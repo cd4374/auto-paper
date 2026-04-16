@@ -27,7 +27,9 @@ auto-paper/
 │           ├── aps/
 │           ├── aip/
 │           ├── iop/
-│           └── elsevier/
+│           ├── elsevier/
+│           ├── nature/
+│           └── science/
 │
 ├── 01-story.md                      # 生成：叙事逻辑
 ├── 02-journal-recommendation.md     # 生成：期刊推荐
@@ -79,5 +81,6 @@ auto-paper/
 | ML期刊 | JMLR | 无限制 |
 | 物理/复杂系统 | PRE, PRL, PRX, Chaos, NJP, JSTAT | 4-15页 |
 | 数值计算 | JCP, CPC | 无限制 |
+| 综合/跨学科 | Nature, Science | 8-10页 |
 
 详见 `skills/shared/templates/venue-requirements.json`
