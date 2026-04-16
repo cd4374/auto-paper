@@ -1,0 +1,481 @@
+{
+  "venues": {
+    "neurips": {
+      "name": "NeurIPS",
+      "type": "conference",
+      "year": 2026,
+      "template": {
+        "entry_tex": "neurips/neurips_2026.tex",
+        "required_markers": ["\\usepackage{neurips_2026}"]
+      },
+      "format": {
+        "abstract_max_words": "one paragraph, ~250 words",
+        "page_limit": 9,
+        "page_count_includes": ["main body", "references"],
+        "page_count_excludes": ["appendix"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "neurips2026.bst"
+      },
+      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": true,
+        "ethics_statement": "Required for some submissions",
+        "reproducibility_checklist": true,
+        "supplementary_materials": "allowed",
+        "checklist": "Required: checklist.tex must be included"
+      },
+      "ablation": { "required": true, "description": "Ablation studies are expected" }
+    },
+
+    "icml": {
+      "name": "ICML",
+      "type": "conference",
+      "year": 2026,
+      "template": {
+        "entry_tex": "icml/example_paper.tex",
+        "required_markers": ["icml2026"]
+      },
+      "format": {
+        "abstract_max_words": "one paragraph, ~4-6 sentences",
+        "page_limit": 8,
+        "page_count_includes": ["main body", "references", "appendix"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "icml2025.bst"
+      },
+      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": true,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": true,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": true, "description": "Ablation studies expected" }
+    },
+
+    "iclr": {
+      "name": "ICLR",
+      "type": "conference",
+      "year": 2026,
+      "template": {
+        "entry_tex": "iclr/iclr2025_conference.tex",
+        "required_markers": ["\\usepackage{iclr2026_conference"]
+      },
+      "format": {
+        "abstract_max_words": "one paragraph, ~250 words",
+        "page_limit": 10,
+        "page_count_includes": ["main body", "references"],
+        "page_count_excludes": ["appendix"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "iclr2025_conference.bst"
+      },
+      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": true,
+        "ethics_statement": "Required for some",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": true, "description": "Ablation studies expected" }
+    },
+
+    "aaai": {
+      "name": "AAAI",
+      "type": "conference",
+      "year": 2026,
+      "template": {
+        "entry_tex": "aaai/anonymous-submission-latex-2026.tex",
+        "required_markers": ["aaai2026"]
+      },
+      "format": {
+        "abstract_max_words": "one paragraph, ~200 words",
+        "page_limit": 7,
+        "page_count_includes": ["main body", "references"],
+        "page_count_note": "7 pages main text + unlimited references"
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "aaai2026.bst"
+      },
+      "figures": { "min": 4, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": true,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "not allowed",
+        "prohibitions": "No color figures, no URLs in references"
+      },
+      "ablation": { "required": true, "description": "Ablation studies expected" }
+    },
+
+    "jmlr": {
+      "name": "JMLR (Journal of Machine Learning Research)",
+      "type": "journal",
+      "template": {
+        "entry_tex": "jmlr/jmlrarticle.tex",
+        "required_markers": ["jmlr"],
+        "note": "Template not yet included - download from JMLR website"
+      },
+      "format": {
+        "abstract_max_words": "one paragraph",
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "jmlr.bst"
+      },
+      "figures": { "min": 0, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 0, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": true,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": false, "description": "Encouraged but not required" }
+    },
+
+    "pre": {
+      "name": "Physical Review E",
+      "type": "journal",
+      "publisher": "APS",
+      "scope": "Statistical physics, nonlinear dynamics, complex systems, soft matter, biological physics",
+      "template": {
+        "entry_tex": "aps/apstemplate.tex",
+        "required_markers": ["aps,"]
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": 10,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "apsrev4-1.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf, tiff", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "data_availability": "Required: data underlying study must be available"
+      },
+      "ablation": { "required": false, "description": "N/A for physics" }
+    },
+
+    "prx": {
+      "name": "Physical Review X",
+      "type": "journal",
+      "publisher": "APS",
+      "scope": "Interdisciplinary physics, open access, ML applications in physics",
+      "template": {
+        "entry_tex": "aps/apstemplate.tex",
+        "required_markers": ["aps,"]
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": 15,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "apsrev4-1.bst"
+      },
+      "figures": { "min": 4, "format": "eps, pdf, tiff", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "data_availability": "Required"
+      },
+      "ablation": { "required": false, "description": "N/A for physics" }
+    },
+
+    "chaos": {
+      "name": "Chaos",
+      "type": "journal",
+      "publisher": "AIP",
+      "scope": "Nonlinear dynamics, chaos theory, complex systems, synchronization",
+      "template": {
+        "entry_tex": "aip/aiptemplate.tex",
+        "required_markers": ["aip,"]
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": 10,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "aipnum4-1.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": false }
+    },
+
+    "cn": {
+      "name": "Chaos, Solitons & Fractals",
+      "type": "journal",
+      "publisher": "Elsevier",
+      "scope": "Nonlinear science, complex systems, fractals, neural networks",
+      "template": {
+        "entry_tex": "elsevier/template.tex",
+        "required_markers": [],
+        "note": "Template not yet included - download from Elsevier"
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "elsarticle-harv.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": false }
+    },
+
+    "jcp": {
+      "name": "Journal of Computational Physics",
+      "type": "journal",
+      "publisher": "Elsevier",
+      "scope": "Numerical methods, computational physics, PDE solvers, finite element, CFD",
+      "template": {
+        "entry_tex": "elsevier/template.tex",
+        "required_markers": [],
+        "note": "Template not yet included - download from Elsevier"
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "elsarticle-harv.bst"
+      },
+      "figures": { "min": 4, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 2, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "code_availability": "Strongly encouraged"
+      },
+      "ablation": { "required": false },
+      "special": "Include computational complexity, convergence analysis"
+    },
+
+    "cpc": {
+      "name": "Computer Physics Communications",
+      "type": "journal",
+      "publisher": "Elsevier",
+      "scope": "Physics software, computational methods, code sharing, parallel computing",
+      "template": {
+        "entry_tex": "elsevier/template.tex",
+        "required_markers": [],
+        "note": "Template not yet included - download from Elsevier"
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "elsarticle-harv.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "code_availability": "Required - code must be deposited"
+      },
+      "ablation": { "required": false },
+      "special": "Code sharing is central to the journal; code must be available via GitHub or similar"
+    },
+
+    "jmp": {
+      "name": "Journal of Mathematical Physics",
+      "type": "journal",
+      "publisher": "AIP",
+      "scope": "Mathematical physics, integrable systems, group theory, statistical mechanics",
+      "template": {
+        "entry_tex": "aip/aiptemplate.tex",
+        "required_markers": ["aip,"]
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "aipnum4-1.bst"
+      },
+      "figures": { "min": 0, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 0, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed"
+      },
+      "ablation": { "required": false }
+    },
+
+    "prl": {
+      "name": "Physical Review Letters",
+      "type": "journal",
+      "publisher": "APS",
+      "scope": "Rapid communications, important original research in physics",
+      "template": {
+        "entry_tex": "aps/apstemplate.tex",
+        "required_markers": ["aps,"]
+      },
+      "format": {
+        "abstract_max_words": 100,
+        "page_limit": null,
+        "page_count_includes": ["full paper"],
+        "page_count_note": "Typically 4-6 pages; Editors decide if length is appropriate"
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "apsrev4-1.bst"
+      },
+      "figures": { "min": 1, "format": "eps, pdf, tiff", "caption_position": "bottom" },
+      "tables": { "min": 0, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "data_availability": "Required"
+      },
+      "ablation": { "required": false }
+    },
+
+    "njp": {
+      "name": "New Journal of Physics",
+      "type": "journal",
+      "publisher": "IOP",
+      "scope": "Multidisciplinary physics, open access, novel physics",
+      "template": {
+        "entry_tex": "iop/iopjournal-template.tex",
+        "required_markers": ["\\documentclass{iopjournal}"]
+      },
+      "format": {
+        "abstract_max_words": 300,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "iopart.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "standard", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "funding": "Required: funding sources must be listed"
+      },
+      "ablation": { "required": false }
+    },
+
+    "jstat": {
+      "name": "Journal of Statistical Mechanics: Theory and Experiment",
+      "type": "journal",
+      "publisher": "IOP",
+      "scope": "Statistical physics, condensed matter, complex systems, out-of-equilibrium",
+      "template": {
+        "entry_tex": "iop/iopjournal-template.tex",
+        "required_markers": ["\\documentclass{iopjournal}"]
+      },
+      "format": {
+        "abstract_max_words": 200,
+        "page_limit": null,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "author-year",
+        "package": "natbib",
+        "commands": ["\\citep{}", "\\citet{}"],
+        "bib_style": "iopart.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "standard", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "data_availability": "Encouraged"
+      },
+      "ablation": { "required": false }
+    }
+  }
+}
