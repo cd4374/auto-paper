@@ -14,8 +14,8 @@ allowed-tools: WebSearch, WebFetch
 
 ## 输出
 
-- `02-journal-recommendation.md` — 推荐 1-2 个期刊及理由
-- `02-journal-requirements.md` — 选中期刊的格式要求
+- `02-journal-recommendation.md` — 推荐 1-2 个期刊及理由（主要语言要用中文，名词等专业用语可以保留英文）
+- `02-journal-requirements.md` — 选中期刊的格式要求（主要语言要用中文，名词等专业用语可以保留英文）
 
 ## 工作流
 

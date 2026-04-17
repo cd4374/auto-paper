@@ -14,7 +14,7 @@ description: "基于 story.md 和 journal-requirements.md 生成 structure.md。
 
 ## 输出
 
-`03-structure.md`
+`03-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
 
 ## 工作流
 

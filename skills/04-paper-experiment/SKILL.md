@@ -14,7 +14,7 @@ description: "基于 story.md 和 structure.md 设计实验。用于定义实验
 
 ## 输出
 
-`04-experiments.md`
+`04-experiments.md` （主要语言要用中文，名词等专业用语可以保留英文）
 
 ## 工作流
 
