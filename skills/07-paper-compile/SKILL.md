@@ -1,10 +1,10 @@
 ---
-name: "06-paper-compile"
+name: "07-paper-compile"
 description: "编译 LaTeX 生成 PDF。用于验证论文可编译并生成最终 PDF。"
 allowed-tools: Bash, Read
 ---
 
-# 06-paper-compile
+# 07-paper-compile
 
 编译 LaTeX 项目生成 PDF。
 
@@ -14,7 +14,7 @@ allowed-tools: Bash, Read
 
 ## 输出
 
-`06-output/paper.pdf`
+`07-output/paper.pdf`
 
 ## 工作流
 
@@ -29,7 +29,7 @@ ls 05-template/references.bib
 ### Step 2: 创建输出目录
 
 ```bash
-mkdir -p 06-output
+mkdir -p 07-output
 ```
 
 ### Step 3: 编译
@@ -52,14 +52,14 @@ pdflatex -interaction=nonstopmode main.tex
 ### Step 5: 复制输出
 
 ```bash
-cp 05-template/main.pdf 06-output/paper.pdf
+cp 05-template/main.pdf 07-output/paper.pdf
 ```
 
 ### Step 6: 验证
 
 ```bash
 # 检查 PDF 非空
-pdfinfo 06-output/paper.pdf | grep Pages
+pdfinfo 07-output/paper.pdf | grep Pages
 ```
 
 ### 错误修复

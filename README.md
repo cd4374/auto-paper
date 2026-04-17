@@ -15,7 +15,8 @@ auto-paper/
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
 │   ├── 05-paper-write/              # 撰写 LaTeX
-│   ├── 06-paper-compile/            # 编译 PDF
+│   ├── 06-paper-review/            # 论文审查
+│   ├── 07-paper-compile/           # 编译 PDF
 │   └── shared/                      # 共享资源
 │       ├── story-template.md
 │       ├── structure-template.md
@@ -42,7 +43,10 @@ auto-paper/
 ├── 04-02-experiment-results.md      # 生成：实验结果
 ├── 04-02-experiment-results/        # 生成：原始输出、日志
 ├── 05-template/                     # 生成：当前项目 LaTeX
-└── 06-output/                       # 生成：编译输出
+├── 06-paper-review/                 # 生成：审查报告 + 修订日志
+│   ├── report.md
+│   └── revision-log.md
+└── 07-output/                       # 生成：编译输出
     └── paper.pdf
 ```
 
@@ -63,7 +67,9 @@ auto-paper/
            ↓
 /05-paper-write          → 填写 05-template/
            ↓
-/06-paper-compile        → 06-output/paper.pdf
+/06-paper-review         → 06-paper-review/report.md + 修订论文
+           ↓
+/07-paper-compile        → 07-output/paper.pdf
 ```
 
 ## 核心概念
