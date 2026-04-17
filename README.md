@@ -17,6 +17,7 @@ auto-paper/
 │   ├── 05-paper-write/              # 撰写 LaTeX
 │   ├── 06-paper-review/            # 论文审查
 │   ├── 07-paper-compile/           # 编译 PDF
+│   ├── project-import/             # 独立导入工具
 │   └── shared/                      # 共享资源
 │       ├── story-template.md
 │       ├── structure-template.md
@@ -71,6 +72,12 @@ auto-paper/
            ↓
 /07-paper-compile        → 07-output/paper.pdf
 ```
+
+## 独立技能
+
+- `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
+- 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
+- 导入完成后，可根据恢复程度继续主流程；若 `01/02/03/04` 已较完整，通常可直接进入 `/05-paper-write`
 
 ## 核心概念
 
