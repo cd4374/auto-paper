@@ -15,7 +15,9 @@ auto-paper/
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
 │   ├── 05-paper-write/              # 撰写 LaTeX
-│   ├── 06-paper-review/            # 论文审查
+│   ├── 06-paper-review/            # 内部论文审查
+│   ├── 06-01-review-assess/        # 外部 review 意见评估
+│   ├── 06-02-review-apply/         # 按 review 方案修改
 │   ├── 07-paper-compile/           # 编译 PDF
 │   ├── project-import/             # 独立导入工具
 │   └── shared/                      # 共享资源
@@ -44,9 +46,13 @@ auto-paper/
 ├── 04-02-experiment-results.md      # 生成：实验结果
 ├── 04-02-experiment-results/        # 生成：原始输出、日志
 ├── 05-template/                     # 生成：当前项目 LaTeX
-├── 06-paper-review/                 # 生成：审查报告 + 修订日志
+├── 06-paper-review/                 # 生成：内部审查报告 + 修订日志
 │   ├── report.md
 │   └── revision-log.md
+├── 06-01-review-feedback.md            # 生成：外部 review 意见整理
+├── 06-01-review-action-plan.md         # 生成：review 修改方案
+├── 06-01-review-open-questions.md      # 可选：待确认问题
+├── 06-02-review-resolution.md          # 生成：review 落实记录
 └── 07-output/                       # 生成：编译输出
     └── paper.pdf
 ```
@@ -70,6 +76,13 @@ auto-paper/
            ↓
 /06-paper-review         → 06-paper-review/report.md + 修订论文
            ↓
+[可选：收到外部 review 后]
+/06-01-review-assess     → 06-01-review-feedback.md + 06-01-review-action-plan.md
+           ↓
+/06-02-review-apply      → 更新 01/03/04/05 + 06-02-review-resolution.md
+           ↓
+/06-paper-review         → 再审查修订结果
+           ↓
 /07-paper-compile        → 07-output/paper.pdf
 ```
 
@@ -78,6 +91,12 @@ auto-paper/
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
 - 导入完成后，可根据恢复程度继续主流程；若 `01/02/03/04` 已较完整，通常可直接进入 `/05-paper-write`
+
+## review 子阶段
+
+- `/06-paper-review`：内部一致性与质量审查
+- `/06-01-review-assess`：判断外部 review 意见是否成立，并生成 `06-01-review-action-plan.md`
+- `/06-02-review-apply`：依据 action plan 修改 `01/03/04/05` 层内容，并生成 `06-02-review-resolution.md`
 
 ## 核心概念
 

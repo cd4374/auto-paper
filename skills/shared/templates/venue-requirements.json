@@ -43,7 +43,8 @@
       "format": {
         "abstract_max_words": "one paragraph, ~4-6 sentences",
         "page_limit": 8,
-        "page_count_includes": ["main body", "references", "appendix"]
+        "page_count_includes": ["main body"],
+        "page_count_excludes": ["references", "appendix", "impact statement"]
       },
       "citation": {
         "style": "author-year",
@@ -67,14 +68,14 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "iclr/iclr2025_conference.tex",
-        "required_markers": ["\\usepackage{iclr2026_conference"]
+        "entry_tex": "iclr/iclr2026_conference.tex",
+        "required_markers": ["\\usepackage{iclr2026_conference}"]
       },
       "format": {
         "abstract_max_words": "one paragraph, ~250 words",
-        "page_limit": 10,
-        "page_count_includes": ["main body", "references"],
-        "page_count_excludes": ["appendix"]
+        "page_limit": 9,
+        "page_count_includes": ["main body"],
+        "page_count_excludes": ["references", "appendix"]
       },
       "citation": {
         "style": "author-year",
@@ -391,10 +392,11 @@
         "required_markers": ["aps,"]
       },
       "format": {
-        "abstract_max_words": 100,
-        "page_limit": null,
+        "abstract_max_chars": 600,
+        "abstract_max_words": "~150 words (600 characters including spaces)",
+        "word_limit": 3750,
         "page_count_includes": ["full paper"],
-        "page_count_note": "Typically 4-6 pages; Editors decide if length is appropriate"
+        "page_count_note": "Max 3750 words for body (excludes abstract, references); typically 4-6 pages"
       },
       "citation": {
         "style": "numeric",
@@ -424,7 +426,7 @@
         "required_markers": ["\\documentclass{iopjournal}"]
       },
       "format": {
-        "abstract_max_words": 300,
+        "abstract_max_words": "less than 200",
         "page_limit": null,
         "page_count_includes": ["full paper"]
       },
@@ -456,7 +458,7 @@
         "required_markers": ["\\documentclass{iopjournal}"]
       },
       "format": {
-        "abstract_max_words": 200,
+        "abstract_max_words": "less than 200",
         "page_limit": null,
         "page_count_includes": ["full paper"]
       },
