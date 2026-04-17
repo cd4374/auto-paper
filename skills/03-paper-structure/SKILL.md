@@ -1,6 +1,7 @@
 ---
 name: "03-paper-structure"
 description: "基于 story.md 和 journal-requirements.md 生成 structure.md。用于定义论文章节结构。"
+allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
 # 03-paper-structure
@@ -61,15 +62,18 @@ description: "基于 story.md 和 journal-requirements.md 生成 structure.md。
 
 ### Step 5: Codex Review
 
-```markdown
-请检查以下 structure 是否支撑 story：
+调用 `mcp__codex__codex` 检查 structure 是否支撑 story：
 
-Story: {story 内容}
+```
+mcp__codex__codex:
+  prompt: |
+    请检查以下 structure 是否支撑 story：
 
-Structure: {structure 内容}
+    Story: {story 内容}
+    Structure: {structure 内容}
 
-检查要点：
-1. 章节是否覆盖 story 的完整叙事？
-2. 各章叙事是否连贯？
-3. 需求（字数/图表）是否合理？
+    检查要点：
+    1. 章节是否覆盖 story 的完整叙事？
+    2. 各章叙事是否连贯？
+    3. 需求（字数/图表）是否合理？
 ```

@@ -12,7 +12,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 - `01-story.md`
 - `03-structure.md`
-- `04-experiments.md`
+- `04-00-experiments.md`
+- `04-02-experiment-results.md`
 - `02-journal-requirements.md`
 - `../shared/templates/` 中的选中期刊模板
 
@@ -52,7 +53,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 1. 读取 structure 中该章的叙事内容
 2. 读取 experiments 中相关结果
 3. 撰写完整 LaTeX（不是占位符）
-4. Codex review 检查
+4. 调用 `mcp__codex__codex` review 检查
 
 ### Step 4: 撰写要点
 
@@ -65,7 +66,21 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ### Step 5: Codex Review
 
-每章完成后调用 Codex review。
+每章完成后调用 `mcp__codex__codex` 进行 review：
+
+```
+mcp__codex__codex:
+  prompt: |
+    请检查以下章节内容：
+
+    Structure 要求: {该章叙事内容}
+    实际内容: {章节 LaTeX 内容}
+
+    检查要点：
+    1. 是否覆盖 structure 中的叙事？
+    2. 语言是否清晰简洁？
+    3. 是否符合期刊风格？
+```
 
 ### Step 6: 最终检查
 

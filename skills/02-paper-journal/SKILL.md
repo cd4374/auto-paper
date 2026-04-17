@@ -1,7 +1,7 @@
 ---
 name: "02-paper-journal"
 description: "基于 story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
-allowed-tools: WebSearch, WebFetch
+allowed-tools: WebSearch, WebFetch, mcp__codex__codex
 ---
 
 # 02-paper-journal
@@ -90,4 +90,17 @@ allowed-tools: WebSearch, WebFetch
 
 ### Step 5: Codex Review
 
-检查推荐是否匹配 story 的贡献度。
+调用 `mcp__codex__codex` 检查推荐是否匹配 story 的贡献度：
+
+```
+mcp__codex__codex:
+  prompt: |
+    请检查以下期刊推荐是否匹配 story 的贡献度：
+
+    Story: {story 内容}
+    推荐: {recommendation 内容}
+
+    检查要点：
+    1. 期刊级别是否匹配贡献度？
+    2. 格式要求是否可满足？
+```

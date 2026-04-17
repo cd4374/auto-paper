@@ -11,7 +11,9 @@ auto-paper/
 │   ├── 01-paper-init/               # 生成 01-story.md
 │   ├── 02-paper-journal/            # 推荐期刊
 │   ├── 03-paper-structure/          # 生成 03-structure.md
-│   ├── 04-paper-experiment/         # 实验设计
+│   ├── 04-00-experiment-design/     # 实验设计
+│   ├── 04-01-experiment-implement/  # 实验代码实现
+│   ├── 04-02-experiment-run/        # 运行实验并收集结果
 │   ├── 05-paper-write/              # 撰写 LaTeX
 │   ├── 06-paper-compile/            # 编译 PDF
 │   └── shared/                      # 共享资源
@@ -35,26 +37,33 @@ auto-paper/
 ├── 02-journal-recommendation.md     # 生成：期刊推荐
 ├── 02-journal-requirements.md       # 生成：期刊要求明细
 ├── 03-structure.md                  # 生成：文章结构
-├── 04-experiments.md               # 生成：实验设计
-├── 05-template/                    # 生成：当前项目 LaTeX
-└── 06-output/                      # 生成：编译输出
+├── 04-00-experiments.md             # 生成：实验设计
+├── 04-01-experiment-code/           # 生成：实验代码
+├── 04-02-experiment-results.md      # 生成：实验结果
+├── 04-02-experiment-results/        # 生成：原始输出、日志
+├── 05-template/                     # 生成：当前项目 LaTeX
+└── 06-output/                       # 生成：编译输出
     └── paper.pdf
 ```
 
 ## 工作流
 
 ```
-/01-paper-init      → 生成 01-story.md
+/01-paper-init           → 生成 01-story.md
            ↓
-/02-paper-journal   → 02-journal-recommendation.md + 02-journal-requirements.md
+/02-paper-journal        → 02-journal-recommendation.md + 02-journal-requirements.md
            ↓
-/03-paper-structure → 生成 03-structure.md
+/03-paper-structure      → 生成 03-structure.md
            ↓
-/04-paper-experiment → 生成 04-experiments.md
+/04-00-experiment-design → 生成 04-00-experiments.md
            ↓
-/05-paper-write     → 填写 05-template/
+/04-01-experiment-implement → 生成 04-01-experiment-code/
            ↓
-/06-paper-compile   → 06-output/paper.pdf
+/04-02-experiment-run    → 04-02-experiment-results.md + 04-02-experiment-results/
+           ↓
+/05-paper-write          → 填写 05-template/
+           ↓
+/06-paper-compile        → 06-output/paper.pdf
 ```
 
 ## 核心概念
@@ -84,3 +93,9 @@ auto-paper/
 | 综合/跨学科 | Nature, Science | 8-10页 |
 
 详见 `skills/shared/templates/venue-requirements.json`
+
+设计注意：
+
+1. **阶段命名规范**：项目是分阶段的，阶段有数字前缀（如 01、02、03），也有子阶段（如 04-00、04-01、04-02）。不止 skills，所生产的文件、文件夹都要有对应前缀，以便查看是哪个阶段。
+
+2. **Skills 简洁性**：每个 skill 应保持简洁，不超过 150 行。

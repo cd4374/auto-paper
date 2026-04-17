@@ -1,9 +1,10 @@
 ---
-name: "04-paper-experiment"
+name: "04-00-experiment-design"
 description: "基于 story.md 和 structure.md 设计实验。用于定义实验方案。"
+allowed-tools: Read, Write, mcp__codex__codex
 ---
 
-# 04-paper-experiment
+# 04-00-experiment-design
 
 基于 story + structure 设计实验方案。
 
@@ -14,7 +15,7 @@ description: "基于 story.md 和 structure.md 设计实验。用于定义实验
 
 ## 输出
 
-`04-experiments.md` （主要语言要用中文，名词等专业用语可以保留英文）
+`04-00-experiments.md` （主要语言要用中文，名词等专业用语可以保留英文）
 
 ## 工作流
 
@@ -52,21 +53,20 @@ description: "基于 story.md 和 structure.md 设计实验。用于定义实验
 
 展示实验方案，等待用户确认或修改。
 
-### Step 4: 执行实验
+### Step 4: Codex Review
 
-用户确认后执行实验，收集结果。
+调用 `mcp__codex__codex` 检查实验设计：
 
-### Step 5: Codex Review
+```
+mcp__codex__codex:
+  prompt: |
+    请检查以下实验设计是否支撑 story 中的 claim：
 
-```markdown
-请检查以下实验设计是否支撑 story 中的 claim：
+    Story claim: {claim 内容}
+    实验设计: {experiments 内容}
 
-Story claim: {claim 内容}
-
-实验设计: {experiments 内容}
-
-检查要点：
-1. 是否所有 claim 都有对应实验？
-2. 评估指标是否合理？
-3. 是否包含 ablation？
+    检查要点：
+    1. 是否所有 claim 都有对应实验？
+    2. 评估指标是否合理？
+    3. 是否包含 ablation？
 ```

@@ -1,6 +1,7 @@
 ---
 name: "01-paper-init"
 description: "从研究想法生成 story.md。用于开始新论文项目时定义叙事逻辑。"
+allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
 # 01-paper-init
@@ -42,17 +43,19 @@ description: "从研究想法生成 story.md。用于开始新论文项目时定
 
 ### Step 3: Codex Review
 
-调用 Codex review 检查叙事逻辑是否自洽：
+调用 `mcp__codex__codex` 检查叙事逻辑：
 
-```markdown
-请检查以下 story 的叙事逻辑：
+```
+mcp__codex__codex:
+  prompt: |
+    请检查以下 story 的叙事逻辑：
 
-{story 内容}
+    {story 内容}
 
-检查要点：
-1. 三问（是什么/为什么/怎么做）是否都回答清楚？
-2. 逻辑链条是否自洽？
-3. 是否有明显的逻辑漏洞？
+    检查要点：
+    1. 三问（是什么/为什么/怎么做）是否都回答清楚？
+    2. 逻辑链条是否自洽？
+    3. 是否有明显的逻辑漏洞？
 ```
 
 ### Step 4: 输出确认
