@@ -18,7 +18,7 @@
         "style": "author-year",
         "package": "natbib",
         "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "neurips2026.bst"
+        "bib_style": "provided by template"
       },
       "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
       "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
@@ -38,7 +38,7 @@
       "year": 2026,
       "template": {
         "entry_tex": "icml/example_paper.tex",
-        "required_markers": ["icml2026"]
+        "required_markers": ["icml2025"]
       },
       "format": {
         "abstract_max_words": "one paragraph, ~4-6 sentences",
@@ -68,8 +68,8 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "iclr/iclr2026_conference.tex",
-        "required_markers": ["\\usepackage{iclr2026_conference}"]
+        "entry_tex": "iclr/iclr2025_conference.tex",
+        "required_markers": ["\\usepackage{iclr2025_conference,times}"]
       },
       "format": {
         "abstract_max_words": "one paragraph, ~250 words",
@@ -130,9 +130,9 @@
       "name": "JMLR (Journal of Machine Learning Research)",
       "type": "journal",
       "template": {
-        "entry_tex": "jmlr/jmlrarticle.tex",
+        "entry_tex": null,
         "required_markers": ["jmlr"],
-        "note": "Template not yet included - download from JMLR website"
+        "note": "Template not included in this repository; download from JMLR website before paper writing"
       },
       "format": {
         "abstract_max_words": "one paragraph",
@@ -143,7 +143,7 @@
         "style": "author-year",
         "package": "natbib",
         "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "jmlr.bst"
+        "bib_style": "download with template"
       },
       "figures": { "min": 0, "format": "pdf, png, eps", "caption_position": "bottom" },
       "tables": { "min": 0, "style": "booktabs", "caption_position": "top" },
@@ -257,7 +257,7 @@
       "publisher": "Elsevier",
       "scope": "Nonlinear science, complex systems, fractals, neural networks",
       "template": {
-        "entry_tex": "elsevier/template.tex",
+        "entry_tex": "elsevier/main.tex",
         "required_markers": [],
         "note": "Template not yet included - download from Elsevier"
       },
@@ -289,7 +289,7 @@
       "publisher": "Elsevier",
       "scope": "Numerical methods, computational physics, PDE solvers, finite element, CFD",
       "template": {
-        "entry_tex": "elsevier/template.tex",
+        "entry_tex": "elsevier/main.tex",
         "required_markers": [],
         "note": "Template not yet included - download from Elsevier"
       },
@@ -323,7 +323,7 @@
       "publisher": "Elsevier",
       "scope": "Physics software, computational methods, code sharing, parallel computing",
       "template": {
-        "entry_tex": "elsevier/template.tex",
+        "entry_tex": "elsevier/main.tex",
         "required_markers": [],
         "note": "Template not yet included - download from Elsevier"
       },
@@ -432,9 +432,9 @@
       },
       "citation": {
         "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "iopart.bst"
+        "package": "natbib-compatible",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "follow journal template"
       },
       "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
       "tables": { "min": 1, "style": "standard", "caption_position": "top" },
@@ -464,9 +464,9 @@
       },
       "citation": {
         "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "iopart.bst"
+        "package": "natbib-compatible",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "follow journal template"
       },
       "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
       "tables": { "min": 1, "style": "standard", "caption_position": "top" },

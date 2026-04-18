@@ -24,7 +24,7 @@ auto-paper/
 │       ├── story-template.md
 │       ├── structure-template.md
 │       ├── codex-review-prompt.md
-│       └── templates/               # 期刊模板
+│       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
 │           ├── icml/
@@ -94,7 +94,7 @@ auto-paper/
 
 ## review 子阶段
 
-- `/06-paper-review`：内部一致性与质量审查
+- `/06-paper-review`：内部一致性与质量审查（生成 `report.md`、`revision-log.md`，并在自检时生成 `self-check.md`）
 - `/06-01-review-assess`：判断外部 review 意见是否成立，并生成 `06-01-review-action-plan.md`
 - `/06-02-review-apply`：依据 action plan 修改 `01/03/04/05` 层内容，并生成 `06-02-review-resolution.md`
 
