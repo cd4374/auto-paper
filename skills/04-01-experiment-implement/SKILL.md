@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 04-01-experiment-implement
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 根据 `04-00-experiments.md` 生成实验代码。
 
 ## 输入
@@ -57,6 +59,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下代码实现是否支撑实验设计中的目标：
 

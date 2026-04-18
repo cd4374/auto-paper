@@ -6,6 +6,8 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 04-00-experiment-design
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 基于 story + structure 设计实验方案。
 
 ## 输入
@@ -59,6 +61,8 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下实验设计是否支撑 story 中的 claim：
 

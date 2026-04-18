@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 06-01-review-assess
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 先判断外部 review 意见是否成立，再生成结构化修改方案。
 
 ## 输入
@@ -99,6 +101,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下 review action plan 是否合理：
 

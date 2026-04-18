@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 05-paper-write
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 基于 structure + experiments 撰写 LaTeX。
 
 ## 输入
@@ -70,6 +72,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下章节内容：
 

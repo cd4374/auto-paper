@@ -6,6 +6,8 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 # 02-paper-journal
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 基于 `01-story.md` 推荐期刊并生成格式要求。
 
 ## 输入
@@ -94,6 +96,8 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下期刊推荐是否匹配 story 的贡献度：
 

@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 03-paper-structure
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 基于 story + 期刊要求生成 `03-structure.md`。
 
 ## 输入
@@ -66,6 +68,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下 structure 是否支撑 story：
 

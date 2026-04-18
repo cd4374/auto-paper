@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 06-paper-review
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 系统审查论文草稿，输出结构化修改意见。
 
 ## 输入
@@ -56,6 +58,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请审查论文草稿的 {章节名} 部分。
 

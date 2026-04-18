@@ -6,6 +6,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 01-paper-init
 
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
 从研究想法生成 `01-story.md`。
 
 ## 输入
@@ -47,6 +49,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  model: gpt-5.4
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下 story 的叙事逻辑：
 
