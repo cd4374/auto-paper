@@ -74,7 +74,7 @@ auto-paper/
            ↓
 /05-paper-write          → 填写 05-template/
            ↓
-/06-paper-review         → 06-paper-review/report.md + 修订论文
+/06-paper-review         → 默认生成 06-paper-review/report.md（可选：按用户要求同时修订论文）
            ↓
 [可选：收到外部 review 后]
 /06-01-review-assess     → 06-01-review-feedback.md + 06-01-review-action-plan.md
@@ -94,7 +94,7 @@ auto-paper/
 
 ## review 子阶段
 
-- `/06-paper-review`：内部一致性与质量审查（生成 `report.md`、`revision-log.md`，并在自检时生成 `self-check.md`）
+- `/06-paper-review`：内部一致性与质量审查（默认生成 `report.md`，并在自检时生成 `self-check.md`；若用户明确要求，也可同时修订论文并更新 `revision-log.md`）
 - `/06-01-review-assess`：判断外部 review 意见是否成立，并生成 `06-01-review-action-plan.md`
 - `/06-02-review-apply`：依据 action plan 修改 `01/03/04/05` 层内容，并生成 `06-02-review-resolution.md`
 

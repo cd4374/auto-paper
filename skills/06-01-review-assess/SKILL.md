@@ -49,6 +49,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - `defer` — 意见成立，但本轮暂不处理
 - `confirm` — 信息不足，需要用户确认
 
+
 要求：
 - 不能默认 reviewer 一定正确
 - 不能为了迎合 review 而破坏 story 主线
@@ -58,6 +59,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 ### Step 3: 生成 `06-01-review-action-plan.md`
 
 按以下结构写入：
+
+只保留本轮准备处理的最小必要修改集；不要把无关优化项或额外改写建议一起并入 action plan。
 
 ```markdown
 # Review Action Plan

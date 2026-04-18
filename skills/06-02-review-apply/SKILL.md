@@ -39,6 +39,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - `defer`
 - `confirm`（除非用户已明确确认）
 
+
 ### Step 2: 按源头优先顺序修改
 
 修改顺序：
@@ -48,12 +49,15 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 4. `04-02-experiment-results.md`
 5. `05-template/`
 
+只按 action plan 做外科手术式修改；不要顺手扩写正文、重组结构，或新增本轮未批准的实验与结论。
+
 要求：
 - 先改源头文件，再改 LaTeX
 - 不要只在 `05-template/` 里头痛医头
 - 如果 review 影响核心主张，必须先改 `01-story.md`
 - 如果 review 影响章节组织，必须先改 `03-structure.md`
 - 如果 review 指向实验不足，应先更新 `04-*` 再决定是否修改正文
+- 每条实际改动都应能回溯到某条 review item
 
 ### Step 3: 记录落实情况
 

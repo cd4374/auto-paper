@@ -57,7 +57,7 @@ allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__c
 必须区分“材料直接支持的结论”和“仅为合理推断的表述”。
 
 ### Step 3: 生成 `01-story.md`
-参考 `../shared/story-template.md` 生成 `01-story.md`。
+参考 `skills/shared/story-template.md` 生成 `01-story.md`。
 
 要求：
 - 中文为主，保留必要英文术语
@@ -89,14 +89,14 @@ mcp__codex__codex:
 - class/sty/bst 文件
 - 草稿文本中的会议/期刊痕迹
 
-若不能识别，则根据 `../shared/templates/venue-requirements.json` 推荐 1-2 个候选。
+若不能识别，则根据 `skills/shared/templates/venue-requirements.json` 推荐 1-2 个候选。
 
 生成：
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 
 ### Step 5: 生成 `03-structure.md`
-参考 `../shared/structure-template.md` 生成 `03-structure.md`。
+参考 `skills/shared/structure-template.md` 生成 `03-structure.md`。
 
 规则：
 - 若已有论文草稿结构较完整，优先保留其章节框架
@@ -128,7 +128,7 @@ mcp__codex__codex:
 ```
 mcp__codex__codex:
   model: gpt-5.4
-  config: {“model_reasoning_effort”: “xhigh”}
+  config: {"model_reasoning_effort": "xhigh"}
   prompt: |
     请检查以下导入结果是否超出原项目证据：
     导入结果摘要: {导入生成的内容}

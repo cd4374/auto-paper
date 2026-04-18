@@ -30,7 +30,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 2: 生成 story.md
 
-基于 `../shared/story-template.md` 模板生成 `01-story.md`：
+基于 `skills/shared/story-template.md` 模板生成 `01-story.md`：
 
 ```markdown
 # 是什么

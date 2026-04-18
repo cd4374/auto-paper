@@ -20,7 +20,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 ## 输出
 
 - `06-paper-review/report.md` — 审查报告
-- `06-paper-review/revision-log.md` — 修改日志
+- `06-paper-review/revision-log.md` — 修改日志（仅在本阶段同时修订论文时生成/更新）
 
 ## 审查维度
 
@@ -32,6 +32,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 | 格式规范 | 期刊格式（页数限制、引用格式、图表位置） |
 | 图表质量 | 说明性、分辨率、引用位置、与正文呼应 |
 | 技术正确性 | 公式推导、算法描述、实验设置是否准确 |
+| 分节密度 | 是否存在过碎的小节、只有很短内容却单独成节的情况 |
 
 ## 工作流
 
@@ -50,6 +51,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - [ ] 所有 \ref 指向有效 \label
 - [ ] 所有 \cite 在 references.bib 中有对应条目
 - [ ] 无 TODO/FIXME 残留
+- [ ] 没有大量只有 1–2 个短段落却单独成节的小节
 ```
 
 ### Step 2: Codex 深度审查
@@ -73,6 +75,7 @@ mcp__codex__codex:
     3. 语言是否清晰、符合学术规范？
     4. 与其他章节的衔接是否顺畅？
     5. 是否有技术错误或表述歧义？
+    6. 是否存在分节过碎、某些小节只有很短内容却单独成节的问题？
 
     输出格式：
     ## 评分 (1-10)
@@ -83,6 +86,8 @@ mcp__codex__codex:
 ### Step 3: 生成报告
 
 汇总所有问题到 `06-paper-review/report.md`：
+
+只记录与 story、structure、experiments、results、venue 要求直接相关的问题；不要顺手扩展为全面重写建议。
 
 ```markdown
 # 论文审查报告
@@ -122,7 +127,7 @@ mcp__codex__codex:
 
 ### Step 4: 修订论文
 
-根据 report.md 修订 05-template/ 中的内容，更新 `06-paper-review/revision-log.md`。
+默认先输出审查结果，不直接改稿；只有在用户明确要求本阶段同时修订时，才根据 report.md 修改 `05-template/` 并更新 `06-paper-review/revision-log.md`。
 
 ### Step 5: 终检
 

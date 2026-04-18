@@ -27,15 +27,19 @@ allowed-tools: Read, Write, mcp__codex__codex
 - 主要 claim（我们声称什么）
 - 次要 claim（我们验证什么）
 
+如果 claim 表述含糊、证据边界不清或存在多种实验解读，先向用户确认，不要自行假设。
+
 ### Step 2: 设计实验
 
-为每个 claim 设计实验：
+为每个 claim 设计实验，优先选择支撑 claim 所必需的最小实验集。
 
-**实验类型**:
+**可选实验类型**:
 - 主实验：验证核心 claim
 - 对比实验：与 baseline 比较
 - 消融实验：验证各组件贡献
 - 鲁棒性实验：不同设置下的稳定性
+
+不要默认把所有实验类型都加上；只保留对当前 story 和 structure 直接必要的实验。
 
 **每类实验包含**:
 ```markdown
@@ -49,15 +53,18 @@ allowed-tools: Read, Write, mcp__codex__codex
 - 指标: [评估指标]
 
 预期结果: [描述预期结果]
+最小验证标准: [跑通后应观察到的文件、表格或核心指标]
 ```
 
 ### Step 3: 用户确认
 
 展示实验方案，等待用户确认或修改。
 
+明确标出：哪些实验是必需的，哪些是可选的，哪些因资源或信息限制暂不纳入。
+
 ### Step 4: Codex Review
 
-调用 `mcp__codex__codex` 检查实验设计：
+调用 `mcp__codex__codex` 检查实验设计是否以最小必要实验集支撑 story 中的 claim：
 
 ```
 mcp__codex__codex:

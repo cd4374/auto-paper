@@ -27,7 +27,9 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 2: 设计章节
 
-根据 story 的叙事逻辑设计章节：
+根据 story 的叙事逻辑设计章节。
+
+默认可采用以下五章结构，但可根据 story 与 venue 要求调整：
 
 ```
 1. Introduction - 引出问题
@@ -39,9 +41,14 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 3: 填写章节内容
 
-参考 `../shared/structure-template.md` 模板，每章填写：
+参考 `skills/shared/structure-template.md` 模板，每章填写：
 - **叙事内容**: 本章要讲什么故事
 - **需求**: 字数范围、图表数量、公式数量
+
+章节与小节规划时遵循“密度优先”原则：
+- 不要为了把要点列整齐而拆出过多小节
+- 预计只有 1–2 个短段落的内容，默认并入父节，不单独设小节
+- 只有当某部分承载独立论证单元、并且内容足以自成展开时，才单独设小节
 
 ```markdown
 # Chapter 1: Introduction
@@ -80,4 +87,5 @@ mcp__codex__codex:
     1. 章节是否覆盖 story 的完整叙事？
     2. 各章叙事是否连贯？
     3. 需求（字数/图表）是否合理？
+    4. 是否存在不必要的小节拆分或分节过碎的问题？
 ```
