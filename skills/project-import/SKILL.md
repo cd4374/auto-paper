@@ -25,6 +25,7 @@ allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__c
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 - `03-structure.md`
+- `03-02-theory-analysis.md`（仅在已有草稿、方法说明或附录中存在足够理论证据时）
 - `04-00-experiments.md`
 - `04-02-experiment-results.md`（仅在结果证据充足时）
 
@@ -104,8 +105,17 @@ mcp__codex__codex:
 - 每章叙事内容要能映射回 story
 - 字数/图表/公式需求要考虑 venue 要求和现有材料量
 
-### Step 6: 恢复 04 阶段材料
-#### 6.1 生成 `04-00-experiments.md`
+### Step 6: 条件性恢复 03-02 理论层与 04 阶段材料
+#### 6.1 条件性生成 `03-02-theory-analysis.md`
+从已有项目中的方法说明、theory section、appendix、证明草稿、公式推导、图注或补充笔记中恢复：
+- 需要理论支撑的核心 claim
+- assumptions / 适用边界
+- 已有的 derivation / proof sketch / heuristic explanation
+- 可与实验对照的 prediction
+
+只有在证据足以支撑这些内容时才生成；如果只能恢复局部理论直觉，应明确标注“待确认/不完整”，不要把经验结论反向包装成理论结果。
+
+#### 6.2 生成 `04-00-experiments.md`
 从训练/评测脚本、YAML/JSON 配置、日志、结果表格、图表 caption、草稿实验段中恢复：
 - 实验名称
 - 支撑的 claim
@@ -116,10 +126,10 @@ mcp__codex__codex:
 
 每个实验都应能追溯到现有文件证据；否则标为“推测/待确认”。
 
-#### 6.2 条件性生成 `04-02-experiment-results.md`
+#### 6.3 条件性生成 `04-02-experiment-results.md`
 只有在已有项目里存在清晰结果产物时才生成：CSV/JSON、图表、关键日志、草稿结果描述。证据不足则不要生成。
 
-#### 6.3 不默认重建 `04-01-experiment-code/`
+#### 6.4 不默认重建 `04-01-experiment-code/`
 已有项目通常已包含代码，导入阶段只做映射和解释，不做代码重写。
 
 ### Step 7: 最终一致性检查

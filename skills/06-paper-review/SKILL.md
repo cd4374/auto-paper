@@ -14,6 +14,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 - `01-story.md` — 叙事逻辑
 - `03-structure.md` — 文章结构
+- `03-02-theory-analysis.md` — 理论分析与表述边界（如已生成）
 - `02-journal-requirements.md` — 期刊要求
 - `05-template/` — 论文 LaTeX 草稿
 
@@ -32,6 +33,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 | 格式规范 | 期刊格式（页数限制、引用格式、图表位置） |
 | 图表质量 | 说明性、分辨率、引用位置、与正文呼应；必要时回溯 `04-03` 图表资产是否充分 |
 | 技术正确性 | 公式推导、算法描述、实验设置是否准确；实验分析问题优先回溯 `04-03` |
+| 理论一致性 | 理论 claim 是否与 `03-02` 一致，assumptions 是否充分暴露，theory 与 experiment 是否真正形成对照 |
 | 分节密度 | 是否存在过碎的小节、只有很短内容却单独成节的情况 |
 
 ## 工作流
@@ -46,7 +48,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 - [ ] Introduction 的 gap → approach → contributions 逻辑链是否清晰
 - [ ] Related Work 是否覆盖相关工作且分类合理
 - [ ] Method 的符号定义是否一致、无歧义
-- [ ] 实验是否验证了所有假设
+- [ ] 理论表述是否与 `03-02-theory-analysis.md` 一致，未把 heuristic 写成已证结论
+- [ ] 实验是否验证了所有关键理论预测或明确说明未覆盖部分
 - [ ] 结论是否回应了引言的动机
 - [ ] 所有 \ref 指向有效 \label
 - [ ] 所有 \cite 在 references.bib 中有对应条目
@@ -87,15 +90,17 @@ mcp__codex__codex:
 
     Story 要求: {该章在 story 中的定位}
     Structure 要求: {该章在 structure 中的叙事内容}
+    Theory Analysis: {03-02-theory-analysis.md}
     期刊要求: {02-journal-requirements.md 中的相关要求}
 
     请检查：
     1. 是否完整覆盖 story 和 structure 的要求？
     2. 论证逻辑是否严密？是否有漏洞？
-    3. 语言是否清晰、符合学术规范？
-    4. 与其他章节的衔接是否顺畅？
-    5. 是否有技术错误或表述歧义？
-    6. 是否存在分节过碎、某些小节只有很短内容却单独成节的问题？
+    3. 若本章涉及理论，理论 claim、assumptions 与 theory–experiment 对照是否一致？
+    4. 语言是否清晰、符合学术规范？
+    5. 与其他章节的衔接是否顺畅？
+    6. 是否有技术错误或表述歧义？
+    7. 是否存在分节过碎、某些小节只有很短内容却单独成节的问题？
 
     输出格式：
     ## 评分 (1-10)

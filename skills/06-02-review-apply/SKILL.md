@@ -16,6 +16,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 当前项目文件：
   - `01-story.md`
   - `03-structure.md`
+  - `03-02-theory-analysis.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
   - `04-03-experiment-analysis.md`
@@ -46,10 +47,11 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 修改顺序：
 1. `01-story.md`
 2. `03-structure.md`
-3. `04-00-experiments.md`
-4. `04-02-experiment-results.md`
-5. `04-03-experiment-analysis.md`
-6. `05-template/`
+3. `03-02-theory-analysis.md`
+4. `04-00-experiments.md`
+5. `04-02-experiment-results.md`
+6. `04-03-experiment-analysis.md`
+7. `05-template/`
 
 只按 action plan 做外科手术式修改；不要顺手扩写正文、重组结构，或新增本轮未批准的实验与结论。
 
@@ -58,6 +60,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 不要只在 `05-template/` 里头痛医头
 - 如果 review 影响核心主张，必须先改 `01-story.md`
 - 如果 review 影响章节组织，必须先改 `03-structure.md`
+- 如果 review 指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先更新 `03-02-theory-analysis.md`，必要时再同步 `04-*` 与 `05-template/`
 - 如果 review 指向实验不足，应先更新 `04-*` 再决定是否修改正文
 - 如果 review 指向结果解释不充分、图表不足或 claim 证据边界不清，优先更新 `04-03-experiment-analysis.md`，不要直接改 `05-template/`
 - 每条实际改动都应能回溯到某条 review item
@@ -99,7 +102,7 @@ mcp__codex__codex:
     请检查以下修改是否严格遵循 review action plan：
 
     Action Plan: {06-01-review-action-plan.md}
-    Updated Story/Structure/Experiments/Results: {updated files}
+    Updated Story/Structure/Theory/Experiments/Results: {updated files}
     Updated LaTeX: {05-template changes}
     Resolution Log: {06-02-review-resolution.md}
 
@@ -107,7 +110,8 @@ mcp__codex__codex:
     1. 是否漏改了应修改的 accept 项？
     2. 是否错误修改了 reject/defer 项？
     3. 是否存在只改 LaTeX、未改源头文件的问题？
-    4. resolution log 是否与实际改动一致？
+    4. 是否有理论层问题没有回到 `03-02-theory-analysis.md`？
+    5. resolution log 是否与实际改动一致？
 ```
 
 ### Step 5: 输出下一步建议

@@ -16,6 +16,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 当前项目文件：
   - `01-story.md`
   - `03-structure.md`
+  - `03-02-theory-analysis.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
   - `04-03-experiment-analysis.md`
@@ -56,6 +57,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 不能为了迎合 review 而破坏 story 主线
 - 如果意见影响核心主张，必须回到 `01-story.md` 层判断
 - 如果意见影响章节组织，必须回到 `03-structure.md` 层判断
+- 如果意见指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先回到 `03-02-theory-analysis.md` 层判断
 - 如果意见指向结果解释、图表质量或 claim 证据边界，优先回到 `04-03-experiment-analysis.md` 层判断
 
 ### Step 3: 生成 `06-01-review-action-plan.md`
@@ -90,7 +92,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 要求：
 - 每条意见都要给出理由，而不是只给结论
-- 明确指出应改 `01/03/04/05` 哪一层
+- 明确指出应改 `01/03-02/04/05` 哪一层
 - 如果只是语言与表述问题，可限定只改 `05-template/`
 
 ### Step 4: 生成待确认问题
@@ -114,14 +116,16 @@ mcp__codex__codex:
     Review 意见: {feedback}
     Story: {01-story.md}
     Structure: {03-structure.md}
+    Theory Analysis: {03-02-theory-analysis.md}
     Experiments/Results: {04-*}
     Action Plan: {06-01-review-action-plan.md}
 
     检查要点：
     1. 是否错误采纳了不成立的 review？
     2. 是否错误拒绝了成立的 review？
-    3. 修改层级是否合理（01/03/04/05）？
-    4. 是否有高风险改动没有标记？
+    3. 修改层级是否合理（01/03-02/04/05）？
+    4. 是否有理论问题被错误下放到纯写作层处理？
+    5. 是否有高风险改动没有标记？
 ```
 
 ### Step 6: 输出总结

@@ -17,6 +17,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 - `04-02-experiment-results.md`
 - `04-02-experiment-results/`
 - `03-structure.md`
+- `03-02-theory-analysis.md`（如已生成，用于 theory vs experiment 对照）
 
 ## 输出
 
@@ -45,13 +46,19 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 不要把“结果不理想”误判为“实验失败”；重点检查结果是否足以支撑或反驳 claim。
 
-### Step 3: 分析结果与 claim 的对应关系
+### Step 3: 分析结果与 claim / theory prediction 的对应关系
 
 围绕 `04-00-experiments.md` 中的 claim，提炼：
 - 哪些 claim 已被结果直接支撑
 - 哪些 claim 仅被部分支撑
 - 哪些 claim 当前证据不足或被结果削弱
 - 哪些现象值得在论文中解释，哪些只是噪声不应过度解读
+
+如果存在 `03-02-theory-analysis.md`，还要对照其中的 prediction：
+- 哪些 theory prediction 已被结果支撑
+- 哪些 prediction 仅被部分支撑
+- 哪些 prediction 被结果削弱或尚未测试
+- theory–experiment mismatch 更可能来自理论边界、实现偏移还是证据不足
 
 只分析当前 story 和 structure 直接需要的结论；不要默认扩展新故事线或补做未批准实验。
 
@@ -110,9 +117,14 @@ mcp__MiniMax__understand_image(
 - 结果复核:
 - 主要发现:
 - 对 claim 的支撑程度:
+- 对理论预测的支撑程度:
 - 可写入论文的图表/表格:
 - 图片审查结论:
 - 风险与限制:
+
+## Theory vs Experiment
+- Prediction P1: 支撑 / 部分支撑 / 削弱 / 未测试
+- Prediction P2: ...
 
 ## Figure Review
 - 图1: 图片审查结论 / 是否建议重绘 / 是否可直接用于论文
@@ -138,14 +150,15 @@ mcp__codex__codex:
     请检查以下实验分析是否合理：
 
     实验设计: {04-00-experiments.md}
+    Theory Analysis: {03-02-theory-analysis.md}
     实现概览: {04-01-experiment-code 概览}
     原始结果: {04-02-experiment-results.md + 关键产物}
     分析文档: {04-03-experiment-analysis.md}
 
     检查要点：
-    1. 是否错误地把未验证的现象写成结论？
-    2. 是否漏掉了对关键异常或限制的说明？
-    3. claim 与证据的对应关系是否清楚？
+    1. 是否错误地把未验证的现象或理论写成结论？
+    2. 是否漏掉了对关键异常、限制或 theory–experiment mismatch 的说明？
+    3. claim / theory prediction 与证据的对应关系是否清楚？
     4. 图表资产是否足以支持论文写作？
     5. 是否充分吸收了图片理解 review 暴露的可读性与表达问题？
 ```

@@ -115,4 +115,4 @@ mcp__codex__codex:
 - `03-01-related-work.md` 已生成
 - `03-01-references.bib` 已生成
 - 若存在歧义，提示先处理 `03-01-open-questions.md`
-- 提示下一步：`/04-00-experiment-design`
+- 提示下一步：`/03-02-paper-theory-analysis`

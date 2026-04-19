@@ -12,6 +12,7 @@ auto-paper/
 │   ├── 02-paper-journal/            # 推荐期刊
 │   ├── 03-00-paper-structure/       # 生成 03-structure.md
 │   ├── 03-01-paper-bibliography/    # 检索文献并生成参考文献初稿
+│   ├── 03-02-paper-theory-analysis/ # 提炼理论分析并导出可检验预测
 │   ├── 04-00-experiment-design/     # 实验设计
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
@@ -45,6 +46,8 @@ auto-paper/
 ├── 03-structure.md                  # 生成：文章结构
 ├── 03-01-related-work.md            # 生成：related work 笔记
 ├── 03-01-references.bib             # 生成：参考文献初稿
+├── 03-02-theory-analysis.md         # 生成：理论分析与可检验预测
+├── 03-02-open-questions.md          # 可选：理论歧义与待确认问题
 ├── 04-00-experiments.md             # 生成：实验设计
 ├── 04-01-experiment-code/           # 生成：实验代码
 ├── 04-02-experiment-results.md      # 生成：实验结果
@@ -73,6 +76,8 @@ auto-paper/
 /03-00-paper-structure   → 生成 03-structure.md
            ↓
 /03-01-paper-bibliography → 生成 03-01-related-work.md + 03-01-references.bib
+           ↓
+/03-02-paper-theory-analysis → 生成 03-02-theory-analysis.md
            ↓
 /04-00-experiment-design → 生成 04-00-experiments.md
            ↓
@@ -107,6 +112,11 @@ auto-paper/
 - `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
 - 它负责为 `/05-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
 
+## 03-02 理论分析子阶段
+
+- `/03-02-paper-theory-analysis`：基于 `01-story.md`、`03-structure.md` 与 `03-01-related-work.md` 提炼论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界，并导出可直接与实验对照的 predictions，生成 `03-02-theory-analysis.md`
+- 它负责把“理论直觉/推导”整理为“可写入论文、可用于实验设计、可被实验分析复核”的中间层材料
+
 ## 04 实验分析子阶段
 
 - `/04-03-experiment-analysis`：复核 `04-01` 实现是否忠实于 `04-00` 设计，检查 `04-02` 结果是否完整可信，输出 `04-03-experiment-analysis.md` 与论文可直接引用的 `04-03-paper-assets/`
@@ -117,7 +127,7 @@ auto-paper/
 
 - `/06-paper-review`：内部一致性与质量审查（默认生成 `report.md`，并在自检时生成 `self-check.md`；若用户明确要求，也可同时修订论文并更新 `revision-log.md`）
 - `/06-01-review-assess`：判断外部 review 意见是否成立，并生成 `06-01-review-action-plan.md`
-- `/06-02-review-apply`：依据 action plan 修改 `01/03/04/05` 层内容，并生成 `06-02-review-resolution.md`
+- `/06-02-review-apply`：依据 action plan 修改 `01/03-02/04/05` 层内容，并生成 `06-02-review-resolution.md`
 
 ## 核心概念
 
