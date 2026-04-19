@@ -1,4 +1,4 @@
-%File: anonymous-submission-latex-2026.tex
+%File: main.tex
 \documentclass[letterpaper]{article} % DO NOT CHANGE THIS
 \usepackage[submission]{aaai2026}  % DO NOT CHANGE THIS
 \usepackage{times}  % DO NOT CHANGE THIS
@@ -579,14 +579,14 @@ The references section should be labeled ``References" and must appear at the ve
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\columnwidth]{figure1} % Reduce the figure size so that it is slightly narrower than the column. Don't use precise values for figure width.This setup will avoid overfull boxes.
+\fbox{\rule{0pt}{1.2in}\rule{0.9\columnwidth}{0pt}} % Placeholder figure box; replace with your actual figure.
 \caption{Using the trim and clip commands produces fragile layers that can result in disasters (like this one from an actual paper) when the color space is corrected or the PDF combined with others for the final proceedings. Crop your figures properly in a graphics program -- not in LaTeX.}
 \label{fig1}
 \end{figure}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.8\textwidth]{figure2} % Reduce the figure size so that it is slightly narrower than the column.
+\fbox{\rule{0pt}{1.4in}\rule{0.8\textwidth}{0pt}} % Placeholder wide figure box; replace with your actual figure.
 \caption{Adjusting the bounding box instead of actually removing the unwanted data resulted multiple layers in this paper. It also needlessly increased the PDF size. In this case, the size of the unwanted layer doubled the paper's size, and produced the following surprising results in final production. Crop your figures properly in a graphics program. Don't just alter the bounding box.}
 \label{fig2}
 \end{figure*}

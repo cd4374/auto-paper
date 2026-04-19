@@ -10,7 +10,7 @@ The science_template.zip archive contains the following files:
 
 readme.txt - this file
 
-science_template.tex - the LaTeX template, containing instructions on how to fill it out
+main.tex - the LaTeX template, containing instructions on how to fill it out
 science_template.pdf - compiled version of the template, as an example of its appearance
 
 science_template.bib - example bibliography, for use with the template and BibTeX

@@ -5,7 +5,7 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "neurips/neurips_2026.tex",
+        "entry_tex": "neurips/main.tex",
         "required_markers": ["\\usepackage{neurips_2026}"]
       },
       "format": {
@@ -37,7 +37,7 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "icml/example_paper.tex",
+        "entry_tex": "icml/main.tex",
         "required_markers": ["icml2025"]
       },
       "format": {
@@ -68,7 +68,7 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "iclr/iclr2025_conference.tex",
+        "entry_tex": "iclr/main.tex",
         "required_markers": ["\\usepackage{iclr2025_conference,times}"]
       },
       "format": {
@@ -99,7 +99,7 @@
       "type": "conference",
       "year": 2026,
       "template": {
-        "entry_tex": "aaai/anonymous-submission-latex-2026.tex",
+        "entry_tex": "aaai/main.tex",
         "required_markers": ["aaai2026"]
       },
       "format": {
@@ -126,35 +126,74 @@
       "ablation": { "required": true, "description": "Ablation studies expected" }
     },
 
-    "jmlr": {
-      "name": "JMLR (Journal of Machine Learning Research)",
+    "nature": {
+      "name": "Nature",
       "type": "journal",
+      "publisher": "Springer Nature",
+      "scope": "High-impact interdisciplinary research with broad scientific significance",
       "template": {
-        "entry_tex": null,
-        "required_markers": ["jmlr"],
-        "note": "Template not included in this repository; download from JMLR website before paper writing"
+        "entry_tex": "nature/main.tex",
+        "required_markers": ["\\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}"],
+        "note": "Bundled Springer Nature template; adjust the documentclass option to the target Nature-family venue as needed"
       },
       "format": {
-        "abstract_max_words": "one paragraph",
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "abstract_max_words": "~150-200 words depending on article type",
+        "page_limit": 8,
+        "page_count_includes": ["main text", "figures", "references"],
+        "page_count_note": "Actual limits depend on article type and journal instructions"
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "download with template"
+        "style": "numeric",
+        "package": "natbib-compatible via sn-jnl",
+        "commands": ["\\cite{}"],
+        "bib_style": "sn-nature.bst"
       },
-      "figures": { "min": 0, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 0, "style": "booktabs", "caption_position": "top" },
+      "figures": { "min": 2, "format": "eps, pdf, png", "caption_position": "bottom" },
+      "tables": { "min": 0, "style": "standard", "caption_position": "top" },
       "requirements": {
         "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": true,
-        "supplementary_materials": "allowed"
+        "ethics_statement": "Required where applicable",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "notes": "Venue-specific editorial policies take precedence; template should usually remain a single manuscript file"
       },
-      "ablation": { "required": false, "description": "Encouraged but not required" }
+      "ablation": { "required": false, "description": "Only when central to the paper's claims" }
     },
+
+    "science": {
+      "name": "Science",
+      "type": "journal",
+      "publisher": "AAAS",
+      "scope": "Broad scientific advances of strong cross-disciplinary interest",
+      "template": {
+        "entry_tex": "science/main.tex",
+        "required_markers": ["\\usepackage{scicite}"],
+        "note": "Bundled Science-family template; keep the manuscript simple and avoid adding extra style packages"
+      },
+      "format": {
+        "abstract_max_words": "journal/article-type dependent; usually concise",
+        "page_limit": 10,
+        "page_count_includes": ["main text", "figures", "references", "supplement list"],
+        "page_count_note": "Actual limits depend on article type and journal instructions"
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "scicite",
+        "commands": ["\\cite{}"],
+        "bib_style": "sciencemag.bst"
+      },
+      "figures": { "min": 2, "format": "pdf, png, eps", "caption_position": "bottom" },
+      "tables": { "min": 0, "style": "standard", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required where applicable",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "common",
+        "notes": "The bundled template includes main text plus supplement conventions; article-specific author instructions still govern"
+      },
+      "ablation": { "required": false, "description": "Only when central to the scientific claim" }
+    },
+
 
     "pre": {
       "name": "Physical Review E",
@@ -162,7 +201,7 @@
       "publisher": "APS",
       "scope": "Statistical physics, nonlinear dynamics, complex systems, soft matter, biological physics",
       "template": {
-        "entry_tex": "aps/apstemplate.tex",
+        "entry_tex": "aps/main.tex",
         "required_markers": ["aps,"]
       },
       "format": {
@@ -194,7 +233,7 @@
       "publisher": "APS",
       "scope": "Interdisciplinary physics, open access, ML applications in physics",
       "template": {
-        "entry_tex": "aps/apstemplate.tex",
+        "entry_tex": "aps/main.tex",
         "required_markers": ["aps,"]
       },
       "format": {
@@ -226,7 +265,7 @@
       "publisher": "AIP",
       "scope": "Nonlinear dynamics, chaos theory, complex systems, synchronization",
       "template": {
-        "entry_tex": "aip/aiptemplate.tex",
+        "entry_tex": "aip/main.tex",
         "required_markers": ["aip,"]
       },
       "format": {
@@ -258,8 +297,8 @@
       "scope": "Nonlinear science, complex systems, fractals, neural networks",
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": [],
-        "note": "Template not yet included - download from Elsevier"
+        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
         "abstract_max_words": 250,
@@ -290,8 +329,8 @@
       "scope": "Numerical methods, computational physics, PDE solvers, finite element, CFD",
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": [],
-        "note": "Template not yet included - download from Elsevier"
+        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
         "abstract_max_words": 250,
@@ -324,8 +363,8 @@
       "scope": "Physics software, computational methods, code sharing, parallel computing",
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": [],
-        "note": "Template not yet included - download from Elsevier"
+        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
         "abstract_max_words": 250,
@@ -357,7 +396,7 @@
       "publisher": "AIP",
       "scope": "Mathematical physics, integrable systems, group theory, statistical mechanics",
       "template": {
-        "entry_tex": "aip/aiptemplate.tex",
+        "entry_tex": "aip/main.tex",
         "required_markers": ["aip,"]
       },
       "format": {
@@ -388,7 +427,7 @@
       "publisher": "APS",
       "scope": "Rapid communications, important original research in physics",
       "template": {
-        "entry_tex": "aps/apstemplate.tex",
+        "entry_tex": "aps/main.tex",
         "required_markers": ["aps,"]
       },
       "format": {
@@ -422,7 +461,7 @@
       "publisher": "IOP",
       "scope": "Multidisciplinary physics, open access, novel physics",
       "template": {
-        "entry_tex": "iop/iopjournal-template.tex",
+        "entry_tex": "iop/main.tex",
         "required_markers": ["\\documentclass{iopjournal}"]
       },
       "format": {
@@ -454,7 +493,7 @@
       "publisher": "IOP",
       "scope": "Statistical physics, condensed matter, complex systems, out-of-equilibrium",
       "template": {
-        "entry_tex": "iop/iopjournal-template.tex",
+        "entry_tex": "iop/main.tex",
         "required_markers": ["\\documentclass{iopjournal}"]
       },
       "format": {

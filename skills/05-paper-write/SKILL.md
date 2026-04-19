@@ -16,6 +16,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - `03-structure.md`
 - `04-00-experiments.md`
 - `04-02-experiment-results.md`
+- `04-03-experiment-analysis.md`
+- `04-03-paper-assets/`
 - `02-journal-requirements.md`
 - `skills/shared/templates/` 中的选中期刊模板
 
@@ -55,7 +57,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 **每章流程**:
 1. 读取 structure 中该章的叙事内容
-2. 读取 experiments 中相关结果
+2. 优先读取 `04-03-experiment-analysis.md` 中已确认的分析结论与 `04-03-paper-assets/` 中的图表资产；必要时回溯 `04-02` 原始结果
 3. 撰写完整 LaTeX（不是占位符）
 4. 先检查该章是否覆盖既定叙事与结果证据
 5. 调用 `mcp__codex__codex` review 检查
@@ -102,7 +104,7 @@ mcp__codex__codex:
 ### Step 6: 最终检查
 
 - 每章内容已覆盖 `03-structure.md` 中对应叙事
-- 所有实验描述都能回溯到 `04-00` / `04-02`
+- 所有实验描述都能回溯到 `04-00` / `04-02` / `04-03`
 - 所有 `\ref` 有对应 `\label`
 - 所有 `\cite` 有对应 bib 条目
 - 无 TODO/FIXME 残留

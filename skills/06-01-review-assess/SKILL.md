@@ -18,6 +18,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
   - `03-structure.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
+  - `04-03-experiment-analysis.md`
   - `05-template/`
   - `06-paper-review/report.md`（如已有）
 
@@ -37,7 +38,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 编号（如 R1, R2）
 - 原意见
 - 来源
-- 涉及位置（story / structure / experiments / results / writing）
+- 涉及位置（story / structure / experiments / results / analysis / writing）
 - 初步严重性（critical / major / minor）
 
 ### Step 2: 判断意见是否成立
@@ -55,6 +56,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 不能为了迎合 review 而破坏 story 主线
 - 如果意见影响核心主张，必须回到 `01-story.md` 层判断
 - 如果意见影响章节组织，必须回到 `03-structure.md` 层判断
+- 如果意见指向结果解释、图表质量或 claim 证据边界，优先回到 `04-03-experiment-analysis.md` 层判断
 
 ### Step 3: 生成 `06-01-review-action-plan.md`
 

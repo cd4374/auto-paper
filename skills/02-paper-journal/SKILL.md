@@ -31,10 +31,10 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 ### Step 2: 推荐期刊
 
 支持的期刊：
-- **ML会议**: neurips (9页), icml (8页), iclr (10页), aaai (7页)
-- **ML期刊**: jmlr (无限制)
-- **物理/复杂系统**: pre, prl (Letters), prx, chaos, njp, jstat
-- **数值计算**: jcp, cpc
+- **ML会议**: neurips (9页), icml (8页), iclr (9页), aaai (7页)
+- **物理/复杂系统**: pre (10页), prl (3750词/约4-6页), prx (15页), chaos (10页), njp (无限制), jstat (无限制), jmp (无限制), cn (无限制)
+- **数值计算**: jcp (无限制), cpc (无限制)
+- **综合/跨学科**: nature (约8页), science (约10页)
 
 根据 story 主题匹配推荐 1-2 个候选期刊。
 

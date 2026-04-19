@@ -14,6 +14,7 @@ auto-paper/
 │   ├── 04-00-experiment-design/     # 实验设计
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
+│   ├── 04-03-experiment-analysis/   # 复核实现与结果，分析并生成图表资产
 │   ├── 05-paper-write/              # 撰写 LaTeX
 │   ├── 06-paper-review/            # 内部论文审查
 │   ├── 06-01-review-assess/        # 外部 review 意见评估
@@ -45,6 +46,8 @@ auto-paper/
 ├── 04-01-experiment-code/           # 生成：实验代码
 ├── 04-02-experiment-results.md      # 生成：实验结果
 ├── 04-02-experiment-results/        # 生成：原始输出、日志
+├── 04-03-experiment-analysis.md     # 生成：实验分析与结论边界
+├── 04-03-paper-assets/              # 生成：论文可直接引用的图表资产
 ├── 05-template/                     # 生成：当前项目 LaTeX
 ├── 06-paper-review/                 # 生成：内部审查报告 + 修订日志
 │   ├── report.md
@@ -72,6 +75,8 @@ auto-paper/
            ↓
 /04-02-experiment-run    → 04-02-experiment-results.md + 04-02-experiment-results/
            ↓
+/04-03-experiment-analysis → 04-03-experiment-analysis.md + 04-03-paper-assets/
+           ↓
 /05-paper-write          → 填写 05-template/
            ↓
 /06-paper-review         → 默认生成 06-paper-review/report.md（可选：按用户要求同时修订论文）
@@ -91,6 +96,12 @@ auto-paper/
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
 - 导入完成后，可根据恢复程度继续主流程；若 `01/02/03/04` 已较完整，通常可直接进入 `/05-paper-write`
+
+## 04 实验分析子阶段
+
+- `/04-03-experiment-analysis`：复核 `04-01` 实现是否忠实于 `04-00` 设计，检查 `04-02` 结果是否完整可信，输出 `04-03-experiment-analysis.md` 与论文可直接引用的 `04-03-paper-assets/`
+- 它负责把“原始跑数结果”整理为“可写入论文的分析结论、图表和限制说明”，供 `/05-paper-write` 直接使用
+- 对准备进入论文的关键 figures，会额外使用图片理解 MCP 做可读性与表达审查，避免 panel 布局、标注、色条或科学表达引发 reviewer 困惑
 
 ## review 子阶段
 
@@ -119,8 +130,7 @@ auto-paper/
 | 领域 | 期刊 | 页数限制 |
 |------|------|----------|
 | ML会议 | NeurIPS, ICML, ICLR, AAAI | 7-10页 |
-| ML期刊 | JMLR | 无限制 |
-| 物理/复杂系统 | PRE, PRL, PRX, Chaos, NJP, JSTAT | 4-15页 |
+| 物理/复杂系统 | PRE, PRL, PRX, Chaos, NJP, JSTAT, JMP, Chaos, Solitons & Fractals | 4-15页或不限 |
 | 数值计算 | JCP, CPC | 无限制 |
 | 综合/跨学科 | Nature, Science | 8-10页 |
 

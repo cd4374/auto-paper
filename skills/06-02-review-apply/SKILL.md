@@ -18,6 +18,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
   - `03-structure.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
+  - `04-03-experiment-analysis.md`
   - `05-template/`
 - `06-01-review-open-questions.md`（如存在，且已由用户确认）
 
@@ -47,7 +48,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 2. `03-structure.md`
 3. `04-00-experiments.md`
 4. `04-02-experiment-results.md`
-5. `05-template/`
+5. `04-03-experiment-analysis.md`
+6. `05-template/`
 
 只按 action plan 做外科手术式修改；不要顺手扩写正文、重组结构，或新增本轮未批准的实验与结论。
 
@@ -57,6 +59,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 如果 review 影响核心主张，必须先改 `01-story.md`
 - 如果 review 影响章节组织，必须先改 `03-structure.md`
 - 如果 review 指向实验不足，应先更新 `04-*` 再决定是否修改正文
+- 如果 review 指向结果解释不充分、图表不足或 claim 证据边界不清，优先更新 `04-03-experiment-analysis.md`，不要直接改 `05-template/`
 - 每条实际改动都应能回溯到某条 review item
 
 ### Step 3: 记录落实情况
