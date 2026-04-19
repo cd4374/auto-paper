@@ -10,7 +10,8 @@ auto-paper/
 ├── skills/                          # Skills 目录（复制到 .claude/skills/）
 │   ├── 01-paper-init/               # 生成 01-story.md
 │   ├── 02-paper-journal/            # 推荐期刊
-│   ├── 03-paper-structure/          # 生成 03-structure.md
+│   ├── 03-00-paper-structure/       # 生成 03-structure.md
+│   ├── 03-01-paper-bibliography/    # 检索文献并生成参考文献初稿
 │   ├── 04-00-experiment-design/     # 实验设计
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
@@ -42,6 +43,8 @@ auto-paper/
 ├── 02-journal-recommendation.md     # 生成：期刊推荐
 ├── 02-journal-requirements.md       # 生成：期刊要求明细
 ├── 03-structure.md                  # 生成：文章结构
+├── 03-01-related-work.md            # 生成：related work 笔记
+├── 03-01-references.bib             # 生成：参考文献初稿
 ├── 04-00-experiments.md             # 生成：实验设计
 ├── 04-01-experiment-code/           # 生成：实验代码
 ├── 04-02-experiment-results.md      # 生成：实验结果
@@ -67,7 +70,9 @@ auto-paper/
            ↓
 /02-paper-journal        → 02-journal-recommendation.md + 02-journal-requirements.md
            ↓
-/03-paper-structure      → 生成 03-structure.md
+/03-00-paper-structure   → 生成 03-structure.md
+           ↓
+/03-01-paper-bibliography → 生成 03-01-related-work.md + 03-01-references.bib
            ↓
 /04-00-experiment-design → 生成 04-00-experiments.md
            ↓
@@ -96,6 +101,11 @@ auto-paper/
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
 - 导入完成后，可根据恢复程度继续主流程；若 `01/02/03/04` 已较完整，通常可直接进入 `/05-paper-write`
+
+## 03-01 文献检索子阶段
+
+- `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
+- 它负责为 `/05-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
 
 ## 04 实验分析子阶段
 

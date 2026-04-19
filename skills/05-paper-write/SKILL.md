@@ -1,6 +1,6 @@
 ---
 name: "05-paper-write"
-description: "基于 structure.md 和实验结果撰写 LaTeX 论文。用于生成可编译的论文草稿。"
+description: "基于 structure、文献笔记与实验结果撰写 LaTeX 论文。用于生成可编译的论文草稿。"
 allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 ---
 
@@ -8,12 +8,14 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
-基于 structure + experiments 撰写 LaTeX。
+基于 structure、文献笔记与实验结果撰写 LaTeX。
 
 ## 输入
 
 - `01-story.md`
 - `03-structure.md`
+- `03-01-related-work.md`
+- `03-01-references.bib`
 - `04-00-experiments.md`
 - `04-02-experiment-results.md`
 - `04-03-experiment-analysis.md`
@@ -57,10 +59,11 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 **每章流程**:
 1. 读取 structure 中该章的叙事内容
-2. 优先读取 `04-03-experiment-analysis.md` 中已确认的分析结论与 `04-03-paper-assets/` 中的图表资产；必要时回溯 `04-02` 原始结果
-3. 撰写完整 LaTeX（不是占位符）
-4. 先检查该章是否覆盖既定叙事与结果证据
-5. 调用 `mcp__codex__codex` review 检查
+2. 若当前章节涉及 Related Work，优先读取 `03-01-related-work.md`；若涉及引用条目，优先使用 `03-01-references.bib`
+3. 优先读取 `04-03-experiment-analysis.md` 中已确认的分析结论与 `04-03-paper-assets/` 中的图表资产；必要时回溯 `04-02` 原始结果
+4. 撰写完整 LaTeX（不是占位符）
+5. 先检查该章是否覆盖既定叙事与结果证据
+6. 调用 `mcp__codex__codex` review 检查
 
 只写 `03-structure.md` 明确要求的内容；不要自行补充未要求的小节、扩展讨论或额外故事线。
 
@@ -104,6 +107,8 @@ mcp__codex__codex:
 ### Step 6: 最终检查
 
 - 每章内容已覆盖 `03-structure.md` 中对应叙事
+- Related Work 章节优先基于 `03-01-related-work.md`
+- `05-template/references.bib` 以 `03-01-references.bib` 为基础生成或填充
 - 所有实验描述都能回溯到 `04-00` / `04-02` / `04-03`
 - 所有 `\ref` 有对应 `\label`
 - 所有 `\cite` 有对应 bib 条目

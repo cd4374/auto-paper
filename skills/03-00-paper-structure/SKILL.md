@@ -1,10 +1,10 @@
 ---
-name: "03-paper-structure"
+name: "03-00-paper-structure"
 description: "基于 story.md 和 journal-requirements.md 生成 structure.md。用于定义论文章节结构。"
 allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
-# 03-paper-structure
+# 03-00-paper-structure
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 

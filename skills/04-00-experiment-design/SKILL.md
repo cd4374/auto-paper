@@ -14,6 +14,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 - `01-story.md`
 - `03-structure.md`
+- `03-01-related-work.md`（如已生成，用于确认 baseline / metric 范围）
 
 ## 输出
 
@@ -32,6 +33,8 @@ allowed-tools: Read, Write, mcp__codex__codex
 ### Step 2: 设计实验
 
 为每个 claim 设计实验，优先选择支撑 claim 所必需的最小实验集。
+
+如需确认 baseline、指标或实验比较范围，可参考 `03-01-related-work.md`；但不要因此默认扩展实验范围。
 
 **可选实验类型**:
 - 主实验：验证核心 claim
