@@ -40,6 +40,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ### Step 2: 生成结构
 
+按 `03-00-structure.md` 的章节规划创建目录。以下为常见示例：
+
 ```bash
 05-template/
 ├── main.tex
@@ -54,6 +56,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 └── template.sty
 ```
 
+实际章节命名与数量以 `03-00-structure.md` 为准。
+
 ### Step 3: 逐章撰写
 
 按 `03-00-structure.md` 的章节顺序撰写：
@@ -62,7 +66,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 1. 读取 structure 中该章的叙事内容
 2. 若当前章节涉及 Related Work，优先读取 `03-01-related-work.md`；若涉及引用条目，优先使用 `03-01-references.bib`
 3. 若当前章节涉及 Method / Theory / Experiments / Discussion，优先读取 `03-02-theory-analysis.md` 中已确认的 claim、assumptions、prediction 与 writing notes
-4. 优先读取 `04-03-experiment-analysis.md` 中已确认的分析结论与 `04-03-paper-assets/` 中的图表资产；必要时回溯 `04-02` 原始结果
+4. **只使用 `04-03-experiment-analysis.md` 中明确标注"可直接用于论文"的图表资产**；标注为"不能直接写进论文"的结论不得进入正文
 5. 撰写完整 LaTeX（不是占位符）
 6. 先检查该章是否覆盖既定叙事与结果证据
 7. 调用 `mcp__codex__codex` review 检查
@@ -103,9 +107,11 @@ mcp__codex__codex:
     检查要点：
     1. 是否覆盖 structure 中的叙事？
     2. 若本章涉及理论，表述是否与 `03-02` 一致，且没有把 heuristic 写成已证结论？
-    3. 语言是否清晰简洁？
-    4. 是否符合期刊风格？
-    5. 是否存在只有极少内容却单独成节的小节？
+    3. 若本章涉及实验，表述是否与 `04-03` 分析结论一致，未写入"不能直接写进论文"的内容？
+    4. 所有 `\includegraphics` 是否有对应文件？
+    5. 语言是否清晰简洁？
+    6. 是否符合期刊风格？
+    7. 是否存在只有极少内容却单独成节的小节？
 ```
 
 ### Step 6: 最终检查
@@ -113,10 +119,14 @@ mcp__codex__codex:
 - 每章内容已覆盖 `03-00-structure.md` 中对应叙事
 - Related Work 章节优先基于 `03-01-related-work.md`
 - Method / Theory / Experiments / Discussion 中的理论表述与 `03-02-theory-analysis.md` 一致
+- 实验表述与 `04-03-experiment-analysis.md` 一致，未写入标注为"不能直接写进论文"的内容
 - heuristic 不被误写成 theorem-level certainty
 - assumptions / limitations 在正文中得到充分暴露
 - `05-template/references.bib` 以 `03-01-references.bib` 为基础生成或填充
 - 所有实验描述都能回溯到 `03-02` / `04-00` / `04-02` / `04-03`
 - 所有 `\ref` 有对应 `\label`
 - 所有 `\cite` 有对应 bib 条目
+- 所有 `\includegraphics` 有对应文件存在于 `figures/` 或 `04-03-paper-assets/`
+- 数学符号在全文中一致（同一变量使用相同符号）
+- 页数符合 venue 限制（检查 `02-journal-requirements.md`）
 - 无 TODO/FIXME 残留
