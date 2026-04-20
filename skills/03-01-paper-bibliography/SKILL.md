@@ -1,6 +1,6 @@
 ---
 name: "03-01-paper-bibliography"
-description: "基于 story、structure 和 venue 要求检索文献并生成参考文献初稿。"
+description: "基于 01-story.md、03-00-structure.md 和 venue 要求检索文献并生成参考文献初稿。"
 allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 ---
 
@@ -8,13 +8,13 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
-基于 `01-story.md`、`02-journal-requirements.md` 与 `03-structure.md` 做定向文献检索，生成 Related Work 笔记与参考文献初稿。
+基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 Related Work 笔记与参考文献初稿。
 
 ## 输入
 
 - `01-story.md`
 - `02-journal-requirements.md`
-- `03-structure.md`
+- `03-00-structure.md`
 
 ## 输出
 
@@ -30,7 +30,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 问题域与核心任务
 - 方法关键词与同类方法簇
 - 需要比较的 baseline 类型
-- `03-structure.md` 中 Related Work / Experiments 对引用的直接需求
+- `03-00-structure.md` 中 Related Work / Experiments 对引用的直接需求
 - 目标 venue 与风格约束
 
 如果当前 story 对任务边界、方法类别或 baseline 范围定义不清，先向用户确认，不要自行扩大检索范围。
@@ -98,7 +98,7 @@ mcp__codex__codex:
     请检查以下文献检索结果是否与论文 story 和 structure 对齐：
 
     Story: {01-story.md}
-    Structure: {03-structure.md}
+    Structure: {03-00-structure.md}
     Related Work Notes: {03-01-related-work.md}
     Bibliography: {03-01-references.bib}
 

@@ -1,6 +1,6 @@
 # auto-paper
 
-基于 Claude Code 的自动化论文生成工具。采用双层文档结构，确保叙事一致性。
+基于 Claude Code 的自动化论文生成工具。采用 0→1 idea funnel 与双层文档结构，确保从想法筛选到论文叙事的连续一致性。
 
 ## 目录结构
 
@@ -8,9 +8,12 @@
 auto-paper/
 ├── README.md
 ├── skills/                          # Skills 目录（复制到 .claude/skills/）
+│   ├── 00-00-idea-brainstorm/       # 生成 00-00-idea-pool.md
+│   ├── 00-01-idea-evaluate/         # 生成 00-01-idea-evaluation.md
+│   ├── 00-02-idea-recommend/        # 生成 00-02-idea-recommendation.md
 │   ├── 01-paper-init/               # 生成 01-story.md
 │   ├── 02-paper-journal/            # 推荐期刊
-│   ├── 03-00-paper-structure/       # 生成 03-structure.md
+│   ├── 03-00-paper-structure/       # 生成 03-00-structure.md
 │   ├── 03-01-paper-bibliography/    # 检索文献并生成参考文献初稿
 │   ├── 03-02-paper-theory-analysis/ # 提炼理论分析并导出可检验预测
 │   ├── 04-00-experiment-design/     # 实验设计
@@ -26,6 +29,9 @@ auto-paper/
 │   └── shared/                      # 共享资源
 │       ├── story-template.md
 │       ├── structure-template.md
+│       ├── idea-pool-template.md
+│       ├── idea-evaluation-template.md
+│       ├── idea-recommendation-template.md
 │       ├── codex-review-prompt.md
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
@@ -40,10 +46,14 @@ auto-paper/
 │           ├── nature/
 │           └── science/
 │
+├── 00-00-idea-pool.md               # 生成：候选 idea 池
+├── 00-01-idea-evaluation.md         # 生成：idea 结构化评估
+├── 00-02-idea-recommendation.md     # 生成：主选 idea 推荐与 framing
+├── 00-02-idea-open-questions.md     # 可选：进入 story 前的待确认问题
 ├── 01-story.md                      # 生成：叙事逻辑
 ├── 02-journal-recommendation.md     # 生成：期刊推荐
 ├── 02-journal-requirements.md       # 生成：期刊要求明细
-├── 03-structure.md                  # 生成：文章结构
+├── 03-00-structure.md               # 生成：文章结构
 ├── 03-01-related-work.md            # 生成：related work 笔记
 ├── 03-01-references.bib             # 生成：参考文献初稿
 ├── 03-02-theory-analysis.md         # 生成：理论分析与可检验预测
@@ -69,11 +79,18 @@ auto-paper/
 ## 工作流
 
 ```
+[可选但推荐：idea funnel]
+/00-00-idea-brainstorm   → 生成 00-00-idea-pool.md
+           ↓
+/00-01-idea-evaluate     → 生成 00-01-idea-evaluation.md
+           ↓
+/00-02-idea-recommend    → 生成 00-02-idea-recommendation.md
+           ↓
 /01-paper-init           → 生成 01-story.md
            ↓
 /02-paper-journal        → 02-journal-recommendation.md + 02-journal-requirements.md
            ↓
-/03-00-paper-structure   → 生成 03-structure.md
+/03-00-paper-structure   → 生成 03-00-structure.md
            ↓
 /03-01-paper-bibliography → 生成 03-01-related-work.md + 03-01-references.bib
            ↓
@@ -101,6 +118,13 @@ auto-paper/
 /07-paper-compile        → 07-output/paper.pdf
 ```
 
+## 00 idea funnel 阶段
+
+- `/00-00-idea-brainstorm`：围绕研究方向、约束与偏好生成候选 idea 池
+- `/00-01-idea-evaluate`：对候选 idea 做结构化评分，并对 top-k 做 novelty / paperability 风险审查
+- `/00-02-idea-recommend`：推荐主选 idea、备选方案，并输出可直接进入 `01-story.md` 的 framing
+- `00` 阶段是**可选但推荐**的前置漏斗：负责先发散，再收敛；而 `/01-paper-init` 负责把选定 idea 固化成 story
+
 ## 独立技能
 
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
@@ -109,12 +133,12 @@ auto-paper/
 
 ## 03-01 文献检索子阶段
 
-- `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
+- `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
 - 它负责为 `/05-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
 
 ## 03-02 理论分析子阶段
 
-- `/03-02-paper-theory-analysis`：基于 `01-story.md`、`03-structure.md` 与 `03-01-related-work.md` 提炼论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界，并导出可直接与实验对照的 predictions，生成 `03-02-theory-analysis.md`
+- `/03-02-paper-theory-analysis`：基于 `01-story.md`、`03-00-structure.md` 与 `03-01-related-work.md` 提炼论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界，并导出可直接与实验对照的 predictions，生成 `03-02-theory-analysis.md`
 - 它负责把“理论直觉/推导”整理为“可写入论文、可用于实验设计、可被实验分析复核”的中间层材料
 
 ## 04 实验分析子阶段
@@ -131,17 +155,25 @@ auto-paper/
 
 ## 核心概念
 
+### 0→1 漏斗
+
+| 层级 | 文件 | 作用 |
+|------|------|------|
+| Idea 层 | `00-00-idea-pool.md` | 发散候选 research ideas |
+| 评估层 | `00-01-idea-evaluation.md` | 对候选进行可做性、novelty、paperability 评估 |
+| 推荐层 | `00-02-idea-recommendation.md` | 选择主选 idea，并产出进入 story 的 framing |
+
 ### 双层文档结构
 
 | 层级 | 文件 | 作用 |
 |------|------|------|
 | 叙事层 | 01-story.md | 定义论文的"故事"：是什么、为什么、怎么做 |
-| 结构层 | 03-structure.md | 定义章节：每章叙事内容 + 需求（字数/图表）|
+| 结构层 | 03-00-structure.md | 定义章节：每章叙事内容 + 需求（字数/图表）|
 
 ### 一致性保证
 
 - **01-story.md 先行**：所有后续步骤以 story 为锚点
-- **03-structure.md 锁定**：章节结构确定后，后续内容必须与之对齐
+- **03-00-structure.md 锁定**：章节结构确定后，后续内容必须与之对齐
 - **Codex review**：关键节点介入检查逻辑一致性
 - **改稿规则**：先改 01/03，再同步内容
 

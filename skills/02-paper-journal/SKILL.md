@@ -1,6 +1,6 @@
 ---
 name: "02-paper-journal"
-description: "基于 story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
+description: "基于 01-story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
 allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 ---
 

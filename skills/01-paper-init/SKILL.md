@@ -1,6 +1,6 @@
 ---
 name: "01-paper-init"
-description: "从研究想法生成 story.md。用于开始新论文项目时定义叙事逻辑。"
+description: "从研究想法生成 01-story.md。用于开始新论文项目时定义叙事逻辑。"
 allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
@@ -12,7 +12,8 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ## 输入
 
-用户描述的研究想法
+- 用户描述的研究想法
+- 可选：`00-02-idea-recommendation.md`（若已完成 idea funnel，则优先读取其中的主选 idea 与 story framing）
 
 ## 输出
 
@@ -22,7 +23,12 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 1: 澄清研究想法
 
-追问以下问题：
+如果存在 `00-02-idea-recommendation.md`，优先读取其中的：
+- 主选 idea
+- 推荐理由
+- 建议的 story framing（是什么 / 为什么 / 怎么做）
+
+在此基础上补足仍不清楚的部分；如果没有 `00-02-idea-recommendation.md`，则直接追问以下问题：
 - 研究的核心问题是什么？
 - 为什么要解决这个问题？（动机/应用价值）
 - 初步的方法思路是什么？
@@ -67,4 +73,5 @@ mcp__codex__codex:
 输出：
 - `01-story.md` 已生成
 - 总结核心论点
+- 若当前还没有经过 `00` 阶段，可提示可选前置步骤：`/00-00-idea-brainstorm` → `/00-01-idea-evaluate` → `/00-02-idea-recommend`
 - 提示下一步：`/02-paper-journal`

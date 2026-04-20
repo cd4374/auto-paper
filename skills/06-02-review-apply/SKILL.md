@@ -15,7 +15,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - `06-01-review-action-plan.md`
 - 当前项目文件：
   - `01-story.md`
-  - `03-structure.md`
+  - `03-00-structure.md`
   - `03-02-theory-analysis.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
@@ -46,7 +46,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 修改顺序：
 1. `01-story.md`
-2. `03-structure.md`
+2. `03-00-structure.md`
 3. `03-02-theory-analysis.md`
 4. `04-00-experiments.md`
 5. `04-02-experiment-results.md`
@@ -59,7 +59,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 先改源头文件，再改 LaTeX
 - 不要只在 `05-template/` 里头痛医头
 - 如果 review 影响核心主张，必须先改 `01-story.md`
-- 如果 review 影响章节组织，必须先改 `03-structure.md`
+- 如果 review 影响章节组织，必须先改 `03-00-structure.md`
 - 如果 review 指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先更新 `03-02-theory-analysis.md`，必要时再同步 `04-*` 与 `05-template/`
 - 如果 review 指向实验不足，应先更新 `04-*` 再决定是否修改正文
 - 如果 review 指向结果解释不充分、图表不足或 claim 证据边界不清，优先更新 `04-03-experiment-analysis.md`，不要直接改 `05-template/`

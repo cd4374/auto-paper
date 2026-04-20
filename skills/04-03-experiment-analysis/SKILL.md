@@ -16,7 +16,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 - `04-01-experiment-code/`
 - `04-02-experiment-results.md`
 - `04-02-experiment-results/`
-- `03-structure.md`
+- `03-00-structure.md`
 - `03-02-theory-analysis.md`（如已生成，用于 theory vs experiment 对照）
 
 ## 输出

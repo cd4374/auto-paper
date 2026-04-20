@@ -1,6 +1,6 @@
 ---
 name: "03-02-paper-theory-analysis"
-description: "基于 story、structure 与文献笔记提炼理论分析，并导出可直接与实验对照的预测。"
+description: "基于 01-story.md、03-00-structure.md 与文献笔记提炼理论分析，并导出可直接与实验对照的预测。"
 allowed-tools: Read, Write, mcp__codex__codex
 ---
 
@@ -8,11 +8,11 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
-基于 `01-story.md`、`03-structure.md` 与相关文献笔记，生成论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界与可实验对照的 predictions。
+基于 `01-story.md`、`03-00-structure.md` 与相关文献笔记，生成论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界与可实验对照的 predictions。
 
 ## 输入
 - `01-story.md`
-- `03-structure.md`
+- `03-00-structure.md`
 - `03-01-related-work.md`（如已生成）
 - `02-journal-requirements.md`（仅在 theory section 的风格或篇幅明显受 venue 影响时参考）
 
@@ -23,7 +23,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 ## 工作流
 
 ### Step 1: 提取需要理论支撑的 claim
-从 `01-story.md` 与 `03-structure.md` 中提取：
+从 `01-story.md` 与 `03-00-structure.md` 中提取：
 - 需要理论支撑的核心 claim
 - 只应由实验支撑、不要误写成理论结论的 claim
 - method / theory / experiments 章节真正需要解释的机制问题
@@ -128,7 +128,7 @@ mcp__codex__codex:
     请检查以下理论分析是否合理，并且是否足以支持后续实验设计与论文写作：
 
     Story: {01-story.md}
-    Structure: {03-structure.md}
+    Structure: {03-00-structure.md}
     Related Work: {03-01-related-work.md}
     Theory Analysis: {03-02-theory-analysis.md}
 

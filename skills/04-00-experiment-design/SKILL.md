@@ -1,6 +1,6 @@
 ---
 name: "04-00-experiment-design"
-description: "基于 story.md 和 structure.md 设计实验。用于定义实验方案。"
+description: "基于 01-story.md 和 03-00-structure.md 设计实验。用于定义实验方案。"
 allowed-tools: Read, Write, mcp__codex__codex
 ---
 
@@ -8,12 +8,12 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
-基于 story + structure 设计实验方案。
+基于 `01-story.md` + `03-00-structure.md` 设计实验方案。
 
 ## 输入
 
 - `01-story.md`
-- `03-structure.md`
+- `03-00-structure.md`
 - `03-01-related-work.md`（如已生成，用于确认 baseline / metric 范围）
 - `03-02-theory-analysis.md`（如已生成，用于提取理论 prediction、适用边界与 failure case）
 

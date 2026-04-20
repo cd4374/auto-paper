@@ -13,7 +13,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ## 输入
 
 - `04-00-experiments.md`
-- `03-structure.md`
+- `03-00-structure.md`
 
 ## 输出
 

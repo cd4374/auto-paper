@@ -24,7 +24,7 @@ allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__c
 - `01-story.md`
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
-- `03-structure.md`
+- `03-00-structure.md`
 - `03-02-theory-analysis.md`（仅在已有草稿、方法说明或附录中存在足够理论证据时）
 - `04-00-experiments.md`
 - `04-02-experiment-results.md`（仅在结果证据充足时）
@@ -96,8 +96,8 @@ mcp__codex__codex:
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 
-### Step 5: 生成 `03-structure.md`
-参考 `skills/shared/structure-template.md` 生成 `03-structure.md`。
+### Step 5: 生成 `03-00-structure.md`
+参考 `skills/shared/structure-template.md` 生成 `03-00-structure.md`。
 
 规则：
 - 若已有论文草稿结构较完整，优先保留其章节框架

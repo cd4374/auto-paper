@@ -15,7 +15,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 外部 review 意见：评论、批注摘录、邮件、聊天记录、审稿意见列表
 - 当前项目文件：
   - `01-story.md`
-  - `03-structure.md`
+  - `03-00-structure.md`
   - `03-02-theory-analysis.md`
   - `04-00-experiments.md`
   - `04-02-experiment-results.md`
@@ -56,7 +56,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 不能默认 reviewer 一定正确
 - 不能为了迎合 review 而破坏 story 主线
 - 如果意见影响核心主张，必须回到 `01-story.md` 层判断
-- 如果意见影响章节组织，必须回到 `03-structure.md` 层判断
+- 如果意见影响章节组织，必须回到 `03-00-structure.md` 层判断
 - 如果意见指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先回到 `03-02-theory-analysis.md` 层判断
 - 如果意见指向结果解释、图表质量或 claim 证据边界，优先回到 `04-03-experiment-analysis.md` 层判断
 
@@ -115,7 +115,7 @@ mcp__codex__codex:
 
     Review 意见: {feedback}
     Story: {01-story.md}
-    Structure: {03-structure.md}
+    Structure: {03-00-structure.md}
     Theory Analysis: {03-02-theory-analysis.md}
     Experiments/Results: {04-*}
     Action Plan: {06-01-review-action-plan.md}

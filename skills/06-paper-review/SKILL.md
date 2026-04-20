@@ -13,7 +13,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 ## 输入
 
 - `01-story.md` — 叙事逻辑
-- `03-structure.md` — 文章结构
+- `03-00-structure.md` — 文章结构
 - `03-02-theory-analysis.md` — 理论分析与表述边界（如已生成）
 - `02-journal-requirements.md` — 期刊要求
 - `05-template/` — 论文 LaTeX 草稿

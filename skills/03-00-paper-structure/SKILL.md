@@ -1,6 +1,6 @@
 ---
 name: "03-00-paper-structure"
-description: "基于 story.md 和 journal-requirements.md 生成 structure.md。用于定义论文章节结构。"
+description: "基于 01-story.md 和 02-journal-requirements.md 生成 03-00-structure.md。用于定义论文章节结构。"
 allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
@@ -8,7 +8,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
-基于 story + 期刊要求生成 `03-structure.md`。
+基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
 
 ## 输入
 
@@ -17,7 +17,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ## 输出
 
-`03-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
+`03-00-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
 
 ## 工作流
 
