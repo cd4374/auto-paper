@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 01-paper-init
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 从研究想法生成 `01-story.md`。
 
@@ -34,7 +34,23 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - 初步的方法思路是什么？
 - 预期的贡献是什么？
 
-### Step 2: 生成 story.md
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查 story 生成计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 story 生成计划是否合理：
+
+    输入来源: {00-02-idea-recommendation.md 或用户描述}
+    执行计划: 基于 story-template.md 生成是什么/为什么/怎么做三问
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 生成 story.md
 
 基于 `skills/shared/story-template.md` 模板生成 `01-story.md`：
 
@@ -49,26 +65,22 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 [解决问题的思路是什么？核心方法概述]
 ```
 
-### Step 3: Codex Review
+### Step 4: Post-review
 
 调用 `mcp__codex__codex` 检查叙事逻辑：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 story 的叙事逻辑：
 
     {story 内容}
 
-    检查要点：
-    1. 三问（是什么/为什么/怎么做）是否都回答清楚？
-    2. 逻辑链条是否自洽？
-    3. 是否有明显的逻辑漏洞？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 4: 输出确认
+### Step 5: 输出确认
 
 输出：
 - `01-story.md` 已生成

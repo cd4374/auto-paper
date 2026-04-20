@@ -6,7 +6,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 # 00-01-idea-evaluate
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 对 `00-00-idea-pool.md` 做结构化评分，并生成 `00-01-idea-evaluation.md`。
 
@@ -29,7 +29,23 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 最小方法差异
 - 最小实验包
 
-### Step 2: 轻量评分全体候选
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查评估计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 idea evaluation 计划是否合理：
+
+    Idea Pool: {00-00-idea-pool.md 内容摘要}
+    执行计划: 对全部候选做轻量评分，选出 top-k 做深度 novelty 审查
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 轻量评分全体候选
 
 参考 `skills/shared/idea-evaluation-template.md`，先对全部候选做结构化评分。
 
@@ -47,7 +63,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - `experiment cost` 分数越高表示越昂贵，需在结论中解释
 - 对明显不成立或不适合当前约束的 idea，应直接标记 `reject`
 
-### Step 3: 深度审查 top-k
+### Step 4: 深度审查 top-k
 
 选出最值得推进的 top-k（默认 3 个）idea，做更深入评估：
 - 提炼每个 idea 最需要成立的 2-4 个 claim
@@ -60,28 +76,23 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 若发现“其实不新”，也要保留其 paperability / feasibility 价值判断
 - 如果 novelty 不高但 framing 或 finding 仍有机会，要明确写出
 
-### Step 4: Codex Review
+### Step 5: Post-review
 
 调用 `mcp__codex__codex` 检查评估是否合理：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 idea evaluation 是否合理：
 
     Idea Pool: {00-00-idea-pool.md}
     Evaluation: {00-01-idea-evaluation.md}
 
-    检查要点：
-    1. 是否高估了 novelty？
-    2. 是否低估了实验代价或实现风险？
-    3. closest prior work 与 true delta 是否说清楚？
-    4. 推荐结论是否与评分一致？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 5: 输出确认
+### Step 6: 输出确认
 
 输出：
 - `00-01-idea-evaluation.md` 已生成

@@ -32,7 +32,9 @@ auto-paper/
 │       ├── idea-pool-template.md
 │       ├── idea-evaluation-template.md
 │       ├── idea-recommendation-template.md
-│       ├── codex-review-prompt.md
+│       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板
+│       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
+│       ├── venue-tiering.md         # 按领域分类的期刊/会议分层表
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
@@ -129,12 +131,14 @@ auto-paper/
 
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
-- 导入完成后，可根据恢复程度继续主流程；若 `01/02/03/04` 已较完整，通常可直接进入 `/05-paper-write`
+- 导入完成后，可根据恢复程度继续主流程；**注意**：`05-paper-write` 强依赖 `03-01-related-work.md`、`03-01-references.bib`、`04-03-paper-assets/`，若这些文件未生成，需先执行对应阶段
 
 ## 03-01 文献检索子阶段
 
 - `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
 - 它负责为 `/05-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
+- **BibTeX 获取链**：优先通过 DBLP API 获取正式出版物的真实 BibTeX，回退到 CrossRef DOI，两者均失败时以 `% [VERIFY]` 标记，禁止编造字段
+- 检索策略与来源分层由 `skills/shared/source-policy.md` 和 `skills/shared/venue-tiering.md` 定义
 
 ## 03-02 理论分析子阶段
 
@@ -179,17 +183,39 @@ auto-paper/
 
 ## 支持的期刊
 
-| 领域 | 期刊 | 页数限制 |
-|------|------|----------|
-| ML会议 | NeurIPS, ICML, ICLR, AAAI | 7-10页 |
-| 物理/复杂系统 | PRE, PRL, PRX, Chaos, NJP, JSTAT, JMP, Chaos, Solitons & Fractals | 4-15页或不限 |
-| 数值计算 | JCP, CPC | 无限制 |
-| 综合/跨学科 | Nature, Science | 8-10页 |
+支持的期刊列表由 `skills/shared/templates/venue-requirements.json` 集中管理，按领域分类如下：
 
-详见 `skills/shared/templates/venue-requirements.json`
+| 领域 | 期刊 |
+|------|------|
+| ML会议 | NeurIPS, ICML, ICLR, AAAI |
+| 物理/复杂系统 | PRE, PRB, PRL, PRX, Chaos, NJP, JSTAT, JMP, Chaos Solitons & Fractals |
+| 数值计算 | JCP, CPC |
+| 综合/跨学科 | Nature, Science |
+
+各期刊的详细格式要求（页数限制、引用格式、图表要求等）参见 `venue-requirements.json`。
 
 设计注意：
 
 1. **阶段命名规范**：项目是分阶段的，阶段有数字前缀（如 01、02、03），也有子阶段（如 04-00、04-01、04-02）。不止 skills，所生产的文件、文件夹都要有对应前缀，以便查看是哪个阶段。
 
-2. **Skills 简洁性**：每个 skill 应保持简洁，不超过 150 行。
+2. **Skills 简洁性**：每个 skill 应保持简洁，不超过 200 行。
+
+## 环境要求
+
+### 必需工具
+- **Claude Code**：核心执行环境
+- **Codex MCP**：用于 Pre/Post review
+- **MiniMax MCP**：用于图片理解审查（04-03、06-paper-review）
+
+### LaTeX 编译（07-paper-compile）
+- `pdflatex`：PDF 编译
+- `bibtex`：参考文献处理
+- `pdfinfo`：PDF 元数据检查
+
+安装示例（macOS）：
+```bash
+brew install --cask mactex
+```
+
+### 文献检索（03-01-paper-bibliography）
+- 网络访问：用于 DBLP、CrossRef API 查询

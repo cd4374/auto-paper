@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 03-00-paper-structure
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
 
@@ -25,7 +25,24 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 读取 story 和 requirements。
 
-### Step 2: 设计章节
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查章节设计计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下章节设计计划是否合理：
+
+    Story: {01-story.md 内容摘要}
+    Journal Requirements: {02-journal-requirements.md 格式限制}
+    执行计划: 根据叙事逻辑设计章节，每章填写叙事内容+需求
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 设计章节
 
 根据 story 的叙事逻辑设计章节。
 
@@ -39,7 +56,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 5. Conclusion - 结论
 ```
 
-### Step 3: 填写章节内容
+### Step 4: 填写章节内容
 
 参考 `skills/shared/structure-template.md` 模板，每章填写：
 - **叙事内容**: 本章要讲什么故事
@@ -62,30 +79,25 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ...
 ```
 
-### Step 4: 结合期刊要求
+### Step 5: 结合期刊要求
 
 根据 `02-journal-requirements.md` 调整：
 - 字数上限
 - 章节命名
 - 图表限制
 
-### Step 5: Codex Review
+### Step 6: Post-review
 
 调用 `mcp__codex__codex` 检查 structure 是否支撑 story：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 structure 是否支撑 story：
 
     Story: {story 内容}
     Structure: {structure 内容}
 
-    检查要点：
-    1. 章节是否覆盖 story 的完整叙事？
-    2. 各章叙事是否连贯？
-    3. 需求（字数/图表）是否合理？
-    4. 是否存在不必要的小节拆分或分节过碎的问题？
+    检查：要点见 codex-review-template.md
 ```

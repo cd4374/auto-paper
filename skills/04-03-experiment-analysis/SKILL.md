@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 # 04-03-experiment-analysis
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 复核实验实现与结果，生成面向论文写作的分析结论和图表资产。
 
@@ -26,7 +26,25 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 ## 工作流
 
-### Step 1: 复核实现与实验设计是否一致
+### Step 1: Pre-review
+
+调用 `mcp__codex__codex` 检查实验分析计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下实验分析计划是否合理：
+
+    实验设计: {04-00-experiments.md 实验列表}
+    实现代码: {04-01-experiment-code 概览}
+    原始结果: {04-02-experiment-results.md 结果摘要}
+    执行计划: 复核实现与结果一致性，分析 claim 支撑程度，生成图表资产
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 2: 复核实现与实验设计是否一致
 
 对照 `04-00-experiments.md` 与 `04-01-experiment-code/`，逐项检查：
 - 是否覆盖了每个必需实验
@@ -36,7 +54,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 如果实现路径不清楚、结果来源无法回溯，先向用户确认，不要自行假设。
 
-### Step 2: 复核结果是否完整且可信
+### Step 3: 复核结果是否完整且可信
 
 对照 `04-02-experiment-results.md` 与 `04-02-experiment-results/`，检查：
 - 是否所有必需实验都已完成
@@ -46,7 +64,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 不要把“结果不理想”误判为“实验失败”；重点检查结果是否足以支撑或反驳 claim。
 
-### Step 3: 分析结果与 claim / theory prediction 的对应关系
+### Step 4: 分析结果与 claim / theory prediction 的对应关系
 
 围绕 `04-00-experiments.md` 中的 claim，提炼：
 - 哪些 claim 已被结果直接支撑
@@ -62,42 +80,24 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 只分析当前 story 和 structure 直接需要的结论；不要默认扩展新故事线或补做未批准实验。
 
-### Step 4: 生成论文可用图表资产
+### Step 5: 生成图表资产
 
-将可直接进入论文的图表与表格统一整理到 `04-03-paper-assets/`：
-- 主结果表
-- ablation/robustness 表（如当前实验需要）
-- 论文可直接引用的 figures
-- 图表对应的简短说明或数据来源记录
-
-要求：
+整理图表到 `04-03-paper-assets/`，要求：
 - 图表命名清晰，能回溯到实验名称或 claim
 - 只保留论文写作需要的最小必要资产
 - 若需要重绘，优先复用现有结果文件，不重跑无关实验
 
-### Step 5: 图表可读性与表达 review
+### Step 6: 图片审查
 
-对准备进入论文的关键 figures，使用 `mcp__MiniMax__understand_image` 做图片理解审查，至少检查：
+用 `mcp__MiniMax__understand_image` 审查关键 figures，检查：
 - panel 布局是否清楚
 - 曲线、热图、坐标轴、legend、colorbar、annotation 是否可读
 - 图是否真正表达了当前 claim 对应的现象
 - 是否存在可能引发 reviewer 困惑的展示问题、歧义或视觉误导
 
-可参考如下提示词：
+结论写入 `04-03-experiment-analysis.md`，明确哪些图可直接进入论文、哪些需要重绘。
 
-```
-mcp__MiniMax__understand_image(
-  image_source: "{figure path}",
-  prompt: "Analyze this scientific figure for an academic paper. Describe the panel layout, whether the visualization clearly communicates the intended finding, whether labels, legends, annotations, and color scales are readable, and identify any weaknesses in presentation, scientific clarity, or potential reviewer confusion."
-)
-```
-
-将图片审查结论写入 `04-03-experiment-analysis.md`，并明确：
-- 哪些图可以直接进入论文
-- 哪些图需要重绘、裁剪、放大字体或补充 caption 信息
-- 哪些图虽然结果有效，但当前呈现方式不适合直接投稿
-
-### Step 6: 生成分析文档
+### Step 7: 生成分析文档
 
 创建 `04-03-experiment-analysis.md`，建议结构：
 
@@ -111,7 +111,6 @@ mcp__MiniMax__understand_image(
 - 是否建议补实验:
 
 ## Experiment-by-Experiment Review
-
 ### 实验 1: ...
 - 实现复核:
 - 结果复核:
@@ -124,28 +123,24 @@ mcp__MiniMax__understand_image(
 
 ## Theory vs Experiment
 - Prediction P1: 支撑 / 部分支撑 / 削弱 / 未测试
-- Prediction P2: ...
 
 ## Figure Review
-- 图1: 图片审查结论 / 是否建议重绘 / 是否可直接用于论文
-- 图2: ...
+- 图1: 审查结论 / 是否建议重绘 / 是否可直接用于论文
 
 ## Writing Notes
 - 正文应强调:
 - 正文应避免过度解读:
-- 需要回到 `04-00` 或 `04-01` 修正的问题:
 ```
 
-明确标注：哪些结论可以进入 `05-paper-write`，哪些只能作为内部判断，不能直接写进论文。
+明确标注：哪些结论可进入 `05-paper-write`，哪些仅作内部判断。
 
-### Step 7: Codex Review
+### Step 8: Post-review
 
 先检查分析文档、图表资产、图片审查结论与原始结果是否可回溯，再调用 `mcp__codex__codex` 检查分析是否合理：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下实验分析是否合理：
 
@@ -155,10 +150,5 @@ mcp__codex__codex:
     原始结果: {04-02-experiment-results.md + 关键产物}
     分析文档: {04-03-experiment-analysis.md}
 
-    检查要点：
-    1. 是否错误地把未验证的现象或理论写成结论？
-    2. 是否漏掉了对关键异常、限制或 theory–experiment mismatch 的说明？
-    3. claim / theory prediction 与证据的对应关系是否清楚？
-    4. 图表资产是否足以支持论文写作？
-    5. 是否充分吸收了图片理解 review 暴露的可读性与表达问题？
+    检查：要点见 codex-review-template.md
 ```

@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 04-02-experiment-run
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 运行实验并收集结果到 `04-02-experiment-results.md`。
 
@@ -22,7 +22,24 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ## 工作流
 
-### Step 1: 环境准备
+### Step 1: Pre-review
+
+调用 `mcp__codex__codex` 检查实验运行计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下实验运行计划是否合理：
+
+    实验设计: {04-00-experiments.md 实验列表}
+    实现代码: {04-01-experiment-code/README.md 运行说明}
+    执行计划: 逐个运行实验，收集结果到 04-02-experiment-results/
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 2: 环境准备
 
 根据 `04-01-experiment-code/README.md` 配置环境：
 - 安装依赖
@@ -31,7 +48,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 如果运行前提不清楚、数据来源缺失或资源条件不足，先向用户确认，不要自行假设。
 
-### Step 2: 执行实验
+### Step 3: 执行实验
 
 根据 `04-00-experiments.md` 中的实验列表逐个运行，优先使用 `04-01` 中定义的最小运行命令：
 
@@ -46,7 +63,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 不要自行扩大实验范围，不额外添加未在 `04-00-experiments.md` 中定义的实验、扫描或参数搜索。
 
-### Step 3: 收集结果
+### Step 4: 收集结果
 
 从输出文件中提取关键数据：
 - 数值结果（表格格式）
@@ -55,7 +72,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 只整理与当前实验目标直接相关的结果；不要顺手改写、清洗或重组无关产物。
 
-### Step 4: 生成结果文档
+### Step 5: 生成结果文档
 
 创建 `04-02-experiment-results.md`：
 - 按 `04-00-experiments.md` 的实验结构组织
@@ -63,22 +80,18 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - 与预期结果对比标注
 - 明确标注哪些结果已验证、哪些失败、哪些因条件不足未完成
 
-### Step 5: 验证与 Codex Review
+### Step 6: Post-review
 
 先检查每个实验是否完成了预期运行命令并产生了约定输出，再调用 `mcp__codex__codex` 对比结果与实验设计中的预期：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下实验结果是否达到预期：
 
     实验设计预期: {预期结果}
     实际结果: {实际结果}
 
-    检查要点：
-    1. 核心指标是否达标？
-    2. 是否有意外发现？
-    3. 是否需要补充实验？
+    检查：要点见 codex-review-template.md
 ```

@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 04-01-experiment-implement
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 根据 `04-00-experiments.md` 生成实验代码。
 
@@ -31,7 +31,23 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 如果实验描述存在歧义、缺失前提或实现路径不唯一，先向用户确认，不要自行假设。
 
-### Step 2: 设计代码结构
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查代码实现计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下代码实现计划是否合理：
+
+    实验设计: {04-00-experiments.md 内容摘要}
+    执行计划: 根据实验类型生成最小必要代码，包含核心逻辑+参数入口+输出格式
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 设计代码结构
 
 根据实验类型设计代码结构，但优先复用现有项目结构；只有缺失时才创建最小必要目录与文件。
 
@@ -42,7 +58,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 不要为一次性实验添加通用框架、额外抽象层或未被要求的可配置性。
 
-### Step 3: 实现代码
+### Step 4: 实现代码
 
 生成或补充 `04-01-experiment-code/`，仅包含支撑当前实验所必需的内容：
 - 核心实验逻辑
@@ -57,7 +73,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - 最小运行命令是什么
 - 成功后应产生哪些输出文件或指标
 
-### Step 4: 生成运行说明
+### Step 5: 生成运行说明
 
 在 `04-01-experiment-code/README.md` 中记录：
 - 环境配置
@@ -65,22 +81,18 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - 必要参数说明
 - 预期输出文件或指标
 
-### Step 5: 验证与 Codex Review
+### Step 6: Post-review
 
 先用最小运行命令验证入口、参数和输出路径是否成立，再调用 `mcp__codex__codex` 检查代码是否支撑实验设计中的目标：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下代码实现是否支撑实验设计中的目标：
 
     实验设计: {experiments 内容}
     代码结构: {code 结构描述}
 
-    检查要点：
-    1. 代码是否覆盖所有实验？
-    2. 输出格式是否符合预期？
-    3. 是否有缺失的关键模块？
+    检查：要点见 codex-review-template.md
 ```

@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 00-00-idea-brainstorm
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 围绕用户给定的研究方向、约束与偏好，生成 `00-00-idea-pool.md`。
 
@@ -34,7 +34,24 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 如果范围过宽，先收敛为 2-3 个问题轴，再生成候选 idea。
 
-### Step 2: 生成候选 idea 池
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查生成计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 idea brainstorming 计划是否合理：
+
+    研究方向: {用户描述的研究方向}
+    约束条件: {算力/时间/偏好等约束}
+    执行计划: 生成 6-12 个候选 idea，每个包含 problem/motivation/insight/method/contribution/risks
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 生成候选 idea 池
 
 参考 `skills/shared/idea-pool-template.md`，生成 6-12 个候选 idea。
 
@@ -53,27 +70,22 @@ allowed-tools: Read, Write, mcp__codex__codex
 - 每个 idea 都必须能落到最小实验包
 - 若某个 idea 明显依赖不存在的数据、算力或理论前提，要直接写入风险
 
-### Step 3: Codex Review
+### Step 4: Post-review
 
 调用 `mcp__codex__codex` 检查 idea pool 质量：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 idea pool 是否适合作为论文前置 brainstorming 输出：
 
     {idea pool 内容}
 
-    检查要点：
-    1. 是否存在重复或只是轻微改写的 idea？
-    2. 是否存在过空泛、无法验证或明显不可做的 idea？
-    3. 是否覆盖了不同的叙事方向或技术切入点？
-    4. 哪些 idea 值得进入下一步评估？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 4: 输出确认
+### Step 5: 输出确认
 
 输出：
 - `00-00-idea-pool.md` 已生成

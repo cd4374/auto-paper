@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 # 06-paper-review
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 系统审查论文草稿，输出结构化修改意见。
 
@@ -38,7 +38,26 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 ## 工作流
 
-### Step 1: 自检清单
+### Step 1: Pre-review
+
+调用 `mcp__codex__codex` 检查审查准备是否充分：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下论文审查准备是否充分：
+
+    Story: {01-story.md 内容摘要}
+    Structure: {03-00-structure.md 章节规划}
+    Theory Analysis: {03-02-theory-analysis.md 理论边界}
+    Journal Requirements: {02-journal-requirements.md 格式限制}
+    LaTeX: {05-template 文件列表}
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 2: 自检清单
 
 逐项检查，输出 `06-paper-review/self-check.md`：
 
@@ -58,7 +77,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 - [ ] 没有大量只有 1–2 个短段落却单独成节的小节
 ```
 
-### Step 2: 图片理解审查
+### Step 3: 图片理解审查
 
 对论文中的关键 figures 使用 `mcp__MiniMax__understand_image` 逐个检查，重点看：
 - panel 布局是否清楚
@@ -77,14 +96,13 @@ mcp__MiniMax__understand_image(
 
 将结论汇总到图表评估部分；如果图存在明显表达问题，优先记录为图表层问题，而不是只在正文里补救。
 
-### Step 3: Codex 深度审查
+### Step 4: Post-review
 
 调用 Codex 逐章节审查：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请审查论文草稿的 {章节名} 部分。
 
@@ -93,14 +111,7 @@ mcp__codex__codex:
     Theory Analysis: {03-02-theory-analysis.md}
     期刊要求: {02-journal-requirements.md 中的相关要求}
 
-    请检查：
-    1. 是否完整覆盖 story 和 structure 的要求？
-    2. 论证逻辑是否严密？是否有漏洞？
-    3. 若本章涉及理论，理论 claim、assumptions 与 theory–experiment 对照是否一致？
-    4. 语言是否清晰、符合学术规范？
-    5. 与其他章节的衔接是否顺畅？
-    6. 是否有技术错误或表述歧义？
-    7. 是否存在分节过碎、某些小节只有很短内容却单独成节的问题？
+    请检查：是否覆盖 story/structure？逻辑是否严密？语言是否规范？
 
     输出格式：
     ## 评分 (1-10)
@@ -108,7 +119,7 @@ mcp__codex__codex:
     ## 具体修改建议
 ```
 
-### Step 4: 生成报告
+### Step 5: 生成报告
 
 汇总所有问题到 `06-paper-review/report.md`：
 
@@ -150,10 +161,10 @@ mcp__codex__codex:
 - 图表位置：✓/✗
 ```
 
-### Step 5: 修订论文
+### Step 6: 修订论文
 
 默认先输出审查结果，不直接改稿；只有在用户明确要求本阶段同时修订时，才根据 report.md 修改 `05-template/` 并更新 `06-paper-review/revision-log.md`。
 
-### Step 6: 终检
+### Step 7: 终检
 
 确认所有严重问题已解决，方可进入 07-paper-compile。

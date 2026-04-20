@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 00-02-idea-recommend
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 基于 `00-00-idea-pool.md` 与 `00-01-idea-evaluation.md`，生成 `00-02-idea-recommendation.md`。
 
@@ -29,7 +29,24 @@ allowed-tools: Read, Write, mcp__codex__codex
 - 哪些 idea 适合作为备选
 - 哪些 idea 虽然新，但当前不值得做
 
-### Step 2: 形成推荐结论
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查推荐计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 idea recommendation 计划是否合理：
+
+    Idea Pool: {00-00-idea-pool.md 内容摘要}
+    Evaluation: {00-01-idea-evaluation.md 内容摘要}
+    执行计划: 综合评分结果选出主选与备选，给出 story framing
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 形成推荐结论
 
 参考 `skills/shared/idea-recommendation-template.md` 输出：
 - 主选 idea
@@ -43,21 +60,20 @@ allowed-tools: Read, Write, mcp__codex__codex
 - 若主选 idea 仍有关键不确定性，必须明确写入 open questions
 - framing 必须足够具体，能够直接喂给 `/01-paper-init`
 
-### Step 3: 生成待确认问题（如需要）
+### Step 4: 生成待确认问题（如需要）
 
 如果存在关键歧义，生成 `00-02-idea-open-questions.md`，列出：
 - 待确认选择
 - 不同选择的影响
 - 对后续 story / venue / experiments 的影响
 
-### Step 4: Codex Review
+### Step 5: Post-review
 
 调用 `mcp__codex__codex` 检查推荐是否合理：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 idea recommendation 是否合理：
 
@@ -65,14 +81,10 @@ mcp__codex__codex:
     Evaluation: {00-01-idea-evaluation.md}
     Recommendation: {00-02-idea-recommendation.md}
 
-    检查要点：
-    1. 主选 idea 是否真的优于备选？
-    2. 推荐理由是否考虑了可做性与投稿匹配度，而不只看 novelty？
-    3. 给出的 story framing 是否足够具体，可直接进入 01-story？
-    4. 是否遗漏了需要用户确认的关键前提？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 5: 输出确认
+### Step 6: 输出确认
 
 输出：
 - `00-02-idea-recommendation.md` 已生成

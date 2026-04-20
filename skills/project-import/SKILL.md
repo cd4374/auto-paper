@@ -5,7 +5,7 @@ allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__c
 ---
 
 # project-import
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准产物。
 
@@ -69,19 +69,14 @@ allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__c
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下导入得到的 story 是否严格基于现有项目证据：
 
     项目证据摘要: {evidence summary}
     Story: {story 内容}
 
-    检查要点：
-    1. 三问是否完整？
-    2. 哪些表述有明确证据支持？
-    3. 哪些表述只是合理推断？
-    4. 是否存在超出原项目材料的编造式概括？
+    检查：要点见 codex-review-template.md
 ```
 
 ### Step 4: 推断或推荐 venue
@@ -137,17 +132,12 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下导入结果是否超出原项目证据：
     导入结果摘要: {导入生成的内容}
     原项目证据: {evidence summary}
-    检查要点：
-    1. 每个主要 claim 是否有证据支撑？
-    2. 每个实验是否能定位到脚本、配置或结果？
-    3. 哪些内容应标记为”待确认”？
-    4. 是否存在 silently fabricated content？
+    检查：要点见 codex-review-template.md
 ```
 
 ### Step 8: 输出导入总结
@@ -155,4 +145,9 @@ mcp__codex__codex:
 - 已生成哪些标准文件
 - 哪些内容是 high confidence / medium confidence / missing
 - 哪些 claim 或实验仍需用户确认
-- 导入完成后建议从哪个阶段继续；若 `01/02/03/04` 恢复充分，通常可继续 `/05-paper-write`
+
+**下游依赖检查**：
+- 若缺少 `03-01-related-work.md`/`03-01-references.bib`，建议先执行 `/03-01-paper-bibliography`
+- 若缺少 `04-03-paper-assets/`/`04-03-experiment-analysis.md`，建议先执行 `/04-03-experiment-analysis`
+
+**不要直接推荐跳过到 `/05-paper-write`**，除非 `03-01` 和 `04-03` 都已完整生成。

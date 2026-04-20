@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 06-01-review-assess
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 先判断外部 review 意见是否成立，再生成结构化修改方案。
 
@@ -18,6 +18,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
   - `03-00-structure.md`
   - `03-02-theory-analysis.md`
   - `04-00-experiments.md`
+  - `04-01-experiment-code/`（实验代码，用于评估实现相关问题）
   - `04-02-experiment-results.md`
   - `04-03-experiment-analysis.md`
   - `05-template/`
@@ -42,7 +43,23 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 涉及位置（story / structure / experiments / results / analysis / writing）
 - 初步严重性（critical / major / minor）
 
-### Step 2: 判断意见是否成立
+### Step 2: Pre-review
+
+调用 `mcp__codex__codex` 检查评估准备是否充分：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 review 评估准备是否充分：
+
+    Review 意见: {外部 review 摘要}
+    项目文件: {01-story/03-00-structure/03-02/04/05 文件列表}
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 判断意见是否成立
 
 对每条意见与当前项目内容对照，分类为：
 - `accept` — 意见成立，应修改
@@ -60,7 +77,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 如果意见指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先回到 `03-02-theory-analysis.md` 层判断
 - 如果意见指向结果解释、图表质量或 claim 证据边界，优先回到 `04-03-experiment-analysis.md` 层判断
 
-### Step 3: 生成 `06-01-review-action-plan.md`
+### Step 4: 生成 `06-01-review-action-plan.md`
 
 按以下结构写入：
 
@@ -95,21 +112,20 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 明确指出应改 `01/03-02/04/05` 哪一层
 - 如果只是语言与表述问题，可限定只改 `05-template/`
 
-### Step 4: 生成待确认问题
+### Step 5: 生成待确认问题
 
 如果存在 `confirm` 项，生成 `06-01-review-open-questions.md`，列出：
 - 不确定点
 - 需要用户确认的选择
 - 不同选择会影响哪些文件
 
-### Step 5: Codex 审查
+### Step 6: Post-review
 
 调用 `mcp__codex__codex` 检查 action plan：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下 review action plan 是否合理：
 
@@ -120,15 +136,10 @@ mcp__codex__codex:
     Experiments/Results: {04-*}
     Action Plan: {06-01-review-action-plan.md}
 
-    检查要点：
-    1. 是否错误采纳了不成立的 review？
-    2. 是否错误拒绝了成立的 review？
-    3. 修改层级是否合理（01/03-02/04/05）？
-    4. 是否有理论问题被错误下放到纯写作层处理？
-    5. 是否有高风险改动没有标记？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 6: 输出总结
+### Step 7: 输出总结
 
 最后总结：
 - 多少条意见被 accept / partial / reject / defer / confirm

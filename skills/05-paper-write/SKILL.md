@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 05-paper-write
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 基于 `03-00-structure.md`、文献笔记与实验结果撰写 LaTeX。
 
@@ -56,9 +56,36 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 └── template.sty
 ```
 
+**产物自包含要求**（P0.2）：
+
+1. 将 `03-01-references.bib` 复制/生成到 `05-template/references.bib`
+2. 更新 LaTeX 中的 `\bibliography{}` 命令指向 `references`
+3. 将 `04-03-paper-assets/` 中的所有图表复制到 `05-template/figures/`
+4. 更新 LaTeX 中的 `\includegraphics` 路径为相对路径（相对于 `05-template/`）
+
 实际章节命名与数量以 `03-00-structure.md` 为准。
 
-### Step 3: 逐章撰写
+### Step 3: Pre-review
+
+调用 `mcp__codex__codex` 检查撰写准备是否充分：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下论文撰写准备是否充分：
+
+    Story: {01-story.md 内容摘要}
+    Structure: {03-00-structure.md 章节规划}
+    Related Work: {03-01-related-work.md 必引文献}
+    Theory Analysis: {03-02-theory-analysis.md 可写入结论}
+    Experiment Analysis: {04-03-experiment-analysis.md 可直接用于论文的图表}
+    Journal Requirements: {02-journal-requirements.md 格式限制}
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 4: 逐章撰写
 
 按 `03-00-structure.md` 的章节顺序撰写：
 
@@ -78,7 +105,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 - 若某小节只有 1–2 个短段落，默认并入父节；只有 `03-00-structure.md` 明确要求或该小节承担独立论证功能时才保留
 - 只有当该小节承担清晰且相对独立的论证功能时，才保留其标题
 
-### Step 4: 撰写要点
+### Step 5: 撰写要点
 
 以下为默认写作要点；若 `03-00-structure.md` 或 venue 要求更窄，以其为准。
 
@@ -89,14 +116,13 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 **Experiments**: setup → main results → ablation → analysis
 **Conclusion**: 总结 + 局限性 + 未来方向
 
-### Step 5: Codex Review
+### Step 6: 每章 Post-review
 
 每章完成后调用 `mcp__codex__codex` 进行 review：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下章节内容：
 
@@ -104,17 +130,10 @@ mcp__codex__codex:
     Theory Analysis: {03-02-theory-analysis.md}
     实际内容: {章节 LaTeX 内容}
 
-    检查要点：
-    1. 是否覆盖 structure 中的叙事？
-    2. 若本章涉及理论，表述是否与 `03-02` 一致，且没有把 heuristic 写成已证结论？
-    3. 若本章涉及实验，表述是否与 `04-03` 分析结论一致，未写入"不能直接写进论文"的内容？
-    4. 所有 `\includegraphics` 是否有对应文件？
-    5. 语言是否清晰简洁？
-    6. 是否符合期刊风格？
-    7. 是否存在只有极少内容却单独成节的小节？
+    检查：要点见 codex-review-template.md
 ```
 
-### Step 6: 最终检查
+### Step 7: 最终检查
 
 - 每章内容已覆盖 `03-00-structure.md` 中对应叙事
 - Related Work 章节优先基于 `03-01-related-work.md`
@@ -125,8 +144,9 @@ mcp__codex__codex:
 - `05-template/references.bib` 以 `03-01-references.bib` 为基础生成或填充
 - 所有实验描述都能回溯到 `03-02` / `04-00` / `04-02` / `04-03`
 - 所有 `\ref` 有对应 `\label`
-- 所有 `\cite` 有对应 bib 条目
-- 所有 `\includegraphics` 有对应文件存在于 `figures/` 或 `04-03-paper-assets/`
+- 所有 `\cite` 有对应 bib 条目（存在于 `05-template/references.bib`）
+- 所有 `\includegraphics` 引用的文件存在于 `05-template/figures/` 中
+- LaTeX 不引用 `05-template/` 之外的文件路径
 - 数学符号在全文中一致（同一变量使用相同符号）
 - 页数符合 venue 限制（检查 `02-journal-requirements.md`）
 - 无 TODO/FIXME 残留

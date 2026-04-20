@@ -202,7 +202,8 @@
       "scope": "Statistical physics, nonlinear dynamics, complex systems, soft matter, biological physics",
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"]
+        "required_markers": ["aps,"],
+        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'pre'"
       },
       "format": {
         "abstract_max_words": 250,
@@ -213,7 +214,7 @@
         "style": "numeric",
         "package": "revtex-natbib",
         "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
-        "bib_style": "apsrev4-1.bst"
+        "bib_style": "apsrev4-2.bst"
       },
       "figures": { "min": 3, "format": "eps, pdf, tiff", "caption_position": "bottom" },
       "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
@@ -234,7 +235,8 @@
       "scope": "Interdisciplinary physics, open access, ML applications in physics",
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"]
+        "required_markers": ["aps,"],
+        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prx'"
       },
       "format": {
         "abstract_max_words": 250,
@@ -245,7 +247,7 @@
         "style": "numeric",
         "package": "revtex-natbib",
         "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
-        "bib_style": "apsrev4-1.bst"
+        "bib_style": "apsrev4-2.bst"
       },
       "figures": { "min": 4, "format": "eps, pdf, tiff", "caption_position": "bottom" },
       "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
@@ -298,6 +300,7 @@
       "template": {
         "entry_tex": "elsevier/main.tex",
         "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
         "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
@@ -330,6 +333,7 @@
       "template": {
         "entry_tex": "elsevier/main.tex",
         "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
         "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
@@ -364,6 +368,7 @@
       "template": {
         "entry_tex": "elsevier/main.tex",
         "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
+        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
         "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
       },
       "format": {
@@ -421,6 +426,39 @@
       "ablation": { "required": false }
     },
 
+    "prb": {
+      "name": "Physical Review B",
+      "type": "journal",
+      "publisher": "APS",
+      "scope": "Condensed matter, materials physics, soft matter, nanoscale physics",
+      "template": {
+        "entry_tex": "aps/main.tex",
+        "required_markers": ["aps,"],
+        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prb'"
+      },
+      "format": {
+        "abstract_max_words": 250,
+        "page_limit": 10,
+        "page_count_includes": ["full paper"]
+      },
+      "citation": {
+        "style": "numeric",
+        "package": "revtex-natbib",
+        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
+        "bib_style": "apsrev4-2.bst"
+      },
+      "figures": { "min": 3, "format": "eps, pdf, tiff", "caption_position": "bottom" },
+      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
+      "requirements": {
+        "anonymous": false,
+        "ethics_statement": "Required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "data_availability": "Required"
+      },
+      "ablation": { "required": false }
+    },
+
     "prl": {
       "name": "Physical Review Letters",
       "type": "journal",
@@ -428,7 +466,8 @@
       "scope": "Rapid communications, important original research in physics",
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"]
+        "required_markers": ["aps,"],
+        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prl'"
       },
       "format": {
         "abstract_max_chars": 600,
@@ -441,7 +480,7 @@
         "style": "numeric",
         "package": "revtex-natbib",
         "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
-        "bib_style": "apsrev4-1.bst"
+        "bib_style": "apsrev4-2.bst"
       },
       "figures": { "min": 1, "format": "eps, pdf, tiff", "caption_position": "bottom" },
       "tables": { "min": 0, "style": "revtex", "caption_position": "top" },

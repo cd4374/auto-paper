@@ -1,18 +1,19 @@
 ---
 name: "02-paper-journal"
 description: "基于 01-story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
-allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 ---
 
 # 02-paper-journal
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
 
 基于 `01-story.md` 推荐期刊并生成格式要求。
 
 ## 输入
 
-`01-story.md`
+- `01-story.md`
+- `../shared/templates/venue-requirements.json`（支持的期刊列表）
 
 ## 输出
 
@@ -28,13 +29,27 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 贡献类型（理论/实验/应用）
 - 预期贡献度
 
-### Step 2: 推荐期刊
+### Step 2: Pre-review
 
-支持的期刊：
-- **ML会议**: neurips (9页), icml (8页), iclr (9页), aaai (7页)
-- **物理/复杂系统**: pre (10页), prl (3750词/约4-6页), prx (15页), chaos (10页), njp (无限制), jstat (无限制), jmp (无限制), cn (无限制)
-- **数值计算**: jcp (无限制), cpc (无限制)
-- **综合/跨学科**: nature (约8页), science (约10页)
+调用 `mcp__codex__codex` 检查期刊推荐计划是否合理：
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下期刊推荐计划是否合理：
+
+    Story: {01-story.md 内容摘要}
+    执行计划: 根据 story 主题匹配 1-2 个候选期刊
+
+    检查：要点见 codex-review-template.md
+```
+
+### Step 3: 读取支持的期刊列表
+
+读取 `../shared/templates/venue-requirements.json`，获取所有支持的期刊及其基本信息。
+
+### Step 4: 推荐期刊
 
 根据 story 主题匹配推荐 1-2 个候选期刊。
 
@@ -43,11 +58,11 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 匹配理由
 - 格式要求摘要
 
-### Step 3: 用户选择
+### Step 5: 用户选择
 
 展示推荐，等待用户选择目标期刊。
 
-### Step 4: 生成 requirements
+### Step 6: 生成 requirements
 
 从 `venue-requirements.json` 读取选中期刊的详细要求，生成 `02-journal-requirements.md`：
 
@@ -90,21 +105,18 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 从 `../shared/templates/venue-requirements.json` 中提取对应期刊的完整配置。
 
-### Step 5: Codex Review
+### Step 7: Post-review
 
 调用 `mcp__codex__codex` 检查推荐是否匹配 story 的贡献度：
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
-  config: {"model_reasoning_effort": "xhigh"}
+  model: claude-opus-4-7
   prompt: |
     请检查以下期刊推荐是否匹配 story 的贡献度：
 
     Story: {story 内容}
     推荐: {recommendation 内容}
 
-    检查要点：
-    1. 期刊级别是否匹配贡献度？
-    2. 格式要求是否可满足？
+    检查：要点见 codex-review-template.md
 ```
