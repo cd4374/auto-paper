@@ -35,7 +35,7 @@ allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下期刊推荐计划是否合理：
 
@@ -111,7 +111,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下两项：
     1. 期刊推荐是否匹配 story 的贡献度？

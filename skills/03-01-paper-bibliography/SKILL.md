@@ -39,7 +39,7 @@ allowed-tools: Bash, Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下文献检索计划是否合理：
 
@@ -156,7 +156,7 @@ for p in data.get('data', []):
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下文献检索结果是否与论文 story 和 structure 对齐：
 

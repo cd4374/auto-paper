@@ -27,7 +27,7 @@ allowed-tools: Bash, Read, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下编译准备是否充分：
 
@@ -109,7 +109,7 @@ fi
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下编译结果是否满足期刊要求：
 
@@ -153,7 +153,7 @@ pdfinfo 07-output/paper.pdf | grep Pages
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下编译结果是否满足期刊要求：
 

@@ -79,7 +79,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下论文撰写准备是否充分：
 
@@ -130,7 +130,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下章节内容：
 

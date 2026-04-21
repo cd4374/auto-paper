@@ -28,7 +28,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下实验运行计划是否合理：
 
@@ -86,7 +86,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下实验结果是否达到预期：
 

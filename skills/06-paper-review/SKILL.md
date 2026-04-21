@@ -44,7 +44,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下论文审查准备是否充分：
 
@@ -102,7 +102,7 @@ mcp__MiniMax__understand_image(
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请审查论文草稿的 {章节名} 部分。
 

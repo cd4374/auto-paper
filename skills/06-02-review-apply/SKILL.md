@@ -49,7 +49,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下修改计划是否合理：
 
@@ -114,7 +114,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下修改是否严格遵循 review action plan：
 

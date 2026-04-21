@@ -29,7 +29,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下实验设计计划是否合理：
 
@@ -96,7 +96,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下实验设计是否同时支撑 story 中的 claim，并覆盖 theory analysis 中需要验证的 prediction：
 

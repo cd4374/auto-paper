@@ -75,7 +75,7 @@ forbidden-actions:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下导入得到的 story 是否严格基于现有项目证据：
 
@@ -101,7 +101,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下 venue 推荐是否与导入项目的风格和范围匹配：
     Story: {01-story.md}
@@ -122,7 +122,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下 structure 是否支撑 story：
     Story: {01-story.md}
@@ -158,7 +158,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下导入的实验材料是否超出原项目证据：
     原项目证据: {evidence summary}
@@ -174,7 +174,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     请检查以下导入结果是否超出原项目证据：
     导入结果摘要: {导入生成的内容}
