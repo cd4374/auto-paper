@@ -81,6 +81,18 @@ mcp__codex__codex:
 - 必要参数说明
 - 预期输出文件或指标
 
+### Step 5.5: 可复现性检查（强制）
+
+**不满足的项目必须在进入 04-02 前修复**：
+
+每个实验必须满足：
+- [ ] 随机种子已固定（如 `torch.manual_seed(42)`、`np.random.seed(42)`）
+- [ ] 有 `requirements.txt` 或 `environment.yml` 记录依赖版本
+- [ ] README 中的运行命令可从零复现结果（包含所有必要参数）
+- [ ] 代码覆盖了 `04-00-experiments.md` 中该实验的所有设置项（数据集、baseline、指标）
+
+若不满足，**阻塞并修复**，不得跳过进入 04-02。
+
 ### Step 6: Post-review
 
 先用最小运行命令验证入口、参数和输出路径是否成立，再调用 `mcp__codex__codex` 检查代码是否支撑实验设计中的目标：

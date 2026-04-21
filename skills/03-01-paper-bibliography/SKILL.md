@@ -105,31 +105,50 @@ mcp__codex__codex:
 
 ### Step 6: 生成 BibTeX
 
-为准备进入论文正文的文献生成 `03-01-references.bib`。
+**工具分工**：WebSearch/WebFetch 用于文献发现和元数据获取，Bash/curl 用于获取可验证的 BibTeX。
 
 对每篇需要引用的论文，按以下顺序获取 BibTeX：
 
 **① DBLP（首选）**：适用于 ML/AI、物理、数学等正式发表论文
+
 ```bash
-# 1. 标题+作者搜索
+# 1. 搜索（返回 JSON）
 curl -s "https://dblp.org/search/publ/api?q=TITLE+AUTHOR&format=json&h=3"
-# 2. 提取 DBLP key（如 conf/nips/VaswaniSPUJGKP17）
-# 3. 获取真实 BibTeX
+# 2. 从 JSON 的 "info > url" 字段提取 DBLP key（如 "conf/iclr/Devlin20"）
+# 3. 获取 BibTeX
 curl -s "https://dblp.org/rec/{key}.bib"
 ```
 
-**② CrossRef（备用）**：适用于有 DOI 或 arXiv ID 的论文（arXiv DOI = `10.48550/arXiv.{id}`）
+若 DBLP API 返回为空或超时，**必须记录**，继续下一步。
+
+**② CrossRef（第二 fallback）**：适用于有 DOI 的论文
 ```bash
 curl -sLH "Accept: application/x-bibtex" "https://doi.org/{doi}"
 ```
 
-**③ [VERIFY] 标记（最后手段）**：两者均失败时，在条目前加 `% [VERIFY]`，同时记录到 `03-01-open-questions.md`，**禁止编造字段**
+**③ Semantic Scholar API（第三 fallback）**：
+```bash
+curl -s "https://api.semanticscholar.org/graph/v1/paper/search?query=TITLE&fields=title,authors,year,venue,externalIds" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+for p in data.get('data', []):
+    if 'ArXiv' in p.get('externalIds', {}):
+        print(f'arXiv: {p[\"externalIds\"][\"ArXiv\"]}')
+    if 'DOI' in p.get('externalIds', {}):
+        print(f'DOI: {p[\"externalIds\"][\"DOI\"]}')
+"
+```
 
-要求：
+**④ [VERIFY] 标记（最后手段）**：所有 API 均失败时：
+- 在条目前加 `% [VERIFY]` 注释
+- 记录到 `03-01-open-questions.md`
+- **禁止编造任何字段**（尤其是 author、year、pages、venue）
+
+**额外规则**：
+- **arXiv preprint 必须标注正式发表 venue**（如论文已有正式版本，引用正式版本而非 arXiv）
+- arXiv 条目标注格式：`@misc{key, author={...}, title={...}, year={...}, eprint={arXiv ID}, archivePrefix={arXiv}, primaryClass={cs.XX}, note={[preprint]}}`
 - 只收录实际会被引用的最小必要文献集
-- 条目字段完整（author, title, year, venue/journal, pages）
-- 正式出版物优先于 arXiv preprint；若两者均存在，引用正式版本
-- 使用一致的 key 格式：`{firstauthor}{year}{keyword}`（如 `vaswani2017attention`）
+- key 格式：`{firstauthor}{year}{keyword}`（如 `vaswani2017attention`）
 
 ### Step 7: Post-review
 

@@ -107,16 +107,19 @@ mcp__codex__codex:
 
 ### Step 7: Post-review
 
-调用 `mcp__codex__codex` 检查推荐是否匹配 story 的贡献度：
+调用 `mcp__codex__codex` 检查两件事：
 
 ```
 mcp__codex__codex:
   model: claude-opus-4-7
   prompt: |
-    请检查以下期刊推荐是否匹配 story 的贡献度：
+    请检查以下两项：
+    1. 期刊推荐是否匹配 story 的贡献度？
+    2. requirements 文件格式是否完整？（必须包含：基本信息/格式要求/引用格式/图表要求/提交要求/实验要求）
 
     Story: {story 内容}
-    推荐: {recommendation 内容}
+    推荐: {02-journal-recommendation.md}
+    Requirements: {02-journal-requirements.md}
 
     检查：要点见 codex-review-template.md
 ```

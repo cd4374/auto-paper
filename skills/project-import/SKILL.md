@@ -2,6 +2,12 @@
 name: "project-import"
 description: "解析现有研究项目并转化为 auto-paper 标准格式。"
 allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__codex
+forbidden-actions:
+  - 不要重构已有的实验代码
+  - 不要补做 structure 之外的实验
+  - 不要凭空生成不存在的实验结果
+  - 不要修改用户提供的原始文件
+  - 不要把 medium confidence 的推断标记为 high confidence
 ---
 
 # project-import
@@ -91,6 +97,18 @@ mcp__codex__codex:
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 
+#### Step 4.1: Post-review（venue 推荐）
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 venue 推荐是否与导入项目的风格和范围匹配：
+    Story: {01-story.md}
+    推荐: {02-journal-recommendation.md}
+    检查：要点见 codex-review-template.md
+```
+
 ### Step 5: 生成 `03-00-structure.md`
 参考 `skills/shared/structure-template.md` 生成 `03-00-structure.md`。
 
@@ -99,6 +117,18 @@ mcp__codex__codex:
 - 若没有现成结构，则回退到标准 5 章结构
 - 每章叙事内容要能映射回 story
 - 字数/图表/公式需求要考虑 venue 要求和现有材料量
+
+#### Step 5.1: Post-review（structure 生成）
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下 structure 是否支撑 story：
+    Story: {01-story.md}
+    Structure: {03-00-structure.md}
+    检查：要点见 codex-review-template.md
+```
 
 ### Step 6: 条件性恢复 03-02 理论层与 04 阶段材料
 #### 6.1 条件性生成 `03-02-theory-analysis.md`
@@ -123,6 +153,18 @@ mcp__codex__codex:
 
 #### 6.3 条件性生成 `04-02-experiment-results.md`
 只有在已有项目里存在清晰结果产物时才生成：CSV/JSON、图表、关键日志、草稿结果描述。证据不足则不要生成。
+
+#### 6.5 Post-review（04 阶段材料）
+
+```
+mcp__codex__codex:
+  model: claude-opus-4-7
+  prompt: |
+    请检查以下导入的实验材料是否超出原项目证据：
+    原项目证据: {evidence summary}
+    导入结果: {04-00/04-02 内容摘要}
+    检查：要点见 codex-review-template.md
+```
 
 #### 6.4 不默认重建 `04-01-experiment-code/`
 已有项目通常已包含代码，导入阶段只做映射和解释，不做代码重写。

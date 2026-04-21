@@ -12,6 +12,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 ## 输入
 
+- `01-story.md`（必须读取，用于 claim 覆盖度核查）
 - `04-00-experiments.md`
 - `04-01-experiment-code/`
 - `04-02-experiment-results.md`
@@ -97,9 +98,36 @@ mcp__codex__codex:
 
 结论写入 `04-03-experiment-analysis.md`，明确哪些图可直接进入论文、哪些需要重绘。
 
-### Step 7: 生成分析文档
+### Step 7: 叙事→实验覆盖度检查
 
-创建 `04-03-experiment-analysis.md`，建议结构：
+**这是 P0 强制门控，不得跳过。**
+
+读取 `01-story.md`，对照实验结果，检查：
+
+```
+## Story Claim Coverage（必须填写）
+| Story Claim（来自01-story.md）| 支撑实验 | 支撑程度 | 论文处理方式 |
+|---|---|---|---|
+| Claim C1: ... | 实验N | 支撑/部分支撑/不支持/无实验 | 直接引用/加限定词/移至future work |
+```
+
+**判定标准**：
+- **支撑**：核心指标超过 baseline，统计显著
+- **部分支撑**：趋势正确但不显著，或只在部分 regime 成立
+- **不支持**：核心指标低于或等于 baseline
+- **无实验**：该 claim 没有任何对应实验
+
+**系统不支持处理**（≥2 个核心 claim 为"不支持"或"无实验"）：
+1. 必须生成 `04-03-story-gap.md`，列出所有覆盖缺口
+2. **阻塞进入 05-paper-write**
+3. 向用户说明，由用户选择：
+   - (a) 修改 story/claim（回退到 `/01-paper-init` 或 `/03-02-paper-theory-analysis`）
+   - (b) 补充/修改实验（回退到 `/04-00-experiment-design`）
+   - (c) 放弃该项目
+
+### Step 8: 生成分析文档
+
+创建 `04-03-experiment-analysis.md`，结构如下：
 
 ```markdown
 # Experiment Analysis
@@ -109,6 +137,16 @@ mcp__codex__codex:
 - 部分支撑的 claim:
 - 当前未支撑的 claim:
 - 是否建议补实验:
+
+## Story Claim Coverage（必填）
+| Story Claim | 支撑实验 | 支撑程度 | 论文处理方式 |
+|---|---|---|---|
+| ... | ... | ... | ... |
+
+**⚠️ 覆盖缺口声明**（若有未支撑的 claim）：
+- 已在正文中加限定词的 claim:
+- 移至 future work 的 claim:
+- [若无缺口] 所有核心 claim 均有实验支撑
 
 ## Experiment-by-Experiment Review
 ### 实验 1: ...
@@ -134,7 +172,9 @@ mcp__codex__codex:
 
 明确标注：哪些结论可进入 `05-paper-write`，哪些仅作内部判断。
 
-### Step 8: Post-review
+### Step 9: Post-review
+
+### Step 9: Post-review
 
 先检查分析文档、图表资产、图片审查结论与原始结果是否可回溯，再调用 `mcp__codex__codex` 检查分析是否合理：
 

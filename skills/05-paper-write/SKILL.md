@@ -30,6 +30,14 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ## 工作流
 
+### Step 0: 进入条件检查
+
+**必须满足以下条件方可开始撰写**：
+1. `04-03-experiment-analysis.md` 已存在且包含 `## Story Claim Coverage` 章节
+2. 所有核心 story claim 均有实验支撑，或已在 `04-03-story-gap.md` 中记录并获用户确认继续
+
+若不满足，**阻塞并返回 04-03 补齐**，不得跳过。
+
 ### Step 1: 准备模板
 
 1. 优先复用现有 `05-template/`；只有缺失时才创建最小必要文件
@@ -143,10 +151,43 @@ mcp__codex__codex:
 - assumptions / limitations 在正文中得到充分暴露
 - `05-template/references.bib` 以 `03-01-references.bib` 为基础生成或填充
 - 所有实验描述都能回溯到 `03-02` / `04-00` / `04-02` / `04-03`
-- 所有 `\ref` 有对应 `\label`
-- 所有 `\cite` 有对应 bib 条目（存在于 `05-template/references.bib`）
-- 所有 `\includegraphics` 引用的文件存在于 `05-template/figures/` 中
-- LaTeX 不引用 `05-template/` 之外的文件路径
-- 数学符号在全文中一致（同一变量使用相同符号）
-- 页数符合 venue 限制（检查 `02-journal-requirements.md`）
 - 无 TODO/FIXME 残留
+
+### Step 7.1: 自动化 LaTeX 完整性检查
+
+**必须执行，不得跳过**：
+
+```bash
+cd 05-template
+
+# 检查未定义的 \ref
+echo "=== Undefined refs ==="
+for ref in $(grep -oE '\\\\ref\{[^}]+\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*\\ref{\([^}]*\)}.*/\1/' | sort -u); do
+  grep -r "\\\\label{$ref}" . > /dev/null 2>&1 || echo "UNDEFINED REF: $ref"
+done
+
+# 检查缺失的 bib 条目
+echo "=== Missing bib entries ==="
+for key in $(grep -oE '\\cite[p]?\{[^}]+\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*{\([^}]*\)}.*/\1/' | tr ',' '\n' | sed 's/^ *//;s/ *$//' | sort -u); do
+  grep -E "^\@.*\{${key}[,@]" references.bib > /dev/null 2>&1 || echo "MISSING BIB: $key"
+done
+
+# 检查缺失的图表文件
+echo "=== Missing figures ==="
+for fig in $(grep -oE '\\\\includegraphics[^;]*\{([^}]+)\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*{\([^}]*\)}.*/\1/' | sort -u); do
+  # 处理相对路径（相对于 05-template/）
+  if [[ "$fig" = figures/* ]]; then
+    [ -f "$fig" ] || echo "MISSING FIGURE: $fig"
+  elif [[ "$fig" = /* ]]; then
+    echo "OUTSIDE PATH: $fig (must use relative path)"
+  else
+    [ -f "figures/$fig" ] || echo "MISSING FIGURE: figures/$fig"
+  fi
+done
+
+# 检查 TODO/FIXME 残留
+echo "=== TODO/FIXME ==="
+grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/FIXME found!"
+```
+
+若任何检查有输出，**必须修复后才能进入 06-paper-review**，不得绕过。
