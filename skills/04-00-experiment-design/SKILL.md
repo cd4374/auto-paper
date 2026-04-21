@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 04-00-experiment-design
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `01-story.md` + `03-00-structure.md` 设计实验方案。
 

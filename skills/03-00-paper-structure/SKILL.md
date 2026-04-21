@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 03-00-paper-structure
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
 

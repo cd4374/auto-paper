@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 01-paper-init
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 从研究想法生成 `01-story.md`。
 

@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 # 06-paper-review
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 系统审查论文草稿，输出结构化修改意见。
 

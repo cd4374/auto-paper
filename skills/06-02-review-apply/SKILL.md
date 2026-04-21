@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 06-02-review-apply
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 根据 `06-01-review-action-plan.md` 执行已经确认的修改，并记录落实情况。
 

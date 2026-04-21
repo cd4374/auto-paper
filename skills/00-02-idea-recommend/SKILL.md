@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 00-02-idea-recommend
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `00-00-idea-pool.md` 与 `00-01-idea-evaluation.md`，生成 `00-02-idea-recommendation.md`。
 

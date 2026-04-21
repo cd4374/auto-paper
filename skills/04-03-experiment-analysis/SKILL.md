@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 # 04-03-experiment-analysis
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 复核实验实现与结果，生成面向论文写作的分析结论和图表资产。
 

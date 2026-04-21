@@ -15,7 +15,7 @@
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     检查以下执行计划：{计划内容}
     要点：是否覆盖上游要求？是否有冲突/遗漏？输出范围是否合理？
@@ -25,7 +25,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: claude-opus-4-7
+  model: gpt-5.4
   prompt: |
     检查以下输出：{输出内容}
     要点：是否覆盖上游要求？是否自洽？有无过度扩展？格式是否规范？

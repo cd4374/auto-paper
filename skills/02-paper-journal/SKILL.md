@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 
 # 02-paper-journal
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `01-story.md` 推荐期刊并生成格式要求。
 

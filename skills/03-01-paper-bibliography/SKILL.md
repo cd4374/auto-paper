@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 # 03-01-paper-bibliography
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 Related Work 笔记与参考文献初稿。
 

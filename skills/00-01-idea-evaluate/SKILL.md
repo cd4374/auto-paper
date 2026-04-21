@@ -6,7 +6,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 # 00-01-idea-evaluate
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 对 `00-00-idea-pool.md` 做结构化评分，并生成 `00-01-idea-evaluation.md`。
 

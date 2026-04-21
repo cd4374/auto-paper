@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, mcp__codex__codex
 
 # 07-paper-compile
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 编译 LaTeX 项目生成 PDF。
 

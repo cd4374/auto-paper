@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 03-02-paper-theory-analysis
 
-- REVIEWER_MODEL = `claude-opus-4-7` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
 
 基于 `01-story.md`、`03-00-structure.md` 与相关文献笔记，生成论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界与可实验对照的 predictions。
 
