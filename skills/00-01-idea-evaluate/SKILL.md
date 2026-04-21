@@ -7,6 +7,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 # 00-01-idea-evaluate
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 对 `00-00-idea-pool.md` 做结构化评分，并生成 `00-01-idea-evaluation.md`。
 
@@ -76,7 +77,7 @@ mcp__codex__codex:
 - 若发现“其实不新”，也要保留其 paperability / feasibility 价值判断
 - 如果 novelty 不高但 framing 或 finding 仍有机会，要明确写出
 
-### Step 5: Post-review
+### Step 5: Post-review（迭代循环，最多 3 轮）
 
 调用 `mcp__codex__codex` 检查评估是否合理：
 
@@ -90,7 +91,13 @@ mcp__codex__codex:
     Evaluation: {00-01-idea-evaluation.md}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改 evaluation → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束
 
 ### Step 6: 输出确认
 

@@ -7,6 +7,7 @@ allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 # 02-paper-journal
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` 推荐期刊并生成格式要求。
 
@@ -105,7 +106,7 @@ mcp__codex__codex:
 
 从 `../shared/templates/venue-requirements.json` 中提取对应期刊的完整配置。
 
-### Step 7: Post-review
+### Step 7: Post-review（迭代循环，最多 3 轮）
 
 调用 `mcp__codex__codex` 检查两件事：
 
@@ -122,4 +123,10 @@ mcp__codex__codex:
     Requirements: {02-journal-requirements.md}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改 recommendation/requirements → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束

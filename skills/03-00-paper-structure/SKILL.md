@@ -7,6 +7,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 # 03-00-paper-structure
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
 
@@ -86,7 +87,7 @@ mcp__codex__codex:
 - 章节命名
 - 图表限制
 
-### Step 6: Post-review
+### Step 6: Post-review（迭代循环，最多 3 轮）
 
 调用 `mcp__codex__codex` 检查 structure 是否支撑 story：
 
@@ -100,4 +101,10 @@ mcp__codex__codex:
     Structure: {structure 内容}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改 structure → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束

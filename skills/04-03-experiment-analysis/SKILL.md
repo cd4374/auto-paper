@@ -7,6 +7,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 # 04-03-experiment-analysis
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 复核实验实现与结果，生成面向论文写作的分析结论和图表资产。
 
@@ -172,9 +173,7 @@ mcp__codex__codex:
 
 明确标注：哪些结论可进入 `05-paper-write`，哪些仅作内部判断。
 
-### Step 9: Post-review
-
-### Step 9: Post-review
+### Step 9: Post-review（迭代循环，最多 3 轮）
 
 先检查分析文档、图表资产、图片审查结论与原始结果是否可回溯，再调用 `mcp__codex__codex` 检查分析是否合理：
 
@@ -191,4 +190,10 @@ mcp__codex__codex:
     分析文档: {04-03-experiment-analysis.md}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改 experiment-analysis → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束

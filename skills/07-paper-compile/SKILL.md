@@ -7,6 +7,7 @@ allowed-tools: Bash, Read, mcp__codex__codex
 # 07-paper-compile
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 编译 LaTeX 项目生成 PDF。
 
@@ -96,54 +97,7 @@ fi
 cp 05-template/main.pdf 07-output/paper.pdf
 ```
 
-### Step 7: 验证与 Post-review
-
-```bash
-[ -s 07-output/paper.pdf ] || { echo "ERROR: PDF is empty or missing" && exit 1 }
-if $PDFINFO; then
-  PAGES=$(pdfinfo 07-output/paper.pdf | grep Pages | awk '{print $2}')
-  echo "PDF pages: $PAGES"
-  # 页数超限检查（由 Codex 检查，与 venue-requirements.json 对照）
-fi
-```
-
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下编译结果是否满足期刊要求：
-
-    期刊要求页数限制: {02-journal-requirements.md 中的 page_limit}
-    实际页数: {pdfinfo 输出}
-    编译日志: {关键错误摘要}
-
-    检查：要点见 codex-review-template.md
-```
-
-### 常见编译问题
-
-| 问题 | 处理方式 |
-|------|----------|
-| Undefined reference | 记录缺失引用位置，返回修复 |
-| Missing bib entry | 记录缺失条目，返回 03-01 补文献 |
-| Overfull hbox | 记录位置，返回正文调整 |
-| Missing package | 记录包名，建议用户安装 tlmgr |
-
-检查对应日志文件中的错误并记录：
-- Undefined references
-- Missing citations
-- Overfull hbox
-- Missing package / template-specific errors
-
-默认记录并返回问题，不在本阶段自动扩展为正文修订或依赖安装。
-
-### Step 6: 复制输出
-
-```bash
-cp 05-template/{stem}.pdf 07-output/paper.pdf
-```
-
-### Step 7: 验证与 Post-review
+### Step 7: 验证与 Post-review（迭代循环，最多 3 轮）
 
 先验证 PDF 非空，再调用 `mcp__codex__codex` 检查编译结果是否满足期刊要求：
 
@@ -162,11 +116,16 @@ mcp__codex__codex:
     编译日志: {关键错误摘要}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修复 LaTeX → 重新编译 → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束
 
 ### 常见编译问题
 
-常见问题：
 | 问题 | 处理方式 |
 |------|----------|
 | Undefined reference | 记录缺失引用并返回对应位置 |

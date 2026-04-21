@@ -7,6 +7,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 # 01-paper-init
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 从研究想法生成 `01-story.md`。
 
@@ -65,7 +66,7 @@ mcp__codex__codex:
 [解决问题的思路是什么？核心方法概述]
 ```
 
-### Step 4: Post-review
+### Step 4: Post-review（迭代循环，最多 3 轮）
 
 调用 `mcp__codex__codex` 检查叙事逻辑：
 
@@ -78,7 +79,13 @@ mcp__codex__codex:
     {story 内容}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改 story → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 结束
 
 ### Step 5: 输出确认
 

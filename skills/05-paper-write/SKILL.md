@@ -7,6 +7,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 # 05-paper-write
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
 
 基于 `03-00-structure.md`、文献笔记与实验结果撰写 LaTeX。
 
@@ -124,7 +125,7 @@ mcp__codex__codex:
 **Experiments**: setup → main results → ablation → analysis
 **Conclusion**: 总结 + 局限性 + 未来方向
 
-### Step 6: 每章 Post-review
+### Step 6: 每章 Post-review（迭代循环，最多 3 轮）
 
 每章完成后调用 `mcp__codex__codex` 进行 review：
 
@@ -139,7 +140,13 @@ mcp__codex__codex:
     实际内容: {章节 LaTeX 内容}
 
     检查：要点见 codex-review-template.md
+
+    若有问题，明确指出并给出修改建议。
 ```
+
+迭代逻辑：
+- 若 review 指出问题 → 按 review 建议修改章节内容 → 继续 review（round++）
+- 若 review 通过或达到轮数上限 → 进入下一章
 
 ### Step 7: 最终检查
 
