@@ -41,7 +41,7 @@ temporary-files: PLAN.md
 
 ```
 mcp__codex__codex:
-  model: cn-plus
+  model: kimi-k2.6
   prompt: |
     请审查以下 plan：
 
@@ -72,7 +72,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: cn-plus
+  model: kimi-k2.6
   prompt: |
     请审查以下实现：
 
