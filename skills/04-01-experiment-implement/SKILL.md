@@ -20,6 +20,19 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 `04-01-experiment-code/` 目录（根据实验类型动态组织）
 
+常见目录结构示例：
+
+```bash
+04-01-experiment-code/
+├── README.md              # 环境配置、最小运行命令
+├── requirements.txt       # 依赖版本
+├── configs/              # 实验配置（YAML/JSON）
+├── scripts/              # 运行脚本
+├── src/                  # 核心代码
+├── data/                 # 数据处理（可选）
+└── outputs/              # 临时输出（.gitignore）
+```
+
 ## 工作流
 
 ### Step 1: 分析实验设计
@@ -73,6 +86,45 @@ mcp__codex__codex:
 - 对应哪个实验目标/claim
 - 最小运行命令是什么
 - 成功后应产生哪些输出文件或指标
+
+**绘图代码规范（强制）**：若实验需要生成图表，绘图代码必须满足以下要求：
+
+**推荐使用共享样式脚本** `skills/shared/paper_plot_style.py`：
+```python
+import sys
+sys.path.append('skills/shared')
+from paper_plot_style import *
+
+# 创建图表
+fig, ax = plt.subplots()
+# ... 绘图代码 ...
+
+# 添加子图编号
+add_subfigure_label(ax, 'a')  # 添加 (a) 标签
+
+# 保存
+save_fig(fig, 'fig_name')  # 保存为 PDF
+```
+
+**图表类型决策树**：
+
+| 数据模式 | 推荐类型 | 宽度 |
+|----------|----------|------|
+| X=时间/steps, Y=指标 | Line plot（折线图） | 0.48\textwidth |
+| X=方法/类别, Y=数值 | Bar chart（柱状图） | 0.48\textwidth |
+| X=连续, Y=连续 | Scatter plot（散点图） | 0.48\textwidth |
+| 矩阵/网格值 | Heatmap（热图） | 0.48\textwidth |
+| 分布比较 | Box/violin plot | 0.48\textwidth |
+| 多数据集/多方法 | Multi-panel（多子图） | 0.95\textwidth |
+
+**绘图规范**：
+
+1. **多子图编号**：使用 `add_subfigure_label(ax, 'a')` 添加 (a)、(b)、(c)... 编号
+2. **字体**：serif 字体（Times New Roman），base size = 10pt
+3. **分辨率**：≥ 300 DPI（PDF 矢量格式优先）
+4. **布局**：使用 `fig.tight_layout()` 避免重叠
+5. **色条**：必须标注数值范围与单位
+6. **导出**：优先 PDF（矢量），PNG 仅作为光栅回退
 
 ### Step 5: 生成运行说明
 

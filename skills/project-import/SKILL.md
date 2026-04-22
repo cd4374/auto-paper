@@ -173,7 +173,7 @@ mcp__codex__codex:
 #### 6.3 条件性生成 `04-02-experiment-results.md`
 只有在已有项目里存在清晰结果产物时才生成：CSV/JSON、图表、关键日志、草稿结果描述。证据不足则不要生成。
 
-#### 6.5 Post-review（迭代循环，最多 3 轮）
+#### 6.4 Post-review（迭代循环，最多 3 轮）
 
 ```
 mcp__codex__codex:
@@ -191,7 +191,7 @@ mcp__codex__codex:
 - 若 review 指出问题 → 按 review 建议修改实验材料 → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 7
 
-#### 6.4 不默认重建 `04-01-experiment-code/`
+#### 6.5 不默认重建 `04-01-experiment-code/`
 已有项目通常已包含代码，导入阶段只做映射和解释，不做代码重写。
 
 ### Step 7: 最终一致性检查（迭代循环，最多 3 轮）

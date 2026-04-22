@@ -72,6 +72,11 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 3. 将 `04-03-paper-assets/` 中的所有图表复制到 `05-template/figures/`
 4. 更新 LaTeX 中的 `\includegraphics` 路径为相对路径（相对于 `05-template/`）
 
+**LaTeX 图表片段**：
+- 若 `04-03-paper-assets/latex_includes.tex` 存在，读取并使用其中的图表 LaTeX 代码
+- 直接复制对应图表的 `\begin{figure}...\end{figure}` 代码到对应章节
+- 若不存在或需要修改，手动编写并确保 `\includegraphics` 路径正确
+
 实际章节命名与数量以 `03-00-structure.md` 为准。
 
 ### Step 3: Pre-review

@@ -25,6 +25,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__MiniMax__u
 
 - `04-03-experiment-analysis.md` （主要语言要用中文，名词等专业用语可以保留英文）
 - `04-03-paper-assets/` （论文可直接引用的图、表、整理后的中间文件）
+- `04-03-paper-assets/latex_includes.tex` （所有图表的 LaTeX 嵌入代码）
 
 ## 工作流
 
@@ -89,15 +90,73 @@ mcp__codex__codex:
 - 只保留论文写作需要的最小必要资产
 - 若需要重绘，优先复用现有结果文件，不重跑无关实验
 
+**生成 LaTeX 片段**：
+生成 `04-03-paper-assets/latex_includes.tex`，包含所有图表的 LaTeX 嵌入代码：
+
+```latex
+% === Fig X: [Caption] ===
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/fig_name.pdf}
+    \caption{[Caption based on 04-03 analysis].}
+    \label{fig:fig_name}
+\end{figure}
+```
+
+格式要求：
+- 使用 `0.48\textwidth`（单栏）或 `0.95\textwidth`（双栏/通栏）
+- Caption 简洁、信息完整
+- label 使用 `fig:fig_name` 格式
+
 ### Step 6: 图片审查
 
-用 `mcp__MiniMax__understand_image` 审查关键 figures，检查：
-- panel 布局是否清楚
-- 曲线、热图、坐标轴、legend、colorbar、annotation 是否可读
-- 图是否真正表达了当前 claim 对应的现象
-- 是否存在可能引发 reviewer 困惑的展示问题、歧义或视觉误导
+用 `mcp__MiniMax__understand_image` 审查关键 figures，检查以下所有要点：
 
-结论写入 `04-03-experiment-analysis.md`，明确哪些图可直接进入论文、哪些需要重绘。
+#### 质量检查清单（10+ 项）
+
+**可读性**：
+- [ ] 字体大小合适，printed size 可读（≥ 8pt）
+- [ ] 颜色在灰度模式下可区分（打印友好）
+- [ ] 曲线、热图、坐标轴、legend、colorbar、annotation 清晰可读
+- [ ] 文字与图形元素无重叠、遮挡
+- [ ] 坐标轴标签有单位（如适用）
+- [ ] 坐标轴标签是 publication 级别（如 `Cross-Entropy Loss` 而非 `loss`）
+
+**多子图**：
+- [ ] 每个子图左上角有 (a)、(b)、(c)... 编号
+- [ ] 编号清晰可见、位置一致
+- [ ] 正文中可引用 "(如图 (a) 所示)"
+
+**布局**：
+- [ ] Legend 不遮挡数据（放在外侧或右下角）
+- [ ] 无箭头/连接线交叉
+- [ ] 间距平衡（不太挤也不太稀疏）
+- [ ] 图表宽度符合期刊要求（单栏 0.48\textwidth，双栏 0.95\textwidth）
+
+**样式**：
+- [ ] Serif 字体（Times New Roman）匹配正文
+- [ ] 无 matplotlib 默认 title（title 只在 LaTeX caption 中）
+- [ ] 无装饰元素（背景色、3D 效果、chart junk）
+- [ ] 色彩协调（非彩虹色，3-5 种主色）
+
+**格式**：
+- [ ] PDF 输出为矢量格式（非光栅化）
+- [ ] 分辨率 ≥ 300 DPI（如用 PNG）
+- [ ] colorbar 有完整标注（数值范围、单位）
+
+#### 结论格式
+
+```
+## Figure Review
+
+| Figure | 检查项通过率 | 结论 | 建议 |
+|--------|-------------|------|------|
+| fig1.pdf | 10/12 | 可直接使用 | - |
+| fig2.pdf | 8/12 | 需小幅修改 | 重绘 legend 位置 |
+| fig3.pdf | 6/12 | 需重绘 | 字体太小，编号缺失 |
+```
+
+明确标注：哪些图可直接进入论文、哪些需要重绘。
 
 ### Step 7: 叙事→实验覆盖度检查
 

@@ -60,7 +60,9 @@ mcp__codex__codex:
 
 ### Step 2: 自检清单
 
-逐项检查，输出 `06-paper-review/self-check.md`：
+逐项检查，结果作为内部中间内容最终合并到 Step 5 的报告中：
+
+**内部审查清单（内部中间文件，不单独输出）**：
 
 ```bash
 # 检查项
@@ -128,7 +130,9 @@ mcp__codex__codex:
 
 ### Step 5: 生成报告
 
-汇总所有问题到 `06-paper-review/report.md`：
+将 Step 2 自检清单结果（内部中间内容）与 Step 3 图片审查结果汇总到 `06-paper-review/report.md`：
+
+> **说明**: Step 2 的自检清单结果作为内部审查章节合并到 report.md，不作为独立文件输出。
 
 只记录与 story、structure、experiments、results、analysis、venue 要求直接相关的问题；不要顺手扩展为全面重写建议。
 

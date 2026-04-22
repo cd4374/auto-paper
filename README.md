@@ -35,6 +35,9 @@ auto-paper/
 │       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板
 │       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
 │       ├── venue-tiering.md         # 按领域分类的期刊/会议分层表
+│       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
+│       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
+│       ├── paper_plot_style.py      # 共享绘图样式脚本
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
@@ -66,10 +69,11 @@ auto-paper/
 ├── 04-02-experiment-results/        # 生成：原始输出、日志
 ├── 04-03-experiment-analysis.md     # 生成：实验分析与结论边界
 ├── 04-03-paper-assets/              # 生成：论文可直接引用的图表资产
+├── 04-03-story-gap.md               # 条件生成：阻塞性文件（story claim 覆盖不足时生成）
 ├── 05-template/                     # 生成：当前项目 LaTeX
 ├── 06-paper-review/                 # 生成：内部审查报告 + 修订日志
-│   ├── report.md
-│   └── revision-log.md
+│   ├── report.md                     # 对外输出：含自检清单结果（内部中间内容已合并）
+│   └── revision-log.md               # 可选：同时修订论文时生成
 ├── 06-01-review-feedback.md            # 生成：外部 review 意见整理
 ├── 06-01-review-action-plan.md         # 生成：review 修改方案
 ├── 06-01-review-open-questions.md      # 可选：待确认问题

@@ -44,14 +44,14 @@ mcp__codex__codex:
 | 03-01-paper-bibliography | 读取 structure 后，检索前 | 生成 references.bib 后（related work 可单独 review） |
 | 03-02-paper-theory-analysis | 读取 structure + related work 后，分析前 | 生成 03-02-theory-analysis.md 后 |
 | 04-00-experiment-design | 读取 theory analysis 后，设计实验前 | 生成 04-00-experiments.md 后 |
-| 04-01-experiment-implement | 读取 experiment design 后，实现前 | 实现完成后 |
-| 04-02-experiment-run | 读取实现代码后，运行前 | 收集结果后 |
-| 04-03-experiment-analysis | 读取结果后，分析前 | 生成 04-03-experiment-analysis.md + 图表后 |
-| 05-paper-write | 每章撰写前读取 structure，撰写后 review（已有设计） | 同上 |
+| 04-01-experiment-implement | 读取 experiment design 后，实现前 | 先验证入口/参数/输出路径，再调用 Codex review 代码是否支撑实验设计 |
+| 04-02-experiment-run | 读取实现代码后，运行前 | 先检查实验完成约定输出，再调用 Codex review 结果是否达到预期 |
+| 04-03-experiment-analysis | 读取结果后，分析前 | 先检查分析文档/图表/审查结论可回溯，再调用 Codex review 分析是否合理 |
+| 05-paper-write | 每章撰写前读取 structure，撰写后 review | 同上 |
 | 06-paper-review | 读取 05-template 后，审查前 | 生成 report.md 后 |
 | 06-01-review-assess | 读取外部 review 后，评估前 | 生成 action-plan 后 |
-| 06-02-review-apply | 读取 action-plan 后，修改前 | 修改完成后 |
-| 07-paper-compile | 检查 LaTeX 完整性后，编译前 | 编译成功后检查 PDF |
+| 06-02-review-apply | 读取 action-plan 后，修改前 | 修改完成后，调用 Codex review 修改是否遵循 action plan |
+| 07-paper-compile | 检查 LaTeX 完整性后，编译前 | 编译成功后调用 Codex review 检查 PDF 是否满足期刊要求 |
 
 ## Review 结果处理
 

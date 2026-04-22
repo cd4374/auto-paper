@@ -73,6 +73,24 @@ mcp__codex__codex:
 
 只整理与当前实验目标直接相关的结果；不要顺手改写、清洗或重组无关产物。
 
+**绘图规范（强制）**：
+生成图表时必须满足以下要求，否则重绘：
+
+**推荐使用共享样式脚本** `skills/shared/paper_plot_style.py`：
+```python
+import sys
+sys.path.append('skills/shared')
+from paper_plot_style import *
+```
+
+**绘图规范**：
+1. **多子图编号**：每个子图左上角必须有 (a)、(b)、(c)... 编号
+2. **字体**：serif 字体（Times New Roman），base size = 10pt
+3. **可读性**：无重叠、遮挡，坐标轴标签清晰
+4. **分辨率**：≥ 300 DPI（PDF 矢量格式优先）
+5. **色条**：必须标注数值范围与单位
+6. **尺寸**：单栏图 3.5–6 inches，双栏/通栏图 7–12 inches
+
 ### Step 5: 生成结果文档
 
 创建 `04-02-experiment-results.md`：

@@ -74,7 +74,7 @@ mcp__codex__codex:
 - 不能默认 reviewer 一定正确
 - 不能为了迎合 review 而破坏 story 主线
 - 如果意见影响核心主张，必须回到 `01-story.md` 层判断
-- 如果意见影响章节组织，必须回到 `03-00-structure.md` 层判断
+- **如果意见影响章节组织（章节顺序、小节划分、内容分布），必须对照 `03-00-structure.md` 检查章节规划是否需要调整**
 - 如果意见指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先回到 `03-02-theory-analysis.md` 层判断
 - 如果意见指向结果解释、图表质量或 claim 证据边界，优先回到 `04-03-experiment-analysis.md` 层判断
 
