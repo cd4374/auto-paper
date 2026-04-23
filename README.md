@@ -20,7 +20,7 @@ auto-paper/
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
 │   ├── 04-03-experiment-analysis/   # 复核实现与结果，分析并生成图表资产
-│   ├── 05-paper-write/              # [DEPRECATED] 兼容入口，请使用 05-01/05-02/05-03
+│   ├── 05-paper-write/              # 兼容入口，自动编排 /05-01 → /05-02 → /05-03
 │   ├── 05-01-paper-template/        # 生成 LaTeX 模板和目录结构
 │   ├── 05-02-paper-write/           # 按章节撰写论文
 │   ├── 05-03-paper-gate/            # 最终检查与门控判定
@@ -29,9 +29,8 @@ auto-paper/
 │   ├── 06-02-review-apply/         # 按 review 方案修改
 │   ├── project-import/             # 独立导入工具
 │   └── shared/                      # 共享资源
-│       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板
+│       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板 + 工具错误处理
 │       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
-│       ├── venue-tiering.md         # 按领域分类的期刊/会议分层表
 │       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
@@ -137,14 +136,14 @@ auto-paper/
 
 - `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
-- 导入完成后，可根据恢复程度继续主流程；**注意**：`05-paper-write` 强依赖 `03-01-related-work.md`、`03-01-references.bib`、`04-03-paper-assets/`，若这些文件未生成，需先执行对应阶段
+- 导入完成后，可根据恢复程度继续主流程；**注意**：`/05-02-paper-write` 强依赖 `03-01-related-work.md`、`03-01-references.bib`、`04-03-paper-assets/`，若这些文件未生成，需先执行对应阶段
 
 ## 03-01 文献检索子阶段
 
 - `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
-- 它负责为 `/05-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
+- 它负责为 `/05-02-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
 - **BibTeX 获取链**：优先通过 DBLP API 获取正式出版物的真实 BibTeX，回退到 CrossRef DOI，两者均失败时以 `% [VERIFY]` 标记，禁止编造字段
-- 检索策略与来源分层由 `skills/shared/source-policy.md` 和 `skills/shared/venue-tiering.md` 定义
+- 检索策略与来源分层由 `skills/shared/source-policy.md` 定义
 
 ## 03-02 理论分析子阶段
 
@@ -154,7 +153,7 @@ auto-paper/
 ## 04 实验分析子阶段
 
 - `/04-03-experiment-analysis`：复核 `04-01` 实现是否忠实于 `04-00` 设计，检查 `04-02` 结果是否完整可信，输出 `04-03-experiment-analysis.md` 与论文可直接引用的 `04-03-paper-assets/`
-- 它负责把“原始跑数结果”整理为“可写入论文的分析结论、图表和限制说明”，供 `/05-paper-write` 直接使用
+- 它负责把”原始跑数结果”整理为”可写入论文的分析结论、图表和限制说明”，供 `/05-02-paper-write` 直接使用
 - 对准备进入论文的关键 figures，会额外使用图片理解 MCP 做可读性与表达审查，避免 panel 布局、标注、色条或科学表达引发 reviewer 困惑
 
 ## review 子阶段
@@ -189,16 +188,7 @@ auto-paper/
 
 ## 支持的期刊
 
-支持的期刊列表由 `skills/shared/templates/venue-requirements.json` 集中管理，按领域分类如下：
-
-| 领域 | 期刊 |
-|------|------|
-| ML会议 | NeurIPS, ICML, ICLR, AAAI |
-| 物理/复杂系统 | PRE, PRB, PRL, PRX, Chaos, NJP, JSTAT, JMP, Chaos Solitons & Fractals |
-| 数值计算 | JCP, CPC |
-| 综合/跨学科 | Nature, Science |
-
-各期刊的详细格式要求（页数限制、引用格式、图表要求等）参见 `venue-requirements.json`。
+期刊列表和详细格式要求（页数限制、引用格式、图表要求等）集中维护在 `skills/shared/templates/venue-requirements.json`。
 
 设计注意：
 

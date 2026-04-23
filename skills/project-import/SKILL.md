@@ -248,4 +248,4 @@ mcp__codex__codex:
 - 若缺少 `03-01-related-work.md`/`03-01-references.bib`，建议先执行 `/03-01-paper-bibliography`
 - 若缺少 `04-03-paper-assets/`/`04-03-experiment-analysis.md`，建议先执行 `/04-03-experiment-analysis`
 
-**不要直接推荐跳过到 `/05-paper-write`**，除非 `03-01` 和 `04-03` 都已完整生成。
+**不要直接推荐跳过到 `/05-02-paper-write`**，除非 `03-01` 和 `04-03` 都已完整生成。

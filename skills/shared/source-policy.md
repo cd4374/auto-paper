@@ -33,6 +33,12 @@
 
 ## Venue 分层
 
-按论文领域选用对应的分层表（详见 `venue-tiering.md`）：
-- 默认先找 Tier A，再扩展到 Tier B
-- 只有用户明确要求时才将 Tier A 作为硬过滤条件
+默认先找 Tier A，再扩展到 Tier B；只有用户明确要求时才将 Tier A 作为硬过滤条件。
+
+**IEEE Xplore 优先级领域**（通信/信号处理/硬件）：
+- Tier A: ISCA, MICRO, HPCA, DAC, SIGCOMM
+- Tier B: DATE, ICCAD, ICCD, CASES
+
+**ACM DL 优先级领域**（系统/软件/网络）：
+- Tier A: SOSP, OSDI, NSDI, SIGCOMM, ATC
+- Tier B: EuroSys, Middleware, SIGMETRICS

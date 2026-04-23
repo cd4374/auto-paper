@@ -148,7 +148,7 @@ mcp__codex__codex:
 **如涉及实验修改/补实验**：
 修改后需要重新运行实验：
 ```
-/04-01-experiment-implement → /04-02-experiment-run → /04-03-experiment-analysis → /05-paper-write
+/04-01-experiment-implement → /04-02-experiment-run → /04-03-experiment-analysis → /05-02-paper-write
 ```
 
 **如涉及论文内容修改**：

@@ -32,8 +32,6 @@ allowed-tools: Bash, Read, Write, WebSearch, WebFetch, mcp__codex__codex
 - 来源标识规则（正式出版物 vs arXiv preprint）
 - 时间窗口策略
 
-如论文领域属于通信/硬件，额外读取 `skills/shared/venue-tiering.md` 确定相关 venue 分层。
-
 ### Step 2: Pre-review
 
 调用 `mcp__codex__codex` 检查文献检索计划是否合理：

@@ -179,7 +179,7 @@ mcp__codex__codex:
 
 **系统不支持处理**（≥2 个核心 claim 为"不支持"或"无实验"）：
 1. 必须生成 `04-03-story-gap.md`，列出所有覆盖缺口
-2. **阻塞进入 05-paper-write**
+2. **阻塞进入 05-02-paper-write**
 3. 向用户说明，由用户选择：
    - (a) 修改 story/claim（回退到 `/01-paper-init` 或 `/03-02-paper-theory-analysis`）
    - (b) 补充/修改实验（回退到 `/04-00-experiment-design`）
@@ -230,7 +230,7 @@ mcp__codex__codex:
 - 正文应避免过度解读:
 ```
 
-明确标注：哪些结论可进入 `05-paper-write`，哪些仅作内部判断。
+明确标注：哪些结论可进入 `05-02-paper-write`，哪些仅作内部判断。
 
 ### Step 9: Post-review（迭代循环，最多 10 轮）
 

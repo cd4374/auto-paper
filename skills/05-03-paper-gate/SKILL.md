@@ -23,20 +23,17 @@ Failure(阻塞): 修复后重跑
 Failure(非阻塞): 用户确认后继续
 ```
 
-## Step 7: 最终检查清单（9项）
+## Step 0: 前置检查
 
-- 每章覆盖 `03-00-structure.md` 对应叙事
-- Related Work 基于 `03-01-related-work.md`（如存在）
-- Method/Theory/Experiments 与 `03-02-theory-analysis.md` 一致（如存在）
-- 实验表述与 `04-03-experiment-analysis.md` 一致（如存在）
-- 实验叙事可追溯到上游材料（cite experiment-analysis 具体结论）
-- `04-03` 中标注"不可直写"的内容不得进入正文
-- `references.bib` 与 `03-01-references.bib` 来源一致
-- heuristic 不写成 theorem-level certainty
-- assumptions/limitations 充分暴露
-- 无 TODO/FIXME 残留
+验证以下前置条件满足：
+- [ ] `05-template/sections/*.tex` 存在（multi-file）或 entry_tex 存在（single-file）
+- [ ] `02-journal-requirements.md` 存在
+- [ ] `03-00-structure.md` 存在
+- [ ] `05-template/` 目录存在
 
-## Step 7.1: 自动化检查
+若不满足，阻塞并提示补齐。
+
+## Step 1: 自动化检查
 
 **模式判定**：按 venue 配置判断 multi-file 或 single-file。
 
@@ -54,7 +51,17 @@ Failure(非阻塞): 用户确认后继续
 
 失败则阻塞。
 
-## Step 7.2: 叙事覆盖度验证
+## Step 2: 最终检查
+
+按 `skills/shared/quality-checklist.md` 的"2. 论文自检清单"和"4. LaTeX 完整性检查"执行。
+
+额外检查：
+- 每章覆盖 `03-00-structure.md` 对应叙事
+- 实验表述与 `04-03-experiment-analysis.md` 一致（如存在）
+- 实验叙事可追溯到上游材料（cite experiment-analysis 具体结论）
+- `04-03` 中标注"不可直写"的内容不得进入正文
+
+## Step 3: 叙事覆盖度验证
 
 **判定表**（每章）：
 
@@ -71,11 +78,11 @@ Failure(非阻塞): 用户确认后继续
 
 调用 Codex 审查，将证据写入 `check-failures.md`。
 
-## Step 7.3: Venue 约束检查
+## Step 4: Venue 约束检查
 
 按 `02-journal-requirements.md` 检查：匿名要求、引用风格、checklist 包含。
 
-## Step 7.4: 门控判定
+## Step 5: 门控判定
 
 收集失败项，生成 `05-template/check-failures.md`：
 - 有阻塞项 → 必须修复

@@ -46,7 +46,12 @@ Failure(非阻塞): 用户确认后继续
 
 ## Step 2: 逐章撰写
 
-按 `03-00-structure.md` 章节顺序撰写。
+按 `03-00-structure.md` 章节顺序**串行**撰写。
+
+**章节间跳转规则**：
+- 严格按 README 流程图顺序：Abstract → Introduction → Related Work → Method → Experiments → Conclusion
+- 只有在前置章节（如 Introduction）完成后，才撰写依赖它的后续章节（如 Related Work）
+- 不支持并行撰写：每章必须完成 Pre-review 后再进入下一章
 
 **每章流程**：
 1. 读取该章叙事内容

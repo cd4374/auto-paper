@@ -62,23 +62,7 @@ mcp__codex__codex:
 
 逐项检查，结果作为内部中间内容最终合并到 Step 5 的报告中：
 
-**内部审查清单（内部中间文件，不单独输出）**：
-
-```bash
-# 检查项
-- [ ] Abstract 是否覆盖 what/why/how/evidence/result 五要素
-- [ ] Introduction 的 gap → approach → contributions 逻辑链是否清晰
-- [ ] Related Work 是否覆盖相关工作且分类合理
-- [ ] Method 的符号定义是否一致、无歧义
-- [ ] 理论表述是否与 `03-02-theory-analysis.md` 一致，未把 heuristic 写成已证结论
-- [ ] 实验是否验证了所有关键理论预测或明确说明未覆盖部分
-- [ ] 结论是否回应了引言的动机
-- [ ] 所有 \ref 指向有效 \label
-- [ ] 所有 \cite 在 references.bib 中有对应条目
-- [ ] 关键 figures 已用 `mcp__MiniMax__understand_image` 做可读性与表达审查
-- [ ] 无 TODO/FIXME 残留
-- [ ] 没有大量只有 1–2 个短段落却单独成节的小节
-```
+按 `skills/shared/quality-checklist.md` 的"2. 论文自检清单"执行检查。
 
 ### Step 3: 图片理解审查
 
@@ -97,7 +81,17 @@ mcp__MiniMax__understand_image(
 )
 ```
 
-将结论汇总到图表评估部分；如果图存在明显表达问题，优先记录为图表层问题，而不是只在正文里补救。
+将结论**直接写入 `report.md` 的"图表评估"章节**，格式如下：
+
+```markdown
+## 图表评估
+| Figure | 检查项通过率 | 结论 | 建议 |
+|--------|-------------|------|------|
+| fig1.pdf | 10/12 | 可直接使用 | - |
+| fig2.pdf | 8/12 | 需小幅修改 | 重绘 legend 位置 |
+```
+
+**不要生成独立文件**，所有图片审查结论汇总到 report.md。
 
 ### Step 4: Post-review（迭代循环，最多 10 轮）
 

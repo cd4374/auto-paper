@@ -76,7 +76,7 @@
 
 ## 4. LaTeX 完整性检查
 
-用于 05-paper-write 的 Step 7.1。
+用于 05-03-paper-gate 的 Step 1。
 
 ```bash
 cd 05-template
@@ -112,23 +112,6 @@ grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/
 
 ---
 
-## 5. Review 触发点清单
+## 5. Review 触发点
 
-| Skill | Pre-review 触发点 | Post-review 触发点 |
-|-------|-------------------|-------------------|
-| 00-00-idea-brainstorm | 生成 idea 前 | 生成 00-00-idea-pool.md 后 |
-| 00-01-idea-evaluate | 评估前 | 生成 00-01-idea-evaluation.md 后 |
-| 00-02-idea-recommend | 推荐前 | 生成 00-02-idea-recommendation.md 后 |
-| 01-paper-init | 生成 story 前 | 生成 01-story.md 后 |
-| 02-paper-journal | 推荐前 | 生成 requirements 后 |
-| 03-00-paper-structure | 设计章节前 | 生成 03-00-structure.md 后 |
-| 03-01-paper-bibliography | 检索前 | 生成 references.bib 后 |
-| 03-02-paper-theory-analysis | 分析前 | 生成 03-02-theory-analysis.md 后 |
-| 04-00-experiment-design | 设计实验前 | 生成 04-00-experiments.md 后 |
-| 04-01-experiment-implement | 实现前 | 实现完成后 |
-| 04-02-experiment-run | 运行前 | 收集结果后 |
-| 04-03-experiment-analysis | 分析前 | 生成 analysis.md + 图表后 |
-| 05-paper-write | 每章撰写前/后 | 同上 |
-| 06-paper-review | 审查前 | 生成 report.md 后 |
-| 06-01-review-assess | 评估前 | 生成 action-plan 后 |
-| 06-02-review-apply | 修改前 | 修改完成后 |
+Review 触发点清单统一维护在 `codex-review-template.md`，请参考该文件。
