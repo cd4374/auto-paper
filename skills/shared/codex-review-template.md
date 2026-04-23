@@ -51,7 +51,6 @@ mcp__codex__codex:
 | 06-paper-review | 读取 05-template 后，审查前 | 生成 report.md 后 |
 | 06-01-review-assess | 读取外部 review 后，评估前 | 生成 action-plan 后 |
 | 06-02-review-apply | 读取 action-plan 后，修改前 | 修改完成后，调用 Codex review 修改是否遵循 action plan |
-| 07-paper-compile | 检查 LaTeX 完整性后，编译前 | 编译成功后调用 Codex review 检查 PDF 是否满足期刊要求 |
 
 ## Review 结果处理
 

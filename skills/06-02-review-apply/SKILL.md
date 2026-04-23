@@ -148,5 +148,5 @@ mcp__codex__codex:
 
 **如涉及论文内容修改**：
 ```
-/06-paper-review → /07-paper-compile
+/06-paper-review → 再审查并编译 PDF
 ```

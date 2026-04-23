@@ -31,7 +31,7 @@
 **期刊**：Physical Review E (PRE), Physical Review B (PRB), Chaos, New Journal of Physics (NJP), Journal of Statistical Mechanics (JSTAT)
 
 ### Tier C
-**期刊**：Journal of Physics A, Physical Letters A (PLA), Journal of Chemical Physics (JCP), Chaos Solitons & Fractals
+**期刊**：Journal of Physics A, Physical Letters A (PLA), Journal of Computational Physics (JCP), Chaos Solitons & Fractals
 
 ---
 

@@ -132,4 +132,3 @@ grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/
 | 06-paper-review | 审查前 | 生成 report.md 后 |
 | 06-01-review-assess | 评估前 | 生成 action-plan 后 |
 | 06-02-review-apply | 修改前 | 修改完成后 |
-| 07-paper-compile | 编译前 | 编译成功后检查 PDF |

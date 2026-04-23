@@ -20,24 +20,26 @@ auto-paper/
 │   ├── 04-01-experiment-implement/  # 实验代码实现
 │   ├── 04-02-experiment-run/        # 运行实验并收集结果
 │   ├── 04-03-experiment-analysis/   # 复核实现与结果，分析并生成图表资产
-│   ├── 05-paper-write/              # 撰写 LaTeX
+│   ├── 05-paper-write/              # [DEPRECATED] 兼容入口，请使用 05-01/05-02/05-03
+│   ├── 05-01-paper-template/        # 生成 LaTeX 模板和目录结构
+│   ├── 05-02-paper-write/           # 按章节撰写论文
+│   ├── 05-03-paper-gate/            # 最终检查与门控判定
 │   ├── 06-paper-review/            # 内部论文审查
 │   ├── 06-01-review-assess/        # 外部 review 意见评估
 │   ├── 06-02-review-apply/         # 按 review 方案修改
-│   ├── 07-paper-compile/           # 编译 PDF
 │   ├── project-import/             # 独立导入工具
 │   └── shared/                      # 共享资源
-│       ├── story-template.md
-│       ├── structure-template.md
-│       ├── idea-pool-template.md
-│       ├── idea-evaluation-template.md
-│       ├── idea-recommendation-template.md
 │       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板
 │       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
 │       ├── venue-tiering.md         # 按领域分类的期刊/会议分层表
 │       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
+│       ├── story-template.md
+│       ├── structure-template.md
+│       ├── idea-pool-template.md
+│       ├── idea-evaluation-template.md
+│       ├── idea-recommendation-template.md
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
@@ -78,8 +80,6 @@ auto-paper/
 ├── 06-01-review-action-plan.md         # 生成：review 修改方案
 ├── 06-01-review-open-questions.md      # 可选：待确认问题
 ├── 06-02-review-resolution.md          # 生成：review 落实记录
-└── 07-output/                       # 生成：编译输出
-    └── paper.pdf
 ```
 
 ## 工作流
@@ -110,7 +110,11 @@ auto-paper/
            ↓
 /04-03-experiment-analysis → 04-03-experiment-analysis.md + 04-03-paper-assets/
            ↓
-/05-paper-write          → 填写 05-template/
+/05-01-paper-template     → 生成 05-template/ 目录结构
+           ↓
+/05-02-paper-write       → 撰写 05-template/sections/*.tex
+           ↓
+/05-03-paper-gate        → 最终检查，输出 check-failures.md
            ↓
 /06-paper-review         → 默认生成 06-paper-review/report.md（可选：按用户要求同时修订论文）
            ↓
@@ -119,9 +123,7 @@ auto-paper/
            ↓
 /06-02-review-apply      → 更新 01/03/04/05 + 06-02-review-resolution.md
            ↓
-/06-paper-review         → 再审查修订结果
-           ↓
-/07-paper-compile        → 07-output/paper.pdf
+/06-paper-review         → 再审查修订结果，编译 PDF
 ```
 
 ## 00 idea funnel 阶段
@@ -211,10 +213,10 @@ auto-paper/
 - **Codex MCP**：用于 Pre/Post review
 - **MiniMax MCP**：用于图片理解审查（04-03、06-paper-review）
 
-### LaTeX 编译（07-paper-compile）
+### LaTeX 编译
 - `pdflatex`：PDF 编译
 - `bibtex`：参考文献处理
-- `pdfinfo`：PDF 元数据检查
+- `pdfinfo`：PDF 元数据检查（可选）
 
 安装示例（macOS）：
 ```bash
