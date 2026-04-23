@@ -20,6 +20,13 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 `03-00-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
 
+## 叙事框架：探索 → 发现 → 理解
+
+本章结构应服务于 story 的"探索 → 发现 → 理解"逻辑：
+- **探索路径** → 对应 Introduction（为什么探索）和 Method（怎么探索）
+- **关键发现** → 对应 Experiments（发现了什么）
+- **深层理解** → 对应 Analysis/Theory（为什么这样）和 Conclusion（理解了什么）
+
 ## 工作流
 
 ### Step 1: 读取输入
@@ -36,41 +43,53 @@ mcp__codex__codex:
   prompt: |
     请检查以下章节设计计划是否合理：
 
-    Story: {01-story.md 内容摘要}
+    Story: {01-story.md 内容摘要，重点关注探索路径/关键发现/深层理解}
     Journal Requirements: {02-journal-requirements.md 格式限制}
-    执行计划: 根据叙事逻辑设计章节，每章填写叙事内容+需求
+    执行计划: 根据叙事逻辑设计章节，遵循探索→发现→理解框架
 
     检查：要点见 codex-review-template.md
 ```
 
 ### Step 3: 设计章节
 
-根据 story 的叙事逻辑设计章节。
+根据 story 的叙事逻辑设计章节，遵循"发现递进"结构：
 
-默认可采用以下五章结构，但可根据 story 与 venue 要求调整：
+**默认可采用五章结构**：
+```
+1. Introduction - 探索动机与预期
+2. Related Work - 已有理解的局限
+3. Method - 探索策略
+4. Experiments - 发现1 → 发现2 → ...
+5. Conclusion - 我们理解了什么
+```
 
-```
-1. Introduction - 引出问题
-2. Related Work - 相关工作
-3. Method - 方法
-4. Experiments - 实验
-5. Conclusion - 结论
-```
+**可选章节**：
+- Analysis/Theory：当"深层理解"需要独立展开时，可在 Experiments 后插入
 
 ### Step 4: 填写章节内容
 
 参考 `skills/shared/structure-template.md` 模板，每章填写：
-- **叙事内容**: 本章要讲什么故事
+- **叙事内容**: 本章要讲什么故事（探索动机、发现序列、理解深化）
 - **需求**: 字数范围、图表数量、公式数量
 
-章节与小节规划时遵循“密度优先”原则：
+**章节叙事重心**：
+
+| 章节 | 叙事重心 | 核心问题 |
+|------|---------|---------|
+| Introduction | 探索动机 → 预期 vs 现实 | "这个领域有什么值得探索的？" |
+| Related Work | 已有理解的局限 | "别人的理解缺什么？" |
+| Method | 探索策略 | "我们怎么系统地探索？" |
+| Experiments | 发现1 → 发现2 → ... | "我们发现了什么意料之外的事？" |
+| Conclusion | 理解的意义 | "我们理解了什么新东西？" |
+
+章节与小节规划时遵循"密度优先"原则：
 - 不要为了把要点列整齐而拆出过多小节
 - 预计只有 1–2 个短段落的内容，默认并入父节，不单独设小节
 - 只有当某部分承载独立论证单元、并且内容足以自成展开时，才单独设小节
 
 ```markdown
 # Chapter 1: Introduction
-叙事内容: [本章要讲什么故事]
+叙事内容: 探索动机 → 预期 vs 现实
 
 需求:
   - 字数: 500-800
@@ -97,10 +116,13 @@ mcp__codex__codex:
   prompt: |
     请检查以下 structure 是否支撑 story：
 
-    Story: {story 内容}
+    Story: {story 内容，重点关注探索→发现→理解链条}
     Structure: {structure 内容}
 
-    检查：要点见 codex-review-template.md
+    检查要点：
+    1. 章节顺序是否服务于发现递进逻辑？
+    2. 每章叙事是否回应了 story 的探索/发现/理解？
+    3. 发现是否有层次感（从初步到深层）？
 
     若有问题，明确指出并给出修改建议。
 ```

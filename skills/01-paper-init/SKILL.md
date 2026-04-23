@@ -27,13 +27,13 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 如果存在 `00-02-idea-recommendation.md`，优先读取其中的：
 - 主选 idea
 - 推荐理由
-- 建议的 story framing（是什么 / 为什么 / 怎么做）
+- 建议的 story framing（探索路径/关键发现/深层理解）
 
 在此基础上补足仍不清楚的部分；如果没有 `00-02-idea-recommendation.md`，则直接追问以下问题：
-- 研究的核心问题是什么？
-- 为什么要解决这个问题？（动机/应用价值）
-- 初步的方法思路是什么？
-- 预期的贡献是什么？
+- 我们想理解/探索什么问题？
+- 我们打算从哪个角度切入？
+- 我们预期会发现什么？
+- 我们如何解释这些发现？
 
 ### Step 2: Pre-review
 
@@ -46,25 +46,19 @@ mcp__codex__codex:
     请检查以下 story 生成计划是否合理：
 
     输入来源: {00-02-idea-recommendation.md 或用户描述}
-    执行计划: 基于 story-template.md 生成是什么/为什么/怎么做三问
+    执行计划: 基于 story-template.md 生成探索→发现→理解框架
 
     检查：要点见 codex-review-template.md
 ```
 
 ### Step 3: 生成 story.md
 
-基于 `skills/shared/story-template.md` 模板生成 `01-story.md`：
-
-```markdown
-# 是什么
-[研究的问题是什么？]
-
-# 为什么
-[为什么要研究这个问题？动机/价值/应用场景]
-
-# 怎么做
-[解决问题的思路是什么？核心方法概述]
-```
+基于 `skills/shared/story-template.md` 模板生成 `01-story.md`，确保覆盖：
+- 核心问题（我们想理解什么）
+- 探索路径（我们怎么切入）
+- 关键发现（我们预期发现什么）
+- 深层理解（我们如何解释）
+- 贡献（新理解的价值）
 
 ### Step 4: Post-review（迭代循环，最多 10 轮）
 
@@ -78,7 +72,11 @@ mcp__codex__codex:
 
     {story 内容}
 
-    检查：要点见 codex-review-template.md
+    检查要点：
+    1. 探索路径是否清晰？我们如何切入问题？
+    2. 预期发现是否具体？是否有意外发现的潜力？
+    3. 深层理解是否回应了探索动机？
+    4. 贡献是否体现了"理解了什么"而非仅仅是"解决了什么"？
 
     若有问题，明确指出并给出修改建议。
 ```

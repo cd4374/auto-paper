@@ -54,7 +54,7 @@ mcp__codex__codex:
 - 备选 idea（1-2 个）
 - 不推荐项及原因
 - 推荐理由摘要
-- 建议的 story framing：是什么 / 为什么 / 怎么做
+- 建议的 story framing：探索路径 / 关键发现 / 深层理解
 
 要求：
 - 不是简单选最高分，而是综合 novelty、可做性、实验成本、venue fit、叙事完整度
