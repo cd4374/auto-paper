@@ -7,7 +7,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 # 00-00-idea-brainstorm
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 围绕用户给定的研究方向、约束与偏好，生成 `00-00-idea-pool.md`。
 
@@ -71,7 +71,7 @@ mcp__codex__codex:
 - 每个 idea 都必须能落到最小实验包
 - 若某个 idea 明显依赖不存在的数据、算力或理论前提，要直接写入风险
 
-### Step 4: Post-review（迭代循环，最多 3 轮）
+### Step 4: Post-review（迭代循环，最多 10 轮）
 
 调用 `mcp__codex__codex` 检查 idea pool 质量：
 
@@ -91,6 +91,11 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改 idea pool → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 结束
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Step 5: 输出确认
 

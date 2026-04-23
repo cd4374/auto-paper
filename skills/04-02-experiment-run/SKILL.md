@@ -7,7 +7,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 # 04-02-experiment-run
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 运行实验并收集结果到 `04-02-experiment-results.md`。
 
@@ -99,7 +99,7 @@ from paper_plot_style import *
 - 与预期结果对比标注
 - 明确标注哪些结果已验证、哪些失败、哪些因条件不足未完成
 
-### Step 6: Post-review（迭代循环，最多 3 轮）
+### Step 6: Post-review（迭代循环，最多 10 轮）
 
 先检查每个实验是否完成了预期运行命令并产生了约定输出，再调用 `mcp__codex__codex` 对比结果与实验设计中的预期：
 
@@ -120,3 +120,8 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议调整实验运行 → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 结束
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...

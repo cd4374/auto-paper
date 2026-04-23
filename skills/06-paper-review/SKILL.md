@@ -7,7 +7,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 # 06-paper-review
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 系统审查论文草稿，输出结构化修改意见。
 
@@ -99,7 +99,7 @@ mcp__MiniMax__understand_image(
 
 将结论汇总到图表评估部分；如果图存在明显表达问题，优先记录为图表层问题，而不是只在正文里补救。
 
-### Step 4: Post-review（迭代循环，最多 3 轮）
+### Step 4: Post-review（迭代循环，最多 10 轮）
 
 调用 Codex 逐章节审查：
 
@@ -127,6 +127,11 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改 report → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 结束
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Step 5: 生成报告
 

@@ -12,7 +12,7 @@ forbidden-actions:
 
 # project-import
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准产物。
 
@@ -92,6 +92,11 @@ mcp__codex__codex:
 - 若 review 指出问题 → 按 review 建议修改 story → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 4
 
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
+
 ### Step 4: 推断或推荐 venue
 优先从已有项目识别 venue：
 - LaTeX 模板 marker
@@ -104,7 +109,7 @@ mcp__codex__codex:
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 
-#### Step 4.1: Post-review（迭代循环，最多 3 轮）
+#### Step 4.1: Post-review（迭代循环，最多 10 轮）
 
 ```
 mcp__codex__codex:
@@ -122,6 +127,11 @@ mcp__codex__codex:
 - 若 review 指出问题 → 按 review 建议修改 venue 推荐 → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 5
 
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
+
 ### Step 5: 生成 `03-00-structure.md`
 参考 `skills/shared/structure-template.md` 生成 `03-00-structure.md`。
 
@@ -131,7 +141,7 @@ mcp__codex__codex:
 - 每章叙事内容要能映射回 story
 - 字数/图表/公式需求要考虑 venue 要求和现有材料量
 
-#### Step 5.1: Post-review（迭代循环，最多 3 轮）
+#### Step 5.1: Post-review（迭代循环，最多 10 轮）
 
 ```
 mcp__codex__codex:
@@ -148,6 +158,11 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改 structure → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 6
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Step 6: 条件性恢复 03-02 理论层与 04 阶段材料
 #### 6.1 条件性生成 `03-02-theory-analysis.md`
@@ -173,7 +188,7 @@ mcp__codex__codex:
 #### 6.3 条件性生成 `04-02-experiment-results.md`
 只有在已有项目里存在清晰结果产物时才生成：CSV/JSON、图表、关键日志、草稿结果描述。证据不足则不要生成。
 
-#### 6.4 Post-review（迭代循环，最多 3 轮）
+#### 6.4 Post-review（迭代循环，最多 10 轮）
 
 ```
 mcp__codex__codex:
@@ -191,10 +206,15 @@ mcp__codex__codex:
 - 若 review 指出问题 → 按 review 建议修改实验材料 → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 7
 
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
+
 #### 6.5 不默认重建 `04-01-experiment-code/`
 已有项目通常已包含代码，导入阶段只做映射和解释，不做代码重写。
 
-### Step 7: 最终一致性检查（迭代循环，最多 3 轮）
+### Step 7: 最终一致性检查（迭代循环，最多 10 轮）
 调用 `mcp__codex__codex` 检查导入结果是否超出原项目证据：
 
 ```
@@ -212,6 +232,11 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改导入结果 → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 进入 Step 8
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Step 8: 输出导入总结
 最后总结：

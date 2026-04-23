@@ -7,7 +7,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 # 04-00-experiment-design
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + `03-00-structure.md` 设计实验方案。
 
@@ -91,7 +91,7 @@ mcp__codex__codex:
 
 明确标出：哪些实验是必需的，哪些是可选的，哪些因资源或信息限制暂不纳入。
 
-### Step 5: Post-review（迭代循环，最多 3 轮）
+### Step 5: Post-review（迭代循环，最多 10 轮）
 
 调用 `mcp__codex__codex` 检查实验设计是否以最小必要实验集支撑 story 中的 claim：
 
@@ -113,3 +113,8 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改 experiments → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 结束
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...

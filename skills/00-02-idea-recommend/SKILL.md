@@ -7,7 +7,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 # 00-02-idea-recommend
 
 - REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
-- MAX_POST_REVIEW_ROUNDS = 3 — Post-review 迭代轮数上限。
+- MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `00-00-idea-pool.md` 与 `00-01-idea-evaluation.md`，生成 `00-02-idea-recommendation.md`。
 
@@ -68,7 +68,7 @@ mcp__codex__codex:
 - 不同选择的影响
 - 对后续 story / venue / experiments 的影响
 
-### Step 5: Post-review（迭代循环，最多 3 轮）
+### Step 5: Post-review（迭代循环，最多 10 轮）
 
 调用 `mcp__codex__codex` 检查推荐是否合理：
 
@@ -90,6 +90,11 @@ mcp__codex__codex:
 迭代逻辑：
 - 若 review 指出问题 → 按 review 建议修改 recommendation → 继续 review（round++）
 - 若 review 通过或达到轮数上限 → 结束
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Step 6: 输出确认
 

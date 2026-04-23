@@ -14,7 +14,7 @@ temporary-files: PLAN.md
 | 参数 | 说明 | 默认 |
 |------|------|------|
 | task | 任务描述 | 必填 |
-| max_review_rounds | 最大 review 轮数 | 4 |
+| max_review_rounds | 最大 review 轮数 | 10 |
 | output_prefix | 输出文件前缀 | `workflow/` |
 
 ## 工作流
@@ -82,6 +82,11 @@ mcp__codex__codex:
    - Codex 明确给出"通过"结论
    - 或达到 `max_review_rounds` 轮上限
 
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
+
 ### Phase 3: 实现与 Review 循环
 
 **Step 3.1: 按 Plan 执行**
@@ -135,6 +140,11 @@ mcp__codex__codex:
 3. **循环终止条件**：
    - Codex 明确给出"通过"结论
    - 或达到 `max_review_rounds` 轮上限
+
+**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
+- 第 1 轮：通过 / 问题数：N，问题摘要：...
+- 第 2 轮：通过 / 问题数：N，问题摘要：...
+- ...
 
 ### Phase 4: 输出
 
