@@ -15,7 +15,7 @@ Preconditions: 无
 Inputs(required):
   - 02-journal-requirements.md
   - 03-00-structure.md
-  - ../shared/templates/venue-requirements.json（skill 相对路径）
+  - skills/shared/templates/venue-requirements.json（skill 相对路径）
   - skills/shared/templates/{template_dir}/（模板目录）
 Inputs(optional):
   - 03-01-references.bib

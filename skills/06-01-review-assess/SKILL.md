@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 # 06-01-review-assess
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 先判断外部 review 意见是否成立，再生成结构化修改方案。
@@ -50,7 +50,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 review 评估准备是否充分：
 
@@ -126,7 +126,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 review action plan 是否合理：
 

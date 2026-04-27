@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 01-paper-init
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 从研究想法生成 `01-story.md`。
@@ -41,7 +41,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 story 生成计划是否合理：
 
@@ -66,7 +66,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 story 的叙事逻辑：
 

@@ -16,18 +16,23 @@ auto-paper/
 │   ├── 03-00-paper-structure/       # 生成 03-00-structure.md
 │   ├── 03-01-paper-bibliography/    # 检索文献并生成参考文献初稿
 │   ├── 03-02-paper-theory-analysis/ # 提炼理论分析并导出可检验预测
-│   ├── 04-00-experiment-design/     # 实验设计
-│   ├── 04-01-experiment-implement/  # 实验代码实现
-│   ├── 04-02-experiment-run/        # 运行实验并收集结果
-│   ├── 04-03-experiment-analysis/   # 复核实现与结果，分析并生成图表资产
-│   ├── 05-paper-write/              # 兼容入口，自动编排 /05-01 → /05-02 → /05-03
-│   ├── 05-01-paper-template/        # 生成 LaTeX 模板和目录结构
-│   ├── 05-02-paper-write/           # 按章节撰写论文
-│   ├── 05-03-paper-gate/            # 最终检查与门控判定
-│   ├── 06-paper-review/            # 内部论文审查
-│   ├── 06-01-review-assess/        # 外部 review 意见评估
-│   ├── 06-02-review-apply/         # 按 review 方案修改
-│   ├── project-import/             # 独立导入工具
+│   ├── 04-00-experiment-design/        # 实验设计
+│   ├── 04-01-experiment-implement/     # 实验代码实现
+│   ├── 04-02-experiment-run/           # 运行实验并收集结果
+│   ├── 04-03-experiment-analysis/      # 04-03 主入口（编排 04-03-* 子阶段）
+│   ├── 04-03-01-experiment-audit/      # 复核实现与结果一致性
+│   ├── 04-03-02-paper-assets/          # 生成论文图表资产并做图片审查
+│   ├── 04-03-03-story-coverage/        # Story Claim 覆盖度门控与分析收敛
+│   ├── 05-01-paper-template/           # 生成 LaTeX 模板和目录结构
+│   ├── 05-02-paper-write/              # 按章节撰写论文
+│   ├── 05-03-paper-gate/               # 最终检查与门控判定
+│   ├── 06-paper-review/                # 内部论文审查
+│   ├── 06-01-review-assess/            # 外部 review 意见评估
+│   ├── 06-02-review-apply/             # 按 review 方案修改
+│   ├── project-import/                 # 独立导入主入口（编排 project-import-* 子阶段）
+│   ├── project-import-01-survey-story/ # 项目普查与 story 恢复
+│   ├── project-import-02-venue-structure/ # venue 识别与结构恢复
+│   ├── project-import-03-experiment-recovery/ # 理论/实验材料恢复与一致性检查
 │   └── shared/                      # 共享资源
 │       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板 + 工具错误处理
 │       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
@@ -106,9 +111,15 @@ auto-paper/
            ↓
 /04-02-experiment-run    → 04-02-experiment-results.md + 04-02-experiment-results/
            ↓
-/04-03-experiment-analysis → 04-03-experiment-analysis.md + 04-03-paper-assets/
+/04-03-experiment-analysis（主入口）
            ↓
-/05-01-paper-template     → 生成 05-template/ 目录结构
+/04-03-01-experiment-audit → 更新 04-03-experiment-analysis.md（审计基础）
+           ↓
+/04-03-02-paper-assets     → 生成 04-03-paper-assets/ + latex_includes.tex
+           ↓
+/04-03-03-story-coverage   → 收敛 04-03-experiment-analysis.md（必要时生成 04-03-story-gap.md）
+           ↓
+/05-01-paper-template      → 生成 05-template/ 目录结构
            ↓
 /05-02-paper-write       → 撰写 05-template/sections/*.tex
            ↓
@@ -133,7 +144,10 @@ auto-paper/
 
 ## 独立技能
 
-- `/project-import`：解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准格式
+- `/project-import`：独立导入主入口，编排 `project-import-01/02/03` 子阶段，把现有项目尽可能转化为 auto-paper 标准格式
+- `/project-import-01-survey-story`：项目普查与 `01-story.md` 恢复（证据分级：high/medium/missing）
+- `/project-import-02-venue-structure`：venue 识别/推荐与 `03-00-structure.md` 恢复
+- `/project-import-03-experiment-recovery`：条件性恢复 `03-02` 与 04 阶段材料，并做证据边界一致性检查
 - 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
 - 导入完成后，可根据恢复程度继续主流程；**注意**：`/05-02-paper-write` 强依赖 `03-01-related-work.md`、`03-01-references.bib`、`04-03-paper-assets/`，若这些文件未生成，需先执行对应阶段
 
@@ -151,9 +165,10 @@ auto-paper/
 
 ## 04 实验分析子阶段
 
-- `/04-03-experiment-analysis`：复核 `04-01` 实现是否忠实于 `04-00` 设计，检查 `04-02` 结果是否完整可信，输出 `04-03-experiment-analysis.md` 与论文可直接引用的 `04-03-paper-assets/`
-- 它负责把”原始跑数结果”整理为”可写入论文的分析结论、图表和限制说明”，供 `/05-02-paper-write` 直接使用
-- 对准备进入论文的关键 figures，会额外使用图片理解 MCP 做可读性与表达审查，避免 panel 布局、标注、色条或科学表达引发 reviewer 困惑
+- `/04-03-experiment-analysis`：04-03 主入口，编排 `04-03-01/02/03` 子阶段，输出 `04-03-experiment-analysis.md` 与 `04-03-paper-assets/`
+- `/04-03-01-experiment-audit`：复核 `04-01` 实现是否忠实于 `04-00` 设计，并检查 `04-02` 结果是否完整可信
+- `/04-03-02-paper-assets`：整理论文可直接引用的图表资产并执行关键 figures 图片审查
+- `/04-03-03-story-coverage`：执行 Story Claim Coverage 门控并收敛分析结论
 
 ## review 子阶段
 
@@ -193,14 +208,14 @@ auto-paper/
 
 1. **阶段命名规范**：项目是分阶段的，阶段有数字前缀（如 01、02、03），也有子阶段（如 04-00、04-01、04-02）。不止 skills，所生产的文件、文件夹都要有对应前缀，以便查看是哪个阶段。
 
-2. **Skills 简洁性**：每个 skill 应保持简洁，不超过 200 行。
+2. **Skills 简洁性**：每个 skill 应保持简洁，不超过 200 行；超长流程必须拆分为子阶段 skill。
 
 ## 环境要求
 
 ### 必需工具
 - **Claude Code**：核心执行环境
 - **Codex MCP**：用于 Pre/Post review
-- **MiniMax MCP**：用于图片理解审查（04-03、06-paper-review）
+- **Kimi MCP + MiniMax MCP**：用于图片理解审查（优先 Kimi，失败时降级 MiniMax；04-03、06-paper-review）
 
 ### LaTeX 编译
 - `pdflatex`：PDF 编译
@@ -213,4 +228,5 @@ brew install --cask mactex
 ```
 
 ### 文献检索（03-01-paper-bibliography）
+- 搜索优先级：Kimi MCP（`kimi_web_search`/`kimi_fetch_url`）→ MiniMax MCP（`web_search`）→ `WebSearch`/`WebFetch`（仅当前一不可用时降级）
 - 网络访问：用于 DBLP、CrossRef API 查询

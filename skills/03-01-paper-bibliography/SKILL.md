@@ -1,12 +1,12 @@
 ---
 name: "03-01-paper-bibliography"
 description: "基于 01-story.md、03-00-structure.md 和 venue 要求检索文献并生成参考文献初稿。"
-allowed-tools: Bash, Read, Write, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
 ---
 
 # 03-01-paper-bibliography
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 Related Work 笔记与参考文献初稿。
@@ -38,7 +38,7 @@ allowed-tools: Bash, Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下文献检索计划是否合理：
 
@@ -62,13 +62,13 @@ mcp__codex__codex:
 
 ### Step 4: 检索最小必要文献池
 
-使用 `WebSearch` 优先检索：
+按优先级检索（仅当前一工具不可用时才降级）：`mcp__kimi-code__kimi_web_search` → `mcp__MiniMax__web_search` → `WebSearch`。检索目标包括：
 - 该问题域的代表性工作
 - 当前方法最直接的比较对象
 - 实验中将要出现的核心 baseline
 - 近年与目标 venue 高相关的代表性论文
 
-必要时使用 `WebFetch` 读取论文页、作者页、项目页或官方页面，补充：
+必要时按优先级抓取页面内容（仅当前一工具不可用时才降级）：`mcp__kimi-code__kimi_fetch_url` → `WebFetch`，用于读取论文页、作者页、项目页或官方页面，补充：
 - 标题、作者、年份
 - 方法定位
 - 与当前 story 的关系
@@ -104,7 +104,7 @@ mcp__codex__codex:
 
 ### Step 6: 生成 BibTeX
 
-**工具分工**：WebSearch/WebFetch 用于文献发现和元数据获取，Bash/curl 用于获取可验证的 BibTeX。
+**工具分工**：文献发现与元数据获取按优先级使用 Kimi MCP → MiniMax MCP → WebSearch/WebFetch（仅当前一不可用时降级）；Bash/curl 用于获取可验证的 BibTeX。
 
 对每篇需要引用的论文，按以下顺序获取 BibTeX：
 
@@ -155,7 +155,7 @@ for p in data.get('data', []):
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下文献检索结果是否与论文 story 和 structure 对齐：
 

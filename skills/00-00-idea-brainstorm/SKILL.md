@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 00-00-idea-brainstorm
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 围绕用户给定的研究方向、约束与偏好，生成 `00-00-idea-pool.md`。
@@ -41,7 +41,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 idea brainstorming 计划是否合理：
 
@@ -77,7 +77,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 idea pool 是否适合作为论文前置 brainstorming 输出：
 

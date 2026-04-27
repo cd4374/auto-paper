@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 04-00-experiment-design
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + `03-00-structure.md` 设计实验方案。
@@ -30,7 +30,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下实验设计计划是否合理：
 
@@ -97,7 +97,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下实验设计是否同时支撑 story 中的 claim，并覆盖 theory analysis 中需要验证的 prediction：
 

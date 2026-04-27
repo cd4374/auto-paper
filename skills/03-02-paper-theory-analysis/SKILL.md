@@ -6,7 +6,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 # 03-02-paper-theory-analysis
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md`、`03-00-structure.md` 与相关文献笔记，生成论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界与可实验对照的 predictions。
@@ -29,7 +29,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下理论分析计划是否合理：
 
@@ -141,7 +141,7 @@ mcp__codex__codex:
 
 ```text
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下理论分析是否合理，并且是否足以支持后续实验设计与论文写作：
 

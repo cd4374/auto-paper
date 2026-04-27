@@ -1,7 +1,7 @@
 ---
 name: "project-import"
-description: "解析现有研究项目并转化为 auto-paper 标准格式。"
-allowed-tools: Bash, Read, Glob, Grep, Write, WebSearch, WebFetch, mcp__codex__codex
+description: "解析现有研究项目并转化为 auto-paper 标准格式（主入口，编排 project-import-01/02/03 子阶段）。"
+allowed-tools: Bash, Read, Glob, Grep, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
 forbidden-actions:
   - 不要重构已有的实验代码
   - 不要补做 structure 之外的实验
@@ -11,245 +11,71 @@ forbidden-actions:
 ---
 
 # project-import
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
-解析一个现有研究项目（代码、实验结果、论文草稿、笔记），并尽可能转化为 auto-paper 的标准产物。
+导入主入口：分三段恢复 story、venue/structure 与理论/实验材料。
 
 ## 输入
+- 一个现有项目目录（代码、实验结果、论文草稿、笔记）
 
-- 一个现有项目目录
-- 可能包含：
-  - 代码：`src/`, `code/`, `scripts/`, `train*`, `eval*`, `run*`
-  - 结果：`results/`, `outputs/`, `logs/`, `figures/`, `tables/`
-  - 论文：`*.tex`, `*.md`, `paper*`, `draft*`, `abstract*`
-  - 配置/元数据：`README*`, `requirements.txt`, `environment.yml`, `pyproject.toml`, `*.yaml`, `*.json`
-
-## 输出
-
-尽可能生成：
+## 输出（尽可能生成）
 - `01-story.md`
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
 - `03-00-structure.md`
-- `03-02-theory-analysis.md`（仅在已有草稿、方法说明或附录中存在足够理论证据时）
+- `03-02-theory-analysis.md`（证据充足时）
 - `04-00-experiments.md`
-- `04-02-experiment-results.md`（仅在结果证据充足时）
+- `04-02-experiment-results.md`（证据充足时）
 
-如果信息不足，必须明确标注“待确认/缺失”，不要编造内容。
+信息不足时必须明确标注“待确认/缺失”，禁止编造。
 
-## 工作流
+## 子阶段编排
 
-### Step 1: 项目普查
-扫描并归类证据：
-- narrative sources：abstract、introduction、conclusion、README、研究说明
-- method sources：方法代码、模块命名、配置文件、算法说明
-- experiment sources：训练/评测脚本、实验配置、命令行入口
-- result sources：结果表、日志、图表、CSV/JSON 指标
-- venue/template clues：LaTeX 模板、class/sty/bst、草稿中的会议信息
+**执行约束（强制）**：必须按 `Stage A → Stage B → Stage C` 串行执行，禁止跳步或只执行部分子阶段。若某阶段证据不足，应在该阶段显式标注“待确认/缺失”，再进入下一阶段。
 
-对每类证据标记：`high confidence` / `medium confidence` / `missing`。
+### Stage A: `/project-import-01-survey-story`
 
-### Step 2: 提炼 story
-从现有项目恢复叙事逻辑：
-- **核心问题**：想理解/探索什么问题？
-- **探索路径**：从哪个角度切入？
-- **关键发现**：发现了什么？（可能需要推断）
-- **深层理解**：如何解释这些发现？
+目标：项目普查 + 证据分级 + `01-story.md` 恢复。
 
-兼容旧格式：若发现旧版"是什么/为什么/怎么做"格式，自动映射到新框架。
+产出：
+- 证据摘要（high/medium/missing）
+- `01-story.md`
 
-证据优先级：
-1. 现有草稿中的 abstract / introduction / conclusion
-2. README 或项目说明
-3. 方法代码命名 / 配置命名
-4. 图表标题 / 结果表格 / 日志摘要
+### Stage B: `/project-import-02-venue-structure`
 
-必须区分“材料直接支持的结论”和“仅为合理推断的表述”。
+目标：识别/推荐 venue，并恢复 `03-00` 结构。
 
-### Step 3: 生成 `01-story.md`
-参考 `skills/shared/story-template.md` 生成 `01-story.md`。
-
-要求：
-- 中文为主，保留必要英文术语
-- 三问完整
-- 不得把没有证据的推断写成既成事实
-
-生成后调用 `mcp__codex__codex` 审查：
-
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下导入得到的 story 是否严格基于现有项目证据：
-
-    项目证据摘要: {evidence summary}
-    Story: {story 内容}
-
-    检查：要点见 codex-review-template.md
-
-    若有问题，明确指出并给出修改建议。
-```
-
-迭代逻辑：
-- 若 review 指出问题 → 按 review 建议修改 story → 继续 review（round++）
-- 若 review 通过或达到轮数上限 → 进入 Step 4
-
-**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
-- 第 1 轮：通过 / 问题数：N，问题摘要：...
-- 第 2 轮：通过 / 问题数：N，问题摘要：...
-- ...
-
-### Step 4: 推断或推荐 venue
-优先从已有项目识别 venue：
-- LaTeX 模板 marker
-- class/sty/bst 文件
-- 草稿文本中的会议/期刊痕迹
-
-若不能识别，则根据 `../shared/templates/venue-requirements.json` 推荐 1-2 个候选。
-
-生成：
+产出：
 - `02-journal-recommendation.md`
 - `02-journal-requirements.md`
+- `03-00-structure.md`
 
-#### Step 4.1: Post-review（迭代循环，最多 10 轮）
+### Stage C: `/project-import-03-experiment-recovery`
 
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下 venue 推荐是否与导入项目的风格和范围匹配：
-    Story: {01-story.md}
-    推荐: {02-journal-recommendation.md}
-    检查：要点见 codex-review-template.md
+目标：条件性恢复 `03-02` 与 04 阶段材料并做一致性检查。
 
-    若有问题，明确指出并给出修改建议。
-```
+产出（按证据）：
+- `03-02-theory-analysis.md`
+- `04-00-experiments.md`
+- `04-02-experiment-results.md`
 
-迭代逻辑：
-- 若 review 指出问题 → 按 review 建议修改 venue 推荐 → 继续 review（round++）
-- 若 review 通过或达到轮数上限 → 进入 Step 5
+## 统一约束
 
-**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
-- 第 1 轮：通过 / 问题数：N，问题摘要：...
-- 第 2 轮：通过 / 问题数：N，问题摘要：...
-- ...
+- 证据优先，不做无依据推断。
+- 只做映射与恢复，不重写原项目代码。
+- 只恢复当前主线所需最小材料。
 
-### Step 5: 生成 `03-00-structure.md`
-参考 `../shared/templates/venue-requirements.json` 中对应 venue 的 section_structure 生成 `03-00-structure.md`。
+## 最终输出与下游提示
 
-规则：
-- 若已有论文草稿结构较完整，优先保留其章节框架
-- 若没有现成结构，则根据 venue 配置生成章节
-- 从 venue-requirements.json 读取 venue 的 section_structure，获取 narrative_points 和 requirements
-- 每章叙事内容要能映射回 story
-- 字数/图表/公式需求要考虑 venue 要求和现有材料量
-
-#### Step 5.1: Post-review（迭代循环，最多 10 轮）
-
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下 structure 是否支撑 story：
-    Story: {01-story.md}
-    Structure: {03-00-structure.md}
-    检查：要点见 codex-review-template.md
-
-    若有问题，明确指出并给出修改建议。
-```
-
-迭代逻辑：
-- 若 review 指出问题 → 按 review 建议修改 structure → 继续 review（round++）
-- 若 review 通过或达到轮数上限 → 进入 Step 6
-
-**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
-- 第 1 轮：通过 / 问题数：N，问题摘要：...
-- 第 2 轮：通过 / 问题数：N，问题摘要：...
-- ...
-
-### Step 6: 条件性恢复 03-02 理论层与 04 阶段材料
-#### 6.1 条件性生成 `03-02-theory-analysis.md`
-从已有项目中的方法说明、theory section、appendix、证明草稿、公式推导、图注或补充笔记中恢复：
-- 需要理论支撑的核心 claim
-- assumptions / 适用边界
-- 已有的 derivation / proof sketch / heuristic explanation
-- 可与实验对照的 prediction
-
-只有在证据足以支撑这些内容时才生成；如果只能恢复局部理论直觉，应明确标注“待确认/不完整”，不要把经验结论反向包装成理论结果。
-
-#### 6.2 生成 `04-00-experiments.md`
-从训练/评测脚本、YAML/JSON 配置、日志、结果表格、图表 caption、草稿实验段中恢复：
-- 实验名称
-- 支撑的 claim
-- 数据集
-- baseline
-- 指标
-- ablation / robustness / generalization 检查
-
-每个实验都应能追溯到现有文件证据；否则标为“推测/待确认”。
-
-#### 6.3 条件性生成 `04-02-experiment-results.md`
-只有在已有项目里存在清晰结果产物时才生成：CSV/JSON、图表、关键日志、草稿结果描述。证据不足则不要生成。
-
-#### 6.4 Post-review（迭代循环，最多 10 轮）
-
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下导入的实验材料是否超出原项目证据：
-    原项目证据: {evidence summary}
-    导入结果: {04-00/04-02 内容摘要}
-    检查：要点见 codex-review-template.md
-
-    若有问题，明确指出并给出修改建议。
-```
-
-迭代逻辑：
-- 若 review 指出问题 → 按 review 建议修改实验材料 → 继续 review（round++）
-- 若 review 通过或达到轮数上限 → 进入 Step 7
-
-**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
-- 第 1 轮：通过 / 问题数：N，问题摘要：...
-- 第 2 轮：通过 / 问题数：N，问题摘要：...
-- ...
-
-#### 6.5 不默认重建 `04-01-experiment-code/`
-已有项目通常已包含代码，导入阶段只做映射和解释，不做代码重写。
-
-### Step 7: 最终一致性检查（迭代循环，最多 10 轮）
-调用 `mcp__codex__codex` 检查导入结果是否超出原项目证据：
-
-```
-mcp__codex__codex:
-  model: gpt-5.4
-  prompt: |
-    请检查以下导入结果是否超出原项目证据：
-    导入结果摘要: {导入生成的内容}
-    原项目证据: {evidence summary}
-    检查：要点见 codex-review-template.md
-
-    若有问题，明确指出并给出修改建议。
-```
-
-迭代逻辑：
-- 若 review 指出问题 → 按 review 建议修改导入结果 → 继续 review（round++）
-- 若 review 通过或达到轮数上限 → 进入 Step 8
-
-**每轮情况汇总**：review 循环结束后，打印每轮的简要情况：
-- 第 1 轮：通过 / 问题数：N，问题摘要：...
-- 第 2 轮：通过 / 问题数：N，问题摘要：...
-- ...
-
-### Step 8: 输出导入总结
 最后总结：
-- 已生成哪些标准文件
-- 哪些内容是 high confidence / medium confidence / missing
-- 哪些 claim 或实验仍需用户确认
+- 已生成文件清单
+- high/medium/missing 项
+- 仍需用户确认项
 
-**下游依赖检查**：
-- 若缺少 `03-01-related-work.md`/`03-01-references.bib`，建议先执行 `/03-01-paper-bibliography`
-- 若缺少 `04-03-paper-assets/`/`04-03-experiment-analysis.md`，建议先执行 `/04-03-experiment-analysis`
+下游依赖检查：
+- 缺 `03-01-related-work.md`/`03-01-references.bib` → 建议先 `/03-01-paper-bibliography`
+- 缺 `04-03-paper-assets/`/`04-03-experiment-analysis.md` → 建议先 `/04-03-experiment-analysis`
 
-**不要直接推荐跳过到 `/05-02-paper-write`**，除非 `03-01` 和 `04-03` 都已完整生成。
+不要默认直接跳到 `/05-02-paper-write`，除非 `03-01` 与 `04-03` 已完整。

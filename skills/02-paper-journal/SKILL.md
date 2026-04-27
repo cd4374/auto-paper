@@ -1,12 +1,12 @@
 ---
 name: "02-paper-journal"
 description: "基于 01-story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
-allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
 ---
 
 # 02-paper-journal
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` 推荐期刊并生成格式要求。
@@ -14,7 +14,7 @@ allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 ## 输入
 
 - `01-story.md`
-- `../shared/templates/venue-requirements.json`（支持的期刊列表）
+- `skills/shared/templates/venue-requirements.json`（支持的期刊列表）
 
 ## 输出
 
@@ -36,7 +36,7 @@ allowed-tools: Read, Write, Glob, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下期刊推荐计划是否合理：
 
@@ -48,9 +48,11 @@ mcp__codex__codex:
 
 ### Step 3: 读取支持的期刊列表
 
-读取 `../shared/templates/venue-requirements.json`，获取所有支持的期刊及其基本信息。
+读取 `skills/shared/templates/venue-requirements.json`，获取所有支持的期刊及其基本信息。
 
 ### Step 4: 推荐期刊
+
+先按优先级做外部检索（仅当前一工具不可用时才降级）：`mcp__kimi-code__kimi_web_search` → `mcp__MiniMax__web_search` → `WebSearch`；需要抓取期刊官网或 CFP 细节时按优先级使用：`mcp__kimi-code__kimi_fetch_url` → `WebFetch`。
 
 根据 story 主题匹配推荐 1-2 个候选期刊。
 
@@ -109,7 +111,7 @@ venue_key: [如 neurips / nature / prl]
 - 说明: [描述]
 ```
 
-从 `../shared/templates/venue-requirements.json` 中提取对应期刊的完整配置。
+从 `skills/shared/templates/venue-requirements.json` 中提取对应期刊的完整配置。
 
 `02-journal-requirements.md` 必须写入 `venue_key`（front matter + 基本信息字段），供 `/03-00-paper-structure` 与 `/05-01-paper-template` 统一解析。
 
@@ -119,7 +121,7 @@ venue_key: [如 neurips / nature / prl]
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下两项：
     1. 期刊推荐是否匹配 story 的贡献度？

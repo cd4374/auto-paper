@@ -15,7 +15,7 @@
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     检查以下执行计划：{计划内容}
     要点：是否覆盖上游要求？是否有冲突/遗漏？输出范围是否合理？
@@ -25,7 +25,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     检查以下输出：{输出内容}
     要点：是否覆盖上游要求？是否自洽？有无过度扩展？格式是否规范？
@@ -80,6 +80,7 @@ mcp__codex__codex:
 
 | 场景 | 处理 |
 |------|------|
+| `mcp__kimi-code__kimi_read_media` 调用失败/超时 | 降级到 `mcp__MiniMax__understand_image`；标注 `⚠️ 已降级到 MiniMax` |
 | `mcp__MiniMax__understand_image` 调用失败/超时 | 跳过，生成占位结论；标注 `⚠️ 待人工审查` |
 | 图片文件不存在 | 报错，列出缺失文件；不继续 |
 

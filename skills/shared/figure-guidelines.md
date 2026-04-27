@@ -160,9 +160,14 @@ save_fig(fig, 'fig_bar_comparison')
 
 ## 7. 质量检查
 
-生成图表后，使用 MiniMax MCP 审查：
+生成图表后，按优先级做图片审查：先使用 Kimi MCP（`mcp__kimi-code__kimi_read_media`），仅当前一工具不可用时降级到 MiniMax MCP（`mcp__MiniMax__understand_image`）：
 
 ```
+mcp__kimi-code__kimi_read_media(
+  path: "path/to/figure.pdf",
+  prompt: "Analyze this scientific figure for an academic paper. Check: (1) Is the font readable? (2) Are subplot labels (a), (b)... visible? (3) Are axis labels and legends clear? (4) Any overlap or occlusion?"
+)
+# fallback only when unavailable:
 mcp__MiniMax__understand_image(
   image_source: "path/to/figure.pdf",
   prompt: "Analyze this scientific figure for an academic paper. Check: (1) Is the font readable? (2) Are subplot labels (a), (b)... visible? (3) Are axis labels and legends clear? (4) Any overlap or occlusion?"

@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 04-02-experiment-run
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 运行实验并收集结果到 `04-02-experiment-results.md`。
@@ -29,7 +29,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下实验运行计划是否合理：
 
@@ -105,7 +105,7 @@ from paper_plot_style import *
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下实验结果是否达到预期：
 

@@ -1,7 +1,7 @@
 ---
 name: "re-iter"
 description: "通用迭代式工作流：需求→Plan→Review循环→实现→Review循环"
-allowed-tools: Read, Write, Glob, Grep, Agent, mcp__codex__codex, mcp__MiniMax__understand_image
+allowed-tools: Read, Write, Glob, Grep, Agent, mcp__codex__codex, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image
 temporary-files: PLAN.md
 ---
 
@@ -156,7 +156,7 @@ mcp__codex__codex:
 
 | 文件 | 说明 |
 |------|------|
-| `{output_prefix}PLAN.md` | 执行计划 |
+| `PLAN.md` | 执行计划 |
 | `{output_prefix}REPORT.md` | 最终报告 |
 
 ## 关键实现要点

@@ -1,12 +1,12 @@
 ---
 name: "06-paper-review"
 description: "系统审查论文草稿，检查叙事一致性、逻辑完整性、语言质量、格式规范。"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__MiniMax__understand_image
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image
 ---
 
 # 06-paper-review
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 系统审查论文草稿，输出结构化修改意见。
@@ -45,7 +45,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__Mini
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下论文审查准备是否充分：
 
@@ -66,15 +66,20 @@ mcp__codex__codex:
 
 ### Step 3: 图片理解审查
 
-对论文中的关键 figures 使用 `mcp__MiniMax__understand_image` 逐个检查，重点看：
+对论文中的关键 figures 按优先级逐个检查：先用 `mcp__kimi-code__kimi_read_media`，仅当前一工具不可用时降级到 `mcp__MiniMax__understand_image`；重点看：
 - panel 布局是否清楚
 - 坐标轴、legend、annotation、colorbar、字体是否可读
 - 图与 caption、正文引用是否一致
 - 图是否准确表达想要支撑的现象，是否存在 reviewer 容易误解的地方
 
-可参考如下提示词：
+可参考如下优先级调用：
 
 ```
+mcp__kimi-code__kimi_read_media(
+  path: "{figure path}",
+  prompt: "Analyze this scientific figure for an academic paper. Describe the panel layout, whether the visualization clearly communicates the intended finding, whether labels, legends, annotations, and color scales are readable, and identify any weaknesses in presentation, scientific clarity, or potential reviewer confusion."
+)
+# fallback only when unavailable:
 mcp__MiniMax__understand_image(
   image_source: "{figure path}",
   prompt: "Analyze this scientific figure for an academic paper. Describe the panel layout, whether the visualization clearly communicates the intended finding, whether labels, legends, annotations, and color scales are readable, and identify any weaknesses in presentation, scientific clarity, or potential reviewer confusion."
@@ -99,7 +104,7 @@ mcp__MiniMax__understand_image(
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请审查论文草稿的 {章节名} 部分。
 

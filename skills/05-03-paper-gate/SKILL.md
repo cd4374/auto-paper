@@ -46,8 +46,11 @@ Failure(非阻塞): 用户确认后继续
 - main.tex 引入所有 sections/*.tex
 
 **Single-file 检查**（仅 entry_tex）：
-- 引用/图表/TODO 同上
-- 章节覆盖由 Codex 审查（无 sections/*.tex 对齐）
+- 所有 `\ref{}` 有对应 `\label{}`
+- 所有 `\cite{}` 在 references.bib 中存在
+- 所有 `\includegraphics` 文件存在
+- 无 TODO/FIXME/XXX 残留
+- 章节覆盖由 Codex 审查（无 sections/*.tex 对齐，也不要求 main.tex 引入 sections）
 
 失败则阻塞。
 
@@ -88,11 +91,11 @@ Failure(非阻塞): 用户确认后继续
 - 有阻塞项 → 必须修复
 - 仅非阻塞项 → 用户确认后继续
 
-## Step 8: 编译输出
+## Step 6: 编译输出
 
 若门控通过（无阻塞项），直接编译 PDF。
 
-### 8.1 检查编译工具
+### 6.1 检查编译工具
 
 ```bash
 which pdflatex || { echo "ERROR: pdflatex not found. Install MacTeX: brew install --cask mactex" && exit 1 }
@@ -102,7 +105,7 @@ which latexmk && LATEXMK=true || LATEXMK=false
 
 若工具缺失，阻塞并提示安装方法。
 
-### 8.2 编译
+### 6.2 编译
 
 进入 `05-template/` 目录，优先使用 `latexmk`：
 
@@ -124,7 +127,7 @@ else
 fi
 ```
 
-### 8.3 验证与清理
+### 6.3 验证与清理
 
 检查 `main.pdf` 是否生成，并记录编译日志中的关键错误：
 

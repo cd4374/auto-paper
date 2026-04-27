@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 # 03-00-paper-structure
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
@@ -15,7 +15,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 - `01-story.md`
 - `02-journal-requirements.md`
-- `../shared/templates/venue-requirements.json`
+- `skills/shared/templates/venue-requirements.json`
 
 ## 输出
 
@@ -43,7 +43,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 若两者都缺失 → 阻塞，提示先重新生成 `02-journal-requirements.md`。
 
 根据 `venue_key` 从 `venue-requirements.json` 读取 `section_structure`。
-venue-requirements.json 位于 `../shared/templates/venue-requirements.json`。
+venue-requirements.json 位于 `skills/shared/templates/venue-requirements.json`。
 
 ### Step 3: Pre-review
 
@@ -51,7 +51,7 @@ venue-requirements.json 位于 `../shared/templates/venue-requirements.json`。
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下章节设计计划是否合理：
 
@@ -115,7 +115,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 structure 是否支撑 story：
 

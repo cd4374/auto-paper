@@ -1,12 +1,12 @@
 ---
 name: "00-01-idea-evaluate"
 description: "对候选 idea 池做结构化评估，并对 top-k 想法做 novelty 与 paperability 风险审查。"
-allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
 ---
 
 # 00-01-idea-evaluate
 
-- REVIEWER_MODEL = `gpt-5.4` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 对 `00-00-idea-pool.md` 做结构化评分，并生成 `00-01-idea-evaluation.md`。
@@ -36,7 +36,7 @@ allowed-tools: Read, Write, WebSearch, WebFetch, mcp__codex__codex
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 idea evaluation 计划是否合理：
 
@@ -68,7 +68,8 @@ mcp__codex__codex:
 
 选出最值得推进的 top-k（默认 3 个）idea，做更深入评估：
 - 提炼每个 idea 最需要成立的 2-4 个 claim
-- 使用 `WebSearch` / `WebFetch` 检查最近相关工作
+- 按优先级检索最近相关工作：`mcp__kimi-code__kimi_web_search` → `mcp__MiniMax__web_search` → `WebSearch`；仅当前一工具不可用（调用失败、超时、权限受限）时才降级到下一工具
+- 需要抓取页面细节时，按优先级使用：`mcp__kimi-code__kimi_fetch_url` → `WebFetch`；仅当前一工具不可用时才降级
 - 记录 closest prior work、true delta、reviewer attack points
 
 要求：
@@ -83,7 +84,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.4
+  model: gpt-5.5
   prompt: |
     请检查以下 idea evaluation 是否合理：
 
