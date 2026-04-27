@@ -6,556 +6,1352 @@
       "year": 2026,
       "template": {
         "entry_tex": "neurips/main.tex",
-        "required_markers": ["\\usepackage{neurips_2026}"]
-      },
-      "format": {
-        "abstract_max_words": "one paragraph, ~250 words",
-        "page_limit": 9,
-        "page_count_includes": ["main body", "references"],
-        "page_count_excludes": ["appendix"]
+        "required_markers": [
+          "\\usepackage{neurips_2026}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
         "bib_style": "provided by template"
       },
-      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": true,
-        "ethics_statement": "Required for some submissions",
-        "reproducibility_checklist": true,
-        "supplementary_materials": "allowed",
-        "checklist": "Required: checklist.tex must be included"
+      "format": {
+        "page_limit": 9
       },
-      "ablation": { "required": true, "description": "Ablation studies are expected" }
+      "format_description": "摘要长度按当年官方模板/投稿系统要求。主文通常限 9 页（含图表），参考文献、附录与 checklist 不计入主文页数；以当年 CFP 为准。引用通常使用 author-year（natbib）。补充材料允许。",
+      "requirements_description": "匿名投稿。需遵循 NeurIPS Code of Ethics。NeurIPS Paper Checklist 为必填。是否需要专门伦理段落取决于论文内容与当年政策；不宜硬编码“消融实验必需”。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？（可与实际发现形成对比）"
+            ],
+            "requirements": {
+              "word_count": "500-800",
+              "figures": "1张问题示意图"
+            }
+          },
+          {
+            "name": "Related Work",
+            "narrative_points": [
+              "分类综述：现有研究从哪些角度理解这个问题？",
+              "理解盲点：哪些角度被忽视或研究不足？",
+              "定位贡献：我们要在哪里拓展理解的边界？"
+            ],
+            "requirements": {
+              "word_count": "300-500",
+              "citations": "数量适中"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "800-1200",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Experiments",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融实验：验证各组件的贡献"
+            ],
+            "requirements": {
+              "word_count": "1500-2000",
+              "figures": "实验图表数量",
+              "tables": "消融实验表"
+            }
+          },
+          {
+            "name": "Conclusion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-300"
+            }
+          }
+        ]
+      }
     },
-
     "icml": {
       "name": "ICML",
       "type": "conference",
       "year": 2026,
       "template": {
         "entry_tex": "icml/main.tex",
-        "required_markers": ["icml2025"]
-      },
-      "format": {
-        "abstract_max_words": "one paragraph, ~4-6 sentences",
-        "page_limit": 8,
-        "page_count_includes": ["main body"],
-        "page_count_excludes": ["references", "appendix", "impact statement"]
+        "required_markers": [
+          "icml2025 (or current year style marker)"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "icml2025.bst"
+        "bib_style": "icml style bst for target year (e.g., icml2025.bst)"
       },
-      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": true,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": true,
-        "supplementary_materials": "allowed"
+      "format": {
+        "page_limit": 8
       },
-      "ablation": { "required": true, "description": "Ablation studies expected" }
+      "format_description": "主文通常限 8 页（含图表），参考文献与附录不计入主文页数；以当年 ICML Author Instructions 为准。引用通常使用 author-year（natbib）。补充材料允许。",
+      "requirements_description": "匿名投稿。需遵循 ICML 伦理与投稿政策。reproducibility 强烈鼓励但不应一概写为“硬性 checklist 必填”（以当年政策为准）。不宜硬编码“消融实验必需”。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？（可与实际发现形成对比）"
+            ],
+            "requirements": {
+              "word_count": "500-800",
+              "figures": "1张问题示意图"
+            }
+          },
+          {
+            "name": "Related Work",
+            "narrative_points": [
+              "分类综述：现有研究从哪些角度理解这个问题？",
+              "理解盲点：哪些角度被忽视或研究不足？",
+              "定位贡献：我们要在哪里拓展理解的边界？"
+            ],
+            "requirements": {
+              "word_count": "300-500",
+              "citations": "数量适中"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "800-1200",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Experiments",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融实验：验证各组件的贡献"
+            ],
+            "requirements": {
+              "word_count": "1500-2000",
+              "figures": "实验图表数量",
+              "tables": "消融实验表"
+            }
+          },
+          {
+            "name": "Conclusion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-300"
+            }
+          }
+        ]
+      }
     },
-
     "iclr": {
       "name": "ICLR",
       "type": "conference",
       "year": 2026,
       "template": {
         "entry_tex": "iclr/main.tex",
-        "required_markers": ["\\usepackage{iclr2025_conference,times}"]
-      },
-      "format": {
-        "abstract_max_words": "one paragraph, ~250 words",
-        "page_limit": 9,
-        "page_count_includes": ["main body"],
-        "page_count_excludes": ["references", "appendix"]
+        "required_markers": [
+          "iclr conference style marker for target year"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
-        "bib_style": "iclr2025_conference.bst"
+        "bib_style": "iclr conference bst for target year"
       },
-      "figures": { "min": 5, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": true,
-        "ethics_statement": "Required for some",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed"
+      "format": {
+        "page_limit": 9
       },
-      "ablation": { "required": true, "description": "Ablation studies expected" }
+      "format_description": "初稿主文通常限 9 页（含图表），参考文献与附录不计入主文页数；rebuttal/camera-ready 页数政策以当年 ICLR Author Guide 为准。引用通常使用 author-year（natbib 风格）。补充材料允许。",
+      "requirements_description": "匿名投稿。需遵循 ICLR Code of Ethics 并在系统中确认；伦理/可复现声明通常为建议项或情形依赖项（以当年政策为准）。不宜硬编码“消融实验必需”。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？（可与实际发现形成对比）"
+            ],
+            "requirements": {
+              "word_count": "500-800",
+              "figures": "1张问题示意图"
+            }
+          },
+          {
+            "name": "Related Work",
+            "narrative_points": [
+              "分类综述：现有研究从哪些角度理解这个问题？",
+              "理解盲点：哪些角度被忽视或研究不足？",
+              "定位贡献：我们要在哪里拓展理解的边界？"
+            ],
+            "requirements": {
+              "word_count": "300-500",
+              "citations": "数量适中"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "800-1200",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Experiments",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融实验：验证各组件的贡献"
+            ],
+            "requirements": {
+              "word_count": "1500-2000",
+              "figures": "实验图表数量",
+              "tables": "消融实验表"
+            }
+          },
+          {
+            "name": "Conclusion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-300"
+            }
+          }
+        ]
+      }
     },
-
     "aaai": {
       "name": "AAAI",
       "type": "conference",
       "year": 2026,
       "template": {
         "entry_tex": "aaai/main.tex",
-        "required_markers": ["aaai2026"]
-      },
-      "format": {
-        "abstract_max_words": "one paragraph, ~200 words",
-        "page_limit": 7,
-        "page_count_includes": ["main body", "references"],
-        "page_count_note": "7 pages main text + unlimited references"
+        "required_markers": [
+          "aaai2026"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
         "bib_style": "aaai2026.bst"
       },
-      "figures": { "min": 4, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": true,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "not allowed",
-        "prohibitions": "No color figures, no URLs in references"
+      "format": {
+        "page_limit": 7
       },
-      "ablation": { "required": true, "description": "Ablation studies expected" }
+      "format_description": "主文通常限 7 页（技术内容），参考文献与可复现性清单可额外页；以当年 AAAI Submission Instructions 为准。AAAI 样式通常为 author-year（aaai*.bst）。补充材料通常允许且有单独截止时间。",
+      "requirements_description": "匿名投稿。通常要求可复现性清单。伦理相关要求依稿件类型与当年政策执行。“禁止彩色图”“禁止 URL 引用”“消融实验必需”不应作为通用硬性规则。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？（可与实际发现形成对比）"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图"
+            }
+          },
+          {
+            "name": "Related Work",
+            "narrative_points": [
+              "分类综述：现有研究从哪些角度理解这个问题？",
+              "理解盲点：哪些角度被忽视或研究不足？",
+              "定位贡献：我们要在哪里拓展理解的边界？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "citations": "数量适中（精简）"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "700-1000",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Experiments",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融实验：验证各组件的贡献"
+            ],
+            "requirements": {
+              "word_count": "1200-1600",
+              "figures": "实验图表数量",
+              "tables": "消融实验表"
+            }
+          },
+          {
+            "name": "Conclusion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "150-250"
+            }
+          }
+        ]
+      }
     },
-
     "nature": {
       "name": "Nature",
       "type": "journal",
-      "publisher": "Springer Nature",
-      "scope": "High-impact interdisciplinary research with broad scientific significance",
+      "year": null,
       "template": {
         "entry_tex": "nature/main.tex",
-        "required_markers": ["\\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}"],
-        "note": "Bundled Springer Nature template; adjust the documentclass option to the target Nature-family venue as needed"
-      },
-      "format": {
-        "abstract_max_words": "~150-200 words depending on article type",
-        "page_limit": 8,
-        "page_count_includes": ["main text", "figures", "references"],
-        "page_count_note": "Actual limits depend on article type and journal instructions"
+        "required_markers": [
+          "\\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "natbib-compatible via sn-jnl",
-        "commands": ["\\cite{}"],
         "bib_style": "sn-nature.bst"
       },
-      "figures": { "min": 2, "format": "eps, pdf, png", "caption_position": "bottom" },
-      "tables": { "min": 0, "style": "standard", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required where applicable",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "notes": "Venue-specific editorial policies take precedence; template should usually remain a single manuscript file"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false, "description": "Only when central to the paper's claims" }
+      "format_description": "Nature 投稿要求随文章类型变化（常见约束是字数、display items、参考文献与方法位置），不使用统一固定页数。引用通常为数字制（按期刊模板）。以 Nature 当期 Author Guide 为准。",
+      "requirements_description": "通常非匿名审稿。伦理、数据与代码可用性声明按稿件类型与编辑政策执行。补充材料/Extended Data 常见；最终以目标期刊当期指南为准。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "300-500",
+              "figures": "1张问题示意图（可选）",
+              "note": "高影响力跨学科研究，需广泛科学意义"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融仅在核心 claim 时需要"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "关键图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Discussion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "400-600"
+            }
+          },
+          {
+            "name": "Methods",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "500-800（可移至补充材料）",
+              "figures": "方法示意图",
+              "equations": "核心公式数量",
+              "note": "通常置于文末或 Supplement"
+            }
+          }
+        ]
+      }
     },
-
     "science": {
       "name": "Science",
       "type": "journal",
-      "publisher": "AAAS",
-      "scope": "Broad scientific advances of strong cross-disciplinary interest",
+      "year": null,
       "template": {
         "entry_tex": "science/main.tex",
-        "required_markers": ["\\usepackage{scicite}"],
-        "note": "Bundled Science-family template; keep the manuscript simple and avoid adding extra style packages"
-      },
-      "format": {
-        "abstract_max_words": "journal/article-type dependent; usually concise",
-        "page_limit": 10,
-        "page_count_includes": ["main text", "figures", "references", "supplement list"],
-        "page_count_note": "Actual limits depend on article type and journal instructions"
+        "required_markers": [
+          "\\usepackage{scicite}"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "scicite",
-        "commands": ["\\cite{}"],
         "bib_style": "sciencemag.bst"
       },
-      "figures": { "min": 2, "format": "pdf, png, eps", "caption_position": "bottom" },
-      "tables": { "min": 0, "style": "standard", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required where applicable",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "common",
-        "notes": "The bundled template includes main text plus supplement conventions; article-specific author instructions still govern"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false, "description": "Only when central to the scientific claim" }
+      "format_description": "Science 稿件限制依稿件类型与版本（print/digital）而变化，通常以主文字数、图表数和补充材料组织来约束，而非固定统一页数。引用为数字制（scicite/sciencemag 样式）。以最新 Information for Authors 为准。",
+      "requirements_description": "通常非匿名审稿。伦理与数据可用性要求按稿件类型和期刊政策执行。补充材料常见并受期刊格式要求约束。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "300-500",
+              "figures": "1张问题示意图（可选）",
+              "note": "跨学科强、广泛科学进展"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "消融仅在核心 scientific claim 时需要"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "关键图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Discussion",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "400-600"
+            }
+          },
+          {
+            "name": "Methods",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "500-800（可移至补充材料）",
+              "figures": "方法示意图",
+              "equations": "核心公式数量",
+              "note": "通常置于文末"
+            }
+          }
+        ]
+      }
     },
-
-
     "pre": {
       "name": "Physical Review E",
       "type": "journal",
-      "publisher": "APS",
-      "scope": "Statistical physics, nonlinear dynamics, complex systems, soft matter, biological physics",
+      "year": null,
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"],
-        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'pre'"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": 10,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "aps,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "apsrev4-2.bst"
       },
-      "figures": { "min": 3, "format": "eps, pdf, tiff", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "data_availability": "Required: data underlying study must be available"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false, "description": "N/A for physics" }
+      "format_description": "APS 期刊通常不设统一硬性页数上限（以当期投稿系统与期刊说明为准）。PRE 常用 REVTeX（apsrev4-2）。引用为数字制。",
+      "requirements_description": "通常非匿名审稿。Data Availability Statement 按 APS 现行政策执行。伦理与补充材料要求按稿件内容和期刊政策执行，不宜一刀切。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "统计物理、非线性动力学、复杂系统、软物质、生物物理"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "建议附 data availability 声明（以期刊当期政策为准）"
+            }
+          }
+        ]
+      }
     },
-
     "prx": {
       "name": "Physical Review X",
       "type": "journal",
-      "publisher": "APS",
-      "scope": "Interdisciplinary physics, open access, ML applications in physics",
+      "year": null,
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"],
-        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prx'"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": 15,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "aps,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "apsrev4-2.bst"
       },
-      "figures": { "min": 4, "format": "eps, pdf, tiff", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "data_availability": "Required"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false, "description": "N/A for physics" }
+      "format_description": "PRX 通常无统一固定页限（以当期作者指南为准），使用 APS/REVTeX 体系，引用为数字制。",
+      "requirements_description": "通常非匿名审稿。Data Availability Statement 按 APS 现行政策执行。伦理与补充材料按政策与稿件类型处理。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "跨学科物理、开放获取、物理中的 ML 应用"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "建议附 data availability 声明（以期刊当期政策为准）"
+            }
+          }
+        ]
+      }
     },
-
     "chaos": {
       "name": "Chaos",
       "type": "journal",
-      "publisher": "AIP",
-      "scope": "Nonlinear dynamics, chaos theory, complex systems, synchronization",
+      "year": null,
       "template": {
         "entry_tex": "aip/main.tex",
-        "required_markers": ["aip,"]
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": 10,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "aip,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "aipnum4-1.bst"
       },
-      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "Chaos (AIP) 通常无统一固定页限，以作者指南与文章类型为准；常用 AIP/REVTeX 体系，引用多为数字制。",
+      "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 AIP 现行政策与稿件类型执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "非线性动力学、混沌理论、复杂系统、同步"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400"
+            }
+          }
+        ]
+      }
     },
-
     "cn": {
       "name": "Chaos, Solitons & Fractals",
       "type": "journal",
-      "publisher": "Elsevier",
-      "scope": "Nonlinear science, complex systems, fractals, neural networks",
+      "year": null,
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
-        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
-        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
         "bib_style": "elsarticle-harv.bst"
       },
-      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板，需修改 \\journal{} 为目标期刊名。",
+      "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "非线性科学、复杂系统、分形、神经网络"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400"
+            }
+          }
+        ]
+      }
     },
-
     "jcp": {
       "name": "Journal of Computational Physics",
       "type": "journal",
-      "publisher": "Elsevier",
-      "scope": "Numerical methods, computational physics, PDE solvers, finite element, CFD",
+      "year": null,
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
-        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
-        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
         "bib_style": "elsarticle-harv.bst"
       },
-      "figures": { "min": 4, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 2, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "code_availability": "Strongly encouraged"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false },
-      "special": "Include computational complexity, convergence analysis"
+      "format_description": "摘要约 250 字。无页数限制。至少 4 图 2 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
+      "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "数值方法、计算物理、PDE solver、有限元、CFD"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？",
+              "收敛性分析：方法的数值稳定性和收敛性"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量",
+              "note": "含收敛性分析"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "复杂度分析：计算成本和效率"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "建议附 code availability 说明"
+            }
+          }
+        ]
+      }
     },
-
     "cpc": {
       "name": "Computer Physics Communications",
       "type": "journal",
-      "publisher": "Elsevier",
-      "scope": "Physics software, computational methods, code sharing, parallel computing",
+      "year": null,
       "template": {
         "entry_tex": "elsevier/main.tex",
-        "required_markers": ["\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"],
-        "compile_hint": "Change \\journal{Results in Physics} to target journal name",
-        "note": "Requires elsarticle.cls from the official Elsevier bundle or local TeX installation"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "\\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib",
-        "commands": ["\\citep{}", "\\citet{}"],
         "bib_style": "elsarticle-harv.bst"
       },
-      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "booktabs", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "code_availability": "Required - code must be deposited"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false },
-      "special": "Code sharing is central to the journal; code must be available via GitHub or similar"
+      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
+      "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "物理软件、计算方法、代码共享、并行计算。代码共享是核心要求"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？",
+              "代码说明：软件架构、实现细节"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量",
+              "note": "含代码说明"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？",
+              "性能测试：计算效率对比"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "必须附代码可用性声明"
+            }
+          }
+        ]
+      }
     },
-
     "jmp": {
       "name": "Journal of Mathematical Physics",
       "type": "journal",
-      "publisher": "AIP",
-      "scope": "Mathematical physics, integrable systems, group theory, statistical mechanics",
+      "year": null,
       "template": {
         "entry_tex": "aip/main.tex",
-        "required_markers": ["aip,"]
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "aip,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "aipnum4-1.bst"
       },
-      "figures": { "min": 0, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 0, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "摘要约 250 字。无页数限制。图表可选，格式 eps/pdf。引用格式 numeric，使用 revtex-natbib。AIP revtex4-1 模板。",
+      "requirements_description": "通常非匿名审稿。伦理、数据可用性与补充材料按 AIP 与稿件类型政策执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "图表可选",
+              "note": "理论推导为主。数学物理、可积系统、群论、统计力学"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "理论框架：我们采用什么数学框架/工具？",
+              "推导逻辑：从基本假设到核心结论的推导步骤",
+              "方法选择理由：为什么这个框架适合解决这个问题？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "equations": "核心公式与证明数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "定理1/推论1: [描述 + 证明]",
+              "定理2/推论2: [描述 + 证明]",
+              "应用示例：理论结果如何应用于具体问题"
+            ],
+            "requirements": {
+              "word_count": "1000-2000",
+              "equations": "公式数量",
+              "note": "以理论推导为主"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400"
+            }
+          }
+        ]
+      }
     },
-
     "prb": {
       "name": "Physical Review B",
       "type": "journal",
-      "publisher": "APS",
-      "scope": "Condensed matter, materials physics, soft matter, nanoscale physics",
+      "year": null,
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"],
-        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prb'"
-      },
-      "format": {
-        "abstract_max_words": 250,
-        "page_limit": 10,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "aps,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "apsrev4-2.bst"
       },
-      "figures": { "min": 3, "format": "eps, pdf, tiff", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "data_availability": "Required"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "PRB 通常无统一固定页限（RapComm 等体裁另有约束），使用 APS/REVTeX 体系，引用为数字制。",
+      "requirements_description": "通常非匿名审稿。Data Availability Statement 按 APS 现行政策执行；伦理相关要求按稿件情形与期刊政策。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "凝聚态、材料物理、软物质、纳米尺度物理"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "建议附 data availability 声明（以期刊当期政策为准）"
+            }
+          }
+        ]
+      }
     },
-
     "prl": {
       "name": "Physical Review Letters",
       "type": "journal",
-      "publisher": "APS",
-      "scope": "Rapid communications, important original research in physics",
+      "year": null,
       "template": {
         "entry_tex": "aps/main.tex",
-        "required_markers": ["aps,"],
-        "compile_hint": "In \\documentclass[aps,physrev,...]{revtex4-2}, change 'physrev' to 'prl'"
-      },
-      "format": {
-        "abstract_max_chars": 600,
-        "abstract_max_words": "~150 words (600 characters including spaces)",
-        "word_limit": 3750,
-        "page_count_includes": ["full paper"],
-        "page_count_note": "Max 3750 words for body (excludes abstract, references); typically 4-6 pages"
+        "required_markers": [
+          "aps,"
+        ]
       },
       "citation": {
-        "style": "numeric",
-        "package": "revtex-natbib",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
         "bib_style": "apsrev4-2.bst"
       },
-      "figures": { "min": 1, "format": "eps, pdf, tiff", "caption_position": "bottom" },
-      "tables": { "min": 0, "style": "revtex", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "data_availability": "Required"
+      "format": {
+        "page_limit": null,
+        "word_limit": 3750
       },
-      "ablation": { "required": false }
+      "format_description": "摘要约 150 字（600 字符含空格）。正文最多 3750 字（不含摘要、参考文献），通常 4-6 页。至少 1 图，表格可选，格式 eps/pdf/tiff，图标题在下、表标题在上。引用格式 numeric，使用 revtex-natbib。APS revtex4-2 模板，documentclass 选项设为 'prl'。",
+      "requirements_description": "通常非匿名审稿。正文核心约束通常为 3750 词级别（以当期 PRL 说明为准）。Data Availability Statement 按 APS 现行政策执行。伦理与补充材料按政策与稿件类型处理。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "200-300",
+              "figures": "1张问题示意图（可选）",
+              "note": "快速通讯、重要原创物理研究（短文紧凑）"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "600-1000",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "关键图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "150-250",
+              "note": "建议附 data availability 声明（以期刊当期政策为准）"
+            }
+          }
+        ]
+      }
     },
-
     "njp": {
       "name": "New Journal of Physics",
       "type": "journal",
-      "publisher": "IOP",
-      "scope": "Multidisciplinary physics, open access, novel physics",
+      "year": null,
       "template": {
         "entry_tex": "iop/main.tex",
-        "required_markers": ["\\documentclass{iopjournal}"]
-      },
-      "format": {
-        "abstract_max_words": "less than 200",
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "\\documentclass{iopjournal}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib-compatible",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
-        "bib_style": "follow journal template"
+        "bib_style": "follow NJP/IOP house style (journal applies style at production)"
       },
-      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "standard", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "funding": "Required: funding sources must be listed"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "NJP 通常无统一固定页限。引用与参考文献格式按 IOP 期刊规则；提交期允许常见一致格式，正式样式由期刊生产阶段统一。",
+      "requirements_description": "通常非匿名审稿。伦理、数据与补充材料按 IOP/NJP 当期政策执行；不应将特定字段写成通用硬性要求。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "多学科物理、开放获取、新颖物理"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400"
+            }
+          }
+        ]
+      }
     },
-
     "jstat": {
       "name": "Journal of Statistical Mechanics: Theory and Experiment",
       "type": "journal",
-      "publisher": "IOP",
-      "scope": "Statistical physics, condensed matter, complex systems, out-of-equilibrium",
+      "year": null,
       "template": {
         "entry_tex": "iop/main.tex",
-        "required_markers": ["\\documentclass{iopjournal}"]
-      },
-      "format": {
-        "abstract_max_words": "less than 200",
-        "page_limit": null,
-        "page_count_includes": ["full paper"]
+        "required_markers": [
+          "\\documentclass{iopjournal}"
+        ]
       },
       "citation": {
-        "style": "author-year",
-        "package": "natbib-compatible",
-        "commands": ["\\cite{}", "\\citep{}", "\\citet{}"],
-        "bib_style": "follow journal template"
+        "bib_style": "follow JSTAT/IOP house style (journal applies style at production)"
       },
-      "figures": { "min": 3, "format": "eps, pdf", "caption_position": "bottom" },
-      "tables": { "min": 1, "style": "standard", "caption_position": "top" },
-      "requirements": {
-        "anonymous": false,
-        "ethics_statement": "Required",
-        "reproducibility_checklist": false,
-        "supplementary_materials": "allowed",
-        "data_availability": "Encouraged"
+      "format": {
+        "page_limit": null
       },
-      "ablation": { "required": false }
+      "format_description": "JSTAT 通常无统一固定页限。引用与参考文献格式按 IOP 期刊规则；提交期允许常见一致格式，正式样式由期刊生产阶段统一。",
+      "requirements_description": "通常非匿名审稿。伦理、数据与补充材料按 IOP/JSTAT 当期政策执行。",
+      "section_structure": {
+        "sections": [
+          {
+            "name": "Introduction",
+            "narrative_points": [
+              "从领域现状切入：我们对这个问题已有的理解是什么？",
+              "已有理解综述（融入 Introduction，无独立 Related Work）",
+              "揭示理解缺口：现有理解的局限或盲点在哪里？",
+              "引出探索必要性：为什么值得系统地探索这个问题？",
+              "预览发现：我们预期会发现什么？"
+            ],
+            "requirements": {
+              "word_count": "400-600",
+              "figures": "1张问题示意图（可选）",
+              "note": "统计物理、凝聚态、复杂系统、非平衡态"
+            }
+          },
+          {
+            "name": "Method",
+            "narrative_points": [
+              "探索框架：我们采用什么策略/视角来探索？",
+              "实验设计逻辑：为什么这样设计能揭示我们想要的发现？",
+              "方法选择理由：这个策略如何帮助我们发现和理解？"
+            ],
+            "requirements": {
+              "word_count": "1000-1500",
+              "figures": "1张方法示意图",
+              "equations": "核心公式数量"
+            }
+          },
+          {
+            "name": "Results",
+            "narrative_points": [
+              "发现1: [描述 + 支撑证据]",
+              "发现2: [描述 + 支撑证据]",
+              "每个发现说明：我们探索了什么？发现了什么？这个发现意味着什么？"
+            ],
+            "requirements": {
+              "word_count": "1500-2500",
+              "figures": "实验图表数量",
+              "tables": "表格数量"
+            }
+          },
+          {
+            "name": "Conclusions",
+            "narrative_points": [
+              "核心理解：我们对问题有了什么新认识？",
+              "理论贡献：这个理解如何拓展了知识的边界？",
+              "实践启示：对后续研究和应用有什么指导意义？",
+              "理解局限：当前理解的边界在哪里？还有什么未知？"
+            ],
+            "requirements": {
+              "word_count": "200-400",
+              "note": "建议附 data availability 说明"
+            }
+          }
+        ]
+      }
     }
   }
 }
