@@ -15,7 +15,7 @@ Preconditions: 无
 Inputs(required):
   - 02-journal-requirements.md
   - 03-00-structure.md
-  - skills/shared/templates/venue-requirements.json（仓库相对路径）
+  - ../shared/templates/venue-requirements.json（skill 相对路径）
   - skills/shared/templates/{template_dir}/（模板目录）
 Inputs(optional):
   - 03-01-references.bib
@@ -26,11 +26,13 @@ Failure: 用户确认后继续
 
 ## Step 1: 读取期刊配置
 
-读取 `02-journal-requirements.md` 提取 venue key。
+读取 `02-journal-requirements.md` 提取 `venue_key`，解析规则：
+1. 优先读取 front matter：`venue_key: <key>`
+2. 若无 front matter，则读取正文字段：`- venue_key: <key>`
 
-若 venue key 缺失或 `venue-requirements.json` 无对应配置 → 阻塞，提示用户补充。
+若 `venue_key` 缺失或 `venue-requirements.json` 无对应配置 → 阻塞，提示用户补充。
 
-从配置读取模板目录。
+从配置读取模板目录与 `section_structure`。
 
 ## Step 2: 创建目录结构
 
@@ -38,7 +40,9 @@ Failure: 用户确认后继续
 
 创建 `05-template/` 并复制模板文件。
 
-按 `03-00-structure.md` 章节创建对应 `sections/*.tex`。文件名规则：`N_title.tex`（序号+英文小写连字符）。
+优先按 `03-00-structure.md` 章节创建对应 `sections/*.tex`。文件名规则：`N_title.tex`（序号+英文小写连字符）。
+
+若 `03-00-structure.md` 章节无法稳定解析，则回退使用 `venue-requirements.json` 的 `section_structure.sections[].name` 生成骨架文件。
 
 若模板缺失 → 阻塞，提示用户手动下载。
 

@@ -106,7 +106,7 @@ mcp__codex__codex:
 - class/sty/bst 文件
 - 草稿文本中的会议/期刊痕迹
 
-若不能识别，则根据 `skills/shared/templates/venue-requirements.json` 推荐 1-2 个候选。
+若不能识别，则根据 `../shared/templates/venue-requirements.json` 推荐 1-2 个候选。
 
 生成：
 - `02-journal-recommendation.md`
@@ -136,11 +136,12 @@ mcp__codex__codex:
 - ...
 
 ### Step 5: 生成 `03-00-structure.md`
-参考 `skills/shared/structure-template.md` 生成 `03-00-structure.md`。
+参考 `../shared/templates/venue-requirements.json` 中对应 venue 的 section_structure 生成 `03-00-structure.md`。
 
 规则：
 - 若已有论文草稿结构较完整，优先保留其章节框架
-- 若没有现成结构，则回退到标准 5 章结构
+- 若没有现成结构，则根据 venue 配置生成章节
+- 从 venue-requirements.json 读取 venue 的 section_structure，获取 narrative_points 和 requirements
 - 每章叙事内容要能映射回 story
 - 字数/图表/公式需求要考虑 venue 要求和现有材料量
 

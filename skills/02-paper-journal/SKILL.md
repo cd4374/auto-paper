@@ -68,9 +68,14 @@ mcp__codex__codex:
 从 `venue-requirements.json` 读取选中期刊的详细要求，生成 `02-journal-requirements.md`：
 
 ```markdown
+---
+venue_key: [如 neurips / nature / prl]
+---
+
 # 期刊要求
 
 ## 基本信息
+- venue_key: [如 neurips / nature / prl]
 - 名称: [期刊名]
 - 类型: [conference/journal]
 - 年份: [年份]
@@ -105,6 +110,8 @@ mcp__codex__codex:
 ```
 
 从 `../shared/templates/venue-requirements.json` 中提取对应期刊的完整配置。
+
+`02-journal-requirements.md` 必须写入 `venue_key`（front matter + 基本信息字段），供 `/03-00-paper-structure` 与 `/05-01-paper-template` 统一解析。
 
 ### Step 7: Post-review（迭代循环，最多 10 轮）
 

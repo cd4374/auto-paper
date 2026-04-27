@@ -35,7 +35,6 @@ auto-paper/
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
 │       ├── story-template.md
-│       ├── structure-template.md
 │       ├── idea-pool-template.md
 │       ├── idea-evaluation-template.md
 │       ├── idea-recommendation-template.md
