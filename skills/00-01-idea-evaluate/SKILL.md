@@ -14,7 +14,7 @@ allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kim
 ## 输入
 
 - `00-00-idea-pool.md`
-- 可选：用户补充偏好（偏快出结果、偏理论、偏顶会、偏低算力）
+- 可选：用户补充偏好（偏快出结果、偏计算/理论/数值模拟、偏顶会、偏低算力）
 
 ## 输出
 
@@ -29,6 +29,8 @@ allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kim
 - 关键 claim
 - 最小方法差异
 - 最小实验包
+
+若信息不完整，系统按现有约束做默认判断并在评估中显式记录假设。
 
 ### Step 2: Pre-review
 
@@ -55,12 +57,14 @@ mcp__codex__codex:
 - feasibility
 - experiment cost
 - theory potential
+- simulation reproducibility
 - paperability
 - venue fit
 - resource fit
 
 要求：
 - 不要只看“听起来新”，要看是否能形成可验证 claim
+- 对计算/理论/数值模拟导向用户，默认提高 `theory potential`、`simulation reproducibility`、`resource fit` 的决策权重
 - `experiment cost` 分数越高表示越昂贵，需在结论中解释
 - 对明显不成立或不适合当前约束的 idea，应直接标记 `reject`
 

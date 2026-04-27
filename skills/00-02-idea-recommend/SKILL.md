@@ -19,7 +19,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 ## 输出
 
 - `00-02-idea-recommendation.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
-- `00-02-idea-open-questions.md` -- （仅在存在关键歧义时生成）
+- `00-02-idea-open-questions.md` -- （仅在存在关键歧义且影响主线决策时生成）
 
 ## 工作流
 
@@ -58,14 +58,15 @@ mcp__codex__codex:
 
 要求：
 - 不是简单选最高分，而是综合 novelty、可做性、实验成本、venue fit、叙事完整度
+- 对计算/理论/数值模拟导向用户，默认优先选择“理论机制明确 + 数值模拟可验证”的主选方案
 - 若主选 idea 仍有关键不确定性，必须明确写入 open questions
 - framing 必须足够具体，能够直接喂给 `/01-paper-init`
 
-### Step 4: 生成待确认问题（如需要）
+### Step 4: 记录关键歧义与系统默认决策（如需要）
 
-如果存在关键歧义，生成 `00-02-idea-open-questions.md`，列出：
-- 待确认选择
-- 不同选择的影响
+如果存在关键歧义，优先由系统按当前目标与约束做默认决策，并在 `00-02-idea-open-questions.md` 记录：
+- 歧义点与系统默认选择
+- 该选择的影响
 - 对后续 story / venue / experiments 的影响
 
 ### Step 5: Post-review（迭代循环，最多 10 轮）
@@ -100,5 +101,5 @@ mcp__codex__codex:
 
 输出：
 - `00-02-idea-recommendation.md` 已生成
-- 若存在关键歧义，提示先确认 `00-02-idea-open-questions.md`
-- 否则提示下一步：`/01-paper-init`
+- 若存在关键歧义，输出 `00-02-idea-open-questions.md` 并说明已采用的系统默认决策
+- 提示下一步：`/01-paper-init`

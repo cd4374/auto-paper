@@ -12,6 +12,14 @@
 ## 最小方法包
 [最小可行方法包是什么？]
 
+## 理论可分析性
+[哪些部分可被推导、证明或机制化解释？]
+
+## 数值模拟最小验证
+- simulation setting:
+- control variables:
+- expected observable:
+
 ## 预期贡献
 [如果成功，主要贡献是什么？]
 
