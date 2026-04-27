@@ -121,10 +121,10 @@ save_fig(fig, 'fig_name')  # 保存为 PDF
 
 1. **多子图编号**：使用 `add_subfigure_label(ax, 'a')` 添加 (a)、(b)、(c)... 编号
 2. **字体**：serif 字体（Times New Roman），base size = 10pt
-3. **分辨率**：≥ 300 DPI（PDF 矢量格式优先）
+3. **分辨率**：300 DPI（用于导出一致性）
 4. **布局**：使用 `fig.tight_layout()` 避免重叠
 5. **色条**：必须标注数值范围与单位
-6. **导出**：优先 PDF（矢量），PNG 仅作为光栅回退
+6. **导出**：仅 PDF（矢量）
 
 ### Step 5: 生成运行说明
 

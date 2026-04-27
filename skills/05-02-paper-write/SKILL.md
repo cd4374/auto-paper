@@ -49,8 +49,10 @@ Failure(非阻塞): 用户确认后继续
 按 `03-00-structure.md` 章节顺序**串行**撰写。
 
 **章节间跳转规则**：
-- 严格按 README 流程图顺序：Abstract → Introduction → Related Work → Method → Experiments → Conclusion
-- 只有在前置章节（如 Introduction）完成后，才撰写依赖它的后续章节（如 Related Work）
+- 章节顺序与章节集合以 `03-00-structure.md` 为唯一依据（该文件由 `/03-00-paper-structure` 基于 `venue-requirements.json` 生成）
+- 不允许在 05-02 中硬编码通用顺序（如 Abstract → Introduction → Related Work → Method → Experiments → Conclusion）
+- 若 `03-00-structure.md` 与当前写作目标不匹配，先回退更新 `03-00-structure.md`，再继续撰写
+- 只有在前置章节完成后，才撰写依赖它的后续章节
 - 不支持并行撰写：每章必须完成 Pre-review 后再进入下一章
 
 **每章流程**：

@@ -40,9 +40,14 @@ Failure: 用户确认后继续
 
 创建 `05-template/` 并复制模板文件。
 
-优先按 `03-00-structure.md` 章节创建对应 `sections/*.tex`。文件名规则：`N_title.tex`（序号+英文小写连字符）。
+**结构链路约束（强制）**：
+- 章节骨架必须以 `03-00-structure.md` 为唯一直接来源创建 `sections/*.tex`
+- `03-00-structure.md` 必须是由 `/03-00-paper-structure` 基于 `venue-requirements.json` 生成的结果
+- 不允许在 05 阶段绕过 `03-00` 直接按模板章节写作
 
-若 `03-00-structure.md` 章节无法稳定解析，则回退使用 `venue-requirements.json` 的 `section_structure.sections[].name` 生成骨架文件。
+文件名规则：`N_title.tex`（序号+英文小写连字符）。
+
+若 `03-00-structure.md` 章节无法稳定解析，则阻塞并提示先回到 `/03-00-paper-structure` 重生结构；不要在 05 阶段回退为直接读取 `venue-requirements.json` 生成骨架。
 
 若模板缺失 → 阻塞，提示用户手动下载。
 

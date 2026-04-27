@@ -96,7 +96,7 @@ venue_key: [如 neurips / nature / prl]
 
 ## 图表要求
 - 最少图表: [N] 张
-- 格式: [pdf/png/eps/tiff]
+- 格式: [pdf]
 - 标题位置: [top/bottom/separate]
 
 ## 提交要求

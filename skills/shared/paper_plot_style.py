@@ -7,7 +7,7 @@ Usage:
 Constants:
     STYLE: 'publication' (default), 'poster', 'slide'
     DPI: 300
-    FORMAT: 'pdf' (vector), 'png' (raster fallback)
+    FORMAT: 'pdf' (vector only)
     COLOR_PALETTE: 'tab10', 'Set2', 'colorblind' (deuteranopia-safe)
     FONT_SIZE: 10 (base font size, matches typical conference body text)
     FIG_DIR: 'figures/' (output directory)
@@ -24,7 +24,7 @@ import matplotlib.cm
 
 STYLE = 'publication'  # Options: publication, poster, slide
 DPI = 300
-FORMAT = 'pdf'  # Options: pdf (vector), png (raster)
+FORMAT = 'pdf'  # Fixed: pdf (vector only)
 COLOR_PALETTE = 'tab10'  # Options: tab10, Set2, colorblind
 FONT_SIZE = 10
 FIG_DIR = 'figures/'
@@ -110,7 +110,7 @@ def save_fig(fig, name, fmt=FORMAT, fig_dir=FIG_DIR):
     Args:
         fig: matplotlib figure object
         name: output filename (without extension)
-        fmt: 'pdf' or 'png'
+        fmt: 'pdf' only
         fig_dir: output directory
 
     Example:

@@ -11,7 +11,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 ## 接口契约
 
 ```
-Preconditions: 05-template/sections/*.tex 存在（multi-file）或 entry_tex 存在（single-file）
+Preconditions: 05-template/sections/*.tex 存在，且章节由 03-00-structure.md 驱动生成
 Inputs(required):
   - 02-journal-requirements.md（venue 约束）
   - 03-00-structure.md
@@ -26,7 +26,7 @@ Failure(非阻塞): 用户确认后继续
 ## Step 0: 前置检查
 
 验证以下前置条件满足：
-- [ ] `05-template/sections/*.tex` 存在（multi-file）或 entry_tex 存在（single-file）
+- [ ] `05-template/sections/*.tex` 存在
 - [ ] `02-journal-requirements.md` 存在
 - [ ] `03-00-structure.md` 存在
 - [ ] `05-template/` 目录存在
@@ -35,22 +35,14 @@ Failure(非阻塞): 用户确认后继续
 
 ## Step 1: 自动化检查
 
-**模式判定**：按 venue 配置判断 multi-file 或 single-file。
+**结构优先检查（唯一模式）**：只支持 `sections/*.tex` 多文件模式，并以 `03-00-structure.md` 为章节对齐基准。
 
-**Multi-file 检查**：
 - 所有 `\ref{}` 有对应 `\label{}`
 - 所有 `\cite{}` 在 references.bib 中存在
 - 所有 `\includegraphics` 文件存在
 - 无 TODO/FIXME/XXX 残留
-- sections/*.tex 与 structure.md 章节对齐
+- sections/*.tex 与 `03-00-structure.md` 章节一一对齐
 - main.tex 引入所有 sections/*.tex
-
-**Single-file 检查**（仅 entry_tex）：
-- 所有 `\ref{}` 有对应 `\label{}`
-- 所有 `\cite{}` 在 references.bib 中存在
-- 所有 `\includegraphics` 文件存在
-- 无 TODO/FIXME/XXX 残留
-- 章节覆盖由 Codex 审查（无 sections/*.tex 对齐，也不要求 main.tex 引入 sections）
 
 失败则阻塞。
 

@@ -750,7 +750,7 @@
       "format": {
         "page_limit": null
       },
-      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板，需修改 \\journal{} 为目标期刊名。",
+      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板，需修改 \\journal{} 为目标期刊名。",
       "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
       "section_structure": {
         "sections": [
@@ -826,7 +826,7 @@
       "format": {
         "page_limit": null
       },
-      "format_description": "摘要约 250 字。无页数限制。至少 4 图 2 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
+      "format_description": "摘要约 250 字。无页数限制。至少 4 图 2 表，格式 pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
       "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
       "section_structure": {
         "sections": [
@@ -906,7 +906,7 @@
       "format": {
         "page_limit": null
       },
-      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 eps/pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
+      "format_description": "摘要约 250 字。无页数限制。至少 3 图 1 表，格式 pdf，图标题在下、表标题在上、表用 booktabs。引用格式 author-year，使用 natbib。Elsevier elsarticle 模板。",
       "requirements_description": "通常非匿名审稿。伦理、数据/代码可用性与补充材料按 Elsevier 该刊当期 Guide for Authors 执行。",
       "section_structure": {
         "sections": [
@@ -986,7 +986,7 @@
       "format": {
         "page_limit": null
       },
-      "format_description": "摘要约 250 字。无页数限制。图表可选，格式 eps/pdf。引用格式 numeric，使用 revtex-natbib。AIP revtex4-1 模板。",
+      "format_description": "摘要约 250 字。无页数限制。图表可选，格式 pdf。引用格式 numeric，使用 revtex-natbib。AIP revtex4-1 模板。",
       "requirements_description": "通常非匿名审稿。伦理、数据可用性与补充材料按 AIP 与稿件类型政策执行。",
       "section_structure": {
         "sections": [
@@ -1139,7 +1139,7 @@
         "page_limit": null,
         "word_limit": 3750
       },
-      "format_description": "摘要约 150 字（600 字符含空格）。正文最多 3750 字（不含摘要、参考文献），通常 4-6 页。至少 1 图，表格可选，格式 eps/pdf/tiff，图标题在下、表标题在上。引用格式 numeric，使用 revtex-natbib。APS revtex4-2 模板，documentclass 选项设为 'prl'。",
+      "format_description": "摘要约 150 字（600 字符含空格）。正文最多 3750 字（不含摘要、参考文献），通常 4-6 页。至少 1 图，表格可选，格式 pdf，图标题在下、表标题在上。引用格式 numeric，使用 revtex-natbib。APS revtex4-2 模板，documentclass 选项设为 'prl'。",
       "requirements_description": "通常非匿名审稿。正文核心约束通常为 3750 词级别（以当期 PRL 说明为准）。Data Availability Statement 按 APS 现行政策执行。伦理与补充材料按政策与稿件类型处理。",
       "section_structure": {
         "sections": [

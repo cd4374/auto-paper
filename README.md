@@ -193,6 +193,11 @@ auto-paper/
 | 叙事层 | 01-story.md | 定义论文的"故事"：是什么、为什么、怎么做 |
 | 结构层 | 03-00-structure.md | 定义章节：每章叙事内容 + 需求（字数/图表）|
 
+**结构优先约束（强制）**：
+- `/03-00-paper-structure` 必须先基于 `skills/shared/templates/venue-requirements.json` 生成 `03-00-structure.md`
+- `/05-01-paper-template` 与 `/05-02-paper-write` 必须以 `03-00-structure.md` 为唯一直接章节依据
+- 不允许在 05 阶段绕过 `03-00-structure.md` 直接按 venue 模板章节写作
+
 ### 一致性保证
 
 - **01-story.md 先行**：所有后续步骤以 story 为锚点

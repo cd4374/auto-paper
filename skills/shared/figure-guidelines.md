@@ -17,7 +17,7 @@ from paper_plot_style import *
 | 常量 | 默认值 | 说明 |
 |------|--------|------|
 | DPI | 300 | 输出分辨率 |
-| FORMAT | pdf | 矢量格式优先 |
+| FORMAT | pdf | 统一导出格式（仅 PDF） |
 | FONT_SIZE | 10 | 基础字号 |
 | COLOR_PALETTE | tab10 | 颜色方案 |
 
@@ -51,8 +51,7 @@ from paper_plot_style import *
 - 高度比例：通常 0.6–0.8 × 宽度
 
 ### 分辨率
-- PDF/SVG：矢量格式，无限清晰
-- PNG：≥ 300 DPI
+- PDF：矢量格式，无限清晰（统一导出格式）
 
 ### 多子图编号
 ```python
