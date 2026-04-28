@@ -44,11 +44,57 @@ Failure(非阻塞): 用户确认后继续
 - sections/*.tex 与 `03-00-structure.md` 章节一一对齐
 - main.tex 引入所有 sections/*.tex
 
+自动化验证命令：
+```bash
+cd 05-template
+
+# 检查未定义的 \ref
+echo "=== Undefined refs ==="
+for ref in $(grep -oE '\\ref\{[^}]+\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*\\ref{\([^}]*\)}.*/\1/' | sort -u); do
+  grep -r "\\label{$ref}" . > /dev/null 2>&1 || echo "UNDEFINED REF: $ref"
+done
+
+# 检查缺失的 bib 条目
+echo "=== Missing bib entries ==="
+for key in $(grep -oE '\\cite[p]?\{[^}]+\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*{\([^}]*\)}.*/\1/' | tr ',' '\n' | sed 's/^ *//;s/ *$//' | sort -u); do
+  grep -E "^@.*\{${key}[,@]" references.bib > /dev/null 2>&1 || echo "MISSING BIB: $key"
+done
+
+# 检查缺失的图表文件
+echo "=== Missing figures ==="
+for fig in $(grep -oE '\\includegraphics[^;]*\{([^}]+)\}' sections/*.tex main.tex 2>/dev/null | sed 's/.*{\([^}]*\)}.*/\1/' | sort -u); do
+  if [[ "$fig" = figures/* ]]; then
+    [ -f "$fig" ] || echo "MISSING FIGURE: $fig"
+  elif [[ "$fig" = /* ]]; then
+    echo "OUTSIDE PATH: $fig (must use relative path)"
+  else
+    [ -f "figures/$fig" ] || echo "MISSING FIGURE: figures/$fig"
+  fi
+done
+
+# 检查 TODO/FIXME 残留
+echo "=== TODO/FIXME ==="
+grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/FIXME found!"
+```
+
 失败则阻塞。
 
 ## Step 2: 最终检查
 
-按 `skills/shared/quality-checklist.md` 的"2. 论文自检清单"和"4. LaTeX 完整性检查"执行。
+按以下清单逐项检查：
+
+- [ ] Abstract 是否覆盖 what/why/how/evidence/result 五要素
+- [ ] Introduction 的 gap → approach → contributions 逻辑链是否清晰
+- [ ] Related Work 是否覆盖相关工作且分类合理
+- [ ] Method 的符号定义是否一致、无歧义
+- [ ] 理论表述是否与 `03-02-theory-analysis.md` 一致，未把 heuristic 写成已证结论
+- [ ] 实验是否验证了所有关键理论预测或明确说明未覆盖部分
+- [ ] 结论是否回应了引言的动机
+- [ ] 所有 \ref 指向有效 \label
+- [ ] 所有 \cite 在 references.bib 中有对应条目
+- [ ] 关键 figures 已用图片理解 MCP 做可读性与表达审查
+- [ ] 无 TODO/FIXME 残留
+- [ ] 没有大量只有 1–2 个短段落却单独成节的小节
 
 额外检查：
 - 每章覆盖 `03-00-structure.md` 对应叙事

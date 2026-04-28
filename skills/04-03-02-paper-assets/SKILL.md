@@ -32,11 +32,56 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 - caption 简洁完整
 - label 使用 `fig:fig_name`
 
+标准 LaTeX 嵌入格式：
+```latex
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/fig_name.pdf}
+    \caption{...}
+    \label{fig:fig_name}
+\end{figure}
+```
+
+尺寸参考：
+| 宽度 | LaTeX 命令 | 适用场景 |
+|------|-----------|----------|
+| 单栏 | `width=0.48\textwidth` | 论文正文中的独立图 |
+| 双栏 | `width=0.95\textwidth` | 占满整页的图 |
+| 半栏 | `width=0.23\textwidth` | 并排多图 |
+
 ### Step 3: 图片审查（优先 Kimi）
-对关键 figures 逐个审查：
-- 字体、坐标轴、legend、annotation、colorbar 可读性
-- panel 布局与子图编号
-- 图-citation-正文一致性与科学表达清晰度
+
+按以下清单逐项检查：
+
+**可读性**：
+- [ ] 字体大小合适，printed size 可读（≥ 8pt）
+- [ ] 颜色在灰度模式下可区分（打印友好）
+- [ ] 曲线、热图、坐标轴、legend、colorbar、annotation 清晰可读
+- [ ] 文字与图形元素无重叠、遮挡
+- [ ] 坐标轴标签有单位（如适用）
+- [ ] 坐标轴标签是 publication 级别（如 `Cross-Entropy Loss` 而非 `loss`）
+
+**多子图**：
+- [ ] 每个子图左上角有 (a)、(b)、(c)... 编号
+- [ ] 编号清晰可见、位置一致
+- [ ] 正文中可引用 "(如图 (a) 所示)"
+
+**布局**：
+- [ ] Legend 不遮挡数据（放在外侧或右下角）
+- [ ] 无箭头/连接线交叉
+- [ ] 间距平衡（不太挤也不太稀疏）
+- [ ] 图表宽度符合期刊要求（单栏 0.48\textwidth，双栏 0.95\textwidth）
+
+**样式**：
+- [ ] Serif 字体（Times New Roman）匹配正文
+- [ ] 无 matplotlib 默认 title（title 只在 LaTeX caption 中）
+- [ ] 无装饰元素（背景色、3D 效果、chart junk）
+- [ ] 色彩协调（非彩虹色，3-5 种主色）
+
+**格式**：
+- [ ] PDF 输出为矢量格式（非光栅化）
+- [ ] 图表文件后缀统一为 .pdf
+- [ ] colorbar 有完整标注（数值范围、单位）
 
 降级规则：
 - 先 `mcp__kimi-code__kimi_read_media`
