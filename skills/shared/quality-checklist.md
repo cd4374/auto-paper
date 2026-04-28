@@ -114,4 +114,4 @@ grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/
 
 ## 5. Review 触发点
 
-Review 触发点清单统一维护在 `codex-review-template.md`，请参考该文件。
+各 skill 在关键步骤前后调用 Codex review（Pre-review 检查计划是否覆盖上游要求，Post-review 检查输出是否自洽）。具体触发点已内化到各 skill 的工作流中。

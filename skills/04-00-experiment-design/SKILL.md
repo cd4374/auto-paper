@@ -38,7 +38,7 @@ mcp__codex__codex:
     Theory Analysis: {03-02-theory-analysis.md 中需要验证的 prediction}
     执行计划: 为每个 claim 设计最小必要实验集
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 2: 提取 claim 与理论预测
@@ -105,7 +105,7 @@ mcp__codex__codex:
     Theory Analysis: {03-02-theory-analysis.md}
     实验设计: {experiments 内容}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

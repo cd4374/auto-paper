@@ -57,7 +57,7 @@ mcp__codex__codex:
     Review 意见: {外部 review 摘要}
     项目文件: {01-story/03-00-structure/03-02/04/05 文件列表}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 判断意见是否成立
@@ -137,7 +137,7 @@ mcp__codex__codex:
     Experiments/Results: {04-*}
     Action Plan: {06-01-review-action-plan.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

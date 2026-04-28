@@ -37,7 +37,7 @@ mcp__codex__codex:
     实现代码: {04-01-experiment-code/README.md 运行说明}
     执行计划: 逐个运行实验，收集结果到 04-02-experiment-results/
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 2: 环境准备
@@ -112,7 +112,7 @@ mcp__codex__codex:
     实验设计预期: {预期结果}
     实际结果: {实际结果}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

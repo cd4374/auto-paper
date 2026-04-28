@@ -57,7 +57,7 @@ mcp__codex__codex:
     Action Plan: {06-01-review-action-plan.md accept/partial 项}
     项目文件: {01/03-00/03-02/04/05 文件列表}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 按源头优先顺序修改
@@ -124,7 +124,7 @@ mcp__codex__codex:
     Updated LaTeX: {05-template changes}
     Resolution Log: {06-02-review-resolution.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

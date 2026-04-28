@@ -44,7 +44,7 @@ mcp__codex__codex:
     Evaluation: {00-01-idea-evaluation.md 内容摘要}
     执行计划: 综合评分结果选出主选与备选，给出 story framing
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 形成推荐结论
@@ -83,7 +83,7 @@ mcp__codex__codex:
     Evaluation: {00-01-idea-evaluation.md}
     Recommendation: {00-02-idea-recommendation.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

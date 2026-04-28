@@ -43,7 +43,7 @@ mcp__codex__codex:
     Story: {01-story.md 内容摘要}
     执行计划: 根据 story 主题匹配 1-2 个候选期刊
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 读取支持的期刊列表
@@ -131,7 +131,7 @@ mcp__codex__codex:
     推荐: {02-journal-recommendation.md}
     Requirements: {02-journal-requirements.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

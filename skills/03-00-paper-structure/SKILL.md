@@ -60,7 +60,7 @@ mcp__codex__codex:
     Venue Section Structure: {venue-requirements.json 中的 section_structure}
     执行计划: 根据叙事逻辑设计章节，遵循探索→发现→理解框架
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 4: 设计章节

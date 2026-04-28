@@ -34,7 +34,7 @@ auto-paper/
 │   ├── project-import-02-venue-structure/ # venue 识别与结构恢复
 │   ├── project-import-03-experiment-recovery/ # 理论/实验材料恢复与一致性检查
 │   └── shared/                      # 共享资源
-│       ├── codex-review-template.md    # Pre-review 与 Post-review 统一模板 + 工具错误处理
+
 │       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
 │       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入

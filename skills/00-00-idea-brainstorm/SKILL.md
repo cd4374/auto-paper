@@ -40,7 +40,7 @@ mcp__codex__codex:
     约束条件: {算力/时间/偏好等约束}
     执行计划: 生成 6-12 个候选 idea，每个包含 problem/motivation/insight/method/contribution/risks
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 2: 生成候选 idea 池
@@ -76,7 +76,7 @@ mcp__codex__codex:
 
     {idea pool 内容}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

@@ -46,7 +46,7 @@ mcp__codex__codex:
     Structure: {03-00-structure.md 中 Related Work/Experiments 的引用需求}
     执行计划: 检索最小必要文献池，生成 related work 笔记与 BibTeX
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 提取检索意图
@@ -164,7 +164,7 @@ mcp__codex__codex:
     Related Work Notes: {03-01-related-work.md}
     Bibliography: {03-01-references.bib}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

@@ -45,7 +45,7 @@ mcp__codex__codex:
     Idea Pool: {00-00-idea-pool.md 内容摘要}
     执行计划: 对全部候选做轻量评分，选出 top-k 做深度 novelty 审查
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 轻量评分全体候选
@@ -95,7 +95,7 @@ mcp__codex__codex:
     Idea Pool: {00-00-idea-pool.md}
     Evaluation: {00-01-idea-evaluation.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

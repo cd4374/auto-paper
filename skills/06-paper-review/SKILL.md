@@ -55,7 +55,7 @@ mcp__codex__codex:
     Journal Requirements: {02-journal-requirements.md 格式限制}
     LaTeX: {05-template 文件列表}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 2: 自检清单

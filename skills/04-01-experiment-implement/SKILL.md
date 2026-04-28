@@ -58,7 +58,7 @@ mcp__codex__codex:
     实验设计: {04-00-experiments.md 内容摘要}
     执行计划: 根据实验类型生成最小必要代码，包含核心逻辑+参数入口+输出格式
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 设计代码结构
@@ -159,7 +159,7 @@ mcp__codex__codex:
     实验设计: {experiments 内容}
     代码结构: {code 结构描述}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

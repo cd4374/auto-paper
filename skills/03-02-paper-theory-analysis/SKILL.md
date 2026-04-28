@@ -37,7 +37,7 @@ mcp__codex__codex:
     Structure: {03-00-structure.md 中需要理论支撑的章节}
     执行计划: 提取需要理论支撑的 claim，建立 assumptions，导出 predictions
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 2: 提取需要理论支撑的 claim
@@ -150,7 +150,7 @@ mcp__codex__codex:
     Related Work: {03-01-related-work.md}
     Theory Analysis: {03-02-theory-analysis.md}
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
     若有问题，明确指出并给出修改建议。
 ```

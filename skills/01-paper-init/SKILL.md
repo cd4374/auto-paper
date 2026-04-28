@@ -48,7 +48,7 @@ mcp__codex__codex:
     输入来源: {00-02-idea-recommendation.md 或用户描述}
     执行计划: 基于 story-template.md 生成探索→发现→理解框架
 
-    检查：要点见 codex-review-template.md
+    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 ```
 
 ### Step 3: 生成 story.md
