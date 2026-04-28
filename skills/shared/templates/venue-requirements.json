@@ -1292,8 +1292,8 @@
       "format": {
         "page_limit": null
       },
-      "format_description": "JSTAT 通常无统一固定页限。引用与参考文献格式按 IOP 期刊规则；提交期允许常见一致格式，正式样式由期刊生产阶段统一。",
-      "requirements_description": "通常非匿名审稿。伦理、数据与补充材料按 IOP/JSTAT 当期政策执行。",
+      "format_description": "无统一固定页限。摘要须控制在一页内，避免公式和参考文献。引用为数字制（sequential numbering in square brackets），参考文献列表按出现顺序排列（非字母序）。正式样式由 IOP 生产阶段统一。",
+      "requirements_description": "非匿名审稿。须包含 Data/Software/Code Availability Statement。需从 JSTAT 关键词列表选择 1-4 个关键词。2025年3月起：front matter 超 2 页时作者列表移至文末。伦理、补充材料按 IOP/JSTAT 当期政策执行。",
       "section_structure": {
         "sections": [
           {
