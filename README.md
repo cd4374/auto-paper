@@ -39,7 +39,7 @@ auto-paper/
 │       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
-│       ├── story-template.md
+
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
