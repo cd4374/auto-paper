@@ -25,12 +25,32 @@ allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ## 工作流
 
-### Step 1: 读取检索策略
+### Step 1: 确定检索策略
 
-读取 `skills/shared/source-policy.md` 了解：
-- 数据库检索优先级（DBLP → CrossRef → 网络搜索）
-- 来源标识规则（正式出版物 vs arXiv preprint）
-- 时间窗口策略
+**数据库优先级**：
+
+1. **DBLP** — 首选：含 venue、pages、editors，覆盖 ML/AI、物理、数学等大多数领域
+2. **CrossRef** — 备用：适用于有 DOI 的正式出版物及 arXiv preprint（DOI = `10.48550/arXiv.{id}`）
+3. **IEEE Xplore** — 通信/信号处理/硬件领域首选
+4. **ACM DL** — 系统/软件/网络领域首选
+5. **arXiv** — 仅用于：(a) 过去 6 个月内的最新工作尚未正式发表；(b) 某篇论文只有 preprint 可获取
+
+**来源标识规则**：
+- 正式出版物：标注 venue、年份、页码
+- arXiv preprint：标注 arXiv ID、年份，标注 `[preprint]`
+- 若两者均存在，引用正式版本，不引用 preprint
+
+**时间窗口策略**（未指定年份范围时）：
+- 基础工作（2022 前）：正式出版物
+- 近期工作（2022–2024）：正式出版物优先
+- 最新工作（2024+）：可接受高影响力 arXiv preprint
+
+**Venue 分层**（仅当用户明确要求时作为硬过滤条件）：
+
+| 领域 | Tier A | Tier B |
+|------|--------|--------|
+| 通信/信号处理/硬件 (IEEE) | ISCA, MICRO, HPCA, DAC, SIGCOMM | DATE, ICCAD, ICCD, CASES |
+| 系统/软件/网络 (ACM) | SOSP, OSDI, NSDI, SIGCOMM, ATC | EuroSys, Middleware, SIGMETRICS |
 
 ### Step 2: Pre-review
 

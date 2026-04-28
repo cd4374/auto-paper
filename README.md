@@ -35,7 +35,7 @@ auto-paper/
 │   ├── project-import-03-experiment-recovery/ # 理论/实验材料恢复与一致性检查
 │   └── shared/                      # 共享资源
 
-│       ├── source-policy.md         # 文献数据库优先级、来源标识与 BibTeX 获取链
+
 │       ├── quality-checklist.md     # 统一质量检查清单（图表/论文/实验）
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
@@ -153,7 +153,7 @@ auto-paper/
 - `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
 - 它负责为 `/05-02-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
 - **BibTeX 获取链**：优先通过 DBLP API 获取正式出版物的真实 BibTeX，回退到 CrossRef DOI，两者均失败时以 `% [VERIFY]` 标记，禁止编造字段
-- 检索策略与来源分层由 `skills/shared/source-policy.md` 定义
+
 
 ## 03-02 理论分析子阶段
 
