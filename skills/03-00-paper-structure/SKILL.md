@@ -21,12 +21,12 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 `03-00-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
 
-## 叙事框架：探索 → 发现 → 理解
+## 叙事框架
 
-本章结构应服务于 story 的"探索 → 发现 → 理解"逻辑：
-- **探索路径** → 对应 Introduction（为什么探索）和 Method（怎么探索）
-- **关键发现** → 对应 Experiments/Results（发现了什么）
-- **深层理解** → 对应 Analysis/Theory（为什么这样）和 Conclusion（理解了什么）
+本章结构将 story 的三部分映射为论文的"探索 → 发现 → 理解"叙事弧：
+- **是什么** → 对应 Introduction 的问题定义与背景
+- **为什么** → 对应 Introduction 的动机与 Related Work 的定位
+- **怎么做** → 对应 Method 的方法设计，并驱动 Experiments 的验证逻辑
 
 ## 工作流
 
@@ -55,7 +55,7 @@ mcp__codex__codex:
   prompt: |
     请检查以下章节设计计划是否合理：
 
-    Story: {01-story.md 内容摘要，重点关注探索路径/关键发现/深层理解}
+    Story: {01-story.md 内容摘要，重点关注研究问题/动机/方法思路}
     Journal Requirements: {02-journal-requirements.md 格式限制}
     Venue Section Structure: {venue-requirements.json 中的 section_structure}
     执行计划: 根据叙事逻辑设计章节，遵循探索→发现→理解框架
@@ -119,12 +119,12 @@ mcp__codex__codex:
   prompt: |
     请检查以下 structure 是否支撑 story：
 
-    Story: {story 内容，重点关注探索→发现→理解链条}
+    Story: {story 内容，重点关注 是什么/为什么/怎么做 是否在章节中得到充分展开}
     Structure: {structure 内容}
 
     检查要点：
-    1. 章节顺序是否服务于发现递进逻辑？
-    2. 每章叙事是否回应了 story 的探索/发现/理解？
+    1. 章节顺序是否服务于"探索→发现→理解"的递进逻辑？
+    2. 每章叙事是否充分展开了 story 中定义的问题、动机与方法？
     3. 发现是否有层次感（从初步到深层）？
 
     若有问题，明确指出并给出修改建议。
