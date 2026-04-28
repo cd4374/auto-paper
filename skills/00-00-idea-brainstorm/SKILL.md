@@ -45,17 +45,47 @@ mcp__codex__codex:
 
 ### Step 2: 生成候选 idea 池
 
-参考 `skills/shared/idea-pool-template.md`，生成 6-12 个候选 idea。
+生成 6-12 个候选 idea，每个 idea 按以下格式输出：
 
-每个 idea 至少包含：
-- problem
-- motivation
-- core insight
-- minimal method
-- expected contribution
-- required experiments
-- likely venue
-- main risks
+```
+# Idea Ixx: [idea 标题]
+
+## 问题
+[要解决的问题是什么？]
+
+## 动机
+[为什么这个问题值得做？]
+
+## 核心洞见
+[核心洞见是什么？]
+
+## 最小方法包
+[最小可行方法包是什么？]
+
+## 理论可分析性
+[哪些部分可被推导、证明或机制化解释？]
+
+## 数值模拟最小验证
+- simulation setting:
+- control variables:
+- expected observable:
+
+## 预期贡献
+[如果成功，主要贡献是什么？]
+
+## 最小实验包
+- 数据/任务:
+- baseline:
+- 指标:
+- 最小实验包:
+
+## 可能目标 venue
+[可能适合的 venue]
+
+## 主要风险
+- [风险 1]
+- [风险 2]
+```
 
 要求：
 - 候选之间要有清晰差异，不要只做措辞改写

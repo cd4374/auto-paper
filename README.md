@@ -40,9 +40,6 @@ auto-paper/
 │       ├── figure-guidelines.md     # 图表绘制指南与 LaTeX 嵌入
 │       ├── paper_plot_style.py      # 共享绘图样式脚本
 │       ├── story-template.md
-│       ├── idea-pool-template.md
-
-│       ├── idea-recommendation-template.md
 │       └── templates/               # 期刊模板（部分 venue 仅提供配置，模板需另行下载）
 │           ├── venue-requirements.json
 │           ├── neurips/
