@@ -50,9 +50,17 @@ mcp__codex__codex:
 
 ### Step 3: 轻量评分全体候选
 
-参考 `skills/shared/idea-evaluation-template.md`，先对全部候选做结构化评分。
+先对全部候选做结构化评分，按以下格式输出 Summary Table：
 
-默认评分维度：
+```
+> 评分说明：除 Experiment Cost 外，分数越高越好；Experiment Cost 分数越高表示越昂贵。
+
+| Idea | Novelty | Feasibility | Experiment Cost | Theory Potential | Simulation Reproducibility | Paperability | Venue Fit | Resource Fit | Overall |
+|------|---------|-------------|-----------------|------------------|----------------------------|--------------|-----------|--------------|---------|
+| I01 | [1-5] | [1-5] | [1-5] | [1-5] | [1-5] | [1-5] | [1-5] | [1-5] | [recommend / hold / reject] |
+```
+
+评分维度：
 - novelty
 - feasibility
 - experiment cost
@@ -75,6 +83,22 @@ mcp__codex__codex:
 - 按优先级检索最近相关工作：`mcp__kimi-code__kimi_web_search` → `mcp__MiniMax__web_search` → `WebSearch`；仅当前一工具不可用（调用失败、超时、权限受限）时才降级到下一工具
 - 需要抓取页面细节时，按优先级使用：`mcp__kimi-code__kimi_fetch_url` → `WebFetch`；仅当前一工具不可用时才降级
 - 记录 closest prior work、true delta、reviewer attack points
+
+每个 deep review 按以下格式输出：
+
+```
+### I01
+- 核心 claim:
+- 新颖性判断:
+- Closest prior work:
+- True delta:
+- Reviewer attack points:
+- 可做性:
+- 数值模拟可复现实验条件:
+- 最小可行实验包:
+- 主要风险:
+- 建议结论:
+```
 
 要求：
 - novelty 深查只覆盖 top-k，避免流程过重
