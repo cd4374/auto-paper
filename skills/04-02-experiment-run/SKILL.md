@@ -42,12 +42,23 @@ mcp__codex__codex:
 
 ### Step 2: 环境准备
 
-根据 `04-01-experiment-code/README.md` 配置环境：
-- 安装依赖
-- 准备数据（如需要）
-- 验证代码可运行
+**强制使用 conda 环境 `scf-paper`**。先检查环境是否存在：
 
-如果运行前提不清楚、数据来源缺失或资源条件不足，先向用户确认，不要自行假设。
+```bash
+conda env list | grep -q "^scf-paper " || {
+    echo "❌ conda 环境 scf-paper 不存在"
+    echo "请先创建环境：conda create -n scf-paper python=3.10"
+    exit 1
+}
+```
+
+**若环境不存在，立即停止，让用户确认后再继续。** 不要自动创建、不要切换到其他环境。
+
+环境就绪后：
+- 激活环境：`conda activate scf-paper`
+- 根据 `04-01-experiment-code/README.md` 安装依赖
+- 准备数据（如需要）
+- 验证 notebook 可运行（`jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 experiment_NN_xxx.ipynb` 快速冒烟测试）
 
 ### Step 3: 执行实验
 

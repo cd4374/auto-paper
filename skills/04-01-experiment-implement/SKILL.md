@@ -22,6 +22,7 @@ Notebook 命名规则：`experiment_NN_xxx.ipynb`，其中 `NN` 对应 `04-00-ex
 ```
 引用上游                   Notebook 内容
 ─────────────────────────────────────────────────────
+                         [code cell - 英文] # Verify conda env scf-paper
 04-00-experiments.md     [md cell - 中文]   ## 实验 1：XXX 对比实验
 01-story.md              [md cell - 中文]   验证 claim：XXX 在 YYY 条件下优于 baseline
 04-00-experiments.md     [md cell - 中文]   ### 1. 数据生成
@@ -215,8 +216,22 @@ save_fig_and_show(fig, 'fig_name')
 ### Step 5: 生成运行说明
 
 在 `04-01-experiment-code/README.md` 中记录：
-- 环境配置
-- 最小运行命令
+- **Python 环境**：conda env `scf-paper`（强制），若不存在则停止
+- 环境配置命令：`conda activate scf-paper && pip install -r requirements.txt`
+- 最小运行命令：`jupyter nbconvert --to notebook --execute experiment_NN_xxx.ipynb`
+
+每个 notebook 的第一个 code cell 必须包含环境检查：
+```python
+# Verify conda environment
+import sys, subprocess
+result = subprocess.run(['conda', 'env', 'list'], capture_output=True, text=True)
+if 'scf-paper' not in result.stdout:
+    raise RuntimeError(
+        'conda env scf-paper not found. '
+        'Create it: conda create -n scf-paper python=3.10'
+    )
+print(f'Python: {sys.version} | conda env: scf-paper')
+```
 - 必要参数说明
 - 预期输出文件或指标
 
@@ -227,8 +242,9 @@ save_fig_and_show(fig, 'fig_name')
 每个实验必须满足：
 - [ ] `04-00-experiments.md` 中的每个实验目标都有对应的 notebook，无遗漏无合并
 - [ ] 每个 notebook 的 md cell 标注了上游来源（`04-00` 实验编号、`01-story` claim、`03-00` figure plan）
+- [ ] conda env `scf-paper` 已确认存在，notebook 第一个 cell 包含环境检查
+- [ ] 有 `requirements.txt` 记录依赖版本
 - [ ] 随机种子已固定（如 `torch.manual_seed(42)`、`np.random.seed(42)`）
-- [ ] 有 `requirements.txt` 或 `environment.yml` 记录依赖版本
 - [ ] README 中记录了 notebook 与实验编号的对应表及执行顺序
 - [ ] notebook 从头到尾可顺序执行复现结果（`Cell → Run All`）
 
