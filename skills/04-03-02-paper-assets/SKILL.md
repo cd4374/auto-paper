@@ -24,11 +24,17 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 ## 工作流
 
-### Step 1: 选择最小必要资产
+### Step 1: 选择最小必要资产并分类
 
-从 `04-01-experiment-code/figures/` 中筛选可直接支撑当前 story/structure 的 PDF 图表，复制到 `04-03-paper-assets/`。命名需可回溯到 notebook 中的实验或 claim。
+从 `04-01-experiment-code/figures/` 中筛选 PDF 图表，按生成方式分类：
 
-注意：所有图表均通过 notebook 中的 `save_fig_and_show()` 生成，已为 PDF 矢量格式，无需格式转换。
+| 类别 | 来源 | 处理方式 |
+|------|------|----------|
+| 数据图 | notebook 自动生成 | 直接复制到 `04-03-paper-assets/` |
+| 架构/流程/示意图 | 手动创建（draw.io / Figma / TikZ） | 标记 `[MANUAL]`，提醒用户补充 |
+| AI 插图 | `paper-illustration` 等外部工具 | 标记 `[MANUAL]`，检查格式兼容性 |
+
+命名需可回溯到 notebook 中的实验或 claim。只复制可直接支撑当前 story/structure 的图表。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
 
 ### Step 2: 生成/整理 LaTeX 片段
 写入 `04-03-paper-assets/latex_includes.tex`，要求：
@@ -64,6 +70,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 - [ ] 文字与图形元素无重叠、遮挡
 - [ ] 坐标轴标签有单位（如适用）
 - [ ] 坐标轴标签是 publication 级别（如 `Cross-Entropy Loss` 而非 `loss`）
+- [ ] 信息密度合适：读者应在 5 秒内理解图表主旨
 
 **多子图**：
 - [ ] 每个子图左上角有 (a)、(b)、(c)... 编号
@@ -91,6 +98,26 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 - 先 `mcp__kimi-code__kimi_read_media`
 - 不可用时再 `mcp__MiniMax__understand_image`
 - 必须记录降级原因
+
+### Step 3.5: 语义审查（Codex MCP）
+
+视觉审查通过后，对每张图做语义审查——图类型是否适合展示该数据：
+
+```
+mcp__codex__codex:
+  model: gpt-5.5
+  prompt: |
+    请审查以下论文图表（语义层面）：
+
+    图表列表及描述：
+    [逐图列出：文件名、图类型、展示的数据、对应的 story claim]
+
+    对每张图检查：
+    1. 图类型是否适合展示该数据？（如：比较方法应用 bar chart 而非 line plot）
+    2. 是否有更有效的可视化选择？
+    3. 该图是否清晰支撑了其对应的 story claim？
+    4. 图中信息密度是否合适（不过密、不过空）？
+```
 
 ### Step 4: 写入 Figure Review
 把结论写回 `04-03-experiment-analysis.md`：

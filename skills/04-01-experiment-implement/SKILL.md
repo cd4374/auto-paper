@@ -41,6 +41,23 @@ Notebook 命名规则：`experiment_NN_xxx.ipynb`，其中 `NN` 对应 `04-00-ex
 
 每个 md cell 在引用上游文件时，应明确标注来源（如 "对应 04-00 实验 1 的设置 A"、"支撑 01-story 中的 claim 2"）。
 
+## 数据规范（强制）
+
+**绘图数据必须从外部文件读取，禁止在 notebook 中硬编码数据**：
+
+```python
+# ✅ 正确：从文件读取
+import json
+with open('outputs/results.json') as f:
+    data = json.load(f)
+
+# ❌ 错误：硬编码
+values = [82.3, 85.1, 86.7, 89.2]
+```
+
+- 实验的中间结果保存为 JSON/CSV 到 `outputs/`，绘图 cell 从 `outputs/` 读取
+- 确保 notebook 从头重跑时数据会被重新生成，图也会随之更新
+
 ## 绘图规范（强制）
 
 **每个绘图 cell 必须同时保存 PDF 并内联显示图片**：

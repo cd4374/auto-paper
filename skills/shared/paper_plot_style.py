@@ -42,9 +42,15 @@ SLIDE_FONT_SIZE = 16
 COLOR_PALETTES = {
     'tab10': plt.cm.tab10.colors,
     'Set2': plt.cm.Set2.colors,
-    'colorblind': ['#0173b2', '#de8f05', '#029e73', '#cc78bc', '#ca9161',
-                   '#949494', '#ece133', '#56b4e9', '#d55e00', '#0173b2'],
+    'colorblind': [
+        '#0173b2', '#de8f05', '#029e73', '#cc78bc', '#ca9161',
+        '#949494', '#ece133', '#56b4e9', '#d55e00', '#0173b2',
+    ],
 }
+
+# Prefer 'colorblind' or 'Set2' for publication — they remain distinguishable
+# in grayscale and are safe for red-green color vision deficiency (deuteranopia).
+# 'tab10' is acceptable but red/green pair may blend in grayscale prints.
 
 
 def _get_font_size():
