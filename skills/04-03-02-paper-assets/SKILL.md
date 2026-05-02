@@ -9,10 +9,11 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 - REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
-基于已完成审计结果，生成最小必要论文图表资产并做图片审查。
+基于已完成审计结果，从 notebook 产出的图表中整理最小必要论文图表资产并做图片审查。
 
 ## 输入
 - `04-03-experiment-analysis.md`（来自 04-03-01 的审计结论）
+- `04-01-experiment-code/figures/`（notebook 生成的 PDF 图表）
 - `04-02-experiment-results/`
 - `03-00-structure.md`
 
@@ -24,7 +25,10 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 ## 工作流
 
 ### Step 1: 选择最小必要资产
-只保留可直接支撑当前 story/structure 的图表，命名需可回溯到实验或 claim。
+
+从 `04-01-experiment-code/figures/` 中筛选可直接支撑当前 story/structure 的 PDF 图表，复制到 `04-03-paper-assets/`。命名需可回溯到 notebook 中的实验或 claim。
+
+注意：所有图表均通过 notebook 中的 `save_fig_and_show()` 生成，已为 PDF 矢量格式，无需格式转换。
 
 ### Step 2: 生成/整理 LaTeX 片段
 写入 `04-03-paper-assets/latex_includes.tex`，要求：

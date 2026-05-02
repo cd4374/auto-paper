@@ -124,6 +124,33 @@ def save_fig(fig, name, fmt=FORMAT, fig_dir=FIG_DIR):
     print(f'Saved: {path}')
 
 
+def save_fig_and_show(fig, name, fmt=FORMAT, fig_dir=FIG_DIR):
+    """
+    Save figure to FIG_DIR as PDF AND display inline in Jupyter notebook cell.
+
+    Use this in Jupyter notebook plotting cells to both persist the PDF and
+    show the figure inline.
+
+    Args:
+        fig: matplotlib figure object
+        name: output filename (without extension)
+        fmt: 'pdf' only
+        fig_dir: output directory
+
+    Example:
+        >>> fig, ax = plt.subplots()
+        >>> ax.plot([1, 2, 3], [1, 4, 9])
+        >>> save_fig_and_show(fig, 'fig2_training_curves')
+    """
+    os.makedirs(fig_dir, exist_ok=True)
+    path = os.path.join(fig_dir, f'{name}.{fmt}')
+    fig.savefig(path)
+    print(f'Saved: {path}')
+    # Display inline in Jupyter notebook cell output
+    from IPython.display import display
+    display(fig)
+
+
 def add_subfigure_label(ax, label, pos='top_left'):
     """
     Add (a), (b), (c)... label to subplot.
