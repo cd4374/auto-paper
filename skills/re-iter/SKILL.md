@@ -45,7 +45,7 @@ temporary-files: PLAN.md
 
 ```
 mcp__codex__codex:
-  model: gpt-5.3-codex
+  model: gpt-5.4
   prompt: |
     请审查以下 plan（第 {round+1} 轮）：
 
@@ -103,7 +103,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
-  model: gpt-5.3-codex
+  model: gpt-5.4
   prompt: |
     请审查以下实现（第 {round+1} 轮）：
 
