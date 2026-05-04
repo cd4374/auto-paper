@@ -23,7 +23,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__kimi-code_
 
 ## 输出
 
-- `04-03-experiment-analysis.md`（主要语言要用中文，名词等专业用语可以保留英文）
+- `04-03-experiment-analysis.md`（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 - `04-03-paper-assets/`（论文可直接引用的图、表、整理后的中间文件）
 - `04-03-paper-assets/latex_includes.tex`（所有图表的 LaTeX 嵌入代码）
 - `04-03-story-gap.md`（仅在覆盖缺口触发阻塞时生成）

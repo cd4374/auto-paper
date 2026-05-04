@@ -20,7 +20,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ## 输出
 
-`04-00-experiments.md` （主要语言要用中文，名词等专业用语可以保留英文）
+`04-00-experiments.md` （主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 
 ## 工作流
 

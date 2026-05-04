@@ -18,7 +18,7 @@ allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kim
 
 ## 输出
 
-`00-01-idea-evaluation.md` -- 主要语言用中文，专业术语保留英文。
+`00-01-idea-evaluation.md` -- 主要语言用中文，专业术语首次出现时用中文并括号标注英文原文。
 
 ## 写作原则
 

@@ -28,7 +28,7 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 ## 输出
 
 - 更新后的项目文件
-- `06-02-review-resolution.md` — 每条 review 意见的最终落实记录（主要语言要用中文，名词等专业用语可以保留英文）
+- `06-02-review-resolution.md` — 每条 review 意见的最终落实记录（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 
 ## 工作流
 

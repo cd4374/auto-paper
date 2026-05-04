@@ -27,8 +27,8 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ## 输出
 
-- `06-01-review-feedback.md` — 标准化整理后的 review 意见清单（主要语言要用中文，名词等专业用语可以保留英文）
-- `06-01-review-action-plan.md` — 每条意见的处理结论与修改方案（主要语言要用中文，名词等专业用语可以保留英文）
+- `06-01-review-feedback.md` — 标准化整理后的 review 意见清单（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
+- `06-01-review-action-plan.md` — 每条意见的处理结论与修改方案（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 - `06-01-review-open-questions.md` — 需要用户确认的问题（仅在存在歧义时生成）
 
 ## 工作流

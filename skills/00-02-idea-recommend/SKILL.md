@@ -18,7 +18,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ## 输出
 
-- `00-02-idea-recommendation.md` -- 主要语言用中文，专业术语保留英文。
+- `00-02-idea-recommendation.md` -- 主要语言用中文，专业术语首次出现时用中文并括号标注英文原文。
 - `00-02-idea-open-questions.md` -- 仅在存在关键歧义且影响主线决策时生成。
 
 ## 写作原则

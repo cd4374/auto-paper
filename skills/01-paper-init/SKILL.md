@@ -18,7 +18,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ## 输出
 
-`01-story.md` -- 主要语言用中文，专业术语保留英文。
+`01-story.md` -- 主要语言用中文，专业术语首次出现时用中文并括号标注英文原文。
 
 ## 写作原则
 

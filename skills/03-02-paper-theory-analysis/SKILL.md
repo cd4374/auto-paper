@@ -18,7 +18,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 - `02-journal-requirements.md`（仅在 theory section 的风格或篇幅明显受 venue 影响时参考）
 
 ## 输出
-- `03-02-theory-analysis.md` （主要语言要用中文，名词等专业用语可以保留英文）
+- `03-02-theory-analysis.md` （主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 - `03-02-open-questions.md`（仅在关键 assumptions、推导链条或可验证 prediction 存在歧义时生成）
 
 ## 工作流

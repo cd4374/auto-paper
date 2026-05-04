@@ -18,7 +18,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ## 输出
 
-`00-00-idea-pool.md` -- 主要语言用中文，专业术语保留英文。
+`00-00-idea-pool.md` -- 主要语言用中文，专业术语首次出现时用中文并括号标注英文原文（如"Transformer 架构（Transformer architecture）"）。
 
 ## 写作原则
 

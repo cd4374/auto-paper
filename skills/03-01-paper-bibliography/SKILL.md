@@ -19,7 +19,7 @@ allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ## 输出
 
-- `03-01-related-work.md` （主要语言要用中文，名词等专业用语可以保留英文）
+- `03-01-related-work.md` （主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 - `03-01-references.bib`
 - `03-01-open-questions.md`（仅在检索范围或候选引用存在歧义时生成）
 

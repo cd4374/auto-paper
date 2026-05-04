@@ -18,8 +18,8 @@ allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ## 输出
 
-- `02-journal-recommendation.md` — 推荐 1-2 个期刊及理由（主要语言要用中文，名词等专业用语可以保留英文）
-- `02-journal-requirements.md` — 选中期刊的格式要求（主要语言要用中文，名词等专业用语可以保留英文）
+- `02-journal-recommendation.md` — 推荐 1-2 个期刊及理由（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
+- `02-journal-requirements.md` — 选中期刊的格式要求（主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 
 ## 工作流
 

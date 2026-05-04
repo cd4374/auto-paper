@@ -19,7 +19,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ## 输出
 
-`03-00-structure.md` -- （主要语言要用中文，名词等专业用语可以保留英文）
+`03-00-structure.md` -- （主要语言用中文，专业术语首次出现时用中文并括号标注英文原文）
 
 ## 叙事框架
 
