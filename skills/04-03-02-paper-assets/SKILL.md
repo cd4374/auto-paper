@@ -30,11 +30,19 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 | 类别 | 来源 | 处理方式 |
 |------|------|----------|
-| 数据图 | notebook 自动生成 | 直接复制到 `04-03-paper-assets/` |
-| 架构/流程/示意图 | 手动创建（draw.io / Figma / TikZ） | 标记 `[MANUAL]`，提醒用户补充 |
-| AI 插图 | `paper-illustration` 等外部工具 | 标记 `[MANUAL]`，检查格式兼容性 |
+| 数据图 | `fig_NN_xxx.ipynb` 代码生成 | 直接复制 PDF 到 `04-03-paper-assets/` |
+| 数据表 | `tab_NN_xxx.ipynb` 代码生成 | 直接复制/生成 LaTeX 表格代码 |
+| 示意图 | `fig_NN_xxx.ipynb` prompt 生成 | 读取 notebook 中的 prompt，标记 `[PROMPT]`，提醒用户调用 LLM 生成；生成后按数据图流程处理 |
+| 手动图 | 人工绘制（draw.io / Figma / TikZ 等） | 标记 `[MANUAL]`，提醒用户补充 |
 
-命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。由于 `04-01` 实行"一个图表资产一个 notebook"，每张图/表应能精确对应到 `fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`。只复制可直接支撑当前 story/structure 的图表。若 structure 中声明的某 `Fig.x` / `Table.x` 在实验结果中缺失，标记为 `[PENDING]`，在 `latex_includes.tex` 中预留注释占位，并在 Figure Review 中说明。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
+命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。由于 `04-01` 实行"一个图表资产一个 notebook"，每张图/表应能精确对应到 `fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`。
+
+**分类处理逻辑**：
+- **数据图/数据表**：检查 `04-01-experiment-code/figures/` 中是否存在对应 PDF，存在则复制到 `04-03-paper-assets/`
+- **示意图**：打开对应 `fig_NN_xxx.ipynb`，提取其中的 prompt cell，在 `latex_includes.tex` 中标记 `% Fig.x [PROMPT]` 并备注"需调用 LLM 生成"；不阻塞流水线，但在 Figure Review 中记录待生成状态
+- **手动图**：标记 `[MANUAL]`，提醒用户补充
+
+若 structure 中声明的某 `Fig.x` / `Table.x` 在实验结果中缺失且非 `[PROMPT]`/`[MANUAL]`，标记为 `[PENDING]`，在 `latex_includes.tex` 中预留注释占位，并在 Figure Review 中说明。
 
 ### Step 2: 生成/整理 LaTeX 片段
 写入 `04-03-paper-assets/latex_includes.tex`，要求：
@@ -74,6 +82,8 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 | 半栏 | `width=0.23\textwidth` | 并排多图 |
 
 ### Step 3: 图片审查（优先 Kimi）
+
+**仅对数据图执行以下清单审查**。示意图和手动图在生成/补充后再审查。
 
 按以下清单逐项检查：
 

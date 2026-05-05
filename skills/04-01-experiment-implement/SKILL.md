@@ -11,6 +11,12 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个 Jupyter Notebook（`.ipynb`）**，禁止将多个图表资产的生成逻辑挤入同一个 notebook。
 
+**Notebook 分为两类**：
+1. **数据图/表 notebook**（类型为 `[数据图]` 或 `[数据表]`）：包含数据生成、训练、评估、绘图/制表的完整 Python 代码
+2. **示意图 notebook**（类型为 `[示意图]`）：不包含传统绘图代码，而是包含生成该图的**详细 prompt**（用于调用 LLM / GPT Image 2 等模型绘制）
+
+两类 notebook 统一使用 `.ipynb` 格式，但内部 cell 结构不同（见下方）。
+
 Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 对应 `03-00-structure.md` 中的图表资产编号（如 `fig_01_problem_setup.ipynb` 对应 Fig.1）。若同一实验生成多个图/表，必须拆分为多个 notebook。
 
 ## Cell 语言规范（强制）
@@ -18,7 +24,7 @@ Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 
 - **Markdown cell**：使用中文撰写，包含实验说明、步骤描述、结果讨论等叙述性内容
 - **Code cell**：使用英文编写，包含所有 Python 代码、注释、变量名等
 
-典型的 notebook 结构及与上游文件的对应关系：
+**数据图/表 notebook 典型结构**：
 ```
 引用上游                   Notebook 内容
 ─────────────────────────────────────────────────────
@@ -34,10 +40,38 @@ Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 
                          [md cell - 中文]   ### 4. 评估
                          [code cell - 英文] # Evaluate, compute metrics
 03-00-structure.md       [md cell - 中文]   ### 5. 可视化
-(figure plan)            [md cell - 中文]   此图用于论文第 X 节，展示...
+(figure plan)            [md cell - 中文]   此图对应 `03-00-structure.md` 中的 Fig.x，用于论文第 X 节，展示...
                          [code cell - 英文] # Plot (save PDF + display inline)
 01-story.md              [md cell - 中文]   ### 6. 结果讨论
 (claim check)            [md cell - 中文]   上述结果支持/不支持 claim X，因为...
+```
+
+**示意图 notebook 典型结构**：
+```
+引用上游                   Notebook 内容
+─────────────────────────────────────────────────────
+03-00-structure.md       [md cell - 中文]   ## Fig.x: [图名称]
+(figure plan)            [md cell - 中文]   类型: [示意图]
+                         [md cell - 中文]   用途: 用于论文第 X 节，展示...
+01-story.md              [md cell - 中文]   叙事功能: 该图要支撑 claim X，帮助读者理解...
+                         [md cell - 中文]   ### 视觉要求
+                         [md cell - 中文]   - 尺寸: 单栏/双栏
+                         [md cell - 中文]   - 风格: 学术简洁 / 拟物 / 扁平
+                         [md cell - 中文]   - 配色: 与论文一致（避免彩虹色）
+                         [md cell - 中文]   - 字体: Times New Roman 或无衬线
+                         [md cell - 中文]   - 必须包含的元素: A、B、C...
+                         [md cell - 中文]   - 布局: 从上到下 / 从左到右...
+                         [md cell - 中文]   ### 生成 Prompt
+                         [md cell - 中文]   ```
+                         [md cell - 中文]   [详细的英文或中文 prompt，可直接复制到 LLM 图像生成工具中使用]
+                         [md cell - 中文]   ```
+                         [md cell - 中文]   ### 生成参数建议
+                         [md cell - 中文]   - 推荐工具: GPT Image 2 / DALL-E 3 / Midjourney / Stable Diffusion
+                         [md cell - 中文]   - 参数: aspect ratio、style reference 等
+                         [md cell - 中文]   ### 输出要求
+                         [md cell - 中文]   - 输出格式: PNG/SVG/PDF（优先矢量或可无损放大）
+                         [md cell - 中文]   - 保存路径: `figures/fig_name.pdf`
+                         [md cell - 中文]   - 生成后检查: 字体可读、元素完整、与描述一致
 ```
 
 每个 md cell 在引用上游文件时，应明确标注来源（如 "对应 04-00 实验 1 的设置 A"、"支撑 01-story 中的 claim 2"）。
