@@ -9,9 +9,9 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
-根据 `04-00-experiments.md` 生成实验代码。**一个实验目标对应一个 Jupyter Notebook（`.ipynb`）**，禁止将多个实验目标挤入同一个 notebook。
+根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个 Jupyter Notebook（`.ipynb`）**，禁止将多个图表资产的生成逻辑挤入同一个 notebook。
 
-Notebook 命名规则：`experiment_NN_xxx.ipynb`，其中 `NN` 对应 `04-00-experiments.md` 中的实验编号。
+Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 对应 `03-00-structure.md` 中的图表资产编号（如 `fig_01_problem_setup.ipynb` 对应 Fig.1）。若同一实验生成多个图/表，必须拆分为多个 notebook。
 
 ## Cell 语言规范（强制）
 
@@ -85,13 +85,14 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ```bash
 04-01-experiment-code/
-├── README.md                 # 环境配置、notebook 与实验编号对应表
+├── README.md                 # 环境配置、notebook 与图表资产对应表
 ├── requirements.txt          # 依赖版本
-├── experiment_01_xxx.ipynb   # 对应 04-00 实验 1
-├── experiment_02_xxx.ipynb   # 对应 04-00 实验 2
+├── fig_01_xxx.ipynb          # 对应 03-00 Fig.1
+├── fig_02_xxx.ipynb          # 对应 03-00 Fig.2
+├── tab_01_xxx.ipynb          # 对应 03-00 Table.1
 ├── configs/                  # 实验配置（YAML/JSON）
 ├── data/                     # 数据文件（可选，仅当数据较大不便内嵌时）
-├── figures/                  # 生成的 PDF 图表
+├── figures/                  # 生成的 PDF 图表（与 Fig.x 一一对应）
 └── outputs/                  # 临时输出（.gitignore）
 ```
 
@@ -99,13 +100,13 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ### Step 1: 分析实验设计
 
-从 `04-00-experiments.md` 提取**实验编号列表**（如实验 1、实验 2...），每个编号对应一个 notebook。然后逐实验分析：
+从 `04-00-experiments.md` 提取**实验编号列表**，并从 `03-00-structure.md` 提取**图表资产列表**（`Fig.x` / `Table.x`）。每个图表资产对应一个 notebook。然后逐资产分析：
 - 实验类型（AI/ML、数值模拟、物理理论等）
 - 实验目的与验证目标
 - 对应的 `01-story.md` claim
 - 需要的资源与依赖
 - 输入数据与输出格式
-- 在 `03-00-structure.md` 中对应的 figure plan
+- 在 `03-00-structure.md` 中对应的 `Fig.x` / `Table.x` 编号与叙事功能
 
 如果实验描述存在歧义、缺失前提或实现路径不唯一，先向用户确认，不要自行假设。
 
@@ -138,7 +139,7 @@ mcp__codex__codex:
 
 ### Step 4: 实现代码
 
-根据 `04-00-experiments.md` 的实验编号，**逐实验生成对应的 notebook**。一个实验目标 → 一个 `.ipynb` 文件，禁止将多个实验合并到一个 notebook 中。
+根据 `04-00-experiments.md` 的实验编号与 `03-00-structure.md` 的图表资产，**逐资产生成对应的 notebook**。一个 `Fig.x` / `Table.x` → 一个 `.ipynb` 文件，禁止将多个图表资产合并到一个 notebook 中。
 
 **Notebook 是唯一的可执行载体**，所有操作代码——数据生成、数据装载、预处理、模型定义、训练循环、评估、可视化——全部内嵌在 notebook 中。
 
@@ -157,7 +158,7 @@ Notebook 必须遵循 **Cell 语言规范**（见顶部）：
 | 5. 模型/算法定义 | code（英文） | 模型结构或算法逻辑 | `04-00` 实验设置 |
 | 6. 训练/运行 | code（英文） | 训练循环或主计算 | `04-00` 实验设置 |
 | 7. 评估 | code（英文） | 在测试集上计算指标 | `04-00` 评估指标 |
-| 8. 可视化 | code（英文） | `save_fig_and_show()` 生成 PDF 图表 | `03-00-structure.md` figure plan |
+| 8. 可视化 | code（英文） | `save_fig_and_show()` 生成对应 `Fig.x` 的 PDF 图表 | `03-00-structure.md` 图表资产 |
 | 9. 结果讨论 | md（中文） | 结果是否支撑 claim，讨论边界条件 | `01-story.md` claims |
 
 **不额外创建独立脚本**。即使某个操作用到通用逻辑（如自定义 loss、数据生成器），也应在 notebook 的 code cell 中定义，而非放在外部 `.py` 文件中 import。唯一允许的外部依赖是 `skills/shared/paper_plot_style.py`。
@@ -166,9 +167,12 @@ Notebook 必须遵循 **Cell 语言规范**（见顶部）：
 
 每个实验实现前应明确：
 - 对应 `04-00-experiments.md` 中哪个实验编号
+- 对应 `03-00-structure.md` 中哪个 `Fig.x` / `Table.x`
 - 对应 `01-story.md` 中哪个 claim
-- notebook 文件名（`experiment_NN_xxx.ipynb`）
+- notebook 文件名（`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`）
 - 成功后应产生哪些输出（PDF 图表路径、指标值等）
+
+**强制约束**：一个 notebook 只能生成一个 `Fig.x` 或一个 `Table.x`。若实验逻辑需要生成多个图/表，必须拆分为多个 notebook，通过共享 `outputs/` 或 `data/` 中的中间结果来实现复用。
 
 **绘图代码规范（强制）**：若实验需要生成图表，必须在 notebook code cell 中使用以下模式：
 
@@ -240,8 +244,8 @@ print(f'Python: {sys.version} | conda env: scf-paper')
 **不满足的项目必须在进入 04-02 前修复**：
 
 每个实验必须满足：
-- [ ] `04-00-experiments.md` 中的每个实验目标都有对应的 notebook，无遗漏无合并
-- [ ] 每个 notebook 的 md cell 标注了上游来源（`04-00` 实验编号、`01-story` claim、`03-00` figure plan）
+- [ ] `03-00-structure.md` 中声明的每个 `Fig.x` / `Table.x` 都有且仅有一个对应 notebook，无遗漏无合并
+- [ ] 每个 notebook 的 md cell 标注了上游来源（`04-00` 实验编号、`01-story` claim、`03-00` 图表资产编号）
 - [ ] conda env `scf-paper` 已确认存在，notebook 第一个 cell 包含环境检查
 - [ ] 有 `requirements.txt` 记录依赖版本
 - [ ] 随机种子已固定（如 `torch.manual_seed(42)`、`np.random.seed(42)`）

@@ -58,11 +58,11 @@ conda env list | grep -q "^scf-paper " || {
 - 激活环境：`conda activate scf-paper`
 - 根据 `04-01-experiment-code/README.md` 安装依赖
 - 准备数据（如需要）
-- 验证 notebook 可运行（`jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 experiment_NN_xxx.ipynb` 快速冒烟测试）
+- 验证 notebook 可运行（`jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=60 fig_NN_xxx.ipynb` / `tab_NN_xxx.ipynb` 快速冒烟测试）
 
 ### Step 3: 执行实验
 
-根据 `04-00-experiments.md` 中的实验列表逐个运行，优先使用 `04-01` 中定义的最小运行命令：
+根据 `04-00-experiments.md` 中的实验列表与 `03-00-structure.md` 中的图表资产逐个运行，优先使用 `04-01` 中定义的最小运行命令。每个 `Fig.x` / `Table.x` 对应一个 notebook，逐个执行：
 
 - 参考 `04-01-experiment-code/README.md` 的运行命令
 - 保存输出到 `04-02-experiment-results/`
@@ -105,10 +105,11 @@ from paper_plot_style import *
 ### Step 5: 生成结果文档
 
 创建 `04-02-experiment-results.md`：
-- 按 `04-00-experiments.md` 的实验结构组织
+- 按 `04-00-experiments.md` 的实验结构组织，并明确标注每个实验生成的 `Fig.x` / `Table.x`
 - 表格/图表展示结果
 - 与预期结果对比标注
 - 明确标注哪些结果已验证、哪些失败、哪些因条件不足未完成
+- 若某 `Fig.x` / `Table.x` 的 notebook 运行失败，单独记录阻塞项
 
 ### Step 6: Post-review（迭代循环，最多 10 轮）
 

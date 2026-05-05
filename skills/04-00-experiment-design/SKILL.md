@@ -9,7 +9,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 - REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
-基于 `01-story.md` + `03-00-structure.md` 设计实验方案。
+基于 `01-story.md` + `03-00-structure.md` 设计实验方案。实验与图表资产严格一一对应：`03-00-structure.md` 中声明的每个 `Fig.x` / `Table.x` 都必须有且仅有一个实验负责生成。
 
 ## 输入
 
@@ -58,6 +58,8 @@ mcp__codex__codex:
 
 为每个 claim 设计实验，优先选择支撑 claim 所必需的最小实验集。
 
+**图表资产驱动原则**：实验设计的颗粒度由 `03-00-structure.md` 中的 `图表资产` 决定。每个 `Fig.x` / `Table.x` 对应一个独立的实验任务，禁止将多个图/表的生成逻辑合并到同一个实验中。
+
 如需确认 baseline、指标或实验比较范围，可参考 `03-01-related-work.md`；如需确认理论应如何落到实验对照，可参考 `03-02-theory-analysis.md`；但不要因此默认扩展实验范围。
 
 **可选实验类型**:
@@ -73,6 +75,7 @@ mcp__codex__codex:
 ## 实验 N: [名称]
 
 目的: 支撑哪个 claim
+对应图表资产: [负责生成的 Fig.x / Table.x，来自 `03-00-structure.md`]
 对应理论预测: [对应 `03-02` 中的 prediction / 若无则写明 purely empirical]
 
 设置:

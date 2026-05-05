@@ -16,6 +16,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
 - `04-01-experiment-code/`
 - `04-02-experiment-results.md`
 - `04-02-experiment-results/`
+- `03-00-structure.md`（用于核对图表资产与 notebook 的一一对应）
 - `03-02-theory-analysis.md`（如已生成）
 
 ## 输出
@@ -35,11 +36,12 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
 - 数据、baseline、指标、输出是否一致
 - 最小运行命令与结果来源是否可回溯
 - 默认设置是否造成实现偏移
+- **`03-00-structure.md` 中每个 `Fig.x` / `Table.x` 是否都有且仅有一个对应 notebook（`fig_NN_xxx.ipynb` / `tab_NN_xxx.ipynb`），无遗漏无合并**
 
 ### Step 3: 复核结果完整性与可信度
 对照 `04-02` 文档与原始产物：
 - 必需实验是否完成
-- 关键输出是否齐全
+- 关键输出是否齐全（每个 `Fig.x` / `Table.x` 是否都已生成对应 PDF/CSV）
 - 是否存在异常值、缺失项、日志报错、描述不一致
 - baseline 比较是否公平，指标解释是否成立
 
@@ -49,6 +51,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
 - 部分支撑的 claim
 - 当前证据不足或被削弱的 claim
 - theory prediction 的支撑/部分支撑/削弱/未测试
+- 每个 claim 对应的 `Fig.x` / `Table.x` 及 notebook 来源
 
 ### Step 5: 写入分析文档
 把审计结果写入 `04-03-experiment-analysis.md` 的对应章节。

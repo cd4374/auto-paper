@@ -26,7 +26,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 ### Step 1: 选择最小必要资产并分类
 
-先读取 `03-00-structure.md` 中的 `图表资产` 清单，获取全文计划的 `Fig.x` / `Table.x` 及其叙事功能说明。再从 `04-01-experiment-code/figures/` 中筛选 PDF 图表，按生成方式分类：
+先读取 `03-00-structure.md` 中的 `图表资产` 清单，获取全文计划的 `Fig.x` / `Table.x` 及其叙事功能说明。再读取 `04-01-experiment-code/README.md` 中的 notebook 与图表资产对应表。然后从 `04-01-experiment-code/figures/` 中筛选 PDF 图表，按生成方式分类：
 
 | 类别 | 来源 | 处理方式 |
 |------|------|----------|
@@ -34,7 +34,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 | 架构/流程/示意图 | 手动创建（draw.io / Figma / TikZ） | 标记 `[MANUAL]`，提醒用户补充 |
 | AI 插图 | `paper-illustration` 等外部工具 | 标记 `[MANUAL]`，检查格式兼容性 |
 
-命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。只复制可直接支撑当前 story/structure 的图表。若 structure 中声明的某 `Fig.x` / `Table.x` 在实验结果中缺失，标记为 `[PENDING]`，在 `latex_includes.tex` 中预留注释占位，并在 Figure Review 中说明。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
+命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。由于 `04-01` 实行"一个图表资产一个 notebook"，每张图/表应能精确对应到 `fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`。只复制可直接支撑当前 story/structure 的图表。若 structure 中声明的某 `Fig.x` / `Table.x` 在实验结果中缺失，标记为 `[PENDING]`，在 `latex_includes.tex` 中预留注释占位，并在 Figure Review 中说明。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
 
 ### Step 2: 生成/整理 LaTeX 片段
 写入 `04-03-paper-assets/latex_includes.tex`，要求：
