@@ -72,6 +72,17 @@ for fig in $(grep -oE '\\includegraphics[^;]*\{([^}]+)\}' sections/*.tex main.te
   fi
 done
 
+# 检查 structure 图表资产与正文 label/ref 对齐
+echo "=== Structure asset alignment ==="
+# 提取 structure 中声明的 Fig.x / Table.x（需根据实际 markdown 格式调整）
+structure_figs=$(grep -oE 'Fig\.[0-9]+' ../03-00-structure.md 2>/dev/null | sort -u)
+structure_tabs=$(grep -oE 'Table\.[0-9]+' ../03-00-structure.md 2>/dev/null | sort -u)
+for asset in $structure_figs $structure_tabs; do
+  label_base=$(echo "$asset" | tr '[:upper:]' '[:lower:]' | tr '.' ':')
+  grep -r "\\label{$label_base" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING LABEL for structure asset: $asset"
+  grep -r "\\ref{$label_base" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING REF for structure asset: $asset"
+done
+
 # 检查 TODO/FIXME 残留
 echo "=== TODO/FIXME ==="
 grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/FIXME found!"
@@ -92,6 +103,8 @@ grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/
 - [ ] 结论是否回应了引言的动机
 - [ ] 所有 \ref 指向有效 \label
 - [ ] 所有 \cite 在 references.bib 中有对应条目
+- [ ] `03-00-structure.md` 中声明的每张 `Fig.x` / `Table.x` 在正文中均有对应 \label{} 与至少一次 \ref{}
+- [ ] 正文中的图表编号与 `03-00-structure.md` 的 `图表资产` 全局顺序一致，无跳号/重复
 - [ ] 关键 figures 已用图片理解 MCP 做可读性与表达审查
 - [ ] 无 TODO/FIXME 残留
 - [ ] 没有大量只有 1–2 个短段落却单独成节的小节
@@ -109,7 +122,7 @@ grep -n -i "TODO\|FIXME\|XXX" sections/*.tex main.tex 2>/dev/null && echo "TODO/
 | 指标 | 完整覆盖阈值 | 阻塞阈值 |
 |------|-------------|---------|
 | 字数 | ≥ structure 要求的 80% | < 50% |
-| 图表数 | ≥ structure 要求 | < 1（若要求≥1）|
+| 图表数 | ≥ `03-00-structure.md` 中 `图表资产` 总数 | < `图表资产` 总数（缺图/缺表）|
 | 公式数 | ≥ structure 要求的 70% | < 1（若要求≥1）|
 
 提取每章指标，按表判定：

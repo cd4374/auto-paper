@@ -47,7 +47,7 @@ allowed-tools: Read, Write, Edit, mcp__codex__codex
 - `## Story Claim Coverage`
 - `## Experiment-by-Experiment Review`
 - `## Theory vs Experiment`
-- `## Figure Review`
+- `## Figure Review`（每张图需标注其在 `03-00-structure.md` 中的编号，如 Fig.1、Fig.2）
 - `## Writing Notes`
 
 ### Step 4: Post-review（最多 10 轮）

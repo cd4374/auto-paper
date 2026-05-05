@@ -26,7 +26,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 ### Step 1: 选择最小必要资产并分类
 
-从 `04-01-experiment-code/figures/` 中筛选 PDF 图表，按生成方式分类：
+先读取 `03-00-structure.md` 中的 `图表资产` 清单，获取全文计划的 `Fig.x` / `Table.x` 及其叙事功能说明。再从 `04-01-experiment-code/figures/` 中筛选 PDF 图表，按生成方式分类：
 
 | 类别 | 来源 | 处理方式 |
 |------|------|----------|
@@ -34,22 +34,36 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 | 架构/流程/示意图 | 手动创建（draw.io / Figma / TikZ） | 标记 `[MANUAL]`，提醒用户补充 |
 | AI 插图 | `paper-illustration` 等外部工具 | 标记 `[MANUAL]`，检查格式兼容性 |
 
-命名需可回溯到 notebook 中的实验或 claim。只复制可直接支撑当前 story/structure 的图表。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
+命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。只复制可直接支撑当前 story/structure 的图表。若 structure 中声明的某 `Fig.x` / `Table.x` 在实验结果中缺失，标记为 `[PENDING]`，在 `latex_includes.tex` 中预留注释占位，并在 Figure Review 中说明。手动类图表不阻塞流水线，但在 `latex_includes.tex` 和 Figure Review 中明确标注为待补充。
 
 ### Step 2: 生成/整理 LaTeX 片段
 写入 `04-03-paper-assets/latex_includes.tex`，要求：
 - 宽度 `0.48\textwidth`（单栏）或 `0.95\textwidth`（双栏）
-- caption 简洁完整
-- label 使用 `fig:fig_name`
+- caption 简洁完整，与 `03-00-structure.md` 中对应 `Fig.x` / `Table.x` 的叙事功能说明保持一致
+- label 使用 `fig:fig_name` 或 `tab:tab_name`（描述性命名），但在每个环境上方用注释标注对应的 structure 编号，如 `% Fig.1` / `% Table.1`
 
 标准 LaTeX 嵌入格式：
 ```latex
+% Fig.1
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/fig_name.pdf}
     \caption{...}
     \label{fig:fig_name}
 \end{figure}
+```
+
+表格示例：
+```latex
+% Table.1
+\begin{table}[t]
+    \centering
+    \caption{...}
+    \label{tab:tab_name}
+    \begin{tabular}{...}
+        ...
+    \end{tabular}
+\end{table}
 ```
 
 尺寸参考：
@@ -110,7 +124,7 @@ mcp__codex__codex:
     请审查以下论文图表（语义层面）：
 
     图表列表及描述：
-    [逐图列出：文件名、图类型、展示的数据、对应的 story claim]
+    [逐图列出：structure 编号（Fig.x/Table.x）、文件名、图类型、展示的数据、对应的 story claim]
 
     对每张图检查：
     1. 图类型是否适合展示该数据？（如：比较方法应用 bar chart 而非 line plot）

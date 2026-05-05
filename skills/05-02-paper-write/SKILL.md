@@ -24,6 +24,7 @@ Inputs(required):
   - 04-03-experiment-analysis.md
 Inputs(optional):
   - 04-03-paper-assets/
+  - 04-03-paper-assets/latex_includes.tex
 Outputs: 05-template/sections/*.tex
 Failure(阻塞): 回退到 03-02 或 04-03
 Failure(非阻塞): 用户确认后继续
@@ -56,13 +57,14 @@ Failure(非阻塞): 用户确认后继续
 - 不支持并行撰写：每章必须完成 Pre-review 后再进入下一章
 
 **每章流程**：
-1. 读取该章叙事内容
+1. 读取该章叙事内容与 `图表资产`
 2. 相关工作优先用 `03-01-related-work.md`
 3. 方法/理论/实验优先用 `03-02-theory-analysis.md`
 4. 实验 claim 强度、limitations 必须以 `04-03-experiment-analysis.md` 为准
 5. 只用 `04-03-experiment-analysis.md` 中标注"可直接用于论文"的图表
-6. 撰写完整 LaTeX（非占位符）
-7. 调用 Codex review（见 Step 3）
+6. 引用图表时，使用 `Fig.~\ref{fig:...}` / `Table.~\ref{tab:...}`，并确保与 `03-00-structure.md` 中该章的 `Fig.x` / `Table.x` 规划一一对应；若 structure 中声明的图表未在 `latex_includes.tex` 中找到对应 label，标记为 `[MISSING_REF]` 并暂停该章，提示补齐
+7. 撰写完整 LaTeX（非占位符）
+8. 调用 Codex review（见 Step 3）
 
 **写作原则**：
 - 只写 structure 明确要求的内容

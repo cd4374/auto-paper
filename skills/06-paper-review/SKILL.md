@@ -101,10 +101,11 @@ mcp__MiniMax__understand_image(
 
 ```markdown
 ## 图表评估
-| Figure | 检查项通过率 | 结论 | 建议 |
-|--------|-------------|------|------|
-| fig1.pdf | 10/12 | 可直接使用 | - |
-| fig2.pdf | 8/12 | 需小幅修改 | 重绘 legend 位置 |
+| 资产编号 | 文件名 | 检查项通过率 | 结论 | 建议 |
+|----------|--------|-------------|------|------|
+| Fig.1 | fig1.pdf | 10/12 | 可直接使用 | - |
+| Fig.2 | fig2.pdf | 8/12 | 需小幅修改 | 重绘 legend 位置 |
+| Table.1 | — | — | 可直接使用 | - |
 ```
 
 **不要生成独立文件**，所有图片审查结论汇总到 report.md。
@@ -121,10 +122,11 @@ mcp__codex__codex:
 
     Story 要求: {该章在 story 中的定位}
     Structure 要求: {该章在 structure 中的叙事内容}
+    Structure 图表资产: {该章在 structure 中的 Fig.x / Table.x 清单}
     Theory Analysis: {03-02-theory-analysis.md}
     期刊要求: {02-journal-requirements.md 中的相关要求}
 
-    请检查：是否覆盖 story/structure？逻辑是否严密？语言是否规范？
+    请检查：是否覆盖 story/structure？逻辑是否严密？语言是否规范？该章声明的图表资产是否都在正文中有对应 \label{} 与 \ref{}？
 
     若有问题，明确指出并给出修改建议。
 

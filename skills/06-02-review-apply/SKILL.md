@@ -82,6 +82,7 @@ mcp__codex__codex:
 - 如果 review 指向理论假设、证明力度、理论表述边界或 theory–experiment mismatch，优先更新 `03-02-theory-analysis.md`，必要时再同步 `04-*` 与 `05-template/`
 - 如果 review 指向实验不足，应先更新 `04-*` 再决定是否修改正文
 - 如果 review 指向结果解释不充分、图表不足或 claim 证据边界不清，优先更新 `04-03-experiment-analysis.md`，不要直接改 `05-template/`
+- 如果 review 涉及图表的增删改，必须同步更新 `03-00-structure.md` 的 `图表资产` 清单并重新全局编号，再同步 `04-03-paper-assets/` 与 `05-template/`
 - 每条实际改动都应能回溯到某条 review item
 
 ### Step 4: 记录落实情况

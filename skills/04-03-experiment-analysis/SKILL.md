@@ -45,7 +45,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__kimi-code_
 
 完成后应至少产出：
 - `04-03-paper-assets/`
-- `04-03-paper-assets/latex_includes.tex`
+- `04-03-paper-assets/latex_includes.tex`（其中的图表编号、注释需与 `03-00-structure.md` 中的 `图表资产` 一一对应）
 - `04-03-experiment-analysis.md` 中 `Figure Review` 的可追溯结论。
 
 ### Stage C: `/04-03-03-story-coverage`
