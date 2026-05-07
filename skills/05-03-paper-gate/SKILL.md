@@ -79,8 +79,8 @@ structure_figs=$(grep -oE 'Fig\.[0-9]+' ../03-00-structure.md 2>/dev/null | sort
 structure_tabs=$(grep -oE 'Table\.[0-9]+' ../03-00-structure.md 2>/dev/null | sort -u)
 for asset in $structure_figs $structure_tabs; do
   label_base=$(echo "$asset" | tr '[:upper:]' '[:lower:]' | tr '.' ':')
-  grep -r "\\label{$label_base" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING LABEL for structure asset: $asset"
-  grep -r "\\ref{$label_base" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING REF for structure asset: $asset"
+  grep -rE "\\label\\{$label_base(_|[}])" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING LABEL for structure asset: $asset"
+  grep -rE "\\ref\\{$label_base(_|[}])" sections/*.tex main.tex > /dev/null 2>&1 || echo "MISSING REF for structure asset: $asset"
 done
 
 # 检查 TODO/FIXME 残留

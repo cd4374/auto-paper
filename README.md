@@ -145,14 +145,14 @@ auto-paper/
 - `/project-import-01-survey-story`：项目普查与 `01-story.md` 恢复（证据分级：high/medium/missing）
 - `/project-import-02-venue-structure`：venue 识别/推荐与 `03-00-structure.md` 恢复
 - `/project-import-03-experiment-recovery`：条件性恢复 `03-02` 与 04 阶段材料，并做证据边界一致性检查
-- 它不是 01–07 正式阶段的一部分，而是一个导入/迁移工具
+- 它不是 01–06 正式阶段的一部分，而是一个导入/迁移工具
 - 导入完成后，可根据恢复程度继续主流程；**注意**：`/05-02-paper-write` 强依赖 `03-01-related-work.md`、`03-01-references.bib`、`04-03-paper-assets/`，若这些文件未生成，需先执行对应阶段
 
 ## 03-01 文献检索子阶段
 
 - `/03-01-paper-bibliography`：基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 `03-01-related-work.md` 与 `03-01-references.bib`
 - 它负责为 `/05-02-paper-write` 提供 Related Work 的材料基础与 BibTeX 初稿，但不替代正文写作
-- **BibTeX 获取链**：优先通过 DBLP API 获取正式出版物的真实 BibTeX，回退到 CrossRef DOI，两者均失败时以 `% [VERIFY]` 标记，禁止编造字段
+- **BibTeX 获取链**：优先通过 DBLP API 获取正式出版物的真实 BibTeX，回退到 CrossRef DOI，再回退到 Semantic Scholar，三者均失败时以 `% [VERIFY]` 标记，禁止编造字段
 
 
 ## 03-02 理论分析子阶段
@@ -169,7 +169,7 @@ auto-paper/
 
 ## review 子阶段
 
-- `/06-paper-review`：内部一致性与质量审查（默认生成 `report.md`，并在自检时生成 `self-check.md`；若用户明确要求，也可同时修订论文并更新 `revision-log.md`）
+- `/06-paper-review`：内部一致性与质量审查（默认生成 `report.md`；自检清单结果合并入 report.md，不生成独立文件。若用户明确要求，也可同时修订论文并更新 `revision-log.md`）
 - `/06-01-review-assess`：判断外部 review 意见是否成立，并生成 `06-01-review-action-plan.md`
 - `/06-02-review-apply`：依据 action plan 修改 `01/03-02/04/05` 层内容，并生成 `06-02-review-resolution.md`
 

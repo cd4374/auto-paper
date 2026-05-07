@@ -20,6 +20,7 @@ allowed-tools: Read, Write, Glob, Grep, mcp__codex__codex
 - `03-02-theory-analysis.md`（条件性）
 - `04-00-experiments.md`
 - `04-02-experiment-results.md`（条件性）
+- `04-01-experiment-code/README.md`（条件性：若存在代码，则生成 notebook 与图表资产对应表）
 
 ## 工作流
 
@@ -42,3 +43,6 @@ allowed-tools: Read, Write, Glob, Grep, mcp__codex__codex
 - 不默认重建 `04-01-experiment-code/`。
 - 不新增不存在的实验结果。
 - 不把 medium confidence 结论升级为 high confidence。
+
+## 下游依赖提示
+- 若未生成 `04-01-experiment-code/README.md` 或 notebook 映射，则 `/04-03-02-paper-assets` 阶段需要手动准备图表资产材料。

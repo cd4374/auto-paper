@@ -30,7 +30,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 | 类别 | 来源 | 处理方式 |
 |------|------|----------|
-| 数据图 | `fig_NN_xxx.ipynb` 代码生成 | 直接复制 PDF 到 `04-03-paper-assets/` |
+| 数据图 | `fig_NN_xxx.ipynb` 代码生成 | 直接复制 PDF 到 `04-03-paper-assets/figures/` |
 | 数据表 | `tab_NN_xxx.ipynb` 代码生成 | 直接复制/生成 LaTeX 表格代码 |
 | 示意图 | `fig_NN_xxx.ipynb` prompt 生成 | 读取 notebook 中的 prompt，标记 `[PROMPT]`，提醒用户调用 LLM 生成；生成后按数据图流程处理 |
 | 手动图 | 人工绘制（draw.io / Figma / TikZ 等） | 标记 `[MANUAL]`，提醒用户补充 |
@@ -38,7 +38,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 命名需可回溯到 notebook 中的实验或 claim，且与 `03-00-structure.md` 中的 `Fig.x` / `Table.x` 编号一一对应。由于 `04-01` 实行"一个图表资产一个 notebook"，每张图/表应能精确对应到 `fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`。
 
 **分类处理逻辑**：
-- **数据图/数据表**：检查 `04-01-experiment-code/figures/` 中是否存在对应 PDF，存在则复制到 `04-03-paper-assets/`
+- **数据图/数据表**：检查 `04-01-experiment-code/figures/` 中是否存在对应 PDF，存在则复制到 `04-03-paper-assets/figures/`
 - **示意图**：打开对应 `fig_NN_xxx.ipynb`，提取其中的 prompt cell，在 `latex_includes.tex` 中标记 `% Fig.x [PROMPT]` 并备注"需调用 LLM 生成"；不阻塞流水线，但在 Figure Review 中记录待生成状态
 - **手动图**：标记 `[MANUAL]`，提醒用户补充
 
@@ -48,7 +48,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 写入 `04-03-paper-assets/latex_includes.tex`，要求：
 - 宽度 `0.48\textwidth`（单栏）或 `0.95\textwidth`（双栏）
 - caption 简洁完整，与 `03-00-structure.md` 中对应 `Fig.x` / `Table.x` 的叙事功能说明保持一致
-- label 使用 `fig:fig_name` 或 `tab:tab_name`（描述性命名），但在每个环境上方用注释标注对应的 structure 编号，如 `% Fig.1` / `% Table.1`
+- label 使用 `fig:NN_description` 或 `tab:NN_description`（编号前缀 + 描述性命名，如 `fig:1_problem_setup`、`tab:1_summary`），确保与 `03-00-structure.md` 中的 `Fig.NN` / `Table.NN` 一一对应；在每个环境上方用注释标注 structure 编号，如 `% Fig.1` / `% Table.1`
 
 标准 LaTeX 嵌入格式：
 ```latex

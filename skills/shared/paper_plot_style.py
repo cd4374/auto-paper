@@ -193,11 +193,11 @@ def create_figure(width='single', height_ratio=0.7, nrows=1, ncols=1):
         ncols: number of columns
 
     Returns:
-        fig, axes tuple
+        fig, axes (single Axes if nrows==ncols==1, otherwise ndarray of Axes)
 
     Example:
-        >>> fig, ax = create_figure('single')
-        >>> fig, axes = create_figure('double', nrows=2, ncols=2)
+        >>> fig, ax = create_figure('single')  # ax is a single Axes object
+        >>> fig, axes = create_figure('double', nrows=2, ncols=2)  # axes is 2x2 ndarray
     """
     # Approximate text width for single column (3.5-6 inches)
     widths = {
@@ -207,8 +207,6 @@ def create_figure(width='single', height_ratio=0.7, nrows=1, ncols=1):
     w = widths.get(width, 5)
     h = w * height_ratio
     fig, axes = plt.subplots(nrows, ncols, figsize=(w, h))
-    if nrows == 1 and ncols == 1:
-        axes = [axes]
     return fig, axes
 
 

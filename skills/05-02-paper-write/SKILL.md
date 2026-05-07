@@ -34,7 +34,7 @@ Failure(非阻塞): 用户确认后继续
 
 **必须满足以下条件**：
 1. `04-03-experiment-analysis.md` 已存在且包含 `## Story Claim Coverage`
-2. 所有核心 story claim 均有实验支撑，或已在 `04-03-story-gap.md` 记录并确认
+2. 所有核心 story claim 均有实验支撑，或已在 `04-03-story-gap.md` 中显式确认"接受风险并继续"
 
 若不满足，**阻塞并返回上游补齐**，不得跳过。
 

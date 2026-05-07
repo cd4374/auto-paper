@@ -51,13 +51,24 @@ Failure: 用户确认后继续
 
 若模板缺失 → 阻塞，提示用户手动下载。
 
-## Step 3: 复制资产
+## Step 3: 处理 main.tex
+
+复制模板 `main.tex` 后，按以下算法处理：
+
+1. **保留 preamble**：`\documentclass`、所有 `\usepackage`、会议特定命令（如 `\icmltitle`）、`\input{math_commands.tex}`/`\input{checklist.tex}` 等保留不动。
+2. **清理正文示例**：删除 `\begin{document}` 到 `\bibliography{}`（或 `\end{document}`）之间的官方示例正文、说明文字、占位内容。
+3. **插入章节**：在 `\begin{document}` 后、`\bibliography{}` 前，按 `03-00-structure.md` 顺序插入 `\input{sections/N_title.tex}`。
+4. **更新文献**：确保 `\bibliography{references}` 和 `\bibliographystyle{...}` 指向正确文件（已复制到 `05-template/references.bib`）。
+
+**安全规则**：
+- 不删除未知命令；不确定时保留并注释说明。
+- Nature 模板明确禁止 `\input`，则直接内联写入（不拆分 `sections/*.tex`）。
+
+## Step 4: 复制资产
 
 - `03-01-references.bib` → `05-template/references.bib`
 - `04-03-paper-assets/figures/` → `05-template/figures/`
 - `04-03-paper-assets/latex_includes.tex`（如存在）
-
-更新 main.tex 的 `\bibliography{}` 和 `\input{}` 命令。
 
 ## 输出
 

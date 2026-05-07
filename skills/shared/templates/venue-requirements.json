@@ -85,6 +85,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": true,
+        "ethics_statement": "required",
+        "reproducibility_checklist": true,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "icml": {
@@ -94,7 +108,7 @@
       "template": {
         "entry_tex": "icml/main.tex",
         "required_markers": [
-          "icml2025 (or current year style marker)"
+          "\\usepackage{icml2026}"
         ]
       },
       "citation": {
@@ -172,6 +186,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": true,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "iclr": {
@@ -181,7 +209,7 @@
       "template": {
         "entry_tex": "iclr/main.tex",
         "required_markers": [
-          "iclr conference style marker for target year"
+          "\\usepackage{iclr2026_conference}"
         ]
       },
       "citation": {
@@ -259,6 +287,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": true,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "aaai": {
@@ -346,6 +388,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 200,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": true,
+        "ethics_statement": "required",
+        "reproducibility_checklist": true,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "nature": {
@@ -424,6 +480,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 150,
+        "citation_style": "numeric",
+        "citation_package": "none",
+        "citation_command": "\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "separate",
+        "anonymous": false,
+        "ethics_statement": "required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "science": {
@@ -502,6 +572,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 125,
+        "citation_style": "numeric",
+        "citation_package": "none",
+        "citation_command": "\\cite{}",
+        "min_figures": 1,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "separate",
+        "anonymous": false,
+        "ethics_statement": "required",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "pre": {
@@ -579,6 +663,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "prx": {
@@ -656,6 +754,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "chaos": {
@@ -732,6 +844,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "cn": {
@@ -808,6 +934,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 3,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "jcp": {
@@ -888,6 +1028,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 4,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "cpc": {
@@ -968,6 +1122,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "author-year",
+        "citation_package": "natbib",
+        "citation_command": "\\citep{}/\\cite{}",
+        "min_figures": 3,
+        "figure_format": "pdf",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "jmp": {
@@ -1043,6 +1211,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "prb": {
@@ -1120,6 +1302,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "prl": {
@@ -1198,6 +1394,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 150,
+        "citation_style": "numeric",
+        "citation_package": "revtex",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "njp": {
@@ -1274,6 +1484,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "iop",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     },
     "jstat": {
@@ -1351,6 +1575,20 @@
             }
           }
         ]
+      },
+      "structured_requirements": {
+        "abstract_max_words": 250,
+        "citation_style": "numeric",
+        "citation_package": "iop",
+        "citation_command": "\\cite{}",
+        "min_figures": 0,
+        "figure_format": "pdf/eps",
+        "figure_caption_position": "bottom",
+        "anonymous": false,
+        "ethics_statement": "optional",
+        "reproducibility_checklist": false,
+        "supplementary_materials": "allowed",
+        "ablation_required": "not_required"
       }
     }
   }

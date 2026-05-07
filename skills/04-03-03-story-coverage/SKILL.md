@@ -33,8 +33,9 @@ allowed-tools: Read, Write, Edit, mcp__codex__codex
 
 若触发：
 1. 生成 `04-03-story-gap.md`
-2. 阻塞进入 `/05-02-paper-write`
-3. 提示用户在以下路径中选择：
+2. 阻塞进入 05 阶段
+3. 仅在用户在 `04-03-story-gap.md` 中**显式确认"接受风险并继续"**后，方可解除阻塞
+4. 否则提示用户在以下路径中选择：
    - 回退 `/01-paper-init` 或 `/03-02-paper-theory-analysis`
    - 回退 `/04-00-experiment-design`
    - 放弃当前项目
