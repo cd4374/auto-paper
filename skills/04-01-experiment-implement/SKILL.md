@@ -1,6 +1,6 @@
 ---
 name: "04-01-experiment-implement"
-description: "基于实验设计生成 Jupyter Notebook 实现，所有操作代码（数据、训练、评估、可视化）集中在 notebook 中。"
+description: "基于实验设计生成实验代码。数据生成/训练/评估逻辑放在独立 .py 脚本，Jupyter Notebook 负责调用脚本并绘图。"
 allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 ---
 
@@ -12,10 +12,17 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个 Jupyter Notebook（`.ipynb`）**，禁止将多个图表资产的生成逻辑挤入同一个 notebook。
 
 **Notebook 分为两类**：
-1. **数据图/表 notebook**（类型为 `[数据图]` 或 `[数据表]`）：包含数据生成、训练、评估、绘图/制表的完整 Python 代码
+1. **数据图/表 notebook**（类型为 `[数据图]` 或 `[数据表]`）：**不包含内嵌的数据生成/训练代码**，而是调用独立 `.py` 脚本生成数据，再基于输出数据绘图/制表
 2. **示意图 notebook**（类型为 `[示意图]`）：不包含传统绘图代码，而是包含生成该图的**详细 prompt**（用于调用 LLM / GPT Image 2 等模型绘制）
 
 两类 notebook 统一使用 `.ipynb` 格式，但内部 cell 结构不同（见下方）。
+
+**数据生成脚本规范（强制）**：
+- 每个 `Fig.x` / `Table.x` 对应一个独立的 `.py` 数据生成脚本，放在 `scripts/` 目录下
+- 脚本命名：`fig_NN_xxx_data.py` 或 `tab_NN_xxx_data.py`，与对应 notebook 一一对应
+- 脚本职责：完成该图/表所需的全部数据生成、训练、评估、指标计算，将中间结果保存到 `outputs/`
+- 脚本必须是**可直接运行的 Python 文件**（`python scripts/fig_NN_xxx_data.py`），不依赖 notebook 上下文
+- notebook 中通过 `subprocess.run([sys.executable, 'scripts/fig_NN_xxx_data.py'])` 调用脚本生成数据，再读取 `outputs/` 中的结果进行绘图
 
 Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 对应 `03-00-structure.md` 中的图表资产编号（如 `fig_01_problem_setup.ipynb` 对应 Fig.1）。若同一实验生成多个图/表，必须拆分为多个 notebook。
 
@@ -32,17 +39,15 @@ Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 
 04-00-experiments.md     [md cell - 中文]   ## 实验 1：XXX 对比实验
 01-story.md              [md cell - 中文]   验证 claim：XXX 在 YYY 条件下优于 baseline
 04-00-experiments.md     [md cell - 中文]   ### 1. 数据生成
-                         [code cell - 英文] # Generate synthetic data
-                         [md cell - 中文]   ### 2. 数据装载与预处理
-                         [code cell - 英文] # Load, normalize, split
-                         [md cell - 中文]   ### 3. 模型训练
-                         [code cell - 英文] # Define model, training loop
-                         [md cell - 中文]   ### 4. 评估
-                         [code cell - 英文] # Evaluate, compute metrics
-03-00-structure.md       [md cell - 中文]   ### 5. 可视化
-(figure plan)            [md cell - 中文]   此图对应 `03-00-structure.md` 中的 Fig.x，用于论文第 X 节，展示...
-                         [code cell - 英文] # Plot (save PDF + display inline)
-01-story.md              [md cell - 中文]   ### 6. 结果讨论
+                         [md cell - 中文]   运行数据生成脚本：
+                         [code cell - 英文] import subprocess, sys
+                         [code cell - 英文] subprocess.run([sys.executable, 'scripts/fig_NN_xxx_data.py'], check=True)
+                         [md cell - 中文]   ### 2. 数据装载
+                         [code cell - 英文] # Load generated data from outputs/
+                         [md cell - 中文]   ### 3. 可视化
+03-00-structure.md       [md cell - 中文]   此图对应 `03-00-structure.md` 中的 Fig.x，用于论文第 X 节，展示...
+(figure plan)            [code cell - 英文] # Plot (save PDF + display inline)
+01-story.md              [md cell - 中文]   ### 4. 结果讨论
 (claim check)            [md cell - 中文]   上述结果支持/不支持 claim X，因为...
 ```
 
@@ -78,10 +83,17 @@ Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 
 
 ## 数据规范（强制）
 
-**绘图数据必须从外部文件读取，禁止在 notebook 中硬编码数据**：
+**数据生成与绘图分离**：
+- 数据生成逻辑必须放在独立的 `.py` 脚本（`scripts/fig_NN_xxx_data.py`）中，禁止在 notebook 的 code cell 内嵌长段训练/计算逻辑
+- notebook 只负责调用脚本、读取 `outputs/` 中的结果、绘图/制表
+
+**绘图数据必须从 `outputs/` 读取，禁止在 notebook 中硬编码数据**：
 
 ```python
-# ✅ 正确：从文件读取
+# ✅ 正确：运行脚本 + 从文件读取
+import subprocess, sys
+subprocess.run([sys.executable, 'scripts/fig_01_xxx_data.py'], check=True)
+
 import json
 with open('outputs/results.json') as f:
     data = json.load(f)
@@ -90,8 +102,8 @@ with open('outputs/results.json') as f:
 values = [82.3, 85.1, 86.7, 89.2]
 ```
 
-- 实验的中间结果保存为 JSON/CSV 到 `outputs/`，绘图 cell 从 `outputs/` 读取
-- 确保 notebook 从头重跑时数据会被重新生成，图也会随之更新
+- 脚本生成的中间结果保存为 JSON/CSV 到 `outputs/`，绘图 cell 从 `outputs/` 读取
+- 确保 notebook 从头重跑时先调用脚本重新生成数据，图也会随之更新
 
 ## 绘图规范（强制）
 
@@ -119,15 +131,19 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ```bash
 04-01-experiment-code/
-├── README.md                 # 环境配置、notebook 与图表资产对应表
+├── README.md                 # 环境配置、notebook / 脚本 / 图表资产对应表
 ├── requirements.txt          # 依赖版本
-├── fig_01_xxx.ipynb          # 对应 03-00 Fig.1
+├── fig_01_xxx.ipynb          # 对应 03-00 Fig.1（调用脚本 + 绘图）
 ├── fig_02_xxx.ipynb          # 对应 03-00 Fig.2
 ├── tab_01_xxx.ipynb          # 对应 03-00 Table.1
+├── scripts/                  # 数据生成脚本（一个图/表对应一个 .py）
+│   ├── fig_01_xxx_data.py    # 生成 Fig.1 所需数据
+│   ├── fig_02_xxx_data.py
+│   └── tab_01_xxx_data.py
 ├── configs/                  # 实验配置（YAML/JSON）
 ├── data/                     # 数据文件（可选，仅当数据较大不便内嵌时）
 ├── figures/                  # 生成的 PDF 图表（与 Fig.x 一一对应）
-└── outputs/                  # 临时输出（.gitignore）
+└── outputs/                  # 脚本输出（JSON/CSV）（.gitignore）
 ```
 
 ## 工作流
@@ -175,27 +191,34 @@ mcp__codex__codex:
 
 根据 `04-00-experiments.md` 的实验编号与 `03-00-structure.md` 的图表资产，**逐资产生成对应的 notebook**。一个 `Fig.x` / `Table.x` → 一个 `.ipynb` 文件，禁止将多个图表资产合并到一个 notebook 中。
 
-**Notebook 是唯一的可执行载体**，所有操作代码——数据生成、数据装载、预处理、模型定义、训练循环、评估、可视化——全部内嵌在 notebook 中。
+**Notebook 是可视化和分析的载体，数据生成逻辑必须拆分到独立 `.py` 脚本**。每个 `Fig.x` / `Table.x` 的完整实验链路为：
+
+```
+scripts/fig_NN_xxx_data.py  →  outputs/results.json  →  fig_NN_xxx.ipynb  →  figures/fig_NN_xxx.pdf
+         (数据生成/训练/评估)        (中间结果)              (读取 + 绘图)            (最终图表)
+```
 
 Notebook 必须遵循 **Cell 语言规范**（见顶部）：
 - Markdown cell → 中文
 - Code cell → 英文
 
-每个 notebook 按完整生命周期组织，并在 md cell 中标注对应的上游文件来源：
+每个 notebook 按以下结构组织，并在 md cell 中标注对应的上游文件来源：
 
 | 步骤 | Cell 类型 | 内容 | 上游来源 |
 |------|-----------|------|----------|
 | 1. 实验目标 | md（中文） | 对应哪个实验、验证哪个 claim | `04-00-experiments.md` |
 | 2. story 上下文 | md（中文） | 该实验在论文叙事中的角色 | `01-story.md` |
-| 3. 数据生成/装载 | code（英文） | 合成数据或加载外部数据集 | `04-00` 实验设置 |
-| 4. 预处理 | code（英文） | 归一化、划分 train/val/test | `04-00` 实验设置 |
-| 5. 模型/算法定义 | code（英文） | 模型结构或算法逻辑 | `04-00` 实验设置 |
-| 6. 训练/运行 | code（英文） | 训练循环或主计算 | `04-00` 实验设置 |
-| 7. 评估 | code（英文） | 在测试集上计算指标 | `04-00` 评估指标 |
-| 8. 可视化 | code（英文） | `save_fig_and_show()` 生成对应 `Fig.x` 的 PDF 图表 | `03-00-structure.md` 图表资产 |
-| 9. 结果讨论 | md（中文） | 结果是否支撑 claim，讨论边界条件 | `01-story.md` claims |
+| 3. 调用数据生成脚本 | code（英文） | `subprocess.run([sys.executable, 'scripts/fig_NN_xxx_data.py'])` | `04-00` 实验设置 |
+| 4. 数据装载 | code（英文） | 从 `outputs/` 读取脚本生成的 JSON/CSV | `04-00` 实验设置 |
+| 5. 可视化 | code（英文） | `save_fig_and_show()` 生成对应 `Fig.x` 的 PDF 图表 | `03-00-structure.md` 图表资产 |
+| 6. 结果讨论 | md（中文） | 结果是否支撑 claim，讨论边界条件 | `01-story.md` claims |
 
-**不额外创建独立脚本**。即使某个操作用到通用逻辑（如自定义 loss、数据生成器），也应在 notebook 的 code cell 中定义，而非放在外部 `.py` 文件中 import。唯一允许的外部依赖是 `skills/shared/paper_plot_style.py`。
+**数据生成脚本规范**：
+- 脚本放在 `scripts/` 目录，命名与对应 notebook 一致（后缀 `_data.py`）
+- 脚本完成该图/表所需的全部数据生成、训练、评估、指标计算，将结果保存到 `outputs/`
+- 脚本必须是可直接运行的 Python 文件（不依赖 notebook 上下文）
+- 通用工具函数（如自定义 loss）可在 `scripts/` 内的独立模块中定义，由多个脚本复用
+- 唯一允许 notebook 直接 import 的外部依赖是 `skills/shared/paper_plot_style.py`
 
 若已有 notebook，优先做局部增量修改；不要顺手重构、迁移目录或清理无关代码。
 
