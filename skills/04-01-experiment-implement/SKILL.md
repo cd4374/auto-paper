@@ -9,27 +9,31 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 - REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
-根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个 Jupyter Notebook（`.ipynb`）**，禁止将多个图表资产的生成逻辑挤入同一个 notebook。
+根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个独立文件**，禁止将多个图表资产的生成逻辑挤入同一个文件。
 
-**Notebook 分为两类**：
-1. **数据图/表 notebook**（类型为 `[数据图]` 或 `[数据表]`）：**不包含内嵌的数据生成/训练代码**，而是调用独立 `.py` 脚本生成数据，再基于输出数据绘图/制表
-2. **示意图 notebook**（类型为 `[示意图]`）：不包含传统绘图代码，而是包含生成该图的**详细 prompt**（用于调用 LLM / GPT Image 2 等模型绘制）
+**图表资产分为两类**：
+1. **数据图/表**（类型为 `[数据图]` 或 `[数据表]`）：对应一个 Jupyter Notebook（`.ipynb`），**不包含内嵌的数据生成/训练代码**，而是调用独立 `.py` 脚本生成数据，再基于输出数据绘图/制表
+2. **示意图**（类型为 `[示意图]`）：不需要运行代码实验，对应一个 Markdown 文件（`.md`），包含生成该图的**详细 prompt**（用于调用 LLM / GPT Image 2 等模型绘制）
 
-两类 notebook 统一使用 `.ipynb` 格式，但内部 cell 结构不同（见下方）。
+两类资产使用不同格式：数据图/表用 `.ipynb`，示意图用 `.md`。
 
 **数据生成脚本规范（强制）**：
-- 每个 `Fig.x` / `Table.x` 对应一个独立的 `.py` 数据生成脚本，放在 `scripts/` 目录下
+- 每个数据类 `Fig.x` / `Table.x` 对应一个独立的 `.py` 数据生成脚本，放在 `scripts/` 目录下
 - 脚本命名：`fig_NN_xxx_data.py` 或 `tab_NN_xxx_data.py`，与对应 notebook 一一对应
 - 脚本职责：完成该图/表所需的全部数据生成、训练、评估、指标计算，将中间结果保存到 `outputs/`
 - 脚本必须是**可直接运行的 Python 文件**（`python scripts/fig_NN_xxx_data.py`），不依赖 notebook 上下文
 - notebook 中通过 `subprocess.run([sys.executable, 'scripts/fig_NN_xxx_data.py'])` 调用脚本生成数据，再读取 `outputs/` 中的结果进行绘图
 
-Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 对应 `03-00-structure.md` 中的图表资产编号（如 `fig_01_problem_setup.ipynb` 对应 Fig.1）。若同一实验生成多个图/表，必须拆分为多个 notebook。
+**文件命名规则**：
+- 数据图/表：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`
+- 示意图：`fig_NN_xxx.md`（直接用 markdown，不需要 `.ipynb`）
 
-## Cell 语言规范（强制）
+其中 `NN` 对应 `03-00-structure.md` 中的图表资产编号（如 `fig_01_problem_setup.ipynb` / `fig_01_problem_setup.md` 对应 Fig.1）。若同一实验生成多个图/表，必须拆分为多个文件。
 
-- **Markdown cell**：使用中文撰写，包含实验说明、步骤描述、结果讨论等叙述性内容
-- **Code cell**：使用英文编写，包含所有 Python 代码、注释、变量名等
+## 文档语言规范（强制）
+
+- **叙述性内容**（markdown / notebook 中的 md cell）：使用中文撰写，包含实验说明、步骤描述、结果讨论等
+- **代码**（notebook 中的 code cell / `.py` 脚本）：使用英文编写，包含所有 Python 代码、注释、变量名等
 
 **数据图/表 notebook 典型结构**：
 ```
@@ -51,35 +55,37 @@ Notebook 命名规则：`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`，其中 `NN` 
 (claim check)            [md cell - 中文]   上述结果支持/不支持 claim X，因为...
 ```
 
-**示意图 notebook 典型结构**：
+**示意图 markdown 文件典型结构**（`fig_NN_xxx.md`）：
 ```
-引用上游                   Notebook 内容
-─────────────────────────────────────────────────────
-03-00-structure.md       [md cell - 中文]   ## Fig.x: [图名称]
-(figure plan)            [md cell - 中文]   类型: [示意图]
-                         [md cell - 中文]   用途: 用于论文第 X 节，展示...
-01-story.md              [md cell - 中文]   叙事功能: 该图要支撑 claim X，帮助读者理解...
-                         [md cell - 中文]   ### 视觉要求
-                         [md cell - 中文]   - 尺寸: 单栏/双栏
-                         [md cell - 中文]   - 风格: 学术简洁 / 拟物 / 扁平
-                         [md cell - 中文]   - 配色: 与论文一致（避免彩虹色）
-                         [md cell - 中文]   - 字体: Times New Roman 或无衬线
-                         [md cell - 中文]   - 必须包含的元素: A、B、C...
-                         [md cell - 中文]   - 布局: 从上到下 / 从左到右...
-                         [md cell - 中文]   ### 生成 Prompt
-                         [md cell - 中文]   ```
-                         [md cell - 中文]   [详细的英文或中文 prompt，可直接复制到 LLM 图像生成工具中使用]
-                         [md cell - 中文]   ```
-                         [md cell - 中文]   ### 生成参数建议
-                         [md cell - 中文]   - 推荐工具: GPT Image 2 / DALL-E 3 / Midjourney / Stable Diffusion
-                         [md cell - 中文]   - 参数: aspect ratio、style reference 等
-                         [md cell - 中文]   ### 输出要求
-                         [md cell - 中文]   - 输出格式: PNG/SVG/PDF（优先矢量或可无损放大）
-                         [md cell - 中文]   - 保存路径: `figures/fig_name.pdf`
-                         [md cell - 中文]   - 生成后检查: 字体可读、元素完整、与描述一致
+## Fig.x: [图名称]
+类型: [示意图]
+用途: 用于论文第 X 节，展示...
+叙事功能: 该图要支撑 claim X，帮助读者理解...
+
+### 视觉要求
+- 尺寸: 单栏/双栏
+- 风格: 学术简洁 / 拟物 / 扁平
+- 配色: 与论文一致（避免彩虹色）
+- 字体: Times New Roman 或无衬线
+- 必须包含的元素: A、B、C...
+- 布局: 从上到下 / 从左到右...
+
+### 生成 Prompt
+```
+[详细的英文或中文 prompt，可直接复制到 LLM 图像生成工具中使用]
 ```
 
-每个 md cell 在引用上游文件时，应明确标注来源（如 "对应 04-00 实验 1 的设置 A"、"支撑 01-story 中的 claim 2"）。
+### 生成参数建议
+- 推荐工具: GPT Image 2 / DALL-E 3 / Midjourney / Stable Diffusion
+- 参数: aspect ratio、style reference 等
+
+### 输出要求
+- 输出格式: PNG/SVG/PDF（优先矢量或可无损放大）
+- 保存路径: `figures/fig_name.pdf`
+- 生成后检查: 字体可读、元素完整、与描述一致
+```
+
+每个叙述性段落在引用上游文件时，应明确标注来源（如 "对应 04-00 实验 1 的设置 A"、"支撑 01-story 中的 claim 2"）。
 
 ## 数据规范（强制）
 
@@ -127,18 +133,17 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ## 输出
 
-`04-01-experiment-code/` 目录。Notebook 是唯一可执行载体，**一个实验目标一个 notebook**。
+`04-01-experiment-code/` 目录。数据图/表用 notebook（可执行），示意图用 markdown（无需执行）。
 
 ```bash
 04-01-experiment-code/
 ├── README.md                 # 环境配置、notebook / 脚本 / 图表资产对应表
 ├── requirements.txt          # 依赖版本
-├── fig_01_xxx.ipynb          # 对应 03-00 Fig.1（调用脚本 + 绘图）
-├── fig_02_xxx.ipynb          # 对应 03-00 Fig.2
-├── tab_01_xxx.ipynb          # 对应 03-00 Table.1
-├── scripts/                  # 数据生成脚本（一个图/表对应一个 .py）
+├── fig_01_xxx.ipynb          # [数据图] 对应 03-00 Fig.1（调用脚本 + 绘图）
+├── fig_02_xxx.md             # [示意图] 对应 03-00 Fig.2（prompt 文档，无需执行）
+├── tab_01_xxx.ipynb          # [数据表] 对应 03-00 Table.1
+├── scripts/                  # 数据生成脚本（仅数据图/表需要，一个对应一个 .py）
 │   ├── fig_01_xxx_data.py    # 生成 Fig.1 所需数据
-│   ├── fig_02_xxx_data.py
 │   └── tab_01_xxx_data.py
 ├── configs/                  # 实验配置（YAML/JSON）
 ├── data/                     # 数据文件（可选，仅当数据较大不便内嵌时）
@@ -150,7 +155,7 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ### Step 1: 分析实验设计
 
-从 `04-00-experiments.md` 提取**实验编号列表**，并从 `03-00-structure.md` 提取**图表资产列表**（`Fig.x` / `Table.x`）。每个图表资产对应一个 notebook。然后逐资产分析：
+从 `04-00-experiments.md` 提取**实验编号列表**，并从 `03-00-structure.md` 提取**图表资产列表**（`Fig.x` / `Table.x`）。每个图表资产对应一个文件（数据类用 `.ipynb`，示意类用 `.md`）。然后逐资产分析：
 - 实验类型（AI/ML、数值模拟、物理理论等）
 - 实验目的与验证目标
 - 对应的 `01-story.md` claim
@@ -189,20 +194,27 @@ mcp__codex__codex:
 
 ### Step 4: 实现代码
 
-根据 `04-00-experiments.md` 的实验编号与 `03-00-structure.md` 的图表资产，**逐资产生成对应的 notebook**。一个 `Fig.x` / `Table.x` → 一个 `.ipynb` 文件，禁止将多个图表资产合并到一个 notebook 中。
+根据 `04-00-experiments.md` 的实验编号与 `03-00-structure.md` 的图表资产，**逐资产生成对应的文件**。一个 `Fig.x` / `Table.x` → 一个 `.ipynb`（数据类）或 `.md`（示意类），禁止将多个图表资产合并到一个文件中。
 
 **Notebook 是可视化和分析的载体，数据生成逻辑必须拆分到独立 `.py` 脚本**。每个 `Fig.x` / `Table.x` 的完整实验链路为：
 
+数据类图表的完整实验链路：
 ```
 scripts/fig_NN_xxx_data.py  →  outputs/results.json  →  fig_NN_xxx.ipynb  →  figures/fig_NN_xxx.pdf
          (数据生成/训练/评估)        (中间结果)              (读取 + 绘图)            (最终图表)
 ```
 
-Notebook 必须遵循 **Cell 语言规范**（见顶部）：
+示意类图表的链路（无代码执行）：
+```
+fig_NN_xxx.md  →  (LLM 图像生成)  →  figures/fig_NN_xxx.pdf
+   (prompt 文档)                        (最终图表)
+```
+
+数据类 notebook 必须遵循 **文档语言规范**（见顶部）：
 - Markdown cell → 中文
 - Code cell → 英文
 
-每个 notebook 按以下结构组织，并在 md cell 中标注对应的上游文件来源：
+每个数据类 notebook 按以下结构组织，并在 md cell 中标注对应的上游文件来源：
 
 | 步骤 | Cell 类型 | 内容 | 上游来源 |
 |------|-----------|------|----------|
@@ -226,10 +238,11 @@ Notebook 必须遵循 **Cell 语言规范**（见顶部）：
 - 对应 `04-00-experiments.md` 中哪个实验编号
 - 对应 `03-00-structure.md` 中哪个 `Fig.x` / `Table.x`
 - 对应 `01-story.md` 中哪个 claim
-- notebook 文件名（`fig_NN_xxx.ipynb` 或 `tab_NN_xxx.ipynb`）
+- 图表类型（`[数据图]` / `[数据表]` / `[示意图]`）
+- 文件名（数据类：`fig_NN_xxx.ipynb` / `tab_NN_xxx.ipynb`；示意类：`fig_NN_xxx.md`）
 - 成功后应产生哪些输出（PDF 图表路径、指标值等）
 
-**强制约束**：一个 notebook 只能生成一个 `Fig.x` 或一个 `Table.x`。若实验逻辑需要生成多个图/表，必须拆分为多个 notebook，通过共享 `outputs/` 或 `data/` 中的中间结果来实现复用。
+**强制约束**：一个文件（`.ipynb` 或 `.md`）只能对应一个 `Fig.x` 或一个 `Table.x`。若实验逻辑需要生成多个图/表，必须拆分为多个文件，数据类通过共享 `outputs/` 或 `data/` 中的中间结果来实现复用。
 
 **绘图代码规范（强制）**：若实验需要生成图表，必须在 notebook code cell 中使用以下模式：
 
@@ -301,13 +314,13 @@ print(f'Python: {sys.version} | conda env: scf-paper')
 **不满足的项目必须在进入 04-02 前修复**：
 
 每个实验必须满足：
-- [ ] `03-00-structure.md` 中声明的每个 `Fig.x` / `Table.x` 都有且仅有一个对应 notebook，无遗漏无合并
-- [ ] 每个 notebook 的 md cell 标注了上游来源（`04-00` 实验编号、`01-story` claim、`03-00` 图表资产编号）
-- [ ] conda env `scf-paper` 已确认存在，notebook 第一个 cell 包含环境检查
+- [ ] `03-00-structure.md` 中声明的每个 `Fig.x` / `Table.x` 都有且仅有一个对应文件（数据类为 `.ipynb`，示意类为 `.md`），无遗漏无合并
+- [ ] 每个数据类 notebook 的 md cell / 示意类 `.md` 文件标注了上游来源（`04-00` 实验编号、`01-story` claim、`03-00` 图表资产编号）
+- [ ] 数据类 notebook：conda env `scf-paper` 已确认存在，第一个 cell 包含环境检查
 - [ ] 有 `requirements.txt` 记录依赖版本
-- [ ] 随机种子已固定（如 `torch.manual_seed(42)`、`np.random.seed(42)`）
-- [ ] README 中记录了 notebook 与实验编号的对应表及执行顺序
-- [ ] notebook 从头到尾可顺序执行复现结果（`Cell → Run All`）
+- [ ] 数据类脚本：随机种子已固定（如 `torch.manual_seed(42)`、`np.random.seed(42)`）
+- [ ] README 中记录了文件与实验编号的对应表及执行顺序
+- [ ] 数据类 notebook 从头到尾可顺序执行复现结果（`Cell → Run All`）；示意类 `.md` 文件已包含完整的生成 prompt 和输出要求
 
 若不满足，**阻塞并修复**，不得跳过进入 04-02。
 
