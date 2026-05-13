@@ -171,6 +171,7 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下代码实现计划是否合理：
@@ -330,6 +331,7 @@ print(f'Python: {sys.version} | conda env: scf-paper')
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下代码实现是否支撑实验设计中的目标：

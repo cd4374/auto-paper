@@ -46,6 +46,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下 idea recommendation 计划是否合理：
@@ -121,6 +122,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下 idea recommendation：

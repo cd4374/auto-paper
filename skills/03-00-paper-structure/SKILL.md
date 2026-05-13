@@ -51,6 +51,7 @@ venue-requirements.json 位于 `skills/shared/templates/venue-requirements.json`
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下章节设计计划是否合理：
@@ -131,6 +132,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下 structure 是否支撑 story：

@@ -58,6 +58,7 @@ allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下文献检索计划是否合理：
@@ -175,6 +176,7 @@ for p in data.get('data', []):
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下文献检索结果是否与论文 story 和 structure 对齐：

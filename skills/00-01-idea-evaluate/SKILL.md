@@ -41,6 +41,7 @@ allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kim
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下 idea evaluation 计划是否合理：
@@ -103,6 +104,7 @@ mcp__codex__codex:
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下 idea evaluation：

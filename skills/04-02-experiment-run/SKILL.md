@@ -29,6 +29,7 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下实验运行计划是否合理：
@@ -117,6 +118,7 @@ from paper_plot_style import *
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下实验结果是否达到预期：

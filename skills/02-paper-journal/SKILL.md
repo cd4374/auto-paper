@@ -36,6 +36,7 @@ allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下期刊推荐计划是否合理：
@@ -121,6 +122,7 @@ venue_key: [如 neurips / nature / prl]
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下两项：

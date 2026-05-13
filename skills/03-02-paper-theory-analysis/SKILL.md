@@ -29,6 +29,7 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下理论分析计划是否合理：
@@ -141,6 +142,7 @@ mcp__codex__codex:
 
 ```text
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请检查以下理论分析是否合理，并且是否足以支持后续实验设计与论文写作：

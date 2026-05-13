@@ -129,6 +129,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 
 ```
 mcp__codex__codex:
+  approval-policy: never
   model: gpt-5.5
   prompt: |
     请审查以下论文图表（语义层面）：
