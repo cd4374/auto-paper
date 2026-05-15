@@ -78,6 +78,7 @@ mcp__codex__codex:
 目的: 支撑哪个 claim
 对应图表资产: [负责生成的 Fig.x / Table.x，来自 `03-00-structure.md`]
 图表类型: [数据图 / 示意图 / 数据表 / 手动图]
+推荐图表家族: [bar / line / scatter / heatmap / distribution / interval / area / polar — 参考 04-01 Chart-type Atlas]
 对应理论预测: [对应 `03-02` 中的 prediction / 若无则写明 purely empirical]
 
 设置:
