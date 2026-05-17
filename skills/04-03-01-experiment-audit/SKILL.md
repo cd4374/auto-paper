@@ -1,12 +1,12 @@
 ---
 name: "04-03-01-experiment-audit"
 description: "复核 04-01 实现与 04-02 结果是否与 04-00 设计一致，并提炼 claim/theory 对应关系。"
-allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Glob, Shell
 ---
 
 # 04-03-01-experiment-audit
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 复核实现与结果，形成可进入图表资产与覆盖门控的分析基础。
@@ -28,7 +28,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
 ## 工作流
 
 ### Step 1: Pre-review
-调用 `mcp__codex__codex` 审查审计计划，检查是否覆盖：实现一致性、结果完整性、claim/theory 对照。
+调用 `codex exec` 审查审计计划，检查是否覆盖：实现一致性、结果完整性、claim/theory 对照。
 
 ### Step 2: 复核实现与设计一致性
 对照 `04-00` 与 `04-01`：
@@ -57,7 +57,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex
 把审计结果写入 `04-03-experiment-analysis.md` 的对应章节。
 
 ### Step 6: Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 校验文档可回溯性与结论边界；有问题则迭代修订。
+调用 `codex exec` 校验文档可回溯性与结论边界；有问题则迭代修订。
 
 ## 约束
 - 只写与当前 story/structure 直接相关的审计结论。

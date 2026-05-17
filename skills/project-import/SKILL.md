@@ -1,7 +1,7 @@
 ---
 name: "project-import"
 description: "解析现有研究项目并转化为 auto-paper 标准格式（主入口，编排 project-import-01/02/03 子阶段）。"
-allowed-tools: Bash, Read, Glob, Grep, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Bash, Read, Glob, Grep, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, Shell
 forbidden-actions:
   - 不要重构已有的实验代码
   - 不要补做 structure 之外的实验
@@ -12,7 +12,7 @@ forbidden-actions:
 
 # project-import
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 导入主入口：分三段恢复 story、venue/structure 与理论/实验材料。

@@ -1,12 +1,12 @@
 ---
 name: "06-paper-review"
 description: "系统审查论文草稿，检查叙事一致性、逻辑完整性、语言质量、格式规范。"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image, Shell
 ---
 
 # 06-paper-review
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 系统审查论文草稿，输出结构化修改意见。
@@ -41,22 +41,20 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex, mcp__kimi
 
 ### Step 1: Pre-review
 
-调用 `mcp__codex__codex` 检查审查准备是否充分：
+调用 `codex exec` 检查审查准备是否充分：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下论文审查准备是否充分：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下论文审查准备是否充分：
 
-    Story: {01-story.md 内容摘要}
-    Structure: {03-00-structure.md 章节规划}
-    Theory Analysis: {03-02-theory-analysis.md 理论边界}
-    Journal Requirements: {02-journal-requirements.md 格式限制}
-    LaTeX: {05-template 文件列表}
+Story: {01-story.md 内容摘要}
+Structure: {03-00-structure.md 章节规划}
+Theory Analysis: {03-02-theory-analysis.md 理论边界}
+Journal Requirements: {02-journal-requirements.md 格式限制}
+LaTeX: {05-template 文件列表}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 2: 自检清单
@@ -115,27 +113,25 @@ mcp__MiniMax__understand_image(
 
 调用 Codex 逐章节审查：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请审查论文草稿的 {章节名} 部分。
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请审查论文草稿的 {章节名} 部分。
 
-    Story 要求: {该章在 story 中的定位}
-    Structure 要求: {该章在 structure 中的叙事内容}
-    Structure 图表资产: {该章在 structure 中的 Fig.x / Table.x 清单}
-    Theory Analysis: {03-02-theory-analysis.md}
-    期刊要求: {02-journal-requirements.md 中的相关要求}
+Story 要求: {该章在 story 中的定位}
+Structure 要求: {该章在 structure 中的叙事内容}
+Structure 图表资产: {该章在 structure 中的 Fig.x / Table.x 清单}
+Theory Analysis: {03-02-theory-analysis.md}
+期刊要求: {02-journal-requirements.md 中的相关要求}
 
-    请检查：是否覆盖 story/structure？逻辑是否严密？语言是否规范？该章声明的图表资产是否都在正文中有对应 \label{} 与 \ref{}？
+请检查：是否覆盖 story/structure？逻辑是否严密？语言是否规范？该章声明的图表资产是否都在正文中有对应 \label{} 与 \ref{}？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
 
-    输出格式：
-    ## 评分 (1-10)
-    ## 主要问题
-    ## 具体修改建议
+输出格式：
+## 评分 (1-10)
+## 主要问题
+## 具体修改建议
+EOF
 ```
 
 迭代逻辑：

@@ -1,12 +1,12 @@
 ---
 name: "03-01-paper-bibliography"
 description: "基于 01-story.md、03-00-structure.md 和 venue 要求检索文献并生成参考文献初稿。"
-allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, Shell
 ---
 
 # 03-01-paper-bibliography
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md`、`02-journal-requirements.md` 与 `03-00-structure.md` 做定向文献检索，生成 Related Work 笔记与参考文献初稿。
@@ -54,20 +54,18 @@ allowed-tools: Bash, Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查文献检索计划是否合理：
+调用 `codex exec` 检查文献检索计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下文献检索计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下文献检索计划是否合理：
 
-    Story: {01-story.md 内容摘要}
-    Structure: {03-00-structure.md 中 Related Work/Experiments 的引用需求}
-    执行计划: 检索最小必要文献池，生成 related work 笔记与 BibTeX
+Story: {01-story.md 内容摘要}
+Structure: {03-00-structure.md 中 Related Work/Experiments 的引用需求}
+执行计划: 检索最小必要文献池，生成 related work 笔记与 BibTeX
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 提取检索意图
@@ -172,23 +170,21 @@ for p in data.get('data', []):
 
 ### Step 7: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查文献池与 story/structure 是否一致：
+调用 `codex exec` 检查文献池与 story/structure 是否一致：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下文献检索结果是否与论文 story 和 structure 对齐：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下文献检索结果是否与论文 story 和 structure 对齐：
 
-    Story: {01-story.md}
-    Structure: {03-00-structure.md}
-    Related Work Notes: {03-01-related-work.md}
-    Bibliography: {03-01-references.bib}
+Story: {01-story.md}
+Structure: {03-00-structure.md}
+Related Work Notes: {03-01-related-work.md}
+Bibliography: {03-01-references.bib}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

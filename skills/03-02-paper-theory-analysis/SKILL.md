@@ -1,12 +1,12 @@
 ---
 name: "03-02-paper-theory-analysis"
 description: "基于 01-story.md、03-00-structure.md 与文献笔记提炼理论分析，并导出可直接与实验对照的预测。"
-allowed-tools: Read, Write, mcp__codex__codex
+allowed-tools: Read, Write, Shell
 ---
 
 # 03-02-paper-theory-analysis
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md`、`03-00-structure.md` 与相关文献笔记，生成论文所需的最小理论分析包，明确 assumptions、理论 claim、适用边界与可实验对照的 predictions。
@@ -25,20 +25,18 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ### Step 1: Pre-review
 
-调用 `mcp__codex__codex` 检查理论分析计划是否合理：
+调用 `codex exec` 检查理论分析计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下理论分析计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下理论分析计划是否合理：
 
-    Story: {01-story.md 内容摘要}
-    Structure: {03-00-structure.md 中需要理论支撑的章节}
-    执行计划: 提取需要理论支撑的 claim，建立 assumptions，导出 predictions
+Story: {01-story.md 内容摘要}
+Structure: {03-00-structure.md 中需要理论支撑的章节}
+执行计划: 提取需要理论支撑的 claim，建立 assumptions，导出 predictions
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 2: 提取需要理论支撑的 claim
@@ -138,23 +136,21 @@ mcp__codex__codex:
 
 ### Step 8: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查理论分析是否足以服务实验设计与论文写作：
+调用 `codex exec` 检查理论分析是否足以服务实验设计与论文写作：
 
-```text
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下理论分析是否合理，并且是否足以支持后续实验设计与论文写作：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下理论分析是否合理，并且是否足以支持后续实验设计与论文写作：
 
-    Story: {01-story.md}
-    Structure: {03-00-structure.md}
-    Related Work: {03-01-related-work.md}
-    Theory Analysis: {03-02-theory-analysis.md}
+Story: {01-story.md}
+Structure: {03-00-structure.md}
+Related Work: {03-01-related-work.md}
+Theory Analysis: {03-02-theory-analysis.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

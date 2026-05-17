@@ -1,12 +1,12 @@
 ---
 name: "project-import-03-experiment-recovery"
 description: "条件性恢复 03-02 与 04 阶段材料，并做证据边界一致性检查。"
-allowed-tools: Read, Write, Glob, Grep, mcp__codex__codex
+allowed-tools: Read, Write, Glob, Grep, Shell
 ---
 
 # project-import-03-experiment-recovery
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 恢复理论/实验层材料，但仅在证据充足时生成。
@@ -37,7 +37,7 @@ allowed-tools: Read, Write, Glob, Grep, mcp__codex__codex
 证据不足则不生成。
 
 ### Step 4: 一致性 Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 检查导入结果是否超出原项目证据；有问题则迭代修正。
+调用 `codex exec` 检查导入结果是否超出原项目证据；有问题则迭代修正。
 
 ## 约束
 - 不默认重建 `04-01-experiment-code/`。

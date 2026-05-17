@@ -1,12 +1,12 @@
 ---
 name: "00-02-idea-recommend"
 description: "基于 idea 池与评估结果推荐主选方向，并给出进入 story 的 framing。"
-allowed-tools: Read, Write, mcp__codex__codex
+allowed-tools: Read, Write, Shell
 ---
 
 # 00-02-idea-recommend
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `00-00-idea-pool.md` 与 `00-01-idea-evaluation.md`，生成 `00-02-idea-recommendation.md`。
@@ -42,20 +42,18 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查推荐逻辑：
+调用 `codex exec` 检查推荐逻辑：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea recommendation 计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea recommendation 计划是否合理：
 
-    Idea Pool: {00-00-idea-pool.md 内容摘要}
-    Evaluation: {00-01-idea-evaluation.md 内容摘要}
-    执行计划: 综合前序分析，选出主选与备选，输出精炼的决策文件和可直接进入 story 的 framing
+Idea Pool: {00-00-idea-pool.md 内容摘要}
+Evaluation: {00-01-idea-evaluation.md 内容摘要}
+执行计划: 综合前序分析，选出主选与备选，输出精炼的决策文件和可直接进入 story 的 framing
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 形成推荐结论
@@ -118,23 +116,21 @@ mcp__codex__codex:
 
 ### Step 5: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查推荐质量：
+调用 `codex exec` 检查推荐质量：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea recommendation：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea recommendation：
 
-    Idea Pool: {00-00-idea-pool.md}
-    Evaluation: {00-01-idea-evaluation.md}
-    Recommendation: {00-02-idea-recommendation.md}
+Idea Pool: {00-00-idea-pool.md}
+Evaluation: {00-01-idea-evaluation.md}
+Recommendation: {00-02-idea-recommendation.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
-    额外检查：文件是否精炼（800-1500 字）？决策是否果断？Framing 是否具体到能直接用于 story？是否只有方向性内容而非过度展开？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+额外检查：文件是否精炼（800-1500 字）？决策是否果断？Framing 是否具体到能直接用于 story？是否只有方向性内容而非过度展开？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

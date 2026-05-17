@@ -1,12 +1,12 @@
 ---
 name: "01-paper-init"
 description: "从研究想法生成 01-story.md。用于开始新论文项目时定义叙事逻辑。"
-allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Glob, Shell
 ---
 
 # 01-paper-init
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 从研究想法生成 `01-story.md`。
@@ -45,19 +45,17 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查 story 生成计划是否合理：
+调用 `codex exec` 检查 story 生成计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 story 生成计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 story 生成计划是否合理：
 
-    输入来源: {00-02-idea-recommendation.md 或用户描述}
-    执行计划: 生成 是什么/为什么/怎么做 三部分 story
+输入来源: {00-02-idea-recommendation.md 或用户描述}
+执行计划: 生成 是什么/为什么/怎么做 三部分 story
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 生成 story.md
@@ -77,25 +75,23 @@ mcp__codex__codex:
 
 ### Step 4: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查叙事逻辑：
+调用 `codex exec` 检查叙事逻辑：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 story 的叙事逻辑：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 story 的叙事逻辑：
 
-    {story 内容}
+{story 内容}
 
-    检查要点：
-    1. 研究问题定义是否清晰、具体、边界明确？（是什么）
-    2. 动机是否充分？是否说明了不做的代价？（为什么）
-    3. 方法思路是否可行？与已有方法的核心差异是什么？（怎么做）
-    4. 三部分之间是否逻辑自洽？
-    5. 全文是否精炼（500-1000 字）？是否只给了方向性内容而非过度展开？
+检查要点：
+1. 研究问题定义是否清晰、具体、边界明确？（是什么）
+2. 动机是否充分？是否说明了不做的代价？（为什么）
+3. 方法思路是否可行？与已有方法的核心差异是什么？（怎么做）
+4. 三部分之间是否逻辑自洽？
+5. 全文是否精炼（500-1000 字）？是否只给了方向性内容而非过度展开？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

@@ -1,12 +1,12 @@
 ---
 name: "04-02-experiment-run"
 description: "运行实验代码并收集结果。"
-allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Glob, Shell
 ---
 
 # 04-02-experiment-run
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 运行实验并收集结果到 `04-02-experiment-results.md`。
@@ -25,20 +25,18 @@ allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
 
 ### Step 1: Pre-review
 
-调用 `mcp__codex__codex` 检查实验运行计划是否合理：
+调用 `codex exec` 检查实验运行计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下实验运行计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下实验运行计划是否合理：
 
-    实验设计: {04-00-experiments.md 实验列表}
-    实现代码: {04-01-experiment-code/README.md 运行说明}
-    执行计划: 逐个运行实验，收集结果到 04-02-experiment-results/
+实验设计: {04-00-experiments.md 实验列表}
+实现代码: {04-01-experiment-code/README.md 运行说明}
+执行计划: 逐个运行实验，收集结果到 04-02-experiment-results/
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 2: 环境准备
@@ -114,21 +112,19 @@ from paper_plot_style import *
 
 ### Step 6: Post-review（迭代循环，最多 10 轮）
 
-先检查每个实验是否完成了预期运行命令并产生了约定输出，再调用 `mcp__codex__codex` 对比结果与实验设计中的预期：
+先检查每个实验是否完成了预期运行命令并产生了约定输出，再调用 `codex exec` 对比结果与实验设计中的预期：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下实验结果是否达到预期：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下实验结果是否达到预期：
 
-    实验设计预期: {预期结果}
-    实际结果: {实际结果}
+实验设计预期: {预期结果}
+实际结果: {实际结果}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

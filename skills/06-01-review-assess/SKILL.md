@@ -1,12 +1,12 @@
 ---
 name: "06-01-review-assess"
 description: "评估外部 review 意见的正确性与优先级，并生成结构化修改方案。"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Shell
 ---
 
 # 06-01-review-assess
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 先判断外部 review 意见是否成立，再生成结构化修改方案。
@@ -46,19 +46,17 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查评估准备是否充分：
+调用 `codex exec` 检查评估准备是否充分：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 review 评估准备是否充分：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 review 评估准备是否充分：
 
-    Review 意见: {外部 review 摘要}
-    项目文件: {01-story/03-00-structure/03-02/04/05 文件列表}
+Review 意见: {外部 review 摘要}
+项目文件: {01-story/03-00-structure/03-02/04/05 文件列表}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 判断意见是否成立
@@ -123,25 +121,23 @@ mcp__codex__codex:
 
 ### Step 6: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查 action plan：
+调用 `codex exec` 检查 action plan：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 review action plan 是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 review action plan 是否合理：
 
-    Review 意见: {feedback}
-    Story: {01-story.md}
-    Structure: {03-00-structure.md}
-    Theory Analysis: {03-02-theory-analysis.md}
-    Experiments/Results: {04-*}
-    Action Plan: {06-01-review-action-plan.md}
+Review 意见: {feedback}
+Story: {01-story.md}
+Structure: {03-00-structure.md}
+Theory Analysis: {03-02-theory-analysis.md}
+Experiments/Results: {04-*}
+Action Plan: {06-01-review-action-plan.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

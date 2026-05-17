@@ -1,12 +1,12 @@
 ---
 name: "06-02-review-apply"
 description: "依据 review action plan 修改项目内容，并记录修改落实情况。"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Shell
 ---
 
 # 06-02-review-apply
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 根据 `06-01-review-action-plan.md` 执行已经确认的修改，并记录落实情况。
@@ -46,19 +46,17 @@ allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查修改计划是否合理：
+调用 `codex exec` 检查修改计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下修改计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下修改计划是否合理：
 
-    Action Plan: {06-01-review-action-plan.md accept/partial 项}
-    项目文件: {01/03-00/03-02/04/05 文件列表}
+Action Plan: {06-01-review-action-plan.md accept/partial 项}
+项目文件: {01/03-00/03-02/04/05 文件列表}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 按源头优先顺序修改
@@ -113,23 +111,21 @@ mcp__codex__codex:
 
 ### Step 5: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查修改是否与 action plan 一致：
+调用 `codex exec` 检查修改是否与 action plan 一致：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下修改是否严格遵循 review action plan：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下修改是否严格遵循 review action plan：
 
-    Action Plan: {06-01-review-action-plan.md}
-    Updated Story/Structure/Theory/Experiments/Results: {updated files}
-    Updated LaTeX: {05-template changes}
-    Resolution Log: {06-02-review-resolution.md}
+Action Plan: {06-01-review-action-plan.md}
+Updated Story/Structure/Theory/Experiments/Results: {updated files}
+Updated LaTeX: {05-template changes}
+Resolution Log: {06-02-review-resolution.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

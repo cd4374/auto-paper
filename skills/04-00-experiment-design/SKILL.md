@@ -1,12 +1,12 @@
 ---
 name: "04-00-experiment-design"
 description: "基于 01-story.md 和 03-00-structure.md 设计实验。用于定义实验方案。"
-allowed-tools: Read, Write, mcp__codex__codex
+allowed-tools: Read, Write, Shell
 ---
 
 # 04-00-experiment-design
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + `03-00-structure.md` 设计实验方案。实验与图表资产严格一一对应：`03-00-structure.md` 中声明的每个 `Fig.x` / `Table.x` 都必须有且仅有一个实验负责生成。
@@ -26,20 +26,18 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ### Step 1: Pre-review
 
-调用 `mcp__codex__codex` 检查实验设计计划是否合理：
+调用 `codex exec` 检查实验设计计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下实验设计计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下实验设计计划是否合理：
 
-    Story claim: {story 中的核心 claim}
-    Theory Analysis: {03-02-theory-analysis.md 中需要验证的 prediction}
-    执行计划: 为每个 claim 设计最小必要实验集
+Story claim: {story 中的核心 claim}
+Theory Analysis: {03-02-theory-analysis.md 中需要验证的 prediction}
+执行计划: 为每个 claim 设计最小必要实验集
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 2: 提取 claim 与理论预测
@@ -99,22 +97,20 @@ mcp__codex__codex:
 
 ### Step 5: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查实验设计是否以最小必要实验集支撑 story 中的 claim：
+调用 `codex exec` 检查实验设计是否以最小必要实验集支撑 story 中的 claim：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下实验设计是否同时支撑 story 中的 claim，并覆盖 theory analysis 中需要验证的 prediction：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下实验设计是否同时支撑 story 中的 claim，并覆盖 theory analysis 中需要验证的 prediction：
 
-    Story claim: {claim 内容}
-    Theory Analysis: {03-02-theory-analysis.md}
-    实验设计: {experiments 内容}
+Story claim: {claim 内容}
+Theory Analysis: {03-02-theory-analysis.md}
+实验设计: {experiments 内容}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

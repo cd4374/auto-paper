@@ -1,12 +1,12 @@
 ---
 name: "project-import-02-venue-structure"
 description: "识别或推荐 venue，生成 02-journal-* 与 03-00-structure.md。"
-allowed-tools: Read, Write, Glob, Grep, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, Glob, Grep, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, Shell
 ---
 
 # project-import-02-venue-structure
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 从现有线索恢复 venue 与结构层。
@@ -39,7 +39,7 @@ allowed-tools: Read, Write, Glob, Grep, mcp__kimi-code__kimi_web_search, mcp__ki
 - 每章叙事必须映射回 story
 
 ### Step 4: Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 检查：
+调用 `codex exec` 检查：
 - venue 推荐与 story 匹配性
 - structure 对 story 支撑度
 

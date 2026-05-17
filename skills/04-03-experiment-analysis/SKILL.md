@@ -1,12 +1,12 @@
 ---
 name: "04-03-experiment-analysis"
 description: "复核实验实现与结果，分析结论边界并生成论文可用图表资产（主入口，编排 04-03-01/02/03 子阶段）。"
-allowed-tools: Bash, Read, Write, Edit, Glob, mcp__codex__codex, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image
+allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image, Shell
 ---
 
 # 04-03-experiment-analysis
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 04-03 主入口：按子阶段完成实验复核、图表资产整理与 story 覆盖门控。

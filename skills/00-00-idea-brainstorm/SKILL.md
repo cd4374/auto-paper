@@ -1,12 +1,12 @@
 ---
 name: "00-00-idea-brainstorm"
 description: "围绕研究方向进行头脑风暴，生成候选 idea 池。"
-allowed-tools: Read, Write, mcp__codex__codex
+allowed-tools: Read, Write, Shell
 ---
 
 # 00-00-idea-brainstorm
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 围绕用户给定的研究方向、约束与偏好，生成 `00-00-idea-pool.md`。
@@ -33,20 +33,18 @@ allowed-tools: Read, Write, mcp__codex__codex
 
 ### Step 1: Pre-review
 
-调用 `mcp__codex__codex` 检查生成计划：
+调用 `codex exec` 检查生成计划：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea brainstorming 计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea brainstorming 计划是否合理：
 
-    研究方向: {用户描述的研究方向}
-    约束条件: {算力/时间/偏好等约束}
-    执行计划: 生成 6-12 个候选 idea，每个 1-2 段精炼叙述，只给方向性判断
+研究方向: {用户描述的研究方向}
+约束条件: {算力/时间/偏好等约束}
+执行计划: 生成 6-12 个候选 idea，每个 1-2 段精炼叙述，只给方向性判断
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 2: 生成候选 idea 池
@@ -70,21 +68,19 @@ mcp__codex__codex:
 
 ### Step 3: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查质量：
+调用 `codex exec` 检查质量：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea pool：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea pool：
 
-    {idea pool 内容}
+{idea pool 内容}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
-    额外检查：每个 idea 是否精炼（1-2 段）？是否只给方向性判断而非展开细节？各 idea 方向是否有实质差异？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+额外检查：每个 idea 是否精炼（1-2 段）？是否只给方向性判断而非展开细节？各 idea 方向是否有实质差异？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

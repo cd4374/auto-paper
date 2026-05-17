@@ -1,7 +1,7 @@
 ---
 name: "05-02-paper-write"
 description: "按章节撰写论文 LaTeX"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Shell
 ---
 
 # 05-02-paper-write

@@ -1,7 +1,7 @@
 ---
 name: "05-03-paper-gate"
 description: "最终检查与门控判定"
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Grep, Glob, Shell
 ---
 
 # 05-03-paper-gate

@@ -1,12 +1,12 @@
 ---
 name: "02-paper-journal"
 description: "基于 01-story.md 推荐期刊并生成格式要求。用于选择目标发表venue。"
-allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, Shell
 ---
 
 # 02-paper-journal
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` 推荐期刊并生成格式要求。
@@ -32,19 +32,17 @@ allowed-tools: Read, Write, Glob, mcp__kimi-code__kimi_web_search, mcp__kimi-cod
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查期刊推荐计划是否合理：
+调用 `codex exec` 检查期刊推荐计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下期刊推荐计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下期刊推荐计划是否合理：
 
-    Story: {01-story.md 内容摘要}
-    执行计划: 根据 story 主题匹配 1-2 个候选期刊
+Story: {01-story.md 内容摘要}
+执行计划: 根据 story 主题匹配 1-2 个候选期刊
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 读取支持的期刊列表
@@ -118,24 +116,22 @@ venue_key: [如 neurips / nature / prl]
 
 ### Step 7: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查两件事：
+调用 `codex exec` 检查两件事：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下两项：
-    1. 期刊推荐是否匹配 story 的贡献度？
-    2. requirements 文件格式是否完整？（必须包含：基本信息/格式要求/引用格式/图表要求/提交要求/实验要求）
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下两项：
+1. 期刊推荐是否匹配 story 的贡献度？
+2. requirements 文件格式是否完整？（必须包含：基本信息/格式要求/引用格式/图表要求/提交要求/实验要求）
 
-    Story: {story 内容}
-    推荐: {02-journal-recommendation.md}
-    Requirements: {02-journal-requirements.md}
+Story: {story 内容}
+推荐: {02-journal-recommendation.md}
+Requirements: {02-journal-requirements.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

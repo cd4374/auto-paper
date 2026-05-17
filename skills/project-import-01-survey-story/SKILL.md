@@ -1,12 +1,12 @@
 ---
 name: "project-import-01-survey-story"
 description: "项目普查并恢复 01-story.md，严格区分直接证据与合理推断。"
-allowed-tools: Bash, Read, Glob, Grep, Write, mcp__codex__codex
+allowed-tools: Bash, Read, Glob, Grep, Write, Shell
 ---
 
 # project-import-01-survey-story
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 从既有项目恢复 narrative 基线与 story。
@@ -53,7 +53,7 @@ allowed-tools: Bash, Read, Glob, Grep, Write, mcp__codex__codex
 ```
 
 ### Step 4: Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 检查 story 是否严格基于证据；有问题则迭代。
+调用 `codex exec` 检查 story 是否严格基于证据；有问题则迭代。
 
 ## 约束
 - 不把无证据推断写成既成事实。

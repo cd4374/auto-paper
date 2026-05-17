@@ -1,7 +1,7 @@
 ---
 name: "re-iter"
 description: "通用迭代式工作流：需求→Plan→Review循环→实现→Review循环"
-allowed-tools: Read, Write, Glob, Grep, mcp__codex__codex, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image
+allowed-tools: Read, Write, Glob, Grep, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image, Shell
 temporary-files: PLAN.md
 ---
 
@@ -43,35 +43,33 @@ temporary-files: PLAN.md
 
 1. 调用 Codex 审查 plan：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.4
-  prompt: |
-    请审查以下 plan（第 {round+1} 轮）：
+```bash
+codex exec -c model="gpt-5.4" << 'EOF'
+请审查以下 plan（第 {round+1} 轮）：
 
-    任务: {task}
-    计划: {plan 内容}
+任务: {task}
+计划: {plan 内容}
 
-    检查：
-    1. 步骤是否完整、无遗漏
-    2. 顺序是否合理
-    3. 验收标准是否可操作
-    4. 风险是否识别充分
+检查：
+1. 步骤是否完整、无遗漏
+2. 顺序是否合理
+3. 验收标准是否可操作
+4. 风险是否识别充分
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
 
-    输出格式（必须严格遵循）：
-    ## 审查结论
-    通过 / 需要修改
+输出格式（必须严格遵循）：
+## 审查结论
+通过 / 需要修改
 
-    ## 问题列表（如有）
-    1. [问题描述]
-    2. [问题描述]
+## 问题列表（如有）
+1. [问题描述]
+2. [问题描述]
 
-    ## 修改建议（如有）
-    1. [具体修改方案]
-    2. [具体修改方案]
+## 修改建议（如有）
+1. [具体修改方案]
+2. [具体修改方案]
+EOF
 ```
 
 2. **解析 Codex 返回结果**：
@@ -102,36 +100,34 @@ mcp__codex__codex:
 
 1. 调用 Codex 审查实现：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.4
-  prompt: |
-    请审查以下实现（第 {round+1} 轮）：
+```bash
+codex exec -c model="gpt-5.4" << 'EOF'
+请审查以下实现（第 {round+1} 轮）：
 
-    任务: {task}
-    计划: {plan}
-    实际实现: {实际完成的内容}
+任务: {task}
+计划: {plan}
+实际实现: {实际完成的内容}
 
-    检查：
-    1. 是否忠实于 plan
-    2. 质量是否达标
-    3. 验收标准是否满足
-    4. 有无遗漏或错误
+检查：
+1. 是否忠实于 plan
+2. 质量是否达标
+3. 验收标准是否满足
+4. 有无遗漏或错误
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
 
-    输出格式（必须严格遵循）：
-    ## 审查结论
-    通过 / 需要修改
+输出格式（必须严格遵循）：
+## 审查结论
+通过 / 需要修改
 
-    ## 问题列表（如有）
-    1. [问题描述]
-    2. [问题描述]
+## 问题列表（如有）
+1. [问题描述]
+2. [问题描述]
 
-    ## 修改建议（如有）
-    1. [具体修改方案]
-    2. [具体修改方案]
+## 修改建议（如有）
+1. [具体修改方案]
+2. [具体修改方案]
+EOF
 ```
 
 2. **解析 Codex 返回结果**：

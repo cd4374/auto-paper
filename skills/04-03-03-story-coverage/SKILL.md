@@ -1,12 +1,12 @@
 ---
 name: "04-03-03-story-coverage"
 description: "执行 Story Claim Coverage 门控，收敛 04-03 分析文档并给出进入 05 的判定。"
-allowed-tools: Read, Write, Edit, mcp__codex__codex
+allowed-tools: Read, Write, Edit, Shell
 ---
 
 # 04-03-03-story-coverage
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 执行 04-03 的 P0 门控，判断是否可以进入论文写作阶段。
@@ -52,7 +52,7 @@ allowed-tools: Read, Write, Edit, mcp__codex__codex
 - `## Writing Notes`
 
 ### Step 4: Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 检查 coverage 判定与文档边界是否合理；有问题则迭代修订。
+调用 `codex exec` 检查 coverage 判定与文档边界是否合理；有问题则迭代修订。
 
 ## 约束
 - 门控是 P0 强制项，不得跳过。

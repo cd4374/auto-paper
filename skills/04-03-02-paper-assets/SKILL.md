@@ -1,12 +1,12 @@
 ---
 name: "04-03-02-paper-assets"
 description: "整理论文可用图表资产、生成 LaTeX 嵌入片段，并完成关键图图片审查。"
-allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, mcp__MiniMax__understand_image, Shell
 ---
 
 # 04-03-02-paper-assets
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于已完成审计结果，从 notebook 产出的图表中整理最小必要论文图表资产并做图片审查。
@@ -135,25 +135,23 @@ allowed-tools: Bash, Read, Write, Edit, Glob, mcp__kimi-code__kimi_read_media, m
 - 不可用时再 `mcp__MiniMax__understand_image`
 - 必须记录降级原因
 
-### Step 3.5: 语义审查（Codex MCP）
+### Step 3.5: 语义审查（Codex CLI）
 
 视觉审查通过后，对每张图做语义审查——图类型是否适合展示该数据：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请审查以下论文图表（语义层面）：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请审查以下论文图表（语义层面）：
 
-    图表列表及描述：
-    [逐图列出：structure 编号（Fig.x/Table.x）、文件名、图类型、展示的数据、对应的 story claim]
+图表列表及描述：
+[逐图列出：structure 编号（Fig.x/Table.x）、文件名、图类型、展示的数据、对应的 story claim]
 
-    对每张图检查：
-    1. 图类型是否适合展示该数据？（如：比较方法应用 bar chart 而非 line plot）
-    2. 是否有更有效的可视化选择？
-    3. 该图是否清晰支撑了其对应的 story claim？
-    4. 图中信息密度是否合适（不过密、不过空）？
+对每张图检查：
+1. 图类型是否适合展示该数据？（如：比较方法应用 bar chart 而非 line plot）
+2. 是否有更有效的可视化选择？
+3. 该图是否清晰支撑了其对应的 story claim？
+4. 图中信息密度是否合适（不过密、不过空）？
+EOF
 ```
 
 ### Step 4: 写入 Figure Review
@@ -163,7 +161,7 @@ mcp__codex__codex:
 - 哪些需重绘
 
 ### Step 5: Post-review（最多 10 轮）
-调用 `mcp__codex__codex` 检查图表资产与审查结论是否可回溯、是否服务主线；有问题则迭代。
+调用 `codex exec` 检查图表资产与审查结论是否可回溯、是否服务主线；有问题则迭代。
 
 ## 约束
 - 不做无关重绘、不新增无关图表。

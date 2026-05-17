@@ -1,12 +1,12 @@
 ---
 name: "00-01-idea-evaluate"
 description: "对候选 idea 池做方向性评估与 novelty 审查。"
-allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, mcp__codex__codex
+allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kimi_fetch_url, mcp__MiniMax__web_search, WebSearch, WebFetch, Shell
 ---
 
 # 00-01-idea-evaluate
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 对 `00-00-idea-pool.md` 做方向性评估，生成 `00-01-idea-evaluation.md`。
@@ -37,19 +37,17 @@ allowed-tools: Read, Write, mcp__kimi-code__kimi_web_search, mcp__kimi-code__kim
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查评估计划：
+调用 `codex exec` 检查评估计划：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea evaluation 计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea evaluation 计划是否合理：
 
-    Idea Pool: {00-00-idea-pool.md 内容摘要}
-    执行计划: 对全部候选做方向性评估（不生成评分表），选出 top-k 做 novelty 方向检索
+Idea Pool: {00-00-idea-pool.md 内容摘要}
+执行计划: 对全部候选做方向性评估（不生成评分表），选出 top-k 做 novelty 方向检索
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 方向性评估
@@ -100,22 +98,20 @@ mcp__codex__codex:
 
 ### Step 5: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查评估质量：
+调用 `codex exec` 检查评估质量：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 idea evaluation：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 idea evaluation：
 
-    Idea Pool: {00-00-idea-pool.md}
-    Evaluation: {00-01-idea-evaluation.md}
+Idea Pool: {00-00-idea-pool.md}
+Evaluation: {00-01-idea-evaluation.md}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
-    额外检查：评估是否精炼？判断是否有明确依据？是否只给了方向性结论而非过度展开？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+额外检查：评估是否精炼？判断是否有明确依据？是否只给了方向性结论而非过度展开？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

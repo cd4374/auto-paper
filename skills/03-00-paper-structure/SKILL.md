@@ -1,12 +1,12 @@
 ---
 name: "03-00-paper-structure"
 description: "基于 01-story.md 和 02-journal-requirements.md 生成 03-00-structure.md。用于定义论文章节结构。"
-allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Glob, Shell
 ---
 
 # 03-00-paper-structure
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 基于 `01-story.md` + 期刊要求生成 `03-00-structure.md`。
@@ -47,21 +47,19 @@ venue-requirements.json 位于 `skills/shared/templates/venue-requirements.json`
 
 ### Step 3: Pre-review
 
-调用 `mcp__codex__codex` 检查章节设计计划是否合理：
+调用 `codex exec` 检查章节设计计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下章节设计计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下章节设计计划是否合理：
 
-    Story: {01-story.md 内容摘要，重点关注研究问题/动机/方法思路}
-    Journal Requirements: {02-journal-requirements.md 格式限制}
-    Venue Section Structure: {venue-requirements.json 中的 section_structure}
-    执行计划: 根据叙事逻辑设计章节，遵循探索→发现→理解框架
+Story: {01-story.md 内容摘要，重点关注研究问题/动机/方法思路}
+Journal Requirements: {02-journal-requirements.md 格式限制}
+Venue Section Structure: {venue-requirements.json 中的 section_structure}
+执行计划: 根据叙事逻辑设计章节，遵循探索→发现→理解框架
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 4: 设计章节
@@ -128,24 +126,22 @@ mcp__codex__codex:
 
 ### Step 7: Post-review（迭代循环，最多 10 轮）
 
-调用 `mcp__codex__codex` 检查 structure 是否支撑 story：
+调用 `codex exec` 检查 structure 是否支撑 story：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下 structure 是否支撑 story：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下 structure 是否支撑 story：
 
-    Story: {story 内容，重点关注 是什么/为什么/怎么做 是否在章节中得到充分展开}
-    Structure: {structure 内容}
+Story: {story 内容，重点关注 是什么/为什么/怎么做 是否在章节中得到充分展开}
+Structure: {structure 内容}
 
-    检查要点：
-    1. 章节顺序是否服务于"探索→发现→理解"的递进逻辑？
-    2. 每章叙事是否充分展开了 story 中定义的问题、动机与方法？
-    3. 发现是否有层次感（从初步到深层）？
+检查要点：
+1. 章节顺序是否服务于"探索→发现→理解"的递进逻辑？
+2. 每章叙事是否充分展开了 story 中定义的问题、动机与方法？
+3. 发现是否有层次感（从初步到深层）？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：

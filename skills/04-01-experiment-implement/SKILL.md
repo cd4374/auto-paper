@@ -1,12 +1,12 @@
 ---
 name: "04-01-experiment-implement"
 description: "基于实验设计生成实验代码。数据生成/训练/评估逻辑放在独立 .py 脚本，Jupyter Notebook 负责调用脚本并绘图。"
-allowed-tools: Bash, Read, Write, Glob, mcp__codex__codex
+allowed-tools: Bash, Read, Write, Glob, Shell
 ---
 
 # 04-01-experiment-implement
 
-- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex MCP.
+- REVIEWER_MODEL = `gpt-5.5` — Model used via Codex CLI.
 - MAX_POST_REVIEW_ROUNDS = 10 — Post-review 迭代轮数上限。
 
 根据 `04-00-experiments.md` 生成实验代码。**一个 `Fig.x` / `Table.x` 对应一个独立文件**，禁止将多个图表资产的生成逻辑挤入同一个文件。
@@ -224,19 +224,17 @@ save_fig_and_show(fig, 'fig_name')  # 保存 PDF + 在 cell 中显示
 
 ### Step 2: Pre-review
 
-调用 `mcp__codex__codex` 检查代码实现计划是否合理：
+调用 `codex exec` 检查代码实现计划是否合理：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下代码实现计划是否合理：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下代码实现计划是否合理：
 
-    实验设计: {04-00-experiments.md 内容摘要}
-    执行计划: 根据实验类型生成最小必要代码，包含核心逻辑+参数入口+输出格式
+实验设计: {04-00-experiments.md 内容摘要}
+执行计划: 根据实验类型生成最小必要代码，包含核心逻辑+参数入口+输出格式
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+EOF
 ```
 
 ### Step 3: 设计代码结构
@@ -384,21 +382,19 @@ print(f'Python: {sys.version} | conda env: scf-paper')
 
 ### Step 6: Post-review（迭代循环，最多 10 轮）
 
-先用最小运行命令验证入口、参数和输出路径是否成立，再调用 `mcp__codex__codex` 检查代码是否支撑实验设计中的目标：
+先用最小运行命令验证入口、参数和输出路径是否成立，再调用 `codex exec` 检查代码是否支撑实验设计中的目标：
 
-```
-mcp__codex__codex:
-  approval-policy: never
-  model: gpt-5.5
-  prompt: |
-    请检查以下代码实现是否支撑实验设计中的目标：
+```bash
+codex exec -c model="gpt-5.5" << 'EOF'
+请检查以下代码实现是否支撑实验设计中的目标：
 
-    实验设计: {experiments 内容}
-    代码结构: {code 结构描述}
+实验设计: {experiments 内容}
+代码结构: {code 结构描述}
 
-    检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
+检查：是否覆盖上游要求？是否自洽？有无遗漏或过度扩展？
 
-    若有问题，明确指出并给出修改建议。
+若有问题，明确指出并给出修改建议。
+EOF
 ```
 
 迭代逻辑：
